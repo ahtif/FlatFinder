@@ -19,12 +19,12 @@ The potential risk categories that could impact the project are:
 
 | Category | Description | Id  |
 | ----------- | -------------- | --- |
-| Requirements | * Requirements aren't clearly defined * Requirements don't meet the user's needs | 1.1 1.2|
-| Time management |  * Developers underestimate the time needed to code the project * Not provided sufficient time to complete the project | 2.1 2.2 |
-| Quality | * The final product does not meet the needs of the user * Client is dissatisfied with the final product | 3.1 3.2 |
-| Issues | * Issues that arise are not dealt with in an appropriate time period |  4.1 |
-| Communication | * Lack of communication between developers causes issues *  Lack of communication between developers and supervisor hinders progress | 5.1 5.2 |
-| Resource | * Developers may not have the required skill set to carry out tasks | 6.1 | 
+| Requirements | <ul><li>Requirements aren't clearly defined</li><li>Requirements don't meet the user's needs</li></ul> | 1.1 1.2|
+| Time management |  <ul><li>Developers underestimate the time needed to code the project</li><li>Not provided sufficient time to complete the project</li></ul> | 2.1 2.2 |
+| Quality | <ul><li>The final product does not meet the needs of the user</li><li>Client is dissatisfied with the final product</li></ul> | 3.1 3.2 |
+| Issues | <ul><li>Issues that arise are not dealt with in an appropriate time period</li></ul> |  4.1 |
+| Communication | <ul><li>Lack of communication between developers causes issues</li><li>Lack of communication between developers and supervisor hinders progress</li></ul> | 5.1 5.2 |
+| Resource | <ul><li>Developers may not have the required skill set to carry out tasks</li></ul> | 6.1 | 
 
 # 2 Risk Quantification
 
