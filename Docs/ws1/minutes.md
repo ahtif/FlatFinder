@@ -18,6 +18,7 @@ All members were firstly introduced to each other, then all the members read the
 **Generating questions for FDM interview**
 
 Once we understood the case study as a group we came up with questions which were not answered in the case study such as the follows:
+
 1.  How would the user express interest in being a buddy?
 2.  What criteria would it suggest buddy’s for you?
 3. 	How would you search for a property i.e. using Postcode, City?
