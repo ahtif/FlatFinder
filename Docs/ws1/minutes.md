@@ -9,7 +9,7 @@
 1.  FDM case study breakdown and analysis
 2.  Generating questions for FDM interview
 3.  Tasks and roles during the next period
-4.	AOB (Any Other Business)
+4.	AOB - Any Other Business
 --
 **FDM case study breakdown and analysis**
 
