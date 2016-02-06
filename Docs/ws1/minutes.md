@@ -22,7 +22,7 @@ Once we understood the case study as a group we came up with questions which wer
 1.  How would the user express interest in being a buddy?
 2.  What criteria would it suggest buddy’s for you?
 3. 	How would you search for a property i.e. using Postcode, City?
-4.  Is one email allowed to be used for a Landlord and Search account?
+4.  Is one email allowed to be used for a Landlord and Searcher account?
 
 We made sure we asked open question to get as much detail possible and that the questions were related to requirements. Jordan documented all the questions and then each member were assigned four questions to ask in the interview with FDM.
 
