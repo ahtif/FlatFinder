@@ -30,14 +30,14 @@ We made sure we asked open question to get as much detail possible and that the 
 
 | Name | Role | Task performed | Comments |
 |------|------|----------------|----------|
-| Harry Zachariou | ? | Backlog, Software Architecture, Presentation and Minutes | ? |
-| Jordan Basran | ? | Risk assessment, Plan and Presentation | ? |
-| Jack Owen | ? | Risk assessment, Plan and Presentation | ? |
-| Ahtif Anwar | ? | Backlog , Software Architecture  Presentation and Minutes  | ? |
-| Majid Hussain | ? | Backlog, Plan, Presentation and Minutes  | ? |
-| Carl Griffiths | ? | Use Case, Glossary,  Software Architecture and Presentation | ? |
-| Matt Lexton | ? | Glossary, Roles and Presentation | ? |
-| Ibrahim Issa | ? | Glossary, Roles and Presentation | ? |
+| Harry Zachariou | Tester/Business Analyst | Backlog, Software Architecture, Presentation and Minutes | ? |
+| Jordan Basran | Developer | Risk assessment, Plan and Presentation | ? |
+| Jack Owen | Tester/Business Analyst | Risk assessment, Plan and Presentation | ? |
+| Ahtif Anwar | Developer/Systems Architect | Backlog , Software Architecture  Presentation and Minutes  | ? |
+| Majid Hussain | Tester/System Architect | Backlog, Plan, Presentation and Minutes  | ? |
+| Carl Griffiths | Developer | Use Case, Glossary,  Software Architecture and Presentation | ? |
+| Matt Lexton | Business Analyst | Glossary, Roles and Presentation | ? |
+| Ibrahim Issa | Systems Architect | Glossary, Roles and Presentation | ? |
 
 **AOB (Any Other Business)**:
 None
