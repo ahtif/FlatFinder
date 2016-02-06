@@ -10,7 +10,7 @@
 2.  Generating questions for FDM interview
 3.  Tasks and roles during the next period
 4.	AOB - Any Other Business
---
+
 **FDM case study breakdown and analysis**
 
 All members were firstly introduced to each other, then all the members read the Flat Finder case study which was provided by the client FDM. After everyone read and understood the case study as a group we highlighted the key aspect of the case study. This allowed us to understand the key requirements and get a clear understand of  the desired end product.
