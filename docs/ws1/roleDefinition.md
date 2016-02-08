@@ -1,6 +1,6 @@
 # Role Definitions
 
-##Quality Assurer (tester):
+##Quality Assurer (Tester):
 
 This is a role that is designed for finding errors within the project in order to ensure they are not present in the final product. They will use techniques that include writing and running scripts that test the system but they will also key in data and play around with the system to make sure it functions as planned. The QA team is responsible for making sure the system meets the requirements of the system.
 
@@ -32,7 +32,7 @@ They will also help guide and motivate the development team. The development tea
 
 Assigned to: Ibramhim Issa, Majid Hussain, Ahtif Anwar
 
-##Business analysis:
+##Business Analyst:
 
 This role will help the clients that requested the system communicate with the rest of the development team. As there can be several people involved from the business that have requested the system it is critical that there is someone to help them work with the rest of the team.
 
