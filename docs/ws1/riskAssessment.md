@@ -80,16 +80,16 @@ The Rating is based on the calculated Priority score. Use the following system t
 ## 3.1 
 | Rating | ID | Preventative Actions| Action Resource | Action Date| Contingent Actions| Action Resource| Action Date|
 |---------|-----|-------------------------|---------------------|----------------|-----------------------|-----------------------|----------|
-|High| 6.1 | Set aside time to learn the framework that will be used for the product | No idea| n/a | Change the roles of the developers to suit their skills|No idea| n/a|
-|High|2.1| Set internal deadlines for specific aspects of the project | No idea| n/a| placeholder| No idea| n/a|
-|High|3.1| Make sure the requirements are met | No idea| n/a| Go back and redevelop areas that do not meet the users needs| No idea| n/a|
-|High|3.2| Have the client sign off on the requirements | No idea| n/a| Discuss issues with clients and rectify the issues| No idea| n/a|
-|High|5.1| Organise regular meetings and ensure that everyone attends | No idea| n/a| Notify supervisor on developers absence | No idea| n/a|
-|Medium|2.2| Prioritise the key tasks in order to achieve the best quality product within the given time frame | No idea| n/a| Produce the best quality product that you can within the time frame| No idea| n/a|
-|Medium|1.1| Organise a meeting with clients to redraft unclear requirements | No idea| 2/2/16| Create product that meets the requirements in the developers mind | No idea| n/a|
-|Medium|1.2| Base the final product on the needs as we see fit, as we are the age group of the target audience | No idea| n/a| Get an outside focus group to give feedback on how well it meets their needs| No idea| n/a|
-|Medium|4.1| Agree as a group before starting the process for fixing issues | No idea| n/a| Fix issues in the agreed time frame| No idea| n/a|
-|Low|5.2| Organise regular meetings with supervisor and ensure all the group attends | No idea| n/a| Carry out the project as best we can| No idea| n/a|
+|High| 6.1 | Set aside time to learn the framework that will be used for the product | Developer| n/a | Change the roles of the developers to suit their skills|Project Manager| n/a|
+|High|2.1| Set internal deadlines for specific aspects of the project | Project Manager| n/a| Ensure deadlines are stuck to| Developer| n/a|
+|High|3.1| Make sure the requirements are met | Tester| n/a| Go back and redevelop areas that do not meet the users needs| Developer| n/a|
+|High|3.2| Have the client sign off on the requirements | Business Analyst| n/a| Discuss issues with clients and rectify the issues| Business Analyst| n/a|
+|High|5.1| Organise regular meetings and ensure that everyone attends | Project Manager| n/a| Notify supervisor on developers absence | Project Manager| n/a|
+|Medium|2.2| Prioritise the key tasks in order to achieve the best quality product within the given time frame | Developer| n/a| Produce the best quality product that you can within the time frame| Developer| n/a|
+|Medium|1.1| Organise a meeting with clients to redraft unclear requirements | Business Analyst| 2/2/16| Create product that meets the requirements in the developers mind | Developer| n/a|
+|Medium|1.2| Base the final product on the needs as we see fit, as we are the age group of the target audience | Developer| n/a| Get an outside focus group to give feedback on how well it meets their needs| Business Analyst| n/a|
+|Medium|4.1| Agree as a group before starting the process for fixing issues | Project Analyst| n/a| Fix issues in the agreed time frame| Developer| n/a|
+|Low|5.2| Organise regular meetings with supervisor and ensure all the group attends | Project Manager| n/a| Carry out the project as best we can| Project Manager| n/a|
 
 # 4 Risk Process
 
