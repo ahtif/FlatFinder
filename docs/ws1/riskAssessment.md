@@ -97,11 +97,5 @@ The Rating is based on the calculated Priority score. Use the following system t
 
 The purpose of risk management is to take into consideration any risks that may arise throughout the project and think of ways in which to prevent risks and how to deal with any that occur. The group discussed potential risks and then came up with a plan for rectifying any risks that may take place. 
 
-## 4.2 Procedures
 
-## 4.3 Responsibilites
-
-## 4.4 Register
-
-## 4.5 Templates
 
