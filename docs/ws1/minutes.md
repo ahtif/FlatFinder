@@ -30,14 +30,14 @@ We made sure we asked open question to get as much detail possible and that the 
 
 | Name | Role | Task performed | Comments |
 |------|------|----------------|----------|
-| Harry Zachariou | Project Manager/Tester Lead | Backlog, Software Architecture, Presentation and Minutes | ? |
-| Jordan Basran | Developer/Business Analyst | Risk assessment, Plan and Presentation | ? |
-| Jack Owen | Tester/Business Analyst | Risk assessment, Plan and Presentation | ? |
-| Ahtif Anwar | Developer/Systems Architect | Backlog , Software Architecture  Presentation and Minutes  | ? |
-| Majid Hussain | Tester/System Architect | Backlog, Plan, Presentation and Minutes  | ? |
-| Carl Griffiths | Developer/Build Manager | Use Case, Glossary,  Software Architecture and Presentation | ? |
-| Matt Lexton | Business Analyst | Glossary, Roles and Presentation | ? |
-| Ibrahim Issa | Systems Architect | Glossary, Roles and Presentation | ? |
+| Harry Zachariou | Project Manager/Test Lead | Backlog, Software Architecture, Presentation and Minutes | Harry will help to lead the project, he will assign task for members based on their strengths. He is also responsible for the planning and execution of the testing aspect of the project.  |
+| Jordan Basran | Developer/Business Analyst | Risk assessment, Plan and Presentation | Jordan will be working closely with the development team, also he will be a business analysis he has been given both roles since having a business analysis on the development team will allow the final product to meet the client requirement.  |
+| Jack Owen | Tester/Business Analyst | Risk assessment, Plan and Presentation | Jack is both a tester and a business analysis, he has been given these roles because of this experience in testing software. He is also contributing to the business analysis team. |
+| Ahtif Anwar | Developer/Systems Architect | Backlog , Software Architecture  Presentation and Minutes  | Ahtif is both a developer and system architect, he will be working on both team due to his experience, he said that he has experience in modelling software and has experience in development.  |
+| Majid Hussain | Tester/System Architect | Backlog, Plan, Presentation and Minutes  | Majid is both a tester and a system architect, he has been given these roles because of this experience in testing software. He is also contributing to the system architecture team. |
+| Carl Griffiths | Developer/Build Manager | Use Case, Glossary,  Software Architecture and Presentation | Carl is both a build manager and a developer he has experience in using Gradle and Travic CI, he also has experience in using spring mvc. |
+| Matt Lexton | Business Analyst | Glossary, Roles and Presentation | Matt is the business analysis he will be working with the clients and will be analysing requirements and contributing to the business aspect of the project. |
+| Ibrahim Issa | Systems Architect | Glossary, Roles and Presentation | Ibrahim is a system architect he has been assigned to this role due to his experience with modelling software. |
 
 **AOB (Any Other Business)**:
 None
