@@ -5,6 +5,6 @@
 - [Project Glossary]()
 - [Risk Assessment](riskAssessment.md)
 - [Gantt Chart](projectPlan.gan)
-- [Role Definitions]()
+- [Role Definitions](RoleDefinition.md)
 - [Software Architecture and Technology Rationale](softwareArchitectureAndTechnologyRationale.docx) 
 - [Minutes](minutes.md)
