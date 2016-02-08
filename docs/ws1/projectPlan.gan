@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Project Plan" company="" webLink="http://" view-date="2016-02-06" view-index="0" gantt-divider-location="446" resource-divider-location="290" version="2.7.1" locale="en_GB">
+<?xml version="1.0" encoding="UTF-8"?><project name="Project Plan" company="" webLink="http://" view-date="2016-01-29" view-index="0" gantt-divider-location="446" resource-divider-location="290" version="2.7.1" locale="en_GB">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
+    <view zooming-state="default:0" id="gantt-chart">
         <field id="tpd3" name="Name" width="53" order="0"/>
         <field id="tpd4" name="Begin date" width="30" order="1"/>
         <field id="tpd5" name="End date" width="15" order="2"/>
+        <option id="taskLabelLeft" value="name"/>
+        <option id="taskLabelRight" value="resources"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Name" width="50" order="0"/>
@@ -33,10 +35,10 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Worksheet 1" meeting="false" start="2016-01-29" duration="11" complete="61" expand="true">
+        <task id="0" name="Worksheet 1" meeting="false" start="2016-01-29" duration="11" complete="86" expand="true">
             <depend id="43" type="2" difference="0" hardness="Strong"/>
             <task id="45" name="Initial meeting" color="#8cb6ce" meeting="false" start="2016-01-29" duration="1" complete="100" expand="true"/>
-            <task id="6" name="Project Plan" color="#8cb6ce" meeting="false" start="2016-02-05" duration="2" complete="50" expand="true">
+            <task id="6" name="Project Plan" color="#8cb6ce" meeting="false" start="2016-02-05" duration="2" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
             <task id="41" name="Role assignment" color="#8cb6ce" meeting="false" start="2016-01-30" duration="1" complete="100" expand="true">
@@ -45,32 +47,32 @@
                 <depend id="4" type="2" difference="7" hardness="Strong"/>
                 <depend id="5" type="2" difference="6" hardness="Strong"/>
                 <depend id="6" type="2" difference="5" hardness="Strong"/>
-                <depend id="7" type="2" difference="0" hardness="Strong"/>
+                <depend id="7" type="2" difference="7" hardness="Strong"/>
                 <depend id="8" type="2" difference="7" hardness="Strong"/>
                 <depend id="10" type="2" difference="6" hardness="Strong"/>
                 <depend id="40" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="7" name="Role definition" color="#8cb6ce" meeting="false" start="2016-01-31" duration="1" complete="0" expand="true"/>
+            <task id="7" name="Role definition" color="#8cb6ce" meeting="false" start="2016-02-07" duration="1" complete="30" expand="true"/>
             <task id="42" name="FDM Interview" color="#8cb6ce" meeting="false" start="2016-02-02" duration="1" complete="100" expand="true"/>
-            <task id="10" name="Minutes of first meeting" color="#8cb6ce" meeting="false" start="2016-02-06" duration="1" complete="90" expand="true">
+            <task id="10" name="Minutes of first meeting" color="#8cb6ce" meeting="false" start="2016-02-06" duration="1" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
             <task id="3" name="Use case diagram" color="#8cb6ce" meeting="false" start="2016-02-05" duration="2" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
-            <task id="8" name="Software architecture and technology rationale" color="#8cb6ce" meeting="false" start="2016-02-07" duration="1" complete="50" expand="true">
+            <task id="8" name="Software architecture and technology rationale" color="#8cb6ce" meeting="false" start="2016-02-07" duration="1" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
             <task id="2" name="Project backlog" color="#8cb6ce" meeting="false" start="2016-02-03" duration="3" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
-            <task id="5" name="Risk assessment" color="#8cb6ce" meeting="false" start="2016-02-06" duration="2" complete="60" expand="true">
+            <task id="5" name="Risk assessment" color="#8cb6ce" meeting="false" start="2016-02-06" duration="2" complete="100" expand="true">
                 <depend id="4" type="3" difference="0" hardness="Strong"/>
             </task>
-            <task id="4" name="Project glossary" color="#8cb6ce" meeting="false" start="2016-02-07" duration="2" complete="0" expand="true">
+            <task id="4" name="Project glossary" color="#8cb6ce" meeting="false" start="2016-02-07" duration="2" complete="60" expand="true">
                 <depend id="40" type="3" difference="0" hardness="Strong"/>
             </task>
-            <task id="40" name="Presentation - Wiki Pages" color="#8cb6ce" meeting="false" start="2016-02-08" duration="1" complete="0" expand="true">
+            <task id="40" name="Presentation - Wiki Pages" color="#8cb6ce" meeting="false" start="2016-02-08" duration="1" complete="100" expand="true">
                 <depend id="34" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="34" name="Finalise and submit WS1" color="#8cb6ce" meeting="true" start="2016-02-09" duration="0" complete="0" expand="true"/>
