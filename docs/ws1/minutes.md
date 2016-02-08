@@ -42,4 +42,4 @@ We made sure we asked open question to get as much detail possible and that the 
 **AOB (Any Other Business)**:
 None
 
-**Date and time of next meeting**: 8/02/2016
+**Date and time of next meeting**: 10/02/2016
