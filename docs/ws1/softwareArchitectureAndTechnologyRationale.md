@@ -1,4 +1,4 @@
-*Initial Discussion of Software Architecture and Technology Rationale *
+Initial Discussion of Software Architecture and Technology Rationale 
 =======================================================================
 
 *Technologies Used*
