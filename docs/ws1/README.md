@@ -4,7 +4,7 @@
 - [Use Case Diagram](useCaseDiagram.jpg)
 - [Project Glossary](Glossary.md)
 - [Risk Assessment](riskAssessment.md)
-- [Gantt Chart](projectPlan.gan)
+- [Gantt Chart](projectPlan.png)
 - [Role Definitions](RoleDefinition.md)
 - [Software Architecture and Technology Rationale](softwareArchitectureAndTechnologyRationale.md) 
 - [Minutes](minutes.md)
