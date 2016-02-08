@@ -43,13 +43,13 @@ Sprint
 
 ##Non-technical Terms
 
-**USER** - Within the context of this project, a user strictly refers to the end-users of the system; these are the landlords, searchers and administrators. 
+**User** - Within the context of this project, a user strictly refers to the end-users of the system; these are the landlords, searchers and administrators. 
 
-**LANDLORDS** - A type of user account that enables users to advertise their property. Landlords can upload key information regarding the property they are attempting to let out. This information includes, but is not limited to: Price per month, price per week, number of rooms, dimensions of individual rooms, floor plans, availability dates, addresses and general information about the area. The landlord account types are also able to upload images of their property. Unlike searchers landlords do not have the ability to browse for available property.
+**Landlords** - A type of user account that enables users to advertise their property. Landlords can upload key information regarding the property they are attempting to let out. This information includes, but is not limited to: Price per month, price per week, number of rooms, dimensions of individual rooms, floor plans, availability dates, addresses and general information about the area. The landlord account types are also able to upload images of their property. Unlike searchers landlords do not have the ability to browse for available property.
 
-**SEARCHERS** - A type of user account that enables users to search the website for available property. Searchers are able to search for property put up for let by landlords. Searchers have the ability to search by the following search criteria: Start and end date, price range and accommodation. Search results display a graphical representation on a map. This map shows the distance between the accommodations to work and university. Additionally, searchers will be able to see public transport and local amenities. Searchers have the ability to express interest in properties and to buddy-up with other searchers. 
+**SearcherS** - A type of user account that enables users to search the website for available property. Searchers are able to search for property put up for let by landlords. Searchers have the ability to search by the following search criteria: Start and end date, price range and accommodation. Search results display a graphical representation on a map. This map shows the distance between the accommodations to work and university. Additionally, searchers will be able to see public transport and local amenities. Searchers have the ability to express interest in properties and to buddy-up with other searchers. 
 
-**ADMINISTRATORS** - A type of user account used to monitor the content on the software system.  Administrators can receive reports and take various actions they deem appropriate. Administrators can permanently or temporarily suspend users they find are using the system in inappropriate ways. 
+**Administrator** - A type of user account used to monitor the content on the software system.  Administrators can receive reports and take various actions they deem appropriate. Administrators can permanently or temporarily suspend users they find are using the system in inappropriate ways. 
 
 **Verification**- Users must register with a valid email address and confirm it before being able to use the system. Verification is used to recover lost passwords. 
 
