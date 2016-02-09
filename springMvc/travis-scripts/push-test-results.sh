@@ -16,6 +16,10 @@ git reset upstream/master
 
 touch .
 
+rm travis-build
+mkdir travis-build
+cd travis-build
+
 # Add the reports DO NOT UNCOMMENT BELOW!
 #git add -A cucumber-html-report
 #git add -A reports
