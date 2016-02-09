@@ -13,7 +13,6 @@ before_install:
 
 jdk:
 - oraclejdk7
-#- oraclejdk8
 
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash travis-scripts/push-test-results.sh

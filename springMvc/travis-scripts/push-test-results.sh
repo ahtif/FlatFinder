@@ -17,10 +17,10 @@ git reset upstream/master
 touch .
 
 # Add the reports
-git add -A cucumber-html-report
-git add -A reports
-git add -A docs
-git add -A libs
+#git add -A cucumber-html-report
+#git add -A reports
+#git add -A docs
+#git add -A libs
 
 git commit -m "[ci skip] Test results from travis at revision ${rev}"
 git push -q upstream HEAD:master
