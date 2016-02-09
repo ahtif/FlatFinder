@@ -7,9 +7,11 @@ script:
 install: 
 - true
 
-before_install: 
-- cd springMvc
+before_install:
 - mysql -e "create database IF NOT EXISTS springMvc;" -uroot
+
+before_script:
+- cd springMvc
 
 jdk:
 - oraclejdk7
