@@ -16,7 +16,6 @@ git reset upstream/master
 
 touch .
 
-rm travis-build
 mkdir travis-build
 cd travis-build
 
