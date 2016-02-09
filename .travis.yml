@@ -8,7 +8,7 @@ before_install:
 - mysql -e "create database IF NOT EXISTS springMvc;" -uroot
 
 before_script:
-- ./gradlew bootRun
+- ./springMvc/gradlew bootRun
 
 jdk:
 - oraclejdk7
