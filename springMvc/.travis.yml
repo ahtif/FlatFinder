@@ -1,0 +1,22 @@
+language: java
+script:
+- ./gradlew -i check
+- ./gradlew jar
+- ./gradlew javadoc
+
+before_install:
+- mysql -e "create database IF NOT EXISTS springMvc;" -uroot
+
+before_script:
+- ./gradlew bootRun
+
+jdk:
+- oraclejdk7
+
+after_success:
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  travis-scripts/push-test-results.sh
+
+env:
+  global:
+  - secure: H6qeuDPs7DW0Yb0bWD+w+q0Ih3wSLBR/couXERRY0p/Z65FH7E6OPNSz30WNKy9MtXFKcQtV0hiLSpqoZUw9Splt+F7jT80qXOz68RfHVdGEwjlul68KKp0IJyhM24AAoODnXIiGniR42Ed1Ck2Lu4DIBKvp+okEfNv89rMhCdgwROtajZHGgImu167H/NaIDf8PuqdmSyDXk2lUmkHlwxxOJ9OsYtPURwzhpk/XioQgJWDVx3T9NhuvGgkSIQuyfKf+6bMPV2NZE6JWfdSY9HBD4GqoI4qeDTkCffh7DN8Ld3WufQ0FtPfX68rpi0/WXg49Xp9N/F6PDBHEtBP1w2AV72n7IucSYKPtqwinhDAwtHhp/3zlX/HKFaLxLRBhjemzAyf6MjUuF4IevbTtLR385IT6rc0JmqfKj0Yyye9gcb6/Y6bgpKsCmNIDfMmJ3/lwmNqZ7KAv7lIq+F3Tkc1nF7Fd1SRMT13um57v5MhKpNNwOlD2GbzHp558P5KZCAEVSvUtpd6Dq/DItDBRQJYkw3wgvrD3aTHvZldcgSfmQKqZXzYem9OmyURpDN3uLI97S2/oEaTjfo01Uqe7vluPw408o+IlCMezjszzAEbzY+o7MgbhZiHZTfLx/OwDZdZ3eIxoAPG8vCyrBzIbgYFkZhqTTeAlmKKw8ICRgMQ=
