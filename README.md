@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.com/UOL-CS/co2015-group-06-repo.svg?token=EJJwnedRJAr4sjnfiybo&branch=master)](https://travis-ci.com/UOL-CS/co2015-group-06-repo)
 
-# Links
+# Quick Links
 
-- [JavaDoc](http://htmlpreview.github.com/?https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/build/docs/javadoc/index.html)
+- [JavaDoc](springMvc/build/docs/javadoc)
+- [Cucumber Report](springMvc/build/cucumber-html-report)
+- [Checkstyle Report](springMvc/build/reports/checkstyle)
+- [Test Results](springMvc/build/reports/tests)
