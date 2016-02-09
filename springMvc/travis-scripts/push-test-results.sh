@@ -14,11 +14,11 @@ git remote add upstream "https://$GH_TOKEN@github.com/UOL-CS/co2015-group-06-rep
 git fetch upstream
 git reset upstream/master
 
-# Add the reports DO NOT UNCOMMENT BELOW!
-git add -A cucumber-html-report
-git add -A reports
-git add -A docs
-git add -A libs
+# DO NOT UNCOMMENT BELOW!
+#git add -A cucumber-html-report
+#git add -A reports
+#git add -A docs
+#git add -A libs
 
 git commit -m "[ci skip] Test results from travis at revision ${rev}"
 git push -q upstream HEAD:master
