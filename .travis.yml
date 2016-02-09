@@ -4,10 +4,9 @@ before_script:
 - cd springMvc
 
 script:
-- ./gradlew -i check
+- ./gradlew build
 - ./gradlew jar
 - ./gradlew javadoc
-- ./gradlew bootRun
 
 before_install:
 - mysql -e "create database IF NOT EXISTS springMvc;" -uroot
