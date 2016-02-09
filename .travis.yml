@@ -4,7 +4,7 @@ before_script:
 - cd springMvc
 
 script:
-- ./gradlew build
+- ./gradlew -i clean check
 - ./gradlew jar
 - ./gradlew javadoc
 
@@ -12,7 +12,10 @@ before_install:
 - mysql -e "create database IF NOT EXISTS springMvc;" -uroot
 
 jdk:
+- openjdk6
 - oraclejdk7
+- openjdk7
+- oraclejdk8
 
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
