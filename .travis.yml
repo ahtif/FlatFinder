@@ -1,8 +1,8 @@
 language: java
 script:
-- ./gradlew -i check
-- ./gradlew jar
-- ./gradlew javadoc
+- ./springMvc/gradlew -i check
+- ./springMvc/gradlew jar
+- ./springMvc/gradlew javadoc
 
 before_install:
 - mysql -e "create database IF NOT EXISTS springMvc;" -uroot
