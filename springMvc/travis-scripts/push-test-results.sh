@@ -16,13 +16,7 @@ git reset upstream/master
 
 touch .
 
-# Add the reports
-rm -rf ./springMvc/travis-build
-mkdir ./springMvc/travis-build
-mv cucumber-html-report ./springMvc/travis-build
-mv reports ./springMvc/travis-build
-mv docs ./springMvc/travis-build
-mv libs ./springMvc/travis-build
+# Add the reports DO NOT UNCOMMENT BELOW!
 #git add -A cucumber-html-report
 #git add -A reports
 #git add -A docs
