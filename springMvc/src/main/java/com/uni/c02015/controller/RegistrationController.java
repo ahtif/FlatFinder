@@ -25,5 +25,4 @@ public class RegistrationController {
   public ModelAndView showSearcherRegistrationForm() {
     return new ModelAndView("searcher/registration-searcher","Searcher",new Searcher());
   }
-
 }

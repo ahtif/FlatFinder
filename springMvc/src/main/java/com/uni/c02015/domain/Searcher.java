@@ -12,8 +12,6 @@ public class Searcher {
   @Id
   private Integer id;
   private String emailAddress;
-  private String password;
-  private String confirmPassword;
   //personal details
   private String firstName;
   private String lastName;
@@ -33,22 +31,6 @@ public class Searcher {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getConfirmPassword() {
-    return confirmPassword;
-  }
-
-  public void setConfirmPassword(String confirmPassword) {
-    this.confirmPassword = confirmPassword;
   }
 
   public String getFirstName() {
