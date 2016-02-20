@@ -44,7 +44,6 @@ public class SpringMvc implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) throws Exception {
 
-    BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
     
     //Set up Roles
     Role role = new Role();
@@ -63,7 +62,8 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     roleRepo.save(role);
 
-
+    BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+    
     // Set up users
     User user = new User();
     user.setLogin("Admin");
