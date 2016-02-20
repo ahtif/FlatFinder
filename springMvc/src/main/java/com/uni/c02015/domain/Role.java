@@ -15,7 +15,7 @@ public class Role {
   private Integer id;
 
   @OneToMany
-  @JoinColumn(name = "users")
+  @JoinColumn(name = "role")
   private Set<User> users;
 
   private String role;
