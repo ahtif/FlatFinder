@@ -4,6 +4,7 @@ import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import com.uni.c02015.domain.User;
 public class RegistrationController {
   @Autowired
   private UserRepository userRepo;
+  @Autowired
+  private RoleRepository roleRepo;
 
   @ModelAttribute("User")
   public User getUser(){
@@ -46,21 +49,19 @@ public class RegistrationController {
   
   @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
   public ModelAndView assessRequest(
-  		@RequestParam(value="username", required=true) String username,
+  		@RequestParam(value="login", required=true) String username,
   		@RequestParam(value="password", required=true) String password,
-  		@RequestParam(value="role", required=false) String role,
+  		@RequestParam(value="role", required=true) String role,
         Model model){
-
+	  
 	    User u = new User();
 		
 		u.setLogin(username);
 		u.setPassword(password);
-		u.setRole(new Role(role));
+		u.setRole(roleRepo.findByRole(role));
 		userRepo.save(u);
 		
-		model.addAttribute("username", username);
-		model.addAttribute("password", password);
-		model.addAttribute("role", role);
+		
 		
      return new ModelAndView("redirect:/index");
   }

@@ -14,4 +14,6 @@ public interface RoleRepository extends CrudRepository<Role, Integer> {
    * @return {@link Role}
    */
   Role findById(Integer id);
+  
+  Role findByRole(String role);
 }

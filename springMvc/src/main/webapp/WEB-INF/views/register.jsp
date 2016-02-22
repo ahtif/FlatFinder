@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Registration</h1>
-<form:form method="POST" action="/createAccount" modelAttribute="user">
+<form:form method="POST" action="/createAccount" modelAttribute="User">
 	<table>
 		<tr>
 			<td>Enter Username:</td>
