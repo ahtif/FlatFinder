@@ -39,7 +39,6 @@ public class Searcher {
     this.emailAddress = emailAddress;
   }
   
-
   public String getUsername() {
     return username;
   }
