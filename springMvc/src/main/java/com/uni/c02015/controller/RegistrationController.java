@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.ModelMap;
 import org.springframework.ui.Model;
@@ -54,16 +55,18 @@ public class RegistrationController {
   		@RequestParam(value="role", required=true) String role,
         Model model){
 	  
+	  
+	    BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 	    User u = new User();
 		
 		u.setLogin(username);
-		u.setPassword(password);
+		u.setPassword(pe.encode(password));
 		u.setRole(roleRepo.findByRole(role));
 		userRepo.save(u);
 		
 		
 		
-     return new ModelAndView("redirect:/index");
+     return new ModelAndView("redirect:/");
   }
 
 }
