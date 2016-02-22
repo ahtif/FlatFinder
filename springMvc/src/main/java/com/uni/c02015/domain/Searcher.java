@@ -12,7 +12,7 @@ public class Searcher {
   @Id
   private Integer id;
   private String emailAddress;
-
+  private String username;
   private String firstName;
   private String lastName;
   private boolean buddyPref;
@@ -21,6 +21,11 @@ public class Searcher {
 
     this.id = id;
   }
+
+  public Searcher() {
+    // TODO Auto-generated constructor stub
+  }
+
 
   public Integer getId() {
     return id;
@@ -34,8 +39,7 @@ public class Searcher {
     this.emailAddress = emailAddress;
   }
   
-<<<<<<< HEAD
-=======
+
   public String getUsername() {
     return username;
   }
@@ -44,7 +48,6 @@ public class Searcher {
     this.username = username;
   }
 
->>>>>>> origin/master
   public String getFirstName() {
     return firstName;
   }

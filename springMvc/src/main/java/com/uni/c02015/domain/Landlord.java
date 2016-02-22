@@ -21,6 +21,10 @@ public class Landlord {
     this.id = id;
   }
 
+  public Landlord() {
+    // TODO Auto-generated constructor stub
+  }
+
   public Integer getId() {
     return id;
   }
