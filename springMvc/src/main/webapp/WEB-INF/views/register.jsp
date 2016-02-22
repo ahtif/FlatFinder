@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<td>Enter Password:</td>
-			<td><form:input type="text" path="password"></form:input></td>
+			<td><form:input type="password" path="password"></form:input></td>
 		</tr>
 		<tr>
 			<td>Choose user type:</td>
