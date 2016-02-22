@@ -13,12 +13,12 @@ public class DbConfig {
    */
   @Bean
   public DriverManagerDataSource dataSource() {
-
-    DriverManagerDataSource ds = new DriverManagerDataSource();
-    ds.setDriverClassName("com.mysql.jdbc.Driver");
-    ds.setUrl("jdbc:mysql://127.0.0.1/springMvc");
-    ds.setUsername("root");
-    ds.setPassword("");
-    return ds;
+	  DriverManagerDataSource ds = new DriverManagerDataSource();
+      ds.setDriverClassName("com.mysql.jdbc.Driver");
+      // jdbc:mysql://host:port/db
+      ds.setUrl("jdbc:mysql://mysql.mcscw3.le.ac.uk:3306/jb603");
+      ds.setUsername("jb603");
+      ds.setPassword("usburtes");
+      return ds;
   }
 }

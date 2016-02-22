@@ -10,8 +10,10 @@ import javax.persistence.Table;
 public class Searcher {
   //login details
   @Id
+  
   private Integer id;
   private String emailAddress;
+  private String username;
   private String password;
   private String confirmPassword;
   //personal details
@@ -33,6 +35,14 @@ public class Searcher {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
+  }
+  
+  public String getUsername() {
+	return username;
+  }
+
+  public void setUsername(String username) {
+	this.username = username;
   }
 
   public String getPassword() {
