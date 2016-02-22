@@ -66,31 +66,12 @@ public class SpringMvc implements ApplicationRunner {
     
     // Set up users
     User user = new User();
-    user.setLogin("Admin");
-    user.setPassword(pe.encode("admin"));
+    user.setLogin("admin");
+    user.setPassword(pe.encode("password"));
     role = new Role();
     role.setId(ROLE_ADMINISTRATOR_ID);
     role.setRole(ROLE_ADMINISTRATOR);
     user.setRole(role);
     userRepo.save(user);
-
-    user = new User();
-    user.setLogin("Landlord");
-    user.setPassword(pe.encode("landlord"));
-    role = new Role();
-    role.setId(ROLE_LANDLORD_ID);
-    role.setRole(ROLE_LANDLORD);
-    user.setRole(role);
-    userRepo.save(user);
-
-    user = new User();
-    user.setLogin("Searcher");
-    user.setPassword(pe.encode("searcher"));
-    role = new Role();
-    role.setId(ROLE_SEARCHER_ID);
-    role.setRole(ROLE_SEARCHER);
-    user.setRole(role);
-    userRepo.save(user);
-    
   }
 }

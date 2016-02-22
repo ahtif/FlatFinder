@@ -1,5 +1,6 @@
 package com.uni.c02015.controller;
 
+import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
@@ -9,18 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
 public class RegistrationController {
+
+  private static final String SIGN_UP_ID_SESSION = "signUpID";
+
   @Autowired
   private UserRepository userRepo;
   @Autowired
@@ -30,21 +33,85 @@ public class RegistrationController {
   public User getUser() {
     return new User();
   }
-  
-  //returns registration page for landlord
-  @RequestMapping(value = "/landlord/registration", method = RequestMethod.GET)
-  public ModelAndView showLandlordRegistrationForm() {
-    return new ModelAndView("landlord/registration-landlord","Landlord",new Landlord());
+
+  /**
+   * Add a searcher.
+   * @param request The request
+   * @return String
+   */
+  @RequestMapping(value = "/addSearcher", method = RequestMethod.POST)
+  public String addSearcher(HttpServletRequest request) {
+
+    // TODO - add searcher
+    Searcher searcher = new Searcher(
+        (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+
+    // Remove the sign up session
+    request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
+
+    return "redirect:/";
   }
 
-  //returns registration page for searcher
+  /**
+   * Add a landlord.
+   * @param request The request
+   * @return String
+   */
+  @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
+  public String addLandlord(HttpServletRequest request) {
+
+    // TODO - add landlord
+    Landlord landlord = new Landlord(
+        (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+
+    // Remove the sign up session
+    request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
+
+    return "redirect:/";
+  }
+
+  /**
+   * Registration page for landlord.
+   * @param request The request
+   * @return ModelAndView
+   */
+  @RequestMapping(value = "/landlord/registration", method = RequestMethod.GET)
+  public ModelAndView showLandlordRegistrationForm(HttpServletRequest request) {
+
+    // Don't allow access unless the sign up session was set
+    if (request.getSession().getAttribute(SIGN_UP_ID_SESSION) == null) {
+
+      return new ModelAndView("redirect:/register");
+    }
+
+    //
+    return new ModelAndView("landlord/registration-landlord",
+        "Landlord",
+        new Landlord((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION)));
+  }
+
+  /**
+   * Registration page for a landlord.
+   * @param request The request
+   * @return ModelAndView
+   */
   @RequestMapping(value = "/searcher/registration", method = RequestMethod.GET)
-  public ModelAndView showSearcherRegistrationForm() {
-    return new ModelAndView("searcher/registration-searcher","Searcher",new Searcher());
+  public ModelAndView showSearcherRegistrationForm(HttpServletRequest request) {
+
+    // Don't allow access unless the sign up session was set
+    if (request.getSession().getAttribute(SIGN_UP_ID_SESSION) == null) {
+
+      return new ModelAndView("redirect:/register");
+    }
+
+    return new ModelAndView("searcher/registration-searcher",
+        "Searcher",
+        new Searcher((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION)));
   }
   
   @RequestMapping("/register")
   public String register() {
+
     return "register";
   }
   
@@ -55,19 +122,32 @@ public class RegistrationController {
    * @param role The account type
    */
   @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-  public ModelAndView assessRequest(
+  public String assessRequest(
       @RequestParam(value = "login", required = true) String username,
       @RequestParam(value = "password", required = true) String password,
       @RequestParam(value = "role", required = true) String role,
-        Model model) {
+      Model model,
+      HttpServletRequest request) {
 
     User user = new User();
     user.setLogin(username);
-    user.setPassword(password);
+
+    user.setPassword(new BCryptPasswordEncoder().encode(password));
     user.setRole(roleRepo.findByRole(role));
     userRepo.save(user);
-    
-    return new ModelAndView("redirect:/");
-  }
 
+    // Set the sign up session
+    request.getSession().setAttribute(SIGN_UP_ID_SESSION, user.getId());
+
+    // Searcher
+    if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)) {
+
+      return "redirect:/searcher/registration";
+
+    // Landlord
+    } else {
+
+      return "redirect:/landlord/registration";
+    }
+  }
 }

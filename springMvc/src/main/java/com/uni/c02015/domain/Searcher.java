@@ -34,17 +34,6 @@ public class Searcher {
     this.emailAddress = emailAddress;
   }
   
-<<<<<<< HEAD
-=======
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
->>>>>>> origin/master
   public String getFirstName() {
     return firstName;
   }
