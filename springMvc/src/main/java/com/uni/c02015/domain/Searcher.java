@@ -8,26 +8,22 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Searcher {
-  //login details
+
   @Id
-  
   private Integer id;
   private String emailAddress;
-  private String username;
-  private String password;
-  private String confirmPassword;
 
-  //personal details
   private String firstName;
   private String lastName;
-  private boolean isBuddy;
+  private boolean buddyPref;
+
+  public Searcher(int id) {
+
+    this.id = id;
+  }
 
   public Integer getId() {
     return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
   }
 
   public String getEmailAddress() {
@@ -38,14 +34,6 @@ public class Searcher {
     this.emailAddress = emailAddress;
   }
   
-  public String getUsername() {
-	return username;
-  }
-
-  public void setUsername(String username) {
-	this.username = username;
-  }
-
   public String getFirstName() {
     return firstName;
   }
@@ -62,11 +50,11 @@ public class Searcher {
     this.lastName = lastName;
   }
 
-  public boolean getBuddy() {
-    return isBuddy;
+  public boolean getBuddyPref() {
+    return buddyPref;
   }
 
-  public void setBuddy(boolean buddy) {
-    isBuddy = buddy;
+  public void setBuddyPref(boolean buddyPref) {
+    this.buddyPref = buddyPref;
   }
 }
