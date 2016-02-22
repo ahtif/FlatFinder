@@ -7,6 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Landlord {
+
   //login details
   @Id
   private Integer id;
@@ -35,14 +36,6 @@ public class Landlord {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public String getFirstName() {
@@ -91,9 +84,5 @@ public class Landlord {
 
   public void setContactNo(String contactNo) {
     this.contactNo = contactNo;
-  }
-
-  public String getConfirmPassword() {
-    return confirmPassword;
   }
 }
