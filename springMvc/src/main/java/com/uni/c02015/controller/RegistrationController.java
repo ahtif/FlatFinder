@@ -4,8 +4,11 @@ import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.Role;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
+import com.uni.c02015.persistence.repository.LandlordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 @Controller
 public class RegistrationController {
 
@@ -28,6 +30,10 @@ public class RegistrationController {
   private UserRepository userRepo;
   @Autowired
   private RoleRepository roleRepo;
+  @Autowired
+  private SearcherRepository searcherRepo;
+  @Autowired
+  private LandlordRepository landlordRepo;
 
   @ModelAttribute("User")
   public User getUser() {
@@ -40,11 +46,20 @@ public class RegistrationController {
    * @return String
    */
   @RequestMapping(value = "/addSearcher", method = RequestMethod.POST)
-  public String addSearcher(HttpServletRequest request) {
+  public String addSearcher(
+		  @RequestParam(value = "firstName", required = true) String firstName,
+	      @RequestParam(value = "lastName", required = true) String lastName,
+	      @RequestParam(value = "emailAddress", required = true) String emailAddress,
+	      Model model,
+	      HttpServletRequest request) {
 
-    // TODO - add searcher
     Searcher searcher = new Searcher(
         (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+    
+    searcher.setFirstName(firstName);
+    searcher.setLastName(lastName);
+    searcher.setEmailAddress(emailAddress);
+    searcherRepo.save(searcher);
 
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
@@ -58,11 +73,20 @@ public class RegistrationController {
    * @return String
    */
   @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
-  public String addLandlord(HttpServletRequest request) {
+  public String addLandlord(
+		  @RequestParam(value = "firstName", required = true) String firstName,
+	      @RequestParam(value = "lastName", required = true) String lastName,
+	      @RequestParam(value = "emailAddress", required = true) String emailAddress,
+	      Model model,
+	      HttpServletRequest request) {
 
-    // TODO - add landlord
     Landlord landlord = new Landlord(
         (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+    
+    landlord.setFirstName(firstName);
+    landlord.setLastName(lastName);
+    landlord.setEmailAddress(emailAddress);
+    landlordRepo.save(landlord);
 
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
