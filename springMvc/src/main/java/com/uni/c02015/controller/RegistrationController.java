@@ -2,13 +2,13 @@ package com.uni.c02015.controller;
 
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.domain.Role;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.UserRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
+import com.uni.c02015.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -47,12 +47,12 @@ public class RegistrationController {
    */
   @RequestMapping(value = "/addSearcher", method = RequestMethod.POST)
   public String addSearcher(
-		  @RequestParam(value = "firstName", required = true) String firstName,
-	      @RequestParam(value = "lastName", required = true) String lastName,
-	      @RequestParam(value = "emailAddress", required = true) String emailAddress,
-	      @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
-	      Model model,
-	      HttpServletRequest request) {
+      @RequestParam(value = "firstName", required = true) String firstName,
+      @RequestParam(value = "lastName", required = true) String lastName,
+      @RequestParam(value = "emailAddress", required = true) String emailAddress,
+      @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
+      Model model,
+      HttpServletRequest request) {
 
     Searcher searcher = new Searcher(
         (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
@@ -71,20 +71,20 @@ public class RegistrationController {
 
   /**
    * Add a landlord.
-   * @param request The request
+   * 
+   * @param request
+   *          The request
    * @return String
    */
   @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
-  public String addLandlord(
-		  @RequestParam(value = "firstName", required = true) String firstName,
-	      @RequestParam(value = "lastName", required = true) String lastName,
-	      @RequestParam(value = "emailAddress", required = true) String emailAddress,
-	      Model model,
-	      HttpServletRequest request) {
+  public String addLandlord(@RequestParam(value = "firstName", required = true) String firstName,
+      @RequestParam(value = "lastName", required = true) String lastName,
+      @RequestParam(value = "emailAddress", required = true) String emailAddress, Model model,
+      HttpServletRequest request) {
 
-    Landlord landlord = new Landlord(
-        (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
-    
+    Landlord landlord = 
+        new Landlord((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+
     landlord.setFirstName(firstName);
     landlord.setLastName(lastName);
     landlord.setEmailAddress(emailAddress);

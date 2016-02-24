@@ -37,6 +37,7 @@ public class Searcher {
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
   }
+  
   public String getFirstName() {
     return firstName;
   }
