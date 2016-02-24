@@ -50,6 +50,7 @@ public class RegistrationController {
 		  @RequestParam(value = "firstName", required = true) String firstName,
 	      @RequestParam(value = "lastName", required = true) String lastName,
 	      @RequestParam(value = "emailAddress", required = true) String emailAddress,
+	      @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
 	      Model model,
 	      HttpServletRequest request) {
 
@@ -59,6 +60,7 @@ public class RegistrationController {
     searcher.setFirstName(firstName);
     searcher.setLastName(lastName);
     searcher.setEmailAddress(emailAddress);
+    searcher.setBuddyPref(buddyPref);
     searcherRepo.save(searcher);
 
     // Remove the sign up session

@@ -32,9 +32,16 @@
             <td><form:input path="emailAddress" value="" /></td>
         </tr>
 
+		<tr>
+            <td>Would you like to be a buddy?</td>
+            <td><form:radiobutton path="buddyPref" value="true" label="Yes"/>
+				<form:radiobutton path="buddyPref" value="false" label="No"/></td>
+        </tr>
+
         <tr>
             <td><button type="submit" value="Submit">Submit</button></td>
         </tr>
+   
 </form:form>
 </body>
 </html>
