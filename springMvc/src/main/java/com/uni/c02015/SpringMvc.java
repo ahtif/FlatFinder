@@ -1,9 +1,14 @@
 package com.uni.c02015;
 
+import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,6 +24,9 @@ public class SpringMvc implements ApplicationRunner {
   
   @Autowired
   private RoleRepository roleRepo;
+  
+  @Autowired
+  private MessageRepository messageRepo;
 
   public static final int ROLE_ADMINISTRATOR_ID = 1;
   public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
@@ -73,5 +81,17 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_ADMINISTRATOR);
     user.setRole(role);
     userRepo.save(user);
+    
+    Message message = new Message();
+    message.setMessage("hello");
+    message.setSender(user);
+    message.setReceiver(user);
+    message.setSubject("test");
+    message.setMessageDate(new Date());
+    message.setIsRead(false);
+    message.setParent(null);
+    message.setChildren(null);
+    messageRepo.save(message);
+    
   }
 }
