@@ -1,5 +1,6 @@
 package com.uni.c02015;
 
+
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
@@ -7,7 +8,7 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 
-import java.util.Date;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,6 +16,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class SpringMvc implements ApplicationRunner {
