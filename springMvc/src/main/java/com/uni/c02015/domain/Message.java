@@ -19,7 +19,7 @@ public class Message {
 
   @Id
   @GeneratedValue
-  private Integer id;
+  private int id;
  
   @ManyToOne
   @JoinColumn(name = "parentId")
@@ -36,6 +36,8 @@ public class Message {
   @JoinColumn(name = "receiverId")
   private User receiver;
   
+  private String senderName;
+  
   private String subject;
   
   private String message;
@@ -43,6 +45,14 @@ public class Message {
   private Date messageDate;
   
   private Boolean isRead;
+  
+  public int getId() {
+    return id;
+  }
+  
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public Date getMessageDate() {
     return messageDate;
@@ -107,5 +117,13 @@ public class Message {
   public void setChildren(Collection<Message> children) {
     this.children = children; 
   }
-  
+
+  public String getSenderName() {
+    return senderName;
+  }
+
+  public void setSenderName(String senderName) {
+    this.senderName = senderName;
+  }
+
 }
