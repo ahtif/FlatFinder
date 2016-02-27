@@ -107,17 +107,17 @@ public class SpringMvc implements ApplicationRunner {
     message.setChildren(null);
     messageRepo.save(message);
     
-    message = new Message();
-    message.setSenderName("alice");
-    message.setMessage("hello1");
-    message.setSender(user1);
-    message.setReceiver(user);
-    message.setSubject("test1");
-    message.setMessageDate(new Date());
-    message.setIsRead(false);
-    message.setParent(null);
-    message.setChildren(null);
-    messageRepo.save(message);
+    Message message1 = new Message();
+    message1.setSenderName("alice");
+    message1.setMessage("hello1");
+    message1.setSender(user1);
+    message1.setReceiver(user);
+    message1.setSubject("test1");
+    message1.setMessageDate(new Date());
+    message1.setIsRead(false);
+    message1.setParent(message);
+    message1.setChildren(null);
+    messageRepo.save(message1);
     
   }
 }

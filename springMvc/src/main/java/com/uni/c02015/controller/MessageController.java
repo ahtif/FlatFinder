@@ -56,9 +56,26 @@ public class MessageController {
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     List<Message> usersMessages = messageRepo.findByReceiver(currentUser);
-    ModelAndView inboxView = new ModelAndView("messaging/inbox");
+    ModelAndView inboxView = new ModelAndView("messaging/inboxPage");
     inboxView.addObject("messages", usersMessages);    
     return inboxView;
+  }
+  
+  @RequestMapping("messaging")
+  public ModelAndView messageIndex() {
+    return goToInbox();
+  }
+  
+  /**
+   * Get a specific message from the database and send it to the view.
+   * @param id The id of the message.
+   */
+  @RequestMapping("messaging/view")
+  public ModelAndView viewMessage(@RequestParam("id") int id) {
+    Message message = messageRepo.findById(id);
+    ModelAndView messageView = new ModelAndView("messaging/view","messageAttribute", new Message());
+    messageView.addObject("message", message);
+    return messageView;
   }
   
   @RequestMapping("messaging/new")

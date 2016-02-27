@@ -19,9 +19,10 @@
 	</tr>
 	<c:forEach items ="${messages}" var ="message">
 		<tr>
-			<td><c:out value="${message.senderName}"/></td>
-			<td><c:out value="${message.subject}"/></td>
-			<td><c:out value="${message.message}"/></td>
+			<td><a href="messaging/view?id=${message.id}"><c:out value="${message.senderName}"/></a></td>
+			<td><a href="messaging/view?id=${message.id}"><c:out value="${message.subject}"/></a></td>
+			<td><a href="messaging/view?id=${message.id}"><c:out value="${message.message}"/></a></td>
+		
 		</tr>
 	</c:forEach>
 </table>
