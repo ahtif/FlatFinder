@@ -43,7 +43,8 @@ public class AccessControlStepDefs {
   }
 
   @Given("^I am a \"([^\"]*)\" with username \"([^\"]*)\" and password \"([^\"]*)\"$")
-  public void i_am_a_with_username_and_password(String arg1, String arg2, String arg3) throws Throwable {
+  public void i_am_a_with_username_and_password(String arg1, String arg2, String arg3)
+          throws Throwable {
     authentication = new UsernamePasswordAuthenticationToken(arg2, arg3,
             AuthorityUtils.createAuthorityList("ROLE_" + arg1));
   }
