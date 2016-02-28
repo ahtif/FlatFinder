@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -23,7 +25,8 @@ import cucumber.api.java.en.When;
 
 import javax.servlet.Filter;
 
-
+@WebAppConfiguration
+@ContextConfiguration(classes = {SpringMvc.class, SecurityConfig.class, WebConfig.class})
 public class AccessControlStepDefs {
 
   @Autowired
@@ -48,10 +51,8 @@ public class AccessControlStepDefs {
   }
   //Creates an authentication token using username, password and role
   @Given("^I am a \"([^\"]*)\" with username \"([^\"]*)\" and password \"([^\"]*)\"$")
-  public void iam_a_with_username_and_password(String arg1, String arg2, String arg3)
-          throws Throwable {
-    authentication = new UsernamePasswordAuthenticationToken(arg2, arg3,
-            AuthorityUtils.createAuthorityList("ROLE_" + arg1));
+  public void iam_a_with_username_and_password(String arg1, String arg2, String arg3) throws Throwable {
+    authentication = new UsernamePasswordAuthenticationToken(arg2, arg3,AuthorityUtils.createAuthorityList("ROLE_" + arg1));
   }
   //When you enter credentials in login
   @When("^I access \"([^\"]*)\"$")
