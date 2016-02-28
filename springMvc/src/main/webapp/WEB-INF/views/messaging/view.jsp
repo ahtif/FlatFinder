@@ -18,10 +18,13 @@
 <p> <c:out value="${message.message}"/> </p>
 <br />
 <h3> Reply: </h3>
-<form action="messaging/reply" id="replyForm">
-<textarea form="replyForm" rows="5" cols="50"></textarea><br />
+<form:form action="/messaging/sendMessage" modelAttribute="messageAttribute" id="replyForm">
+<form:input type="hidden" value="${message.senderName}" path="receiver"/>
+<form:input type="hidden" value="${message.id}" path="parent"/>
+<form:input type="hidden" value="RE: ${message.subject}" path="subject"/>
+<form:textarea form="replyForm" rows="5" cols="50" path="message"/><br />
 <input type="submit" value="Reply"/>
-</form>
+</form:form>
 
 
 </body>

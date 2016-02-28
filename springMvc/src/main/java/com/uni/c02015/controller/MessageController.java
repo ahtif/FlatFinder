@@ -71,8 +71,8 @@ public class MessageController {
    * @param id The id of the message.
    */
   @RequestMapping("messaging/view")
-  public ModelAndView viewMessage(@RequestParam("id") int id) {
-    Message message = messageRepo.findById(id);
+  public ModelAndView viewMessage(@RequestParam("id") String id) {
+    Message message = messageRepo.findById(Integer.parseInt(id));
     ModelAndView messageView = new ModelAndView("messaging/view","messageAttribute", new Message());
     messageView.addObject("message", message);
     return messageView;
@@ -93,7 +93,8 @@ public class MessageController {
   @RequestMapping("messaging/sendMessage")
   public String sendMessage(@RequestParam(value = "receiver", required = true) String to,
       @RequestParam(value = "subject", required = true) String subject,
-      @RequestParam(value = "message", required = true) String body) {
+      @RequestParam(value = "message", required = true) String body,
+      @RequestParam(value = "parent", required = false) String parent) {
     
     
     System.out.println("sending message");
@@ -101,9 +102,11 @@ public class MessageController {
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
-    User receiver = userRepo.findByLogin(to);
-    
     Message message = new Message();
+    if (!parent.isEmpty()) {
+      message.setParent(messageRepo.findById(Integer.parseInt(parent)));
+    }
+    User receiver = userRepo.findByLogin(to);
     message.setSenderName(currentUser.getLogin());
     message.setSender(currentUser);
     message.setReceiver(receiver);
