@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -60,6 +61,7 @@ public class RegisterStepDefs {
    */
   @Before
   public void setup() {
+    userRepository.deleteAll();
     this.mockMvc = MockMvcBuilders
             .webAppContextSetup(this.wac)
             .addFilters(springSecurityFilterChain)
@@ -68,8 +70,9 @@ public class RegisterStepDefs {
 
     user = new User();
     //deletes all records before starting scenario.
-    userRepository.deleteAll();
   }
+
+ 
 
   /**
    * Given a username.
