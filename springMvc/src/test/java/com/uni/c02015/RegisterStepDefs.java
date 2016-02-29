@@ -70,25 +70,25 @@ public class RegisterStepDefs {
   }
 
   @Given("^a username \"([^\"]*)\"$")
-  public void a_username(String arg1) throws Throwable {
+  public void ausername(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     user.setLogin(arg1);
   }
 
   @Given("^a password \"([^\"]*)\"$")
-  public void a_password(String arg1) throws Throwable {
+  public void apassword(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     user.setPassword(arg1);
   }
 
   @Given("^a user type \"([^\"]*)\"$")
-  public void a_user_type(String arg1) throws Throwable {
+  public void auser_type(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     user.setRole(roleRepository.findByRole(arg1));
   }
 
   @When("^I press create account$")
-  public void i_press_create_account() throws Throwable {
+  public void ipress_create_account() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     result = mockMvc.perform(post("/createAccount")
             .param("login",user.getLogin())
@@ -139,7 +139,7 @@ public class RegisterStepDefs {
   }
 
   @Given("^I am a user with username \"([^\"]*)\"$")
-  public void i_am_a_user_with_username(String arg1) throws Throwable {
+  public void iam_a_user_with_username(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     user.setLogin(arg1);
   }
@@ -163,75 +163,75 @@ public class RegisterStepDefs {
   }
 
   @Given("^a Landlord with firstname \"([^\"]*)\"$")
-  public void a_Landlord_with_firstname(String arg1) throws Throwable {
+  public void aLandlord_with_firstname(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a surname \"([^\"]*)\"$")
-  public void a_surname(String arg1) throws Throwable {
+  public void asurname(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^I have entered a email \"([^\"]*)\"$")
-  public void i_have_entered_a_email(String arg1) throws Throwable {
+  public void ihave_entered_a_email(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @When("^I request for a user account$")
-  public void i_request_for_a_user_account() throws Throwable {
+  public void irequest_for_a_user_account() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Then("^I should get an error message \"([^\"]*)\"$")
-  public void i_should_get_an_error_message(String arg1) throws Throwable {
+  public void ishould_get_an_error_message(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a User with username \"([^\"]*)\" which is an existing username in the User Repository$")
-  public void a_User_with_username_which_is_an_existing_username_in_the_User_Repository(String arg1)
+  public void aUser_with_username_which_is_an_existing_username_in_the_User_Repository(String arg1)
           throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a confirmed password \"([^\"]*)\"$")
-  public void a_confirmed_password(String arg1) throws Throwable {
+  public void aconfirmed_password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Then("^an error message should occur: \"([^\"]*)\"$")
-  public void an_error_message_should_occur(String arg1) throws Throwable {
+  public void anerror_message_should_occur(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a User with username \"([^\"]*)\"$")
-  public void a_User_with_username(String arg1) throws Throwable {
+  public void aUser_with_username(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Then("^I should get the error message \"([^\"]*)\"$")
-  public void i_should_get_the_error_message(String arg1) throws Throwable {
+  public void ishould_get_the_error_message(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^I have entered a password which consists of (\\d+) to (\\d+) characters \"([^\"]*)\"$")
-  public void i_have_entered_a_password_which_consists_of_to_characters(int arg1, int arg2, String arg3)
+  public void ihave_entered_a_password_which_consists_of_to_characters(int arg1, int arg2, String arg3)
           throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^I have entered the confirmed password \"([^\"]*)\"$")
-  public void i_have_entered_the_confirmed_password(String arg1) throws Throwable {
+  public void ihave_entered_the_confirmed_password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
@@ -243,19 +243,20 @@ public class RegisterStepDefs {
   }
 
   @Given("^a email \"([^\"]*)\"$")
-  public void a_email(String arg1) throws Throwable {
+  public void aemail(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @When("^I submit the form$")
-  public void i_submit_the_form() throws Throwable {
+  public void isubmit_the_form() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Then("^the system stores the Landlord with firstname \"([^\"]*)\"$")
-  public void the_system_stores_the_Landlord_with_firstname(String arg1) throws Throwable {
+  public void the_system_stores_the_Landlord_with_firstname(String arg1)
+  throws Throwable {
     //                                                                                                                                                                 Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
@@ -273,19 +274,19 @@ public class RegisterStepDefs {
   }
 
   @Given("^a firstname \"([^\"]*)\"$")
-  public void a_firstname(String arg1) throws Throwable {
+  public void afirstname(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a lastname \"([^\"]*)\"$")
-  public void a_lastname(String arg1) throws Throwable {
+  public void alastname(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
 
   @Given("^a Searcher with firstname \"([^\"]*)\"$")
-  public void a_Searcher_with_firstname(String arg1) throws Throwable {
+  public void aSearcher_with_firstname(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     //throw new PendingException();
   }
