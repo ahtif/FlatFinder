@@ -102,7 +102,7 @@ public class MessageController {
     User currentUser = userRepo.findByLogin(username);
     
     Message message = new Message();
-    if(parent != null && !parent.isEmpty()) {
+    if (parent != null && !parent.isEmpty()) {
       message.setParent(messageRepo.findById(Integer.parseInt(parent)));
     }
     User receiver = userRepo.findByLogin(to);
