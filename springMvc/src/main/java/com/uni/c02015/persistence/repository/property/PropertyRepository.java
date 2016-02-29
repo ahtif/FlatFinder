@@ -1,6 +1,6 @@
-package com.uni.c02015.persistence.repository;
+package com.uni.c02015.persistence.repository.property;
 
-import com.uni.c02015.domain.Property;
+import com.uni.c02015.domain.property.Property;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 

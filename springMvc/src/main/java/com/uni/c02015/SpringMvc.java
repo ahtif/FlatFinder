@@ -2,8 +2,10 @@ package com.uni.c02015;
 
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,9 +18,10 @@ public class SpringMvc implements ApplicationRunner {
 
   @Autowired
   private UserRepository userRepo;
-  
   @Autowired
   private RoleRepository roleRepo;
+  @Autowired
+  private TypeRepository typeRepository;
 
   public static final int ROLE_ADMINISTRATOR_ID = 1;
   public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
@@ -64,7 +67,7 @@ public class SpringMvc implements ApplicationRunner {
 
     BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
     
-    // Set up users
+    // Set up admin user
     User user = new User();
     user.setLogin("admin");
     user.setPassword(pe.encode("password"));
@@ -73,5 +76,14 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_ADMINISTRATOR);
     user.setRole(role);
     userRepo.save(user);
+
+    // Set up property types
+    Type type = new Type();
+    type.setType("Flat");
+    typeRepository.save(type);
+
+    type = new Type();
+    type.setType("House");
+    typeRepository.save(type);
   }
 }

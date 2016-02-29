@@ -228,8 +228,8 @@ public class RegisterStepDefs {
   /**
     * If username exist it shouldnt add it to database
     */
-  @Given("^a User with username \"([^\"]*)\" which is an
-  existing username in the User Repository$")
+  @Given("^a User with username \"([^\"]*)\" which is an " +
+      "existing username in the User Repository$")
   public void auser_with_username_which_is_an_existing_username_in_the_User_Repository(String arg1)
           throws Throwable {
     // Write code here that turns the phrase above into concrete actions
