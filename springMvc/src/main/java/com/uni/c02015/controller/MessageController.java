@@ -97,13 +97,12 @@ public class MessageController {
       @RequestParam(value = "parent", required = false) String parent) {
     
     
-    System.out.println("sending message");
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
     Message message = new Message();
-    if (!parent.isEmpty()) {
+    if(parent != null && !parent.isEmpty()) {
       message.setParent(messageRepo.findById(Integer.parseInt(parent)));
     }
     User receiver = userRepo.findByLogin(to);
