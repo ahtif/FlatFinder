@@ -25,8 +25,8 @@ Scenario: Creating User and redirected to registration page for Searcher
 @controller
 Scenario: Creating User and redirected to registration page for Landlord
     Given I am a user with username "mh453"
-    And password "password"
-    And confirmed password "password"
+    And a password "password"
+    And a confirmed password "password"
     And a user type "LANDLORD"
     When I press create account
     Then the system should redirect me to "/landlord/registration"

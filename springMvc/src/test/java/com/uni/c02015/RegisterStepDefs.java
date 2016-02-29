@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -60,6 +61,7 @@ public class RegisterStepDefs {
    */
   @Before
   public void setup() {
+    userRepository.deleteAll();
     this.mockMvc = MockMvcBuilders
             .webAppContextSetup(this.wac)
             .addFilters(springSecurityFilterChain)
@@ -68,8 +70,9 @@ public class RegisterStepDefs {
 
     user = new User();
     //deletes all records before starting scenario.
-    userRepository.deleteAll();
   }
+
+
 
   /**
    * Given a username.
@@ -107,7 +110,8 @@ public class RegisterStepDefs {
     result = mockMvc.perform(post("/createAccount")
             .param("login", user.getLogin())
             .param("password", user.getPassword())
-            .param("role", user.getRole().toString()));
+            .param("role", user.getRole().toString())
+    );
 
     //Not sure about this
     userRepository.save(user);
@@ -167,7 +171,7 @@ public class RegisterStepDefs {
   @Given("^I am a user with username \"([^\"]*)\"$")
   public void iam_a_user_with_username(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setLogin(arg1);
+    //user.setLogin(arg1);
   }
 
   /**
@@ -176,7 +180,7 @@ public class RegisterStepDefs {
   @Given("^password \"([^\"]*)\"$")
   public void password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setPassword(arg1);
+    //user.setPassword(arg1);
   }
 
   /**
@@ -185,7 +189,7 @@ public class RegisterStepDefs {
   @Given("^confirmed password \"([^\"]*)\"$")
   public void confirmed_password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setPassword(arg1);
+    //user.setPassword(arg1);
   }
 
   /**
@@ -194,7 +198,7 @@ public class RegisterStepDefs {
   @Then("^the system should redirect me to \"([^\"]*)\"$")
   public void the_system_should_redirect_me_to(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    //throw new PendingException();
+    //result.andExpect(view().name(arg1));
   }
 
   /**
