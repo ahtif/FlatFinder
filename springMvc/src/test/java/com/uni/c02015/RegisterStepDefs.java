@@ -61,7 +61,6 @@ public class RegisterStepDefs {
    */
   @Before
   public void setup() {
-    userRepository.deleteAll();
     this.mockMvc = MockMvcBuilders
             .webAppContextSetup(this.wac)
             .addFilters(springSecurityFilterChain)
@@ -70,6 +69,11 @@ public class RegisterStepDefs {
 
     user = new User();
     //deletes all records before starting scenario.
+  }
+  
+  @After
+  public void after() {
+    userRepository.deleteAll();
   }
 
  
