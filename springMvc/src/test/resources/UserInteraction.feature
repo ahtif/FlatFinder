@@ -18,9 +18,9 @@ Scenario: replying to a message
 @domain
 Scenario: Expressing interest in a property
 	Given I am logged in as a searcher "bob"
-	When I like a property "Ted's House 7"
 	And the user "ted" is a landlord
 	And the user "ted" is the owner of the property
+	When I like a property "Ted's House 7"
 	Then user "ted" should receive a notification that user "bob" liked his property
 
 @domain
