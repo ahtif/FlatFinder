@@ -135,7 +135,7 @@ public class RegisterStepDefs {
       }
     }
     assertThat(found, is(true));
-	/*
+	*/
   }
 
   /**
