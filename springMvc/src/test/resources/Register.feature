@@ -36,7 +36,7 @@ Scenario: Email validation
     Given a Landlord with firstname "Majid"
     And a surname "Hussain"
     And I have entered a email "@mh453.com"
-    When I request for a user account
+    When a landlord request for a user account
     Then I should get an error message "Invalid email address entered"
 
 @controller
@@ -70,7 +70,7 @@ Scenario: Landlord submitting details
     Given a Landlord with firstname "Majid"
     And a surname "Hussain"
     And a email "mh453@example.com"
-    When I submit the form
+    When a Landlord submit the form
     Then the system stores the Landlord with firstname "Majid"
     And surname "Hussain"
     And email "mh453@example.com"
@@ -80,7 +80,7 @@ Scenario: Landlord registering details (controller)
     Given a firstname "Majid"
     And a lastname "Hussain"
     And a email "mh453@example.com"
-    When I submit the form
+    When I Landlord submit the form
     Then the user is redirect to the login page
 
 @domain
@@ -89,7 +89,7 @@ Scenario: Searcher submitting details
     And a surname "Johnson"
     And a email "an001@example.com"
     And buddyUp is selected
-    When I submit the form
+    When I searcher submit the form
     Then the system stores the Landlord with firstname "Andy"
     And surname "Johnson"
     And email "an001@example.com"
@@ -101,5 +101,5 @@ Scenario: Searcher registering details (controller)
     And a lastname "Johnson"
     And a email "an001@example.com"
     And buddyUp is selected
-    When I submit the form
+    When I searcher submit the form
     Then the user is redirect to the login page
