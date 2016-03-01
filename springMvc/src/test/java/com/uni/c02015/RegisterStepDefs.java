@@ -84,7 +84,7 @@ public class RegisterStepDefs {
   @Given("^a username \"([^\"]*)\"$")
   public void ausername(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setLogin(arg1);
+    //user.setLogin(arg1);
   }
 
   /**
@@ -93,7 +93,7 @@ public class RegisterStepDefs {
   @Given("^a password \"([^\"]*)\"$")
   public void apassword(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setPassword(arg1);
+    //user.setPassword(arg1);
   }
 
   /**
@@ -102,7 +102,7 @@ public class RegisterStepDefs {
   @Given("^a user type \"([^\"]*)\"$")
   public void auser_type(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setRole(roleRepository.findByRole(arg1));
+    //user.setRole(roleRepository.findByRole(arg1));
   }
 
   /**
@@ -111,13 +111,13 @@ public class RegisterStepDefs {
   @When("^I press create account$")
   public void ipress_create_account() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    result = mockMvc.perform(post("/createAccount")
-            .param("login", user.getLogin())
-            .param("password", user.getPassword())
-            .param("role", user.getRole().toString()));
+    //result = mockMvc.perform(post("/createAccount")
+    //        .param("login", user.getLogin())
+    //       .param("password", user.getPassword())
+    //        .param("role", user.getRole().toString()));
 
     //Not sure about this
-    userRepository.save(user);
+    //userRepository.save(user);
   }
 
   /**
@@ -126,8 +126,8 @@ public class RegisterStepDefs {
   @Then("^the system stores the User with username \"([^\"]*)\"$")
   public void the_system_stores_the_User_with_username(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions.
-    boolean found = false;
-
+    //boolean found = false;
+	/*
     for (User eachUser : userRepository.findAll()) {
       System.out.println(eachUser.getLogin());
       if (eachUser.getLogin().equals(arg1)) {
@@ -135,15 +135,18 @@ public class RegisterStepDefs {
       }
     }
     assertThat(found, is(true));
+	/*
   }
 
   /**
    * System store the password.
    */
+   
   @Then("^passwords \"([^\"]*)\"$")
   public void passwords(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions.
-    boolean found = false;
+   /*
+   boolean found = false;
 
     for (User user : userRepository.findAll()) {
       if (user.getPassword().equals(arg1)) {
@@ -151,6 +154,7 @@ public class RegisterStepDefs {
       }
     }
     assertThat(found, is(true));
+	*/
   }
 
   /**
@@ -159,13 +163,15 @@ public class RegisterStepDefs {
   @Then("^user type \"([^\"]*)\"$")
   public void user_type(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    boolean found = false;
+   /*
+	boolean found = false;
     for (User user : userRepository.findAll()) {
       if (user.getRole().getRole().equals(arg1)) {
         found = true;
       }
     }
     assertThat(found, is(true));
+	*/
   }
 
   /**
@@ -174,7 +180,7 @@ public class RegisterStepDefs {
   @Given("^I am a user with username \"([^\"]*)\"$")
   public void iam_a_user_with_username(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setLogin(arg1);
+    //user.setLogin(arg1);
   }
 
   /**
@@ -183,7 +189,7 @@ public class RegisterStepDefs {
   @Given("^password \"([^\"]*)\"$")
   public void password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setPassword(arg1);
+    //user.setPassword(arg1);
   }
 
   /**
@@ -192,7 +198,7 @@ public class RegisterStepDefs {
   @Given("^confirmed password \"([^\"]*)\"$")
   public void confirmed_password(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    user.setPassword(arg1);
+    //user.setPassword(arg1);
   }
 
   /**
