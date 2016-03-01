@@ -125,36 +125,21 @@ public class RegisterStepDefs {
    */
   @Then("^the system stores the User with username \"([^\"]*)\"$")
   public void the_system_stores_the_User_with_username(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions.
-    //boolean found = false;
-	/*
-    for (User eachUser : userRepository.findAll()) {
-      System.out.println(eachUser.getLogin());
-      if (eachUser.getLogin().equals(arg1)) {
-        found = true;
-      }
-    }
-    assertThat(found, is(true));
-	*/
   }
 
   /**
    * System store the password.
    */
-   
   @Then("^passwords \"([^\"]*)\"$")
   public void passwords(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions.
-   /*
-   boolean found = false;
-
+   /*boolean found = false;
     for (User user : userRepository.findAll()) {
       if (user.getPassword().equals(arg1)) {
         found = true;
       }
     }
-    assertThat(found, is(true));
-	*/
+    assertThat(found, is(true));*/
   }
 
   /**
@@ -163,15 +148,13 @@ public class RegisterStepDefs {
   @Then("^user type \"([^\"]*)\"$")
   public void user_type(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-   /*
-	boolean found = false;
+   /*boolean found = false;
     for (User user : userRepository.findAll()) {
       if (user.getRole().getRole().equals(arg1)) {
         found = true;
       }
     }
-    assertThat(found, is(true));
-	*/
+    assertThat(found, is(true));*/
   }
 
   /**
