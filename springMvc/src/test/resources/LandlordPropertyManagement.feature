@@ -60,7 +60,7 @@ Scenario: Re-entering an already listed property
 	And the details should not be stored in the database
 
 @domain
-Scenario: Upload image of property
+Scenario Outline: Upload image of property
 	Given I am a landlord "James"
 	And I am on the update property page
 	When I select property <PROPERTY> to update
@@ -73,7 +73,7 @@ Scenario: Upload image of property
 	 |300 Welford Rd |img03.png    |
 
 @domain
-Scenario outline: Submitting propertydetails
+Scenario Outline: Submitting propertydetails
 	Given I am a landlord "Ted"
 	And I have entered the address <ADDRESS>
 	And I have entered the postcode <POSTCODE>
