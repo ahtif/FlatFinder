@@ -104,7 +104,5 @@ Scenario outline: Submitting propertydetails
 Scenario Outline: Updating property
 	Given I have a listed property
 	And the cost (PCM) is "750"
-	When I update the property
-	And I change the price to "800"
-	And I submit the new details
+	When I change the price to "800"
 	Then the new price should be set as "800" on the database
