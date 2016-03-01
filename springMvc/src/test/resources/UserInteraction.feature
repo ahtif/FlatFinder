@@ -25,7 +25,7 @@ Scenario: Expressing interest in a property
 
 @domain
 Scenario: Broadcasting a message
-	Given I am logged in as an administator "James
+	Given I am logged in as an administator "James"
 	When I broadcast a message "Maintenance 4-7AM (GMT)"
 	Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
 
