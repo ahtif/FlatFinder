@@ -71,10 +71,10 @@ public class RegisterStepDefs {
     //deletes all records before starting scenario.
   }
   
-  @After
-  public void after() {
-    userRepository.deleteAll();
-  }
+  // @After
+  // public void after() {
+  //   userRepository.deleteAll();
+  // }
 
  
 
