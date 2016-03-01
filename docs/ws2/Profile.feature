@@ -35,10 +35,9 @@ Scenario: Tracking property views
 	And I own properties <PROPERTIES>
 	And I have a 999 property views on each property
 	When a searcher "Bob" views my property "13 Aylestone Rd"
-	And a searcher "Bob" views my property "300 Welford Road"
 	Then my property views for "13 Aylestone Rd" should be "1000"
-	And my property views for "300 Welford Rd" should be "1000"
-	And my property views for "171 London Rd" should remain "999"
+	And my property views for "300 Welford Rd" should be "999"
+	And my property views for "171 London Rd" should be "999"
 	
 	Examples:
 	 |PROPERTY	 |
