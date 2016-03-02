@@ -8,19 +8,19 @@ Scenario: Search by location
 	Given I am logged in as searcher "bob"
 	And I enter a postcode "LE2 3AD"
 	When I specify a distance of "2" mile radius
-	Then only properties within 2 miles should show
+	Then only properties within "2" miles should show
 
 @controller
 Scenario: Search by listing price
 	Given I am logged in as searcher "Bob"
 	When I filter by the price "750" or lower (PCM)
-	Then I should only be able to see properties that cost 750 or less
+	Then I should only be able to see properties that cost "750" or less
 
 @controller
 Scenario: Search by bedroom
 	Given I am logged in as a searcher "Bob"
 	When I filter by "4" bedrooms
-	Then only property with 4 Bedrooms should be displayed
+	Then only property with "4" Bedrooms should be displayed
 
 @controller
 Scenario: Filter by multple criteria
@@ -37,4 +37,3 @@ Scenario: Search by start date
 	And I filter listings by start date "01/03/2016/"
 	When I set the end date "01/04/2016"
 	Then I should be able to only see properties available from "01/03/2016" to "01/04/2016"
-	

@@ -34,10 +34,10 @@ Scenario: Searcher providing feedback for landlord
 	Given I am a registered searcher "bob"
 	When I have dealt with a landlord "Ted"
 	Then I should be able to leave feedback: "Excellent property"
-	And rate him 4/5 stars
+	And rate him "4/5" stars
 
 @domain
-Scenario Outline: expressing interest
+Scenario: expressing interest
 	Given I am a registered user "bob"
 	And I am logged in
 	And I am a searcher
@@ -66,7 +66,7 @@ Scenario: Reporting a landlord as a searcher
 	And the administrator "James" should be notified
 
 @domain
-Scenario Outline: Reporting a searcher as a landlord
+Scenario: Reporting a searcher as a landlord
 	Given I am a landlord "Ted"
 	When a searcher "Bob" verbally abuses me over the messaging system
 	Then I should be able to report searcher "bob"

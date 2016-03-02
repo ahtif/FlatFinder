@@ -19,14 +19,14 @@
 #      | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
 #      | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-#@security
-#Scenario Outline: authorization
-#    Given I am an authenticated <ROLE> with username <USR>
-#    When I access <Service>
-#    Then My authentication is <isAuth> with role <ROLE>
+@security
+Scenario Outline: authorization
+    Given I am an authenticated <ROLE> with username <USR>
+    When I access <Service>
+    Then My authentication is <isAuthorized> with role <ROLE>
 
-#    Examples:
-#      | Service                          | USR     | ROLE        | isAuthorized|
+    Examples:
+       | Service                          | USR     | ROLE        | isAuthorized|
 #      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
 #      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
 #      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
