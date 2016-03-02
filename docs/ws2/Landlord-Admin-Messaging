@@ -1,0 +1,147 @@
+----LANDLORD-----
+Feature: Add property
+	In order to advertise my property
+	As a landlord I would like to add it to the system
+	So searchers can view my property
+	
+	@controller
+	Scenario outline: accessing the add property form
+	
+
+	@controller
+	Scenario outline: validate post code
+	Given I have entered a postcode "90001"
+	When I submit the form
+	Then I should get an error message "Incorrect postcode format"
+		
+
+	@controller
+	Scenario outline: validate address
+	Given I have entered an address "123456789"
+	When I submit the form
+	Then I should get an error message "Please enter a valid address format"
+	
+	@controller
+	Scenario outline: No. Bedrooms validation
+	Given I have entered the number of bedrooms "fifty"
+	When I submit the form
+	Then I should get an error message "Please enter 1 to 28 bedrooms in numerical digits"
+	
+	@controller
+	Scenario outline: No. Bathrooms validation
+	Given I have entered the number of bedrooms "six"
+	When I submit the form
+	Then I should get an error message "Please enter 1 to 28 bathrooms in numerical digits"	
+
+	@controller
+	Scenario: Requesting 'add property' page for landlords
+   	Given I am a landlord
+	And I am logged in
+ 	When I request the Searcher registration form
+    	Then the system shows the Searcher registration page
+
+	@controller
+	Scenario outline: Re-entering an already listed property
+ 	Given I have entered the address "123 Example Street"
+	And I have entered the postcode "SW1A 2AA"
+	And there is already a record of the "123 Example Street"
+	And there is already a record of the postcode "SW1A 2AA"
+  	When I submit the form
+   	Then an error message should occur: "property already listed - can not relist the same property"
+
+	
+	@Domain
+	Scenario outline: Submitting property details
+	Given I am a landlord user
+	And I have entered the address "10 Downing Street"
+	And the postcode "SW1A 2AA"
+	And the no. bedrooms "5"
+	And the no. bathrooms "2"
+	When I submit the form
+	Then the property should be listed to the system
+
+
+---Messaging---
+Feature: Interact with other users
+		In order to interact with other users
+		Users must be able to view their inbox
+	 	So that they can exchange messages and send reports
+	
+	@
+	Scenario Outline: Sending a message
+	Given I am a registered user "bob"
+	When I send a message "Hello" to "ted"
+	and "ted" is a registered user
+	Then they should receive the message "Hello"
+	
+	@
+	Scenario Outline: replying to a message
+	Given I am a registered user "bob"
+	When I receive a message "viewing arrangements" from a user "ted"
+	Then I should be able to reply
+	
+	@	
+	Scenario outline: No
+	Given I am a registered user "bob"
+	When I like a property "Ted's House 7"
+	And the user "ted" is a landlord
+	And the user "ted" is the owner of the property
+	Then user "ted" should receive a notification that user "bob" liked his property
+	
+	@	
+	Given I am a registered user "Bill"
+	And I am registered as an administrator 
+	When I broadcast a message "Maintenance 4-7AM (GMT)"
+	Then all registered users should receive the message "Maintenance 4-7AM (GMT)"
+
+	
+	 
+	
+----- Admin -----
+
+Feature: Admin management
+	
+	
+	In order to manage the system's userbase
+	As an administrator I want to oversee communications and receive reports
+	so that I can deal with them accordingly by suspending, expiring and deleting users and posts
+	
+	@
+	Scenario outline: delete user
+	Given I am an administrator
+	When a user "bob" is reported for malicious behaviour
+	Then I should be able to delete the user account "bob"
+	
+	@
+	Scenario outline: temporarily suspend user		
+	Given I am an administrator
+	When a user "bob" is reported for malicious behaviour
+	Then I should be able to suspend them for 30 days
+	
+	@
+	Scenario outline: 	
+	Given I am an administrator
+	When a user makes a report
+	Then I should be able to view it
+	
+	@
+	Scenario outline: Search for inactive users	
+	Given I am an administrator
+	When a user has been inactive for 365 or more
+	Then I should be able to expire their account removing them from search results
+
+	@
+	Scenario outline:	
+	Given I am an administrator
+	When I search for inactive users
+	Then only users that have been inactive for >365 should show
+
+
+
+
+
+
+
+
+
+
