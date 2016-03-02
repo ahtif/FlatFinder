@@ -66,8 +66,8 @@ public class RegisterStepDefs {
             .apply(springSecurity())
             .build();
 
-    userRepository.deleteAll();
-    user = new User();
+    //userRepository.deleteAll();
+    //user = new User();
 
     //deletes all records before starting scenario.
   }
