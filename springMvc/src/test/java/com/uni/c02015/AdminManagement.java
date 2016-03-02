@@ -55,12 +55,14 @@ public class AdminManagement {
   }
 
   @When("^a user \"([^\"]*)\" is reported for malicious behaviour$")
-  public void auser_is_reported_for_malicious_behaviour(String arg1) throws Throwable {
+  public void auser_is_reported_for_malicious_behaviour(String arg1)
+          throws Throwable {
     // Write code here that turns the phrase above into concrete actions
   }
 
   @Then("^I should be able to delete the user account \"([^\"]*)\"$")
-  public void ishould_be_able_to_delete_the_user_account(String arg1) throws Throwable {
+  public void ishould_be_able_to_delete_the_user_account(String arg1)
+          throws Throwable {
     // Write code here that turns the phrase above into concrete actions
   }
 
@@ -70,7 +72,8 @@ public class AdminManagement {
   }
 
   @When("^a searcher \"([^\"]*)\" makes a report about a user \"([^\"]*)\"$")
-  public void asearcher_makes_a_report_about_a_user(String arg1, String arg2) throws Throwable {
+  public void asearcher_makes_a_report_about_a_user(String arg1, String arg2)
+          throws Throwable {
     // Write code here that turns the phrase above into concrete actions
   }
 
@@ -90,7 +93,8 @@ public class AdminManagement {
   }
 
   @Then("^user \"([^\"]*)\" cannot access the system for (\\d+) days$")
-  public void usercannot_access_the_system_for_days(String arg1, int arg2) throws Throwable {
+  public void usercannot_access_the_system_for_days(String arg1, int arg2)
+          throws Throwable {
     // Write code here that turns the phrase above into concrete actions
   }
 
@@ -106,7 +110,8 @@ public class AdminManagement {
   }
 
   @When("^a searcher \"([^\"]*)\" has been inactive for (\\d+) or more$")
-  public void asearcher_has_been_inactive_for_or_more(String arg1, int arg2) throws Throwable {
+  public void asearcher_has_been_inactive_for_or_more(String arg1, int arg2)
+          throws Throwable {
     // Write code here that turns the phrase above into concrete actions
   }
 
@@ -158,4 +163,3 @@ public class AdminManagement {
   }
 
 }
-

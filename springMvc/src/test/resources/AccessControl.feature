@@ -26,7 +26,7 @@ Scenario Outline: authorization
     Then My authentication is <isAuthorized> with role <ROLE>
 
     Examples:
-      | Service                          | USR     | ROLE        | isAuthorized|
+       | Service                          | USR     | ROLE        | isAuthorized|
 #      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
 #      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
 #      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
