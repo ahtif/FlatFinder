@@ -2,9 +2,9 @@
 
 ## Types of tests
 
-<em>Unit Testing:</em> Generating step definitions using cucumber and implemented these step definitions
+<strong>Unit Testing:</strong> Generating step definitions using cucumber and implemented these step definitions
 	
-<em>UI Testing:</em> Testing the user interface of our system
+<strong>UI Testing:</strong> Testing the user interface of our system
 
 ### What we are testing this sprint 
 
@@ -30,7 +30,7 @@
 
 ### What we arent testing this sprint
 
-<em>Unit Testing:</em> We have created feature files for these scenarios but have not fully implemented the code for these so we cannot test them at this time. We will be testing them in sprint 2.
+<strong>Unit Testing:</strong> We have created feature files for these scenarios but have not fully implemented the code for these so we cannot test them at this time. We will be testing them in sprint 2.
 	
 ###### Access Control
 * Multi user authentication
@@ -78,7 +78,7 @@
 * Password recovery
 
 
-<em>UI Tests:</em> We will not be testing the user interface of our system at this time because in this sprint we have been focussed on implementing features and have not added any styling to the project yet.
+<strong>UI Tests:</strong> We will not be testing the user interface of our system at this time because in this sprint we have been focussed on implementing features and have not added any styling to the project yet.
 * Check for any grammatical errors
 * Make sure the site has a consistent design
 * Make sure error messages are clear
