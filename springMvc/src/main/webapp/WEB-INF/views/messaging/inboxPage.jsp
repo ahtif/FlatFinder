@@ -27,6 +27,9 @@
 	</c:forEach>
 </table>
 
+    <p><a href="/messaging/new">New Message</a></p>   
+    <p><a href="/success-login">Go back</a></p>
+
 
 
 </body>
