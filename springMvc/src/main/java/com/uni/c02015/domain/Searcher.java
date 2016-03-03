@@ -25,7 +25,10 @@ public class Searcher {
     // TODO Auto-generated constructor stub
   }
 
-
+  public void setId(Integer id){
+	  this.id = id;
+  }
+  
   public Integer getId() {
     return id;
   }
