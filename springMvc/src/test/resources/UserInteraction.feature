@@ -19,57 +19,57 @@ Scenario: replying to a message
 	When I receive a message "viewing arrangements" from a user "ted"
 	Then I should be able to reply with "time and date?" 
 
-@domain
-Scenario: Expressing interest in a property
-	Given I am a searcher "bob"
-	And the user "ted" is a landlord
-	And the user "ted" is the owner of the property
-	When I like a property "Ted's House 7"
-	Then user "ted" receives a notification that user "bob" liked his property
+# @domain
+# Scenario: Expressing interest in a property
+#	Given I am a searcher "bob"
+#	And the user "ted" is a landlord
+#	And the user "ted" is the owner of the property
+#	When I like a property "Ted's House 7"
+#	Then user "ted" receives a notification that user "bob" liked his property
 
-@domain
-Scenario: Broadcasting a message
-	Given I am an administator "James"
-	When I broadcast a message "Maintenance 4-7AM (GMT)"
-	Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
+# @domain
+# Scenario: Broadcasting a message
+#	Given I am an administator "James"
+#	When I broadcast a message "Maintenance 4-7AM (GMT)"
+#	Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
 
-@domain
-Scenario: Searcher providing feedback for landlord
-	Given I am a registered searcher "bob"
-	When I have dealt with a landlord "Ted"
-	Then I should be able to leave feedback: "Excellent property"
-	And rate him "4/5" stars
+# @domain
+# Scenario: Searcher providing feedback for landlord
+#	Given I am a registered searcher "bob"
+#	When I have dealt with a landlord "Ted"
+#	Then I should be able to leave feedback: "Excellent property"
+#	And rate him "4/5" stars
 
-@domain
-Scenario: expressing interest
-	Given I am a registered user "bob"
-	And I am logged in
-	And I am a searcher
-	When I view a property
-	Then I should be able to express interest
+# @domain
+# Scenario: expressing interest
+#	Given I am a registered user "bob"
+#	And I am logged in
+#	And I am a searcher
+#	When I view a property
+#	Then I should be able to express interest
 
-@domain
-Scenario Outline: expressed interest notification
-	Given I am a landlord "Ted"
-	When a searcher <SearcherName> expresses interest
-	Then I should be notified
+# @domain
+# Scenario Outline: expressed interest notification
+#	Given I am a landlord "Ted"
+#	When a searcher <SearcherName> expresses interest
+#	Then I should be notified
 
-	Examples:
-		|SearcherName|
-		|Bob         |
-		|Sarah       |
-		|Jacob       |
-		|Kim         |
+#	Examples:
+#		|SearcherName|
+#		|Bob         |
+#		|Sarah       |
+#		|Jacob       |
+#		|Kim         |
 
-@domain
-Scenario: Reporting a landlord as a searcher
-	Given I am a searcher "Bob"
-	When a landlord "Ted" makes an inaccurate property listing
-	Then I should be able to report them
-	And the administrator "James" should be notified
+# @domain
+# Scenario: Reporting a landlord as a searcher
+#	Given I am a searcher "Bob"
+#	When a landlord "Ted" makes an inaccurate property listing
+#	Then I should be able to report them
+#	And the administrator "James" should be notified
 
-@domain
-Scenario: Reporting a searcher as a landlord
-	Given I am a landlord "Ted"
-	When a searcher "Bob" verbally abuses me over the messaging system
-	Then I should be able to report searcher "bob"
+# @domain
+# Scenario: Reporting a searcher as a landlord
+#	Given I am a landlord "Ted"
+#	When a searcher "Bob" verbally abuses me over the messaging system
+#	Then I should be able to report searcher "bob"

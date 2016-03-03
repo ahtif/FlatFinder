@@ -7,6 +7,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.util.List;
 
 import com.uni.c02015.domain.*;
 import com.uni.c02015.persistence.repository.LandlordRepository;
@@ -60,10 +61,11 @@ public class UserInteraction {
   private MockMvc mockMvc;
   private ResultActions result;
   private Authentication authentication;
-  private User user1, user2;
+  private User user1, user2,user4;
   private Searcher searcher;
   private Landlord landlord;
   Message message = new Message();
+  Message message2 = new Message();
 
   
   public static final int ROLE_ADMINISTRATOR_ID = 1;
@@ -170,10 +172,7 @@ public class UserInteraction {
   }
 
   @Then("^I should be able to reply with \"([^\"]*)\"$")
-  public void ierror: The following untracked working tree files would be overwritten by merge:
-    springMvc/.classpath
-    springMvc/.settings/gradle.prefs
-_should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
+  public void i_should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
       
     Message messageReply = new Message();
     messageReply.setMessage(arg1);
@@ -183,166 +182,12 @@ _should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
 
   @Given("^the user \"([^\"]*)\" is a landlord$")
   public void the_user_is_a_landlord(String arg1) throws Throwable {
-     
+  
      User user = new User();
      user.setLogin(arg1);
      user.setRole(roleRepository.findByRole("Landlord"));
      userRepository.save(user);
   }
-
-  @Given("^the user \"([^\"]*)\" is the owner of the property$")
-  public void the_user_is_the_owner_of_the_property(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^I like a property \"([^\"]*)\"$")
-  public void i_like_a_property(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^user \"([^\"]*)\" receives a notification that user \"([^\"]*)\" liked his property$")
-  public void user_receives_a_notification_that_user_liked_his_property(String arg1, String arg2) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am an administator \"([^\"]*)\"$")
-  public void i_am_an_administator(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^I broadcast a message \"([^\"]*)\"$")
-  public void i_broadcast_a_message(String arg1) throws Throwable {
-      // Write coerror: The following untracked working tree files would be overwritten by merge:
-    springMvc/.classpath
-    springMvc/.settings/gradle.prefs
-de here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^users \"([^\"]*)\" and \"([^\"]*)\" should receive the message \"([^\"]*)\"$")
-  public void users_and_should_receive_the_message(String arg1, String arg2, String arg3) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am a registered searcher \"([^\"]*)\"$")
-  public void i_am_a_registered_searcher(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^I have dealt with a landlord \"([^\"]*)\"$")
-  public void i_have_dealt_with_a_landlord(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^I should be able to leave feedback: \"([^\"]*)\"$")
-  public void i_should_be_able_to_leave_feedback(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^rate him \"([^\"]*)\" stars$")
-  public void rate_him_stars(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am a registered user \"([^\"]*)\"$")
-  public void i_am_a_registered_user(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am logged in$")
-  public void i_am_logged_in() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am a searcher$")
-  public void i_am_a_searcher() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^I view a property$")
-  public void i_view_a_property() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^I should be able to express interest$")
-  public void i_should_be_able_to_express_interest() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Given("^I am a landlord \"([^\"]*)\"$")
-  public void i_am_a_landlord(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a searcher Bob expresses interest$")
-  public void a_searcher_Bob_expresses_interest() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a searcher Sarah expresses interest$")
-  public void a_searcher_Sarah_expresses_interest() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a searcher Jacob expresses interest$")
-  public void a_searcher_Jacob_expresses_interest() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a searcher Kim expresses interest$")
-  public void a_searcher_Kim_expresses_interest() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a landlord \"([^\"]*)\" makes an inaccurate property listing$")
-  public void a_landlord_makes_an_inaccurate_property_listing(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^I should be able to report them$")
-  public void i_should_be_able_to_report_them() throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^the administrator \"([^\"]*)\" should be notified$")
-  public void the_administrator_should_be_notified(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @When("^a searcher \"([^\"]*)\" verbally abuses me over the messaging system$")
-  public void a_searcher_verbally_abuses_me_over_the_messaging_system(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
-  @Then("^I should be able to report searcher \"([^\"]*)\"$")
-  public void i_should_be_able_to_report_searcher(String arg1) throws Throwable {
-      // Write code here that turns the phrase above into concrete actions
-      
-  }
-
 
 
 }
