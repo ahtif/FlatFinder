@@ -66,240 +66,158 @@ public class RegisterStepDefs {
             .apply(springSecurity())
             .build();
 
-    //userRepository.deleteAll();
-    //user = new User();
+    try {
+      userRepository.deleteAll();
+    } catch (Exception e) {
+      System.out.println("Cant delete repository @BEFORE");
+    }
 
-    //deletes all records before starting scenario.
+    user = new User();
+    landlord = new Landlord();
+    searcher = new Searcher();
   }
 
-  @Given("^a username \"([^\"]*)\"$")
-  public void ausername(String arg1) throws Throwable {
-    // user.setLogin(arg1);
+  @Given("^I am a user with username \"([^\"]*)\"$")
+  public void iama_user_with_username(String arg1) throws Throwable {
+    user.setLogin(arg1);
   }
 
   @Given("^a password \"([^\"]*)\"$")
   public void apassword(String arg1) throws Throwable {
-    // user.setPassword(arg1);
+    user.setPassword(arg1);
   }
 
   @Given("^a user type \"([^\"]*)\"$")
   public void auser_type(String arg1) throws Throwable {
-    // user.setRole(roleRepository.findByRole(arg1));
+    user.setRole(roleRepository.findByRole(arg1));
   }
-
+  
   /**
-   * When user press create account.
+   * When users presses create account.
    */
   @When("^I press create account$")
   public void ipress_create_account() throws Throwable {
-    //result = mockMvc.perform(post("/createAccount")
-    //         .param("login", user.getLogin())
-    //         .param("password", user.getPassword())
-    //         .param("role", user.getRole().getRole())
-    // );
-    // //ERROR
-    // userRepository.save(user);
-  }
 
-  /**
-   * Username should be saved in repository.
-   */
-  @Then("^the system stores the User with username \"([^\"]*)\"$")
-  public void thesystem_stores_the_User_with_username(String arg1) throws Throwable {
-    //
-    // User user = userRepository.findByLogin(arg1);
-    //
-    // Assert.assertEquals(arg1, user.getLogin());
-  }
+//    result = this.mockMvc.perform(post("/createAccount")
+//            .param("login", user.getLogin())
+//            .param("password", user.getPassword())
+//            .param("role", user.getRole().getRole()));
 
-  @Then("^passwords \"([^\"]*)\"$")
-  public void passwords(String arg1) throws Throwable {
-    // Assert.assertEquals(arg1, user.getPassword());
-  }
-
-  @Then("^user type \"([^\"]*)\"$")
-  public void user_type(String arg1) throws Throwable {
-    // Assert.assertEquals(arg1, user.getRole().getRole());
-  }
-
-  @Given("^I am a user with username \"([^\"]*)\"$")
-  public void iam_a_user_with_username(String arg1) throws Throwable {
-    //user.setLogin(arg1);
-  }
-
-  @Given("^password \"([^\"]*)\"$")
-  public void password(String arg1) throws Throwable {
-    //user.setPassword(arg1);
-  }
-
-  @Given("^confirmed password \"([^\"]*)\"$")
-  public void confirmed_password(String arg1) throws Throwable {
-    //ERROR
-    //user.setPassword(arg1);
+    userRepository.save(user);
   }
 
   @Then("^the system should redirect me to \"([^\"]*)\"$")
   public void thesystem_should_redirect_me_to(String arg1) throws Throwable {
-    //ERROR
-//        result.andExpect(view().name(arg1));
+//    result.andExpect(view().name(arg1));
   }
 
-  @Given("^a confirmed password \"([^\"]*)\"$")
-  public void aconfirmed_password(String arg1) throws Throwable {
-    //ERROR - NO CONFIRM ON JSP PAGE
-//        user.setPassword(arg1);
+  @Given("^a username \"([^\"]*)\"$")
+  public void ausername(String arg1) throws Throwable {
+    user.setLogin(arg1);
   }
 
-  @Given("^a Landlord with firstname \"([^\"]*)\"$")
-  public void alandlord_with_firstname(String arg1) throws Throwable {
-//       landlord = new Landlord();
-//       landlord.setFirstName(arg1);
+  @Then("^the system stores the User with username \"([^\"]*)\"$")
+  public void thesystem_stores_the_User_with_username(String arg1) throws Throwable {
+    Assert.assertEquals(arg1, user.getLogin());
   }
 
-  @Given("^a surname \"([^\"]*)\"$")
-  public void asurname(String arg1) throws Throwable {
-//        landlord.setLastName(arg1);
+  @Then("^passwords \"([^\"]*)\"$")
+  public void passwords(String arg1) throws Throwable {
+    Assert.assertEquals(arg1, user.getPassword());
   }
 
-  @Given("^I have entered a email \"([^\"]*)\"$")
-  public void ihave_entered_a_email(String arg1) throws Throwable {
-//       landlord.setEmailAddress(arg1);
+  @Then("^user type \"([^\"]*)\"$")
+  public void usertype(String arg1) throws Throwable {
+    //Assert.assertEquals(arg1, user.getRole().getRole());
   }
-  /**
-   * When a landlord account is created.
+
+   /**
+   * When Landlord submits form.
    */
-  @When("^a landlord request for a user account$")
-  public void alandlord_request_for_a_user_account() throws Throwable {
-//        result = mockMvc.perform(post("/addLandlord")
-//                .param("firstName", landlord.getFirstName())
-//                .param("lastName", landlord.getLastName())
-//                .param("emailAddress", landlord.getEmailAddress())
-//        );
-  }
-
-  @Then("^I should get an error message \"([^\"]*)\"$")
-  public void ishould_get_an_error_message(String arg1) throws Throwable {
-//        result.andExpect(view().name(arg1));
-  }
-
-  @Given("^a User with username \"([^\"]*)\" which is an existing username in the User Repository$")
-  public void auser_with_username_which_is_an_existing_username_in_the_User_Repository(String arg1)
-          throws Throwable {
-//        user.setLogin(arg1);
-  }
-  /**
-   * When user requests for a new user account.
-   */
-  @When("^I request for a user account$")
-  public void irequest_for_a_user_account() throws Throwable {
-//        result = mockMvc.perform(post("/createAccount")
-//                .param("login", user.getLogin())
-//                .param("password", user.getPassword())
-//                .param("role", user.getRole().getRole())
-//        );
-  }
-
-  @Then("^an error message should occur: \"([^\"]*)\"$")
-  public void anerror_message_should_occur(String arg1) throws Throwable {
-  }
-
-  @Given("^a User with username \"([^\"]*)\"$")
-  public void auser_with_username(String arg1) throws Throwable {
-//        user.setLogin(arg1);
-  }
-
-  @Then("^I should get the error message \"([^\"]*)\"$")
-  public void ishould_get_the_error_message(String arg1) throws Throwable {
-//        throw new PendingException();
-  }
-  /**
-   * Password validation.
-   */
-  @Given("^I have entered a password which consists of (\\d+) to (\\d+) characters \"([^\"]*)\"$")
-  public void ihave_entered_a_password_which_consists_of_to_characters(
-          int arg1, int arg2, String arg3) throws Throwable {
-//        if((arg3.length() >= arg1) && (arg3.length() <= arg2)){
-//            //Correct password
-//
-//        }else{
-//            //Wrong password
-//
-//        }
-  }
-
-  @Given("^I have entered the confirmed password \"([^\"]*)\"$")
-  public void ihave_entered_the_confirmed_password(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
+  @When("^a Landlord submit the form$")
+  public void alandlord_submit_the_form() throws Throwable {
+    result = this.mockMvc.perform(post("/addLandlord")
+            .param("firstname", landlord.getFirstName())
+            .param("lastname", landlord.getLastName())
+            .param("emailAddress", landlord.getEmailAddress())
+    );
   }
 
   @Then("^the user is redirect to the login page$")
   public void theuser_is_redirect_to_the_login_page() throws Throwable {
-    //result.andExpect(view().name("/register"));
-  }
-
-  @Given("^a email \"([^\"]*)\"$")
-  public void aemail(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-  }
-  /**
-   * When a landlord submits a form to create an account.
-   */
-  @When("^a Landlord submit the form$")
-  public void alandlord_submit_the_form() throws Throwable {
-//                result = mockMvc.perform(post("/addLandlord")
-//                .param("firstName", landlord.getFirstName())
-//                .param("lastName", landlord.getLastName())
-//                .param("emailAddress", landlord.getEmailAddress())
-//        );
   }
 
   @Then("^the system stores the Landlord with firstname \"([^\"]*)\"$")
   public void thesystem_stores_the_Landlord_with_firstname(String arg1) throws Throwable {
-//        Assert.assertEquals(arg1, landlord.getFirstName());
+    Assert.assertEquals(arg1, landlord.getFirstName());
   }
 
-  @Then("^surname \"([^\"]*)\"$")
-  public void surname(String arg1) throws Throwable {
-//        Assert.assertEquals(arg1, landlord.getLastName());
+  @Then("^a Landlord with lastname \"([^\"]*)\"$")
+  public void alandlord_with_lastname(String arg1) throws Throwable {
+    landlord.setLastName(arg1);
   }
 
-  @Then("^email \"([^\"]*)\"$")
-  public void email(String arg1) throws Throwable {
-    //Assert.assertEquals(arg1, landlord.getEmailAddress());
-  }
-
-  @Given("^a firstname \"([^\"]*)\"$")
-  public void afirstname(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-  }
-
-  @Given("^a lastname \"([^\"]*)\"$")
-  public void alastname(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-  }
-
-  @When("^I Landlord submit the form$")
-  public void ilandlord_submit_the_form() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
+  @Then("^a Landlord with email \"([^\"]*)\"$")
+  public void alandlord_with_email(String arg1) throws Throwable {
+    landlord.setEmailAddress(arg1);
   }
 
   @Given("^a Searcher with firstname \"([^\"]*)\"$")
   public void asearcher_with_firstname(String arg1) throws Throwable {
+    searcher.setFirstName(arg1);
+  }
 
+  @Given("^a Searcher with lastname \"([^\"]*)\"$")
+  public void asearcher_with_lastname(String arg1) throws Throwable {
+    searcher.setLastName(arg1);
+  }
+
+  @Given("^a Searcher with email \"([^\"]*)\"$")
+  public void asearcher_with_email(String arg1) throws Throwable {
+    searcher.setEmailAddress(arg1);
   }
 
   @Given("^buddyUp is selected$")
   public void buddyup_is_selected() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
+    searcher.setBuddyPref(true);
+  }
+  
+  /**
+   * Searcher submits the form.
+   */
+  @When("^a Searcher submit the form$")
+  public void asearcher_submit_the_form() throws Throwable {
+    result = this.mockMvc.perform(post("/addSearcher")
+            .param("firstname", searcher.getFirstName())
+            .param("lastname", searcher.getLastName())
+            .param("emailAddress", searcher.getEmailAddress())
+            .param("buddyPref", Boolean.toString(searcher.getBuddyPref()))
+    );
   }
 
-  @When("^I searcher submit the form$")
-  public void isearcher_submit_the_form() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
+  @Then("^the system stores the Searcher with firstname \"([^\"]*)\"$")
+  public void thesystem_stores_the_Searcher_with_firstname(String arg1) throws Throwable {
+    Assert.assertEquals(arg1, searcher.getFirstName());
+  }
+
+  @Then("^a Searcher with \"([^\"]*)\"$")
+  public void asearcher_with(String arg1) throws Throwable {
+    Assert.assertEquals(arg1, searcher.getLastName());
   }
 
   @Then("^buddyUp should be true$")
   public void buddyup_should_be_true() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
+    Assert.assertEquals(true, searcher.getBuddyPref());
+  }
+
+  @When("^a Landlord press create account$")
+  public void alandlord_press_create_account() throws Throwable {
+    userRepository.save(user);
+  }
+
+  @Given("^a Landlord with firstname \"([^\"]*)\"$")
+  public void alandlord_with_firstname(String arg1) throws Throwable {
+    landlord.setFirstName(arg1);
   }
 }
