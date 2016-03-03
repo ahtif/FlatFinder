@@ -34,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/addLandlord",
           "/addSearcher").permitAll()
       .antMatchers("/property/add", "/property/addPost", "/property/viewAll").hasRole(SpringMvc.ROLE_LANDLORD)
+      .antMatchers("/messaging/**")
+        .hasAnyAuthority("ROLE_ADMINISTRATOR","ROLE_SEARCHER","ROLE_LANDLORD")
       .anyRequest().authenticated()
       .and()
     .formLogin()

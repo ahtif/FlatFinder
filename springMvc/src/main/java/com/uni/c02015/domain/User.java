@@ -73,7 +73,6 @@ public class User {
    * @return String
    */
   public String getPassword() {
-
     return password;
   }
 
