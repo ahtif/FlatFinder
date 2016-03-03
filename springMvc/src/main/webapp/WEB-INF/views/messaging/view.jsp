@@ -26,6 +26,9 @@
 <input type="submit" value="Reply"/>
 </form:form>
 
+    <p><a href="/messaging">Go back</a></p>
+
+
 
 </body>
 </html>

@@ -13,6 +13,8 @@
 
 <p><a href="/property/add">Add A Property</a></p>
 <p><a href="/property/viewAll">View All Your Properties</a></p>
+<p><a href="/messaging">Inbox</a></p>
+
 
 <c:url value="/logout" var="logoutUrl" />
 <form action="${logoutUrl}" method="get">
