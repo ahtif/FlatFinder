@@ -7,6 +7,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.util.List;
 
 import com.uni.c02015.domain.*;
 import com.uni.c02015.persistence.repository.LandlordRepository;
@@ -60,10 +61,11 @@ public class UserInteraction {
   private MockMvc mockMvc;
   private ResultActions result;
   private Authentication authentication;
-  private User user1, user2;
+  private User user1, user2,user4;
   private Searcher searcher;
   private Landlord landlord;
   Message message = new Message();
+  Message message2 = new Message();
 
   
   public static final int ROLE_ADMINISTRATOR_ID = 1;
@@ -180,7 +182,7 @@ public class UserInteraction {
 
   @Given("^the user \"([^\"]*)\" is a landlord$")
   public void the_user_is_a_landlord(String arg1) throws Throwable {
-     
+  
      User user = new User();
      user.setLogin(arg1);
      user.setRole(roleRepository.findByRole("Landlord"));
@@ -335,7 +337,6 @@ public class UserInteraction {
       // Write code here that turns the phrase above into concrete actions
       
   }
-
 
 
 }
