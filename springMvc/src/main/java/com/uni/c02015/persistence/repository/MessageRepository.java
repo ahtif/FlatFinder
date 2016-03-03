@@ -25,6 +25,7 @@ public interface MessageRepository extends CrudRepository<Message, Integer> {
   Message findByMessage(String message);
   
   Message findByMessageAndReceiver(String message, User receiver);
+  
   Message findByMessageAndSender(String message, User sender);
   
 }
