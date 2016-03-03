@@ -170,10 +170,7 @@ public class UserInteraction {
   }
 
   @Then("^I should be able to reply with \"([^\"]*)\"$")
-  public void ierror: The following untracked working tree files would be overwritten by merge:
-    springMvc/.classpath
-    springMvc/.settings/gradle.prefs
-_should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
+  public void i_should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
       
     Message messageReply = new Message();
     messageReply.setMessage(arg1);
@@ -216,10 +213,6 @@ _should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
 
   @When("^I broadcast a message \"([^\"]*)\"$")
   public void i_broadcast_a_message(String arg1) throws Throwable {
-      // Write coerror: The following untracked working tree files would be overwritten by merge:
-    springMvc/.classpath
-    springMvc/.settings/gradle.prefs
-de here that turns the phrase above into concrete actions
       
   }
 
