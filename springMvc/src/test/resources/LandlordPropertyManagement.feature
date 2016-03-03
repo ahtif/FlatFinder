@@ -97,3 +97,4 @@
 # 	And the cost (PCM) is "750"
 # 	When I change the price to "800"
 # 	Then the new price should be set as "800" on the database
+

@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher").permitAll()
+      .antMatchers("/messaging/**")
+        .hasAnyAuthority("ROLE_ADMINISTRATOR","ROLE_SEARCHER","ROLE_LANDLORD")
       .anyRequest().authenticated()
       .and()
     .formLogin()

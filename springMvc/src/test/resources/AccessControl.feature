@@ -1,23 +1,23 @@
-Feature: Access Control
-  In order to access control content
-  Users should be able to only access certain content based on their role
-  So that they system is secure
+#Feature: Access Control
+#  In order to access control content
+#  Users should be able to only access certain content based on their role
+#  So that they system is secure
 
-@security
-Scenario Outline: multiuser authentication
-    Given I am a <ROLE> with username <USR> and password <PWD>
-    When I access <URL>
-    Then My authentication is <isAuth> with role <ROLE>
+#@security
+#Scenario Outline: multiuser authentication
+#    Given I am a <ROLE> with username <USR> and password <PWD>
+#    When I access <URL>
+#    Then My authentication is <isAuth> with role <ROLE>
 
-    Examples:
-      | URL           | USR       | PWD        | ROLE        | isAuth |
-      | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
-      | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
-      | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
-      | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
-      | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
+#    Examples:
+#      | URL           | USR       | PWD        | ROLE        | isAuth |
+#      | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
+#      | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
+#      | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
+#      | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
+#      | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
+#      | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
+#      | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
 @security
 Scenario Outline: authorization
