@@ -5,14 +5,12 @@ Feature: Viewing and updating profile
 
 @domain
 Scenario: Changing preferences
-	Given I am logged in as a searcher "bob"
+	Given the user "bob"
 	And I am opted in for the buddy-up system
 	And my preference is set to "Smoking"
 	And my preference is set to "Undergraduate"
 	And my preference is set to "Lively Atmosphere"
 	When I update my profile and set my preference to "Non-smoking"
-	And I set my profle to "Post-graduate"
-	And I set my preference to "Quiet"
 	Then my profile should show my preferences as "Non-smoking"
 	And "Post-graduate"
 	And "Quiet"
