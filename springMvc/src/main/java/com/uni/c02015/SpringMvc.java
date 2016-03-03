@@ -66,7 +66,7 @@ public class SpringMvc implements ApplicationRunner {
     roleRepo.save(role);
 
     BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-    
+
     // Set up admin user
     User user = new User();
     user.setLogin("admin");
