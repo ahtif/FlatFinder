@@ -85,39 +85,19 @@ public class RegisterStepDefs {
 
  
 
-<<<<<<< HEAD
   @Given("^I am a user with username \"([^\"]*)\"$")
   public void iama_user_with_username(String arg1) throws Throwable {
     user.setLogin(arg1);
-=======
-  @Given("^a username \"([^\"]*)\"$")
-  public void ausername(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    //user.setLogin(arg1);
-
->>>>>>> messaging
   }
 
   @Given("^a password \"([^\"]*)\"$")
   public void apassword(String arg1) throws Throwable {
-<<<<<<< HEAD
     user.setPassword(arg1);
-=======
-    // Write code here that turns the phrase above into concrete actions
-    //user.setPassword(arg1);
-
->>>>>>> messaging
   }
 
   @Given("^a user type \"([^\"]*)\"$")
   public void auser_type(String arg1) throws Throwable {
-<<<<<<< HEAD
     user.setRole(roleRepository.findByRole(arg1));
-=======
-    // Write code here that turns the phrase above into concrete actions
-    //user.setRole(roleRepository.findByRole(arg1));
-
->>>>>>> messaging
   }
   
   /**
@@ -125,8 +105,6 @@ public class RegisterStepDefs {
    */
   @When("^I press create account$")
   public void ipress_create_account() throws Throwable {
-<<<<<<< HEAD
-=======
     // Write code here that turns the phrase above into concrete actions
     //result = mockMvc.perform(post("/createAccount")
     //        .param("login", user.getLogin())
@@ -177,20 +155,10 @@ public class RegisterStepDefs {
   public void iam_a_user_with_username(String arg1) throws Throwable {
     //user.setLogin(arg1);
   }
->>>>>>> messaging
 
-//    result = this.mockMvc.perform(post("/createAccount")
-//            .param("login", user.getLogin())
-//            .param("password", user.getPassword())
-//            .param("role", user.getRole().getRole()));
-
-<<<<<<< HEAD
-    userRepository.save(user);
-=======
   @Given("^confirmed password \"([^\"]*)\"$")
   public void confirmed_password(String arg1) throws Throwable {
     //user.setPassword(arg1);
->>>>>>> messaging
   }
 
   @Then("^the system should redirect me to \"([^\"]*)\"$")
