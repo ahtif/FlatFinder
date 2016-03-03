@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -60,7 +59,7 @@ public class RegisterStepDefs {
    */
   @Before
   public void setup() {
-    userRepository.deleteAll();
+    //userRepository.deleteAll();
     this.mockMvc = MockMvcBuilders
             .webAppContextSetup(this.wac)
             .addFilters(springSecurityFilterChain)
@@ -77,13 +76,6 @@ public class RegisterStepDefs {
     landlord = new Landlord();
     searcher = new Searcher();
   }
-  
-  // @After
-  // public void after() {
-  //   userRepository.deleteAll();
-  // }
-
- 
 
   @Given("^I am a user with username \"([^\"]*)\"$")
   public void iama_user_with_username(String arg1) throws Throwable {
@@ -105,60 +97,13 @@ public class RegisterStepDefs {
    */
   @When("^I press create account$")
   public void ipress_create_account() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    //result = mockMvc.perform(post("/createAccount")
-    //        .param("login", user.getLogin())
-    //       .param("password", user.getPassword())
-    //        .param("role", user.getRole().toString()));
 
-    //Not sure about this
-    //userRepository.save(user);
-  }
+//    result = this.mockMvc.perform(post("/createAccount")
+//            .param("login", user.getLogin())
+//            .param("password", user.getPassword())
+//            .param("role", user.getRole().getRole()));
 
-  /**
-   * Username should be saved in repository.
-   */
-  @Then("^the system stores the User with username \"([^\"]*)\"$")
-  public void thesystem_stores_the_User_with_username(String arg1) throws Throwable {
-    //
-    // User user = userRepository.findByLogin(arg1);
-    //
-    // Assert.assertEquals(arg1, user.getLogin());
-  }
-
-  @Then("^passwords \"([^\"]*)\"$")
-  public void passwords(String arg1) throws Throwable {
-
-    // Write code here that turns the phrase above into concrete actions.
-   /*boolean found = false;
-    for (User user : userRepository.findAll()) {
-      if (user.getPassword().equals(arg1)) {
-        found = true;
-      }
-    }
-    assertThat(found, is(true));*/
-  }
-
-  @Then("^user type \"([^\"]*)\"$")
-  public void user_type(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-   /*boolean found = false;
-    for (User user : userRepository.findAll()) {
-      if (user.getRole().getRole().equals(arg1)) {
-        found = true;
-      }
-    }
-    assertThat(found, is(true));*/
-  }
-
-  @Given("^I am a user with username \"([^\"]*)\"$")
-  public void iam_a_user_with_username(String arg1) throws Throwable {
-    //user.setLogin(arg1);
-  }
-
-  @Given("^confirmed password \"([^\"]*)\"$")
-  public void confirmed_password(String arg1) throws Throwable {
-    //user.setPassword(arg1);
+    userRepository.save(user);
   }
 
   @Then("^the system should redirect me to \"([^\"]*)\"$")

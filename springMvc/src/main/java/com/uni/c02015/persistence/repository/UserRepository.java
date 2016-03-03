@@ -25,4 +25,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
    * @return {@link User} List
    */
   List<User> findByRole(Role role);
+
+  User findById(Integer integer);
 }
