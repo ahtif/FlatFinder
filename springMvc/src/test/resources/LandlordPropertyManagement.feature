@@ -4,13 +4,13 @@
 # 	So relevant searchers can view my property
 #
 # @controller
-# Scenario Outline: accessing the add property form
+# Scenario: accessing the add property form
 # 	Given I am logged in as a landlord "Ted"
 # 	When I request the add property form
 # 	Then I should have access to the form
 #
 # @controller
-# Scenario Outline: validate post code
+# Scenario: validate post code
 # 	Given I am logged in as a landlord "Ted"
 # 	And I am on the "Add property" page
 # 	And I have entered a postcode "90001"
@@ -19,7 +19,7 @@
 # 	And the details should not be stored in the database
 #
 # @controller
-# Scenario Outline: validate address
+# Scenario: validate address
 # 	Given I am logged in as a landlord "Ted"
 # 	And I have entered an address "123456789"
 # 	When I submit the form
@@ -27,7 +27,7 @@
 # 	And the details should not be stored in the database
 #
 # @controller
-# Scenario Outline: No. Bedrooms validation
+# Scenario: No. Bedrooms validation
 # 	Give I am logged in as a landlord "Ted"
 # 	And I have entered the number of bedrooms "fifty"
 # 	When I submit the form
@@ -35,13 +35,13 @@
 # 	And the details should not be stored in the database
 #
 # @domain
-# Scenario Outline: Entering price listing
+# Scenario: Entering price listing
 # 	Given I am on the add property page
 # 	When I enter the price "750"
 # 	Then the price of my property should be "750"
 #
 # @controller
-# Scenario Outline: Re-entering an already listed property
+# Scenario: Re-entering an already listed property
 #  	Given I have entered the address "123 Example Street"
 # 	And I have entered the postcode "SW1A 2AA"
 # 	And there is already a record of the "123 Example Street"
@@ -58,7 +58,7 @@
 # 	Then I should be able to upload <PropertyImage> to give a further description of my property
 #
 # 	Examples:
-# 		|PROPERTY					|PropertyImage|
+# 		|PROPERTY		  |PropertyImage|
 # 		|"13 Aylestone Rd"|"img01.png"  |
 # 		|"171 London Rd"  |"img02.png"  |
 # 		|"300 Welford Rd" |"img03.png"  |
@@ -86,13 +86,13 @@
 # 	And with the local information <LOCALINFO>
 #
 # 	Examples:
-# 		|ADDRESS	 				|POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE    	|ENDATE    	 |LOCALINFO                   	|IMAGE        	|
+# 		|ADDRESS	 	  |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO      				  |IMAGE          |
 # 		|"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"78"  |"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|"AyleStone.png"|
 # 		|"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"105" |"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |"LndRd.png"    |
 # 		|"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"110" |"16/04/2016"|"31/12/2016"|"Urban Area"                  |"Welford.png"  |
 #
 # @domain
-# Scenario Outline: Updating property
+# Scenario: Updating property
 # 	Given I have a listed property
 # 	And the cost (PCM) is "750"
 # 	When I change the price to "800"
