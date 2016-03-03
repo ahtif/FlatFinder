@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Add Property</h1>
-<form method="POST" action="/property/add">
+<form method="POST" action="/property/addPost">
 	<table>
 		<tr>
 			<td>Property Number:</td>
@@ -55,6 +55,8 @@
 		<tr>
 			<td colspan="2"><input type="submit" value="Add Property"/></td>
 		</tr>
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</table>
 
 </form>

@@ -13,5 +13,5 @@ public interface TypeRepository extends CrudRepository<Type, Integer> {
    * @param id Integer
    * @return {@link Type}
    */
-  Property findById(Integer id);
+  Type findById(Integer id);
 }
