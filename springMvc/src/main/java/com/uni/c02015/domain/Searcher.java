@@ -22,7 +22,7 @@ public class Searcher {
   }
 
   public Searcher() {
-    // TODO Auto-generated constructor stub
+
   }
 
   public void setId(Integer id){
