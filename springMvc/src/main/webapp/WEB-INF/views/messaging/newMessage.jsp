@@ -18,6 +18,8 @@
 		<input type="submit" value="Send"/>
 	</form:form>
 	
+	    <p><a href="/messaging">Go back</a></p>
+	
 
 </body>
 </html>

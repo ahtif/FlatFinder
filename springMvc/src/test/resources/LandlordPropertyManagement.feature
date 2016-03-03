@@ -58,7 +58,7 @@
 # 	Then I should be able to upload <PropertyImage> to give a further description of my property
 #
 # 	Examples:
-# 		|PROPERTY		  |PropertyImage|
+# 		|PROPERTY		      |PropertyImage|
 # 		|"13 Aylestone Rd"|"img01.png"  |
 # 		|"171 London Rd"  |"img02.png"  |
 # 		|"300 Welford Rd" |"img03.png"  |
@@ -86,7 +86,7 @@
 # 	And with the local information <LOCALINFO>
 #
 # 	Examples:
-# 		|ADDRESS	 	  |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO      				  |IMAGE          |
+# 		|ADDRESS	 	      |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO      				        |IMAGE          |
 # 		|"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"78"  |"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|"AyleStone.png"|
 # 		|"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"105" |"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |"LndRd.png"    |
 # 		|"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"110" |"16/04/2016"|"31/12/2016"|"Urban Area"                  |"Welford.png"  |
