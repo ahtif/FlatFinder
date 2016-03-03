@@ -1,15 +1,15 @@
 package com.uni.c02015;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
-
-
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import java.util.List;
-
-import com.uni.c02015.domain.*;
+import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.Message;
+import com.uni.c02015.domain.Role;
+import com.uni.c02015.domain.Searcher;
+import com.uni.c02015.domain.User;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
@@ -28,7 +28,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -61,7 +60,9 @@ public class UserInteraction {
   private MockMvc mockMvc;
   private ResultActions result;
   private Authentication authentication;
-  private User user1, user2,user4;
+  private User user1;
+  private User user2;
+  private User user4;
   private Searcher searcher;
   private Landlord landlord;
   Message message = new Message();
@@ -110,49 +111,62 @@ public class UserInteraction {
   
   }
   
+  /**
+   * Delete contents from each repo's after each scenario.
+   */
   @After
   public void delete() {
-	  messageRepository.deleteAll();
-	  searcherRepository.deleteAll();
-	  landlordRepository.deleteAll();
-	  userRepository.deleteAll();
-	  roleRepository.deleteAll();
+    messageRepository.deleteAll();
+    searcherRepository.deleteAll();
+    landlordRepository.deleteAll();
+    userRepository.deleteAll();
+    roleRepository.deleteAll();
   }
 
   @Given("^\"([^\"]*)\" is a landlord$")
   public void is_a_landlord(String arg1) throws Throwable {
-	User user2 = userRepository.findByLogin(arg1);
-	user2.setRole(roleRepository.findByRole("landlord"));
+    User user2 = userRepository.findByLogin(arg1);
+    user2.setRole(roleRepository.findByRole("landlord"));
   }
 
+  /**
+   * sets a user with a username.
+   */
   @Given("^a user called \"([^\"]*)\"$")
-  public void a_user_called(String arg1) throws Throwable {
-      user2 = new User();
-      user2.setLogin(arg1);
-      userRepository.save(user2);
+  public void auser_called(String arg1) throws Throwable {
+    user2 = new User();
+    user2.setLogin(arg1);
+    userRepository.save(user2);
   }
   
+  /**
+   * saves a user that is a searcher to the userRepository.
+   */
   @Given("^I am a searcher \"([^\"]*)\"$")
-  public void i_am_a_searcher(String arg1) throws Throwable {
-	  user2 = userRepository.findByLogin(arg1);
-      Role role = roleRepository.findByRole("SEARCHER");
-      user2.setRole(role);
-	  searcher.setFirstName(arg1);
-      searcher.setId(user2.getId());
-      searcherRepository.save(searcher);
-      userRepository.save(user2);
+  public void iam_a_searcher(String arg1) throws Throwable {
+    user2 = userRepository.findByLogin(arg1);
+    Role role = roleRepository.findByRole("SEARCHER");
+    user2.setRole(role);
+    searcher.setFirstName(arg1);
+    searcher.setId(user2.getId());
+    searcherRepository.save(searcher);
+    userRepository.save(user2);
   }
 
+  /**
+   * a searcher sends a message to a landlord.
+   */
   @When("^I send a message \"([^\"]*)\" to a landlord \"([^\"]*)\"$")
-  public void i_send_a_message_to_a_landlord(String arg1, String arg2) throws Throwable {
-      landlord.setFirstName(arg2);
-      result = this.mockMvc.perform(post("https://localhost:8070/messaging/sendMessage")
-            .param("receiver", landlord.getFirstName())
-            .param("subject", "test")
-            .param("message", arg1)
-            .with(authentication(new UsernamePasswordAuthenticationToken(user2.getLogin(),"", AuthorityUtils.createAuthorityList("ROLE_SEARCHER"))))
-            .with(csrf())
-            );
+  public void isend_a_message_to_a_landlord(String arg1, String arg2) throws Throwable {
+    landlord.setFirstName(arg2);
+    result = this.mockMvc.perform(post("https://localhost:8070/messaging/sendMessage")
+      .param("receiver", landlord.getFirstName())
+      .param("subject", "test")
+      .param("message", arg1)
+      .with(authentication(new UsernamePasswordAuthenticationToken(user2.getLogin(),"", 
+        AuthorityUtils.createAuthorityList("ROLE_SEARCHER"))))
+      .with(csrf())
+      );
   }
 
   @Then("^\"([^\"]*)\" should receive the message \"([^\"]*)\"$")
@@ -161,32 +175,38 @@ public class UserInteraction {
     Assert.assertEquals(message.getReceiver().getLogin(), arg1);
   }
 
+  /**
+   * A user receives a message from another user.
+   */
   @When("^I receive a message \"([^\"]*)\" from a user \"([^\"]*)\"$")
-  public void i_receive_a_message_from_a_user(String arg1, String arg2) throws Throwable {
-	  
-	  message.setMessage(arg1);
-	  message.setSender(userRepository.findByLogin(arg2));
-	  message.setReceiver(user2);
-	  messageRepository.save(message);
+  public void ireceive_a_message_from_a_user(String arg1, String arg2) throws Throwable {
+    message.setMessage(arg1);
+    message.setSender(userRepository.findByLogin(arg2));
+    message.setReceiver(user2);
+    messageRepository.save(message);
       
   }
 
+  /**
+   * Replying to a message.
+   */
   @Then("^I should be able to reply with \"([^\"]*)\"$")
-  public void i_should_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable {
-      
+  public void ishould_be_able_to_reply_with_from_my_inbox(String arg1) throws Throwable { 
     Message messageReply = new Message();
     messageReply.setMessage(arg1);
     messageReply.setSender(message.getReceiver());
     messageReply.setReceiver(message.getSender());
   }
 
+  /**
+   * Set a user to be a landlord.
+   */
   @Given("^the user \"([^\"]*)\" is a landlord$")
   public void the_user_is_a_landlord(String arg1) throws Throwable {
-  
-     User user = new User();
-     user.setLogin(arg1);
-     user.setRole(roleRepository.findByRole("Landlord"));
-     userRepository.save(user);
+    User user = new User();
+    user.setLogin(arg1);
+    user.setRole(roleRepository.findByRole("Landlord"));
+    userRepository.save(user);
   }
 
   @Given("^the user \"([^\"]*)\" is the owner of the property$")
