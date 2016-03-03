@@ -43,62 +43,74 @@ public class ProfileController {
     return new User();
   }
 
+  /**
+   * getting searcher information.
+   */
   @RequestMapping("/searcher/profile")
-  public ModelAndView viewProfile(){
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	String username = auth.getName();
-	User user = userRepo.findByLogin(username);
-	Searcher searcher = searcherRepo.findById(user.getId());
-	ModelAndView profileView = new ModelAndView("searcher/view","user",new Searcher());
-	profileView.addObject("searcher", searcher);
-	return profileView;
+  public ModelAndView viewProfile() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User user = userRepo.findByLogin(username);
+    Searcher searcher = searcherRepo.findById(user.getId());
+    ModelAndView profileView = new ModelAndView("searcher/view","user",new Searcher());
+    profileView.addObject("searcher", searcher);
+    return profileView;
   }
   
+  /**
+   * update searcher information.
+   */
   @RequestMapping("/searcher/edit")
-  public String editProfile(@RequestParam("firstName") String firstName,
-		  @RequestParam("lastName") String lastName,
-		  @RequestParam("emailAddress") String emailAddress,
-		  @RequestParam("buddyPref")Boolean buddy){
-	  
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	String username = auth.getName();
-	User user = userRepo.findByLogin(username);
-	Searcher searcher = searcherRepo.findById(user.getId());
-	searcher.setFirstName(firstName);
-	searcher.setLastName(lastName);
-	searcher.setEmailAddress(emailAddress);
-	searcher.setBuddyPref(buddy);
-	searcherRepo.save(searcher);
-	
-	return "redirect:/searcher/profile";
+  public String editSearcherProfile(@RequestParam("firstName") String firstName,
+          @RequestParam("lastName") String lastName,
+          @RequestParam("emailAddress") String emailAddress,
+          @RequestParam("buddyPref")Boolean buddy) {
+    
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User user = userRepo.findByLogin(username);
+    Searcher searcher = searcherRepo.findById(user.getId());
+    searcher.setFirstName(firstName);
+    searcher.setLastName(lastName);
+    searcher.setEmailAddress(emailAddress);
+    searcher.setBuddyPref(buddy);
+    searcherRepo.save(searcher);
+    
+    return "redirect:/searcher/profile";
   }
   
+  /**
+   * getting landlord information.
+   */
   @RequestMapping("/landlord/profile")
-  public ModelAndView viewLandLordProfile(){
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	String username = auth.getName();
-	User user = userRepo.findByLogin(username);
-	Landlord landlord = landlordRepo.findById(user.getId());
-	ModelAndView profileView = new ModelAndView("landlord/view","user",new Landlord());
-	profileView.addObject("landlord", landlord);
-	return profileView;
+  public ModelAndView viewLandLordProfile() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User user = userRepo.findByLogin(username);
+    Landlord landlord = landlordRepo.findById(user.getId());
+    ModelAndView profileView = new ModelAndView("landlord/view","user",new Landlord());
+    profileView.addObject("landlord", landlord);
+    return profileView;
   }
   
+  /**
+   * updating landlord information.
+   */
   @RequestMapping("/landlord/edit")
-  public String editProfile(@RequestParam("firstName") String firstName,
-		  @RequestParam("lastName") String lastName,
-		  @RequestParam("emailAddress") String emailAddress){
-	  
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	String username = auth.getName();
-	User user = userRepo.findByLogin(username);
-	Landlord landlord = landlordRepo.findById(user.getId());
-	landlord.setFirstName(firstName);
-	landlord.setLastName(lastName);
-	landlord.setEmailAddress(emailAddress);
-	landlordRepo.save(landlord);
-	
-	return "redirect:/landlord/profile";
+  public String editLandlordProfile(@RequestParam("firstName") String firstName,
+          @RequestParam("lastName") String lastName,
+          @RequestParam("emailAddress") String emailAddress) {
+    
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User user = userRepo.findByLogin(username);
+    Landlord landlord = landlordRepo.findById(user.getId());
+    landlord.setFirstName(firstName);
+    landlord.setLastName(lastName);
+    landlord.setEmailAddress(emailAddress);
+    landlordRepo.save(landlord);
+    
+    return "redirect:/landlord/profile";
   }
   
   

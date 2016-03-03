@@ -11,13 +11,13 @@ Feature: Login and recovery
 	And I will be prompted to enter my credentials 
 
 	@security
-	Scenario outline: logging in to the system
+	Scenario Outline: logging in to the system
 	Given I am a registered user <USER> with account type <TYPE>
 	And I am on the login screen
 	When I enter username <USER> and password <PASSWORD>
 	Then I should be <IsAuthorised> to use the system
 
-	Examples
+	Examples:
 	|  USER	      |  PASSWORD | TYPE            |IsAuthorised  |
 	| "bob"	      | "pw123"   | "Searcher"      |"authorised"  |
 	| "ted"       | "tlop"    | "Landlord"      |"authorised"  |
@@ -60,12 +60,13 @@ Feature: Login and recovery
 	Then I should receive an error message "Incorrect password, please try again."
 
 	@controller
+	Scenario: logging out
 	Given a searcher "bob" is logged in
 	When searcher "bob" presses logout
 	Then he should be redirected to the login page
 
 	@security
-	Scenario outline: password recovery
+	Scenario: password recovery
 	Given I am a registered user "bob"
 	And I have forgotten my password
 	And I have requested the 'forgotten password' form
@@ -74,7 +75,7 @@ Feature: Login and recovery
 	Then I should receive an email with my password
 
 	@controller
-	Scenario outline: recovering password with unpaired email
+	Scenario: recovering password with unpaired email
 	Given I have entered the username "bob"
 	And the username "bob is registered with the email address "bob@gmail.com"
 	And I request the 'forgotten password' form
