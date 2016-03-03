@@ -11,6 +11,9 @@
 <h1>SEARCHER VIEW</h1>
 <p>You have successfully logged in as an Searcher.</p>
 
+<p><a href="/messaging">Inbox</a></p>
+
+
 <c:url value="/logout" var="logoutUrl"/>
 <form action="${logoutUrl}" method="get">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
