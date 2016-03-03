@@ -4,10 +4,13 @@ package com.uni.c02015;
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.property.Type;
+import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.TypeRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
-
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +27,11 @@ public class SpringMvc implements ApplicationRunner {
 
   @Autowired
   private UserRepository userRepo;
-  
   @Autowired
   private RoleRepository roleRepo;
-  
+  @Autowired
+  private TypeRepository typeRepository;
+
   @Autowired
   private MessageRepository messageRepo;
 
@@ -67,15 +71,14 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_LANDLORD);
     roleRepo.save(role);
 
-    
     role = new Role();
     role.setId(ROLE_SEARCHER_ID);
     role.setRole(ROLE_SEARCHER);
     roleRepo.save(role);
 
     BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-    
-    // Set up users
+
+    // Set up admin user
     User user = new User();
     user.setLogin("admin");
     user.setPassword(pe.encode("password"));
@@ -84,7 +87,16 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_ADMINISTRATOR);
     user.setRole(role);
     userRepo.save(user);
-    
+
+    // Set up property types
+    Type type = new Type();
+    type.setType("Flat");
+    typeRepository.save(type);
+
+    type = new Type();
+    type.setType("House");
+    typeRepository.save(type);
+
     // Set up users
     User user1 = new User();
     user1.setLogin("alice");
@@ -118,6 +130,5 @@ public class SpringMvc implements ApplicationRunner {
     message1.setParent(message);
     message1.setChildren(null);
     messageRepo.save(message1);
-    
   }
 }
