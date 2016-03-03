@@ -59,7 +59,6 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_LANDLORD);
     roleRepo.save(role);
 
-    
     role = new Role();
     role.setId(ROLE_SEARCHER_ID);
     role.setRole(ROLE_SEARCHER);
