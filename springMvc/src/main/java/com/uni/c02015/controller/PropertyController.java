@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PropertyController {
@@ -29,6 +30,10 @@ public class PropertyController {
   @Autowired
   PropertyRepository propertyRepository;
 
+  /**
+   * View property.
+   * @return ModelAndView
+   */
   @RequestMapping(value = "/property/add", method = RequestMethod.GET)
   public ModelAndView propertyAdd(HttpServletRequest request) {
 
@@ -39,6 +44,10 @@ public class PropertyController {
     return modelAndView;
   }
 
+  /**
+   * Add property to database.
+   * @return String
+   */
   @RequestMapping(value = "/property/addPost", method = RequestMethod.POST)
   public String propertyAddPost(HttpServletRequest request, Principal principal) {
 
@@ -53,7 +62,8 @@ public class PropertyController {
     );
     property.setRooms(new Integer(request.getParameter("pRooms")));
 
-    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
+    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
+        ((Authentication) principal).getPrincipal()).getUsername());
 
     property.setLandlord(landlordRepository.findById(user.getId()));
 
@@ -62,19 +72,29 @@ public class PropertyController {
     return "property/addPost";
   }
 
+  /**
+   * View all properties.
+   * @return ModelAndView
+   */
   @RequestMapping(value = "/property/viewAll", method = RequestMethod.GET)
   public ModelAndView viewProperty(Principal principal) {
 
     ModelAndView modelAndView = new ModelAndView("property/viewAll");
 
-    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
-    modelAndView.addObject("properties", propertyRepository.findByLandlord(landlordRepository.findById(user.getId())));
+    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
+        ((Authentication) principal).getPrincipal()).getUsername());
+    modelAndView.addObject("properties", 
+        propertyRepository.findByLandlord(landlordRepository.findById(user.getId())));
 
     return modelAndView;
   }
-
+  
+  /**
+   * View property.
+   * @return ModelAndView
+   */
   @RequestMapping(value = "/property/view/{id}", method = RequestMethod.GET)
-  public ModelAndView viewProperty(@PathVariable(value="id") Integer id) {
+  public ModelAndView viewProperty(@PathVariable(value = "id") Integer id) {
 
     ModelAndView modelAndView = new ModelAndView("property/view");
 
