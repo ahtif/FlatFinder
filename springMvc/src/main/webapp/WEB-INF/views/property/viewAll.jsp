@@ -9,8 +9,10 @@
 <h1>View Properties</h1>
 
 <c:forEach items="${properties}" var="property">
-    <p><a href="/property/view/${type.id}">${property.number}, ${property.street}</a></p>
+    <p><a href="/property/view/${property.id}">${property.number}, ${property.street}</a></p>
 </c:forEach>
+
+<p><a href="/success-login">Home</a></p>
 
 </body>
 </html>

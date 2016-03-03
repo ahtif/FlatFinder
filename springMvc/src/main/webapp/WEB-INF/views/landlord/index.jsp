@@ -11,6 +11,9 @@
 <h1>LANDLORD VIEW</h1>
 <p>You have successfully logged in as an Landlord.</p>
 
+<p><a href="/property/add">Add A Property</a></p>
+<p><a href="/property/viewAll">View All Your Properties</a></p>
+
 <c:url value="/logout" var="logoutUrl" />
 <form action="${logoutUrl}" method="get">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

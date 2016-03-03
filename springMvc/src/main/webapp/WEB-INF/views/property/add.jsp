@@ -60,5 +60,7 @@
 	</table>
 
 </form>
+
+<p><a href="/success-login">Home</a></p>
 </body>
 </html>

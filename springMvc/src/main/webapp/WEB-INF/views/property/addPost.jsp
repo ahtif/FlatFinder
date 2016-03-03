@@ -10,5 +10,7 @@
 
 <a href="/property/add">Add another property?</a>
 
+<p><a href="/success-login">Home</a></p>
+
 </body>
 </html>
