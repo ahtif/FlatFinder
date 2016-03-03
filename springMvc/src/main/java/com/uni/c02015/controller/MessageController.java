@@ -94,14 +94,23 @@ public class MessageController {
   public String sendMessage(@RequestParam(value = "receiver", required = true) String to,
       @RequestParam(value = "subject", required = true) String subject,
       @RequestParam(value = "message", required = true) String body,
-      @RequestParam(value = "parent", required = false) String parent) {
+      @RequestParam(value = "parent", required = false) String parent,
+      @RequestParam(value = "sender", required = false) String sender) {
     
-    
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String username = auth.getName();
-    User currentUser = userRepo.findByLogin(username);
-    
+	 
+	  
+   User currentUser;
     Message message = new Message();
+    
+    if (sender != null && !sender.isEmpty()) {
+    	 currentUser = userRepo.findByLogin(sender);
+		 message.setSender(currentUser);
+	 } else {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 String username = auth.getName();
+		  currentUser = userRepo.findByLogin(username);
+	 }
+    
     if (parent != null && !parent.isEmpty()) {
       message.setParent(messageRepo.findById(Integer.parseInt(parent)));
     }

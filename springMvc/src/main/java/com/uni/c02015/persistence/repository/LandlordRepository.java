@@ -15,4 +15,5 @@ public interface LandlordRepository extends CrudRepository<Landlord, Integer> {
    */
   Landlord findById(Integer id);
   
+  Landlord findByFirstName(String firstName);
 }
