@@ -51,4 +51,4 @@ Registation Nav Model
 
 ![](registrationNavModel-1.png)
 
-This model, shows how the Registationcontroller works.
+This model, shows how the Registation controller works.
