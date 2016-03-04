@@ -16,7 +16,7 @@ Scenario: Changing preferences
 	And "Quiet"
 
 @controller
-Scenario: Viewing property views
+Scenario Outline: Viewing property views
 	Given I am logged in as a landlord "James"
 	When I access my profile page
 	Then I should be able to view my property views for <PROPERTY>
@@ -28,7 +28,7 @@ Scenario: Viewing property views
 	 |300 Welford Rd |
 
 @domain
-Scenario: Tracking property views
+Scenario Outline: Tracking property views
 	Given I am logged in as a landlord "James"
 	And I own properties <PROPERTIES>
 	And I have a 999 property views on each property
@@ -38,7 +38,7 @@ Scenario: Tracking property views
 	And my property views for "171 London Rd" should be "999"
 	
 	Examples:
-	 |PROPERTY	 |
+	 |PROPERTIES	 |
 	 |13 Aylestone Rd|
 	 |171 London Rd  |
 	 |300 Welford Rd |
@@ -48,4 +48,4 @@ Scenario: Tracking recent property views
 	Given I am logged in as a searcher "Bob" 
 	And I have been recently viewed two properties, "Aylestone Road, LE2 7LG" and "Welford Road, LE2 6EG"
 	When I access my profile page
-	I should be able to see "Aylestone Road, LE2 7LG" and "Welford Road, LE2 6EG" on my recently viewed properties
+	Then I should be able to see "Aylestone Road, LE2 7LG" and "Welford Road, LE2 6EG" on my recently viewed properties
