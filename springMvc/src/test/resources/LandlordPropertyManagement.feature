@@ -5,13 +5,13 @@
 # 	So relevant searchers can view my property
 #
 #@controller
-# Scenario: accessing the add property form
+#Scenario: accessing the add property form
 # 	Given I am logged in as a landlord "Ted"
 # 	When I request the add property form
 # 	Then I should have access to the form
 #
 #@controller
-# Scenario: validate post code
+#Scenario: validate post code
 # 	Given I am logged in as a landlord "Ted"
 # 	And I am on the "Add property" page
 # 	And I have entered a postcode "90001"
@@ -20,7 +20,7 @@
 # 	And the details should not be stored in the database
 #
 #@controller
-# Scenario: validate address
+#Scenario: validate address
 # 	Given I am logged in as a landlord "Ted"
 # 	And I have entered an address "123456789"
 # 	When I submit the form
@@ -28,7 +28,7 @@
 # 	And the details should not be stored in the database
 #
 #@controller
-# Scenario: No. Bedrooms validation
+#Scenario: No. Bedrooms validation
 # 	Give I am logged in as a landlord "Ted"
 # 	And I have entered the number of bedrooms "fifty"
 # 	When I submit the form
@@ -36,7 +36,7 @@
 # 	And the details should not be stored in the database
 #
 #@domain
-# Scenario: Entering price listing
+#Scenario: Entering price listing
 # 	Given I am on the add property page
 # 	When I enter the price "750"
 # 	Then the price of my property should be "750"
@@ -51,8 +51,8 @@
 #   Then an error message should occur "property already listed - can not relist the same property"
 # 	And the details should not be stored in the database
 #
-# @domain
-# Scenario Outline: Upload image of property
+#@domain
+#Scenario Outline: Upload image of property
 # 	Given I am a landlord "James"
 # 	And I am on the update property page
 # 	When I select property <PROPERTY> to update
@@ -87,10 +87,10 @@
 # 	And with the local information <LOCALINFO>
 #
 # 	Examples:
-# 		|ADDRESS          |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO                     |IMAGE          |
-# 		|"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"78"  |"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|"AyleStone.png"|
-# 		|"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"105" |"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |"LndRd.png"    |
-# 		|"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"110" |"16/04/2016"|"31/12/2016"|"Urban Area"                  |"Welford.png"  |
+#     |ADDRESS          |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO                     |IMAGE          |
+#     |"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"78"  |"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|"AyleStone.png"|
+#     |"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"105" |"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |"LndRd.png"    |
+#     |"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"110" |"16/04/2016"|"31/12/2016"|"Urban Area"                  |"Welford.png"  |
 #
 #@domain
 #Scenario: Updating property
