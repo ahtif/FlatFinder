@@ -8,7 +8,7 @@ Domain Class Diagram
 ![](question1.png)
 
 This diagram shows the scope of the system, the domain part of the system.
-
+The User object is created when a user creates a new account it holds your username, password, and role. Landlord and Searcher object are to hold personal information such as name, email, this object is created within the web app when the user has created a user object then it would create either a searcher or landlord object based on the user role and take them to the appreciate screen. We broke down the web app into small modular component and these class should support continuous improvement due to the design pattern used. Property class should be able to support Open Street Maps, as each property object will have a latitude and longitude, this means when rendering the maps it would be able to position each property correctly on the map.
 
 Whole System Class Diagram
 -------------
@@ -18,6 +18,9 @@ Whole System Class Diagram
 
 This diagram shows the entire system, with all the layers inclusive, the domain, security and controllers are all present in this diagram.
 
+##Security Layer
+
+With the use of each user having role it allows us to allow certain user onto certain pages, we have implemented code which looks at the role of the user and based on that can allow the user to view the page or block the request and send them to an error page.  AuthenticationManager is used for the main aspect of security. Since this web app is going to store personal data we have used secure communication across the web app (https), HttpBasicAuthentication allows us to do this.
 
 Component Diagram
 -------------
@@ -86,10 +89,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `sender_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-INSERT INTO `messages` (`id`, `is_read`, `message`, `message_date`, `sender_name`, `subject`, `parent_id`, `receiver_id`, `sender_id`) VALUES
-(1, b'0', 'hello', '2016-03-04 01:55:01', 'admin', 'test', NULL, 1, 1),
-(2, b'0', 'hello1', '2016-03-04 01:55:02', 'alice', 'test1', 1, 1, 2);
-
 CREATE TABLE IF NOT EXISTS `property` (
   `id` int(11) NOT NULL,
   `city` varchar(255) DEFAULT NULL,
@@ -106,11 +105,6 @@ CREATE TABLE IF NOT EXISTS `role` (
   `role` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `role` (`id`, `role`) VALUES
-(1, 'ADMINISTRATOR'),
-(2, 'LANDLORD'),
-(3, 'SEARCHER');
-
 CREATE TABLE IF NOT EXISTS `searcher` (
   `id` int(11) NOT NULL,
   `buddy_pref` bit(1) NOT NULL,
@@ -124,68 +118,11 @@ CREATE TABLE IF NOT EXISTS `type` (
   `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-INSERT INTO `type` (`id`, `type`) VALUES
-(1, 'Flat'),
-(2, 'House');
-
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `login` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `role` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
-INSERT INTO `user` (`id`, `login`, `password`, `role`) VALUES
-(1, 'admin', '$2a$10$LOeVSv0vAWv1QTFggqCZpun5805EmVZcA3DdZ1AlseP7B4qRwLTFG', 1),
-(2, 'alice', '$2a$10$It4Nwnc9qQ2n.zQ9erfOe.QBcsN3XQnOchHqykkUKsKc5DdXhc0Nm', 3);
-
-
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`user_id`);
-
-ALTER TABLE `landlord`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`), ADD KEY `FK_4v30oo6svjuouqfbn8dr4xlgq` (`parent_id`), ADD KEY `FK_n6etueqjx4sscap8ji01eq224` (`receiver_id`), ADD KEY `FK_2tgrsfo79pwvrwk6lbdy32701` (`sender_id`);
-
-ALTER TABLE `property`
-  ADD PRIMARY KEY (`id`), ADD KEY `FK_53g93c5tc7op77y6pv80xptry` (`landlord`), ADD KEY `FK_6pn7r25h3hawss06awckwrm05` (`type`);
-
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `searcher`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `type`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`), ADD KEY `FK_dl7g53f7lpmorjc24kx74apx8` (`role`);
-
-
-ALTER TABLE `admin`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
-ALTER TABLE `property`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
-
-ALTER TABLE `messages`
-ADD CONSTRAINT `FK_2tgrsfo79pwvrwk6lbdy32701` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`),
-ADD CONSTRAINT `FK_4v30oo6svjuouqfbn8dr4xlgq` FOREIGN KEY (`parent_id`) REFERENCES `messages` (`id`),
-ADD CONSTRAINT `FK_n6etueqjx4sscap8ji01eq224` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`);
-
-ALTER TABLE `property`
-ADD CONSTRAINT `FK_53g93c5tc7op77y6pv80xptry` FOREIGN KEY (`landlord`) REFERENCES `landlord` (`id`),
-ADD CONSTRAINT `FK_6pn7r25h3hawss06awckwrm05` FOREIGN KEY (`type`) REFERENCES `type` (`id`);
-
-ALTER TABLE `user`
-ADD CONSTRAINT `FK_dl7g53f7lpmorjc24kx74apx8` FOREIGN KEY (`role`) REFERENCES `role` (`id`);
 
 We have used MySQL to save data, above is the database schema. We have used Hibernate for the persistence layer making use of object relational mapping to easily query databases using SQL and set up the structure. 
