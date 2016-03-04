@@ -36,7 +36,7 @@ Scenario: Password masking
   And it should be displayed as "********"
 	
 @controller
-  Scenario: Username field length validation
+Scenario: Username field length validation
   Given I am on the login screen
   When I enter the username "UsernameIsTooLongToFitHere"
   Then I should receive an error message stating: "Username must be between "3 to 12 characters"
@@ -59,13 +59,13 @@ Scenario: Entering the wrong password
   Then I should receive an error message "Incorrect password, please try again."
 
 @controller
-  Scenario: logging out
+Scenario: logging out
   Given a searcher "bob" is logged in
   When searcher "bob" presses logout
   Then he should be redirected to the login page
 
 @security
-  Scenario: password recovery
+Scenario: password recovery
   Given I am a registered user "bob"
   And I have forgotten my password
   And I have requested the "forgotten password" form
@@ -74,7 +74,7 @@ Scenario: Entering the wrong password
   Then I should receive an email with my password
 
 @controller
-  Scenario: recovering password with unpaired email
+Scenario: recovering password with unpaired email
   Given I have entered the username "bob"
   And the username "bob is registered with the email address "bob@gmail.com"
   And I request the 'forgotten password' form
