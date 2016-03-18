@@ -1,6 +1,5 @@
 package com.uni.c02015;
 
-
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
