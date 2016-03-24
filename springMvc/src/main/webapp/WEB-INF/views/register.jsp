@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
@@ -24,12 +26,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Flat Finder</a>
+          <a class="navbar-brand">Flat Finder</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
           </ul>
+ss-login">Home</a></p>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -61,8 +64,8 @@
 			<td>Choose user type:</td>
 			<div class="form-group">
 			<td><form:select class="form-control" path="role" label="">
-				<form:option value="Searcher" label="Searcher"></form:option>
-				<form:option value="Landlord" label="Landlord"></form:option>
+				<form:option class="form-control" value="Searcher" label="Searcher"></form:option>
+				<form:option class="form-control" value="Landlord" label="Landlord"></form:option>
 			</form:select></div></td>
 		</tr>
 		<tr><td><br /></td></tr>

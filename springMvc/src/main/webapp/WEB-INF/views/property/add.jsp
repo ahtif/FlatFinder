@@ -3,53 +3,106 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
     <title>Add Property</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
 </head>
 <body>
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Flat Finder- Landlord View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/success-login">Home</a></li>
+            <li><a href="/messaging">Inbox</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/property/add">Add a Property</a></li>
+                <li><a href="/property/viewAll">View all properties</a></li>
+              </ul>
+            </li>
+          </ul>
+          <c:url value="/logout" var="logoutUrl"/>
+          <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+          <button class="btn btn-success" type="submit">Log Out</button>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+
+<br /><br /><br />
 <h1>Add Property</h1>
 <form method="POST" action="/property/addPost">
 	<table>
 		<tr>
 			<td>Property Number:</td>
-			<td><input type="text" name="pNumber" pattern="[0-9a-z ]+" required="required" /></td>
+			<td><div class="form-group">
+			    <input role="form" class="form-control" type="text" name="pNumber" pattern="[0-9a-z ]+" required="required" placeholder="Number"/>
+			</div></td>
 		</tr>
 
 		<tr>
             <td>Property Street:</td>
-            <td><input type="text" name="pStreet" pattern="[A-Za-z ]+" required="required" /></td>
+            <td><div class="form-group">
+			    <input role="form" class="form-control" type="text" name="pStreet" pattern="[0-9a-z ]+" required="required" placeholder="Street name"/>
+			</div></td>
 		</tr>
 
         <tr>
             <td>Property City:</td>
-            <td><input type="text" name="pCity" pattern="[A-Za-z ]+" required="required" /></td>
+            <td><div class="form-group"><div class="form-group">
+			    <input role="form" class="form-control" type="text" name="pCity" pattern="[A-Za-z ]+" required="required" placeholder="City"/>
+			</div></td>
         </tr>
 
         <tr>
             <td>Property PostCode:</td>
-            <td><input type="text" name="pPostcode" pattern="[a-zA-Z0-9 ]+" required="required" /></td>
+            <td><div class="form-group">
+			    <input role="form" class="form-control" type="text" name="pPostcode" pattern="[a-zA-Z0-9 ]+" required="required" placeholder="Postcode"/>
+			</div></td>
         </tr>
 
         <tr>
             <td>Property Type:</td>
-            <td>
-                <select name="pType" required="required">
+            <td><div class="form-group">
+                <select name="pType" class="form-control" required="required">
                     <c:forEach items="${types}" var="type">
                         <option value="${type.id}">${type.type}</option>
                     </c:forEach>
                 </select>
-            </td>
+            </div></td>
         </tr>
 
         <tr>
             <td>Number of Rooms:</td>
-            <td>
-                <select name="pRooms" required="required">
+            <td><div class="form-group">
+                <select name="pRooms" class="form-control" required="required">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-            </td>
+            </div></td>
         </tr>
 
 		<tr>
@@ -61,6 +114,12 @@
 
 </form>
 
-<p><a href="/success-login">Home</a></p>
+<hr>
+
+      <footer>
+        <p>&copy; CO2015- Group 6</p>
+      </footer>
+</div>
+
 </body>
 </html>
