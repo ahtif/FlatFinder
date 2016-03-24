@@ -6,36 +6,64 @@
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
     <title>Login page</title>
-    <style>
-        .notice {color: red;}
-    </style>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
-<h1>Login page</h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Flat Finder</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        <c:url value="/login" var="loginUrl"/>
+          <form class="navbar-form navbar-right" action="${loginUrl}" method="post" modelAttribute="user">
+            <div class="form-group">
+              <input id="username" name="username" type="text" placeholder="Username" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input id="password" name="password" type="password" placeholder="Password" class="form-control" required>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit" class="btn btn-success">Log in</button>
+            <a href="/register" class="btn btn-success">Register</a>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+<br /><br /><br />
 
 <p>
     <c:if test="${error == true}">
-        <strong class="notice">Invalid login or password.</strong>
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> It seems as though you have entered an invalid username or password.
+    </div>
     </c:if>
     <c:if test="${logout == true}">
-        <strong class="notice">You have been logged out.</strong>
+    <div class="alert alert-success" role="alert">
+        <strong>See you again soon!</strong> You have been successfully logged out.
+    </div>
     </c:if>
 </p>
 
-<c:url value="/login" var="loginUrl"/>
-<form action="${loginUrl}" method="post" modelAttribute="user">
-    <p>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Your Username" required="required" />
-    </p>
-    <p>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Your Password" required="required" />
-    </p>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <button type="submit">Log in</button>
-</form>
-	<a href="/register">Register</a>
+<hr>
+
+      <footer>
+        <p>&copy; CO2015- Group 6</p>
+      </footer>
+		
 </body>
 </html>
