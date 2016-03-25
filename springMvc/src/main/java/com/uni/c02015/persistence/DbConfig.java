@@ -23,7 +23,6 @@ public class DbConfig {
     // ds.setUrl("jdbc:mysql://mysql.mcscw3.le.ac.uk:3306/aa845");
     // ds.setUsername("aa845");
     // ds.setPassword("aggazzlo");
-
     return ds;
   }
 }

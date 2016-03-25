@@ -16,13 +16,13 @@ public class Landlord {
   private String firstName;
   private String lastName;
 
+  public Landlord() {
+
+  }
+
   public Landlord(int id) {
 
     this.id = id;
-  }
-
-  public Landlord() {
-    // TODO Auto-generated constructor stub
   }
 
   public Integer getId() {

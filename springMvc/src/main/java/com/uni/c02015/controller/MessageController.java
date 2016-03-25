@@ -1,32 +1,19 @@
 package com.uni.c02015.controller;
 
-import com.uni.c02015.SpringMvc;
-import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
-import com.uni.c02015.domain.Role;
-import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.persistence.repository.LandlordRepository;
-import com.uni.c02015.persistence.repository.MessageRepository;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
-import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MessageController {
@@ -49,6 +36,7 @@ public class MessageController {
 
   /**
    * Get the user logged in, find all the message sent to them, and take them to their inbox.
+   * @return ModelAndView
    */
   @RequestMapping("messaging/inbox")
   public ModelAndView goToInbox() {
@@ -60,7 +48,11 @@ public class MessageController {
     inboxView.addObject("messages", usersMessages);    
     return inboxView;
   }
-  
+
+  /**
+   * User inbox.
+   * @return ModelAndView
+   */
   @RequestMapping("messaging")
   public ModelAndView messageIndex() {
     return goToInbox();

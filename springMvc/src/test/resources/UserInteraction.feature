@@ -2,22 +2,22 @@ Feature: Interact with other users
 	In order to interact with other users users must be able to view their inbox
 	So that they can exchange messages and send reports
 
-Background:
-	Given a user called "bob"
-	And a user called "ted"
-	And "ted" is a landlord
-
-@domain
-Scenario: Sending a message
-	Given I am a searcher "bob"
-	When I send a message "Hello" to a landlord "ted"
-	Then "ted" should receive the message "Hello"
-
-@domain
-Scenario: replying to a message
-	Given I am a searcher "bob"
-	When I receive a message "viewing arrangements" from a user "ted"
-	Then I should be able to reply with "time and date?" 
+#Background:
+#	Given a user called "bob"
+#	And a user called "ted"
+#	And "ted" is a landlord
+#
+#@domain
+#Scenario: Sending a message
+#	Given I am a searcher "bob"
+#	When I send a message "Hello" to a landlord "ted"
+#	Then "ted" should receive the message "Hello"
+#
+#@domain
+#Scenario: replying to a message
+#	Given I am a searcher "bob"
+#	When I receive a message "viewing arrangements" from a user "ted"
+#	Then I should be able to reply with "time and date?"
 
 # @domain
 # Scenario: Expressing interest in a property

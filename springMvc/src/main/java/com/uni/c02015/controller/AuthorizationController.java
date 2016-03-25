@@ -1,6 +1,13 @@
 package com.uni.c02015.controller;
 
 import com.uni.c02015.SpringMvc;
+import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
+import com.uni.c02015.persistence.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AuthorizationController {
+
+  @Autowired
+  private UserRepository userRepository;
+  @Autowired
+  private SearcherRepository searcherRepository;
+  @Autowired
+  private LandlordRepository landlordRepository;
 
   /**
    * Login.
@@ -47,9 +61,29 @@ public class AuthorizationController {
       return "administrator/index";
     }
 
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User userDetails = (User) authentication.getPrincipal();
+    com.uni.c02015.domain.User user = userRepository.findByLogin(userDetails.getUsername());
+
     if (request.isUserInRole(SpringMvc.ROLE_LANDLORD)) {
 
+      // Check the landlord has completed the sign up process
+      if (landlordRepository.findById(user.getId()) == null) {
+
+        request.getSession().setAttribute(RegistrationController.SIGN_UP_ID_SESSION, user.getId());
+
+        return "redirect:/landlord/registration";
+      }
+
       return "landlord/index";
+    }
+
+    // Check the searcher has completed the sign up process
+    if (searcherRepository.findById(user.getId()) == null) {
+
+      request.getSession().setAttribute(RegistrationController.SIGN_UP_ID_SESSION, user.getId());
+
+      return "redirect:/searcher/registration";
     }
 
     return "searcher/index";

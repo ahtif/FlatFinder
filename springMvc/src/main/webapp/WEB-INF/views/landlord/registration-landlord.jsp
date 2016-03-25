@@ -56,6 +56,7 @@
             <td><div class="form-group">
 			    <form:input role="form" type="text" path="lastName" class="form-control" placeholder="Last Name"></form:input>
 			</div></td>
+
         </tr>
 
         <tr>

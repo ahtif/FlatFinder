@@ -2,7 +2,6 @@ package com.uni.c02015.controller;
 
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
-import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.persistence.repository.LandlordRepository;
@@ -20,11 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 public class RegistrationController {
 
-  private static final String SIGN_UP_ID_SESSION = "signUpID";
+  public static final String SIGN_UP_ID_SESSION = "signUpID";
 
   @Autowired
   private UserRepository userRepo;
@@ -37,6 +37,7 @@ public class RegistrationController {
 
   @ModelAttribute("User")
   public User getUser() {
+
     return new User();
   }
 
@@ -71,9 +72,7 @@ public class RegistrationController {
 
   /**
    * Add a landlord.
-   * 
-   * @param request
-   *          The request
+   * @param request The request
    * @return String
    */
   @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
@@ -134,11 +133,23 @@ public class RegistrationController {
         "Searcher",
         new Searcher((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION)));
   }
-  
-  @RequestMapping("/register")
-  public String register() {
 
-    return "register";
+  /**
+   * Register view.
+   * @param request The request
+   * @return ModelAndView
+   */
+  @RequestMapping("/register")
+  public ModelAndView register(HttpServletRequest request) {
+
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("register");
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
   
   /**
@@ -154,6 +165,12 @@ public class RegistrationController {
       @RequestParam(value = "role", required = true) String role,
       Model model,
       HttpServletRequest request) {
+
+    // The username already exists
+    if (userRepo.findByLogin(username) != null) {
+
+      return "redirect:/register?usernameExists=true";
+    }
 
     User user = new User();
     user.setLogin(username);
