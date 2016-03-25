@@ -1,5 +1,12 @@
 package com.uni.c02015.services;
 
+import static com.uni.c02015.SpringMvc.ROLE_ADMINISTRATOR;
+import static com.uni.c02015.SpringMvc.ROLE_ADMINISTRATOR_ID;
+import static com.uni.c02015.SpringMvc.ROLE_LANDLORD;
+import static com.uni.c02015.SpringMvc.ROLE_LANDLORD_ID;
+import static com.uni.c02015.SpringMvc.ROLE_SEARCHER;
+import static com.uni.c02015.SpringMvc.ROLE_SEARCHER_ID;
+
 import com.uni.c02015.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.uni.c02015.SpringMvc.*;
 
 @Service
 @Transactional(readOnly = true)

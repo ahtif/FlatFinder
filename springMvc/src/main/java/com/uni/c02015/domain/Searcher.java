@@ -24,7 +24,11 @@ public class Searcher {
   public Searcher() {
 
   }
-
+  
+  public void setId(int id) {
+    this.id = id;
+  }
+  
   public Integer getId() {
     return id;
   }
