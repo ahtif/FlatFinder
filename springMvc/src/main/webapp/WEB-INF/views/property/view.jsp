@@ -31,7 +31,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/success-login">Home</a></li>
-            <li><a href="/landlord/profile/">Profile</a></li>
             <li><a href="/messaging">Inbox</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
@@ -64,13 +63,13 @@
       </div>
 
 <p>To go back to view all of your properties, click <a href="/property/viewAll">here</a>.</p>
-
+</div>
 <hr>
 
       <footer>
         <p>&copy; CO2015- Group 6</p>
       </footer>
-</div>
+
 
 </body>
 </html>
