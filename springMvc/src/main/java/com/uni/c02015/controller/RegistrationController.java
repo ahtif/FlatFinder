@@ -162,7 +162,7 @@ public class RegistrationController {
   public String assessRequest(
       @RequestParam(value = "login", required = true) String username,
       @RequestParam(value = "password", required = true) String password,
-      @RequestParam(value = "cPassword", required = true) String cPassword,
+      @RequestParam(value = "cPassword", required = true) String confPassword,
       @RequestParam(value = "role", required = true) String role,
       Model model,
       HttpServletRequest request) {
@@ -191,7 +191,7 @@ public class RegistrationController {
       query += "passwordLength=true";
 
     // Password and confirm password is not equal
-    } else if (!password.equals(cPassword)) {
+    } else if (!password.equals(confPassword)) {
 
       if (query.length() > 0) {
 
