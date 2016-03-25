@@ -83,7 +83,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="<-http://www.thepfa.com/~/media/Images/PA%20Images/2013/3/1/foxes-purchase-king-power-stadium-Image.ashx?h=353&la=en&mw=628&w=628"> alt="King Power Stadium" width="460" height="345">
+        <img src="<-http://www.thepfa.com/~/media/Images/PA%20Images/2013/3/1/foxes-purchase-king-power-stadium-Image.ashx?h=353&la=en&mw=628&w=628->" alt="King Power Stadium" width="460" height="345">
       </div>
     
       <div class="item">

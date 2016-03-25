@@ -113,13 +113,13 @@
 	</table>
 
 </form>
-
+</div>
 <hr>
 
       <footer>
         <p>&copy; CO2015- Group 6</p>
       </footer>
-</div>
+
 
 </body>
 </html>

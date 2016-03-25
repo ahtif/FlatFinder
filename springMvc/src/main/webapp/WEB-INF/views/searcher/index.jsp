@@ -48,12 +48,12 @@
     <div class="alert alert-success" role="alert">
         <strong>Hi!</strong> You have been successfully logged in as a searcher.
     </div>
-
+</div>
 <hr>
 
       <footer>
         <p>&copy; CO2015- Group 6</p>
       </footer>
-</div>
+
 </body>
 </html>

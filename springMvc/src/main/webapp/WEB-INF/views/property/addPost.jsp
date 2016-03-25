@@ -60,13 +60,13 @@
         <h3>Add another property?</h3>
         <p>If you would like to add another property, please click <a href="/property/add">here</a>.</p>
       </div>
-
+</div>
 <hr>
 
       <footer>
         <p>&copy; CO2015- Group 6</p>
       </footer>
-</div>
+
 
 </body>
 </html>

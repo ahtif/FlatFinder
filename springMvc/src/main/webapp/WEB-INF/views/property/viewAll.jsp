@@ -61,12 +61,13 @@
     <tr><td><a style="color:black" href="/property/view/${property.id}">${property.number}, ${property.street}</a></td></tr>
 </c:forEach>
 </table>
+</div>
 <hr>
 
       <footer>
         <p>&copy; CO2015- Group 6</p>
       </footer>
-</div>
+
 
 </body>
 </html>
