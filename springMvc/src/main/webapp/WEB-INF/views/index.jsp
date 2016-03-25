@@ -83,15 +83,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="<-http://www.thepfa.com/~/media/Images/PA%20Images/2013/3/1/foxes-purchase-king-power-stadium-Image.ashx?h=353&la=en&mw=628&w=628"> alt="King Power Stadium" width="460" height="345">
+        <img src="http://www.thepfa.com/~/media/Images/PA%20Images/2013/3/1/foxes-purchase-king-power-stadium-Image.ashx?h=345&la=en&mw=460&w=460" alt="King Power Stadium" width="460" height="345" />
       </div>
     
       <div class="item">
-        <img src="<-https://upload.wikimedia.org/wikipedia/commons/1/1b/Victoria_Park_Leicester_from_Queens_Road.jpg->" alt="Victoria Park" width="460" height="345">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Victoria_Park_Leicester_from_Queens_Road.jpg" alt="Victoria Park" width="460" height="345" />
       </div>
 
       <div class="item">
-        <img src="<-http://www.thecompleteuniversityguide.co.uk/imagecache/file/fit/700x700/media/1131003/1._fielding_johnson.jpg->" alt="Fielding Johnson" width="460" height="345">
+        <img src="http://www.thecompleteuniversityguide.co.uk/imagecache/file/fit/700x700/media/1131003/1._fielding_johnson.jpg" alt="Fielding Johnson" width="460" height="345" />
       </div>
     </div>
 
