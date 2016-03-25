@@ -33,11 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher").permitAll()
-      .antMatchers("/searcher/**").hasAnyAuthority(SpringMvc.ROLE_SEARCHER)
+      .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
+     // .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/property/add", "/property/addPost", 
         "/property/viewAll").hasRole(SpringMvc.ROLE_LANDLORD)
       .antMatchers("/messaging/**")
-        .hasAnyAuthority(SpringMvc.ROLE_ADMINISTRATOR, SpringMvc.ROLE_SEARCHER, SpringMvc.ROLE_LANDLORD)
+        .hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR, SpringMvc.ROLE_SEARCHER, SpringMvc.ROLE_LANDLORD)
       .anyRequest().authenticated()
       .and()
     .formLogin()
