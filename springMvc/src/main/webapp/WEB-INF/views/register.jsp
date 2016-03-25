@@ -77,10 +77,12 @@ ss-login">Home</a></p>
 		</tr>
         <tr>
             <td>Confirm Password:</td>
-            <td><input
-                    type="password" name="cPassword" required="required"
-                    pattern=".{8,20}" title="Please enter in between 8 and 20 characters." placeholder="Confirm Password" />
-            </td>
+            <td><div class="form-group">
+                <input role="form" type="password" class="form-control" name="cPassword"
+                 pattern=".{8,20}" title="Please enter in between 8 and 20 characters." 
+                 placeholder="Confirm Password"/>
+            </div></td>
+          
         </tr>
 		<tr>
 			<td>Choose user type:</td>
