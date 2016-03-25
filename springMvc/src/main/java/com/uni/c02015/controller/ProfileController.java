@@ -1,8 +1,6 @@
 package com.uni.c02015.controller;
 
-import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
-import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.persistence.repository.LandlordRepository;
@@ -12,22 +10,14 @@ import com.uni.c02015.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 public class ProfileController {
-
-  private static final String SIGN_UP_ID_SESSION = "signUpID";
 
   @Autowired
   private UserRepository userRepo;
@@ -44,7 +34,8 @@ public class ProfileController {
   }
 
   /**
-   * getting searcher information.
+   * Update searcher information.
+   * @return ModelAndView
    */
   @RequestMapping("/searcher/profile")
   public ModelAndView viewProfile() {
@@ -56,9 +47,14 @@ public class ProfileController {
     profileView.addObject("searcher", searcher);
     return profileView;
   }
-  
+
   /**
-   * update searcher information.
+   * Edit searcher information.
+   * @param firstName String
+   * @param lastName String
+   * @param emailAddress String
+   * @param buddy Boolean
+   * @return String
    */
   @RequestMapping("/searcher/edit")
   public String editSearcherProfile(@RequestParam("firstName") String firstName,
@@ -78,9 +74,10 @@ public class ProfileController {
     
     return "redirect:/searcher/profile";
   }
-  
+
   /**
-   * getting landlord information.
+   * Get landlord information.
+   * @return ModelAndView
    */
   @RequestMapping("/landlord/profile")
   public ModelAndView viewLandLordProfile() {
@@ -92,9 +89,13 @@ public class ProfileController {
     profileView.addObject("landlord", landlord);
     return profileView;
   }
-  
+
   /**
-   * updating landlord information.
+   * Update landlord information.
+   * @param firstName String
+   * @param lastName String
+   * @param emailAddress String
+   * @return String
    */
   @RequestMapping("/landlord/edit")
   public String editLandlordProfile(@RequestParam("firstName") String firstName,
@@ -112,9 +113,4 @@ public class ProfileController {
     
     return "redirect:/landlord/profile";
   }
-  
-  
-  
-  
-  
 }

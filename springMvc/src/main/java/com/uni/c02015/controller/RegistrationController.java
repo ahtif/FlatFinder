@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 public class RegistrationController {
 
-  private static final String SIGN_UP_ID_SESSION = "signUpID";
+  public static final String SIGN_UP_ID_SESSION = "signUpID";
 
   @Autowired
   private UserRepository userRepo;
@@ -142,7 +142,7 @@ public class RegistrationController {
   @RequestMapping("/register")
   public ModelAndView register(HttpServletRequest request) {
 
-    // Get the request GET paramaters
+    // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
     // Create the model and view and add the GET parameters as object in the model

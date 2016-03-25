@@ -102,7 +102,7 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     user1.setRole(role);
     userRepo.save(user1);
-    
+
     Message message = new Message();
     message.setSenderName("admin");
     message.setMessage("hello");
@@ -114,7 +114,7 @@ public class SpringMvc implements ApplicationRunner {
     message.setParent(null);
     message.setChildren(null);
     messageRepo.save(message);
-    
+
     Message message1 = new Message();
     message1.setSenderName("alice");
     message1.setMessage("hello1");
