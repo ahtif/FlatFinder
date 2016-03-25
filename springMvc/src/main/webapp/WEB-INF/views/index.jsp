@@ -6,9 +6,6 @@
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
     <title>Login page</title>
-    <style>
-        .notice {color: red;}
-    </style>
 </head>
 <body>
 

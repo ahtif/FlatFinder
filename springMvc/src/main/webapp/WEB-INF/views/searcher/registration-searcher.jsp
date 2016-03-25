@@ -19,17 +19,17 @@
     <table>
         <tr>
             <td>First Name:</td>
-            <td><form:input path="firstName" value="" /></td>
+            <td><form:input path="firstName" required="required" placeholder="First Name" /></td>
         </tr>
 
         <tr>
             <td>Last Name:</td>
-            <td><form:input path="lastName" value="" /></td>
+            <td><form:input path="lastName" required="required" placeholder="Last Name" /></td>
         </tr>
 
         <tr>
             <td>Email:</td>
-            <td><form:input path="emailAddress" value="" /></td>
+            <td><form:input type="email" path="emailAddress" required="required" placeholder="Email" /></td>
         </tr>
 
 		<tr>
