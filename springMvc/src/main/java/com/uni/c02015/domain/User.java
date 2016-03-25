@@ -42,15 +42,6 @@ public class User {
   }
 
   /**
-   * Set the user ID.
-   * @param id Integer
-   */
-  public void setId(Integer id) {
-
-    this.id = id;
-  }
-
-  /**
    * Get the user login.
    * @return String
    */
