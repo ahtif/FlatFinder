@@ -162,14 +162,48 @@ public class RegistrationController {
   public String assessRequest(
       @RequestParam(value = "login", required = true) String username,
       @RequestParam(value = "password", required = true) String password,
+      @RequestParam(value = "cPassword", required = true) String cPassword,
       @RequestParam(value = "role", required = true) String role,
       Model model,
       HttpServletRequest request) {
 
-    // The username already exists
-    if (userRepo.findByLogin(username) != null) {
+    String query = "";
 
-      return "redirect:/register?usernameExists=true";
+    // Username length is invalid
+    if (username.length() < 3 || username.length() > 15) {
+
+      query += "usernameLength=true";
+
+    // The username already exists
+    } else if (username.length() >= 3 && userRepo.findByLogin(username) != null) {
+
+      query += "usernameExists=true";
+    }
+
+    // Password length is invalid
+    if (password.length() < 8 || password.length() > 20) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "passwordLength=true";
+
+    // Password and confirm password is not equal
+    } else if (!password.equals(cPassword)) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "passwordMismatch=true";
+    }
+
+    if (query.length() > 0) {
+
+      return "redirect:/register?" + query;
     }
 
     User user = new User();
