@@ -2,7 +2,11 @@ package com.uni.c02015.controller;
 
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.persistence.repository.*;
+import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
+import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
