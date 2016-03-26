@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class RegistrationController {
@@ -34,6 +36,11 @@ public class RegistrationController {
   private SearcherRepository searcherRepo;
   @Autowired
   private LandlordRepository landlordRepo;
+
+  // Email regex and pattern
+  private final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+      + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+  private Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
 
   @ModelAttribute("User")
   public User getUser() {
@@ -54,6 +61,53 @@ public class RegistrationController {
       @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
       Model model,
       HttpServletRequest request) {
+
+    String query = "";
+
+    // First name is not set
+    if (firstName.length() == 0) {
+
+      query += "fNameLength=true";
+    }
+
+    // Last name is not set
+    if (lastName.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "lNameLength=true";
+    }
+
+    // Email regex matcher
+    Matcher matcher = emailPattern.matcher(emailAddress);
+    // Email address is not set
+    if (emailAddress.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailLength=true";
+
+    // Email is not of the correct pattern
+    } else if (!matcher.find()) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailFormat=true";
+    }
+
+    if (query.length() > 0) {
+
+      return "redirect:/searcher/registration?" + query;
+    }
 
     Searcher searcher = new Searcher(
         (Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
@@ -80,6 +134,53 @@ public class RegistrationController {
       @RequestParam(value = "lastName", required = true) String lastName,
       @RequestParam(value = "emailAddress", required = true) String emailAddress, Model model,
       HttpServletRequest request) {
+
+    String query = "";
+
+    // First name is not set
+    if (firstName.length() == 0) {
+
+      query += "fNameLength=true";
+    }
+
+    // Last name is not set
+    if (lastName.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "lNameLength=true";
+    }
+
+    // Email regex matcher
+    Matcher matcher = emailPattern.matcher(emailAddress);
+    // Email address is not set
+    if (emailAddress.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailLength=true";
+
+      // Email is not of the correct pattern
+    } else if (!matcher.find()) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailFormat=true";
+    }
+
+    if (query.length() > 0) {
+
+      return "redirect:/landlord/registration?" + query;
+    }
 
     Landlord landlord = 
         new Landlord((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
@@ -109,10 +210,15 @@ public class RegistrationController {
       return new ModelAndView("redirect:/register");
     }
 
-    //
-    return new ModelAndView("landlord/registration-landlord",
-        "Landlord",
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("landlord/registration-landlord", "Landlord",
         new Landlord((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION)));
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
 
   /**
@@ -129,9 +235,15 @@ public class RegistrationController {
       return new ModelAndView("redirect:/register");
     }
 
-    return new ModelAndView("searcher/registration-searcher",
-        "Searcher",
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("searcher/registration-searcher", "Searcher",
         new Searcher((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION)));
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
 
   /**
