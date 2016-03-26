@@ -42,19 +42,41 @@
       </div>
 <div class="container">
 <h1>Landlord Registration</h1>
+
+    <c:if test="${fNameLength != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide a first name.
+        </div>
+    </c:if>
+    <c:if test="${lNameLength != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide a last name.
+        </div>
+    </c:if>
+    <c:if test="${emailLength != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide an email.
+        </div>
+    </c:if>
+    <c:if test="${emailFormat != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> The email is not of the correct format.
+        </div>
+    </c:if>
+
 <form:form modelAttribute="Landlord" method="POST" action="/addLandlord">
     <table>
         <tr>
             <td>First Name:</td>
             <td><div class="form-group">
-			    <form:input role="form" type="text" path="firstName" class="form-control" placeholder="First Name"></form:input>
+			    <form:input role="form" type="text" path="firstName" class="form-control" placeholder="First Name" required="required"></form:input>
 			</div></td>
         </tr>
 
         <tr>
             <td>Last Name:</td>
             <td><div class="form-group">
-			    <form:input role="form" type="text" path="lastName" class="form-control" placeholder="Last Name"></form:input>
+			    <form:input role="form" type="text" path="lastName" class="form-control" placeholder="Last Name" required="required"></form:input>
 			</div></td>
 
         </tr>
@@ -62,7 +84,7 @@
         <tr>
             <td>Email:</td>
             <td><div class="form-group">
-			    <form:input role="form" type="text" path="emailAddress" class="form-control" placeholder="Email Address"></form:input>
+			    <form:input role="form" type="email" path="emailAddress" class="form-control" placeholder="Email Address" required="required"></form:input>
 			</div></td>
         </tr>
         

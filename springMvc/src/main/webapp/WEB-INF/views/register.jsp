@@ -32,7 +32,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
           </ul>
-ss-login">Home</a></p>
+		<li><a href="/">Home</a></p>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -46,16 +46,24 @@ ss-login">Home</a></p>
 <div class="container">
 <h1>Registration</h1>
 <c:if test="${usernameLength != null}">
-    <p><strong class="notice">Your username is not between 3 and 15 characters.</strong></p>
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> Your username is not between 3 and 15 characters.
+    </div>
 </c:if>
 <c:if test="${usernameExists != null}">
-    <p><strong class="notice">Your username is not available, please choose another.</strong></p>
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> Your username is not available, please choose another.
+    </div>
 </c:if>
 <c:if test="${passwordLength != null}">
-    <p><strong class="notice">Your password is not between 8 and 20 characters.</strong></p>
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> Your password is not between 8 and 20 characters.
+    </div>
 </c:if>
 <c:if test="${passwordMismatch != null}">
-	<p><strong class="notice">Your passwords did not match.</strong></p>
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> Your passwords did not match.
+    </div>
 </c:if>
 <form:form method="POST" action="/createAccount" modelAttribute="User">
 	<table>
@@ -64,7 +72,7 @@ ss-login">Home</a></p>
 			<td><div class="form-group">
 			    <form:input role="form" type="text" path="login" class="form-control" 
 			     pattern=".{3,15}" title="Please enter in between 3 and 15 characters." 
-			     placeholder="Username"></form:input>
+			     placeholder="Username" required="required"></form:input>
 			</div></td>
 		</tr>
 		<tr>
@@ -72,7 +80,7 @@ ss-login">Home</a></p>
 			<td><div class="form-group">
 			    <form:input role="form" type="password" path="password" class="form-control" 
 			     pattern=".{8,20}" title="Please enter in between 8 and 20 characters." 
-			     placeholder="Password"></form:input>
+			     placeholder="Password" required="required"></form:input>
 			</div></td>
 		</tr>
         <tr>
@@ -80,14 +88,14 @@ ss-login">Home</a></p>
             <td><div class="form-group">
                 <input role="form" type="password" class="form-control" name="cPassword"
                  pattern=".{8,20}" title="Please enter in between 8 and 20 characters." 
-                 placeholder="Confirm Password"/>
+                 placeholder="Confirm Password" required="required" />
             </div></td>
           
         </tr>
 		<tr>
 			<td>Choose user type:</td>
 			<div class="form-group">
-			<td><form:select class="form-control" path="role" label="">
+			<td><form:select class="form-control" path="role" required="required">
 				<form:option class="form-control" value="Searcher" label="Searcher"></form:option>
 				<form:option class="form-control" value="Landlord" label="Landlord"></form:option>
 			</form:select></div></td>
