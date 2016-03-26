@@ -38,9 +38,9 @@ public class RegistrationController {
   private LandlordRepository landlordRepo;
 
   // Email regex and pattern
-  private final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+  private final String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
       + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-  private Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
+  private Pattern emailPattern = Pattern.compile(emailRegex);
 
   @ModelAttribute("User")
   public User getUser() {
