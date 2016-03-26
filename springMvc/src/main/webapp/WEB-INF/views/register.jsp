@@ -64,7 +64,7 @@ ss-login">Home</a></p>
 			<td><div class="form-group">
 			    <form:input role="form" type="text" path="login" class="form-control" 
 			     pattern=".{3,15}" title="Please enter in between 3 and 15 characters." 
-			     placeholder="Username"></form:input>
+			     placeholder="Username" required="required"></form:input>
 			</div></td>
 		</tr>
 		<tr>
@@ -72,7 +72,7 @@ ss-login">Home</a></p>
 			<td><div class="form-group">
 			    <form:input role="form" type="password" path="password" class="form-control" 
 			     pattern=".{8,20}" title="Please enter in between 8 and 20 characters." 
-			     placeholder="Password"></form:input>
+			     placeholder="Password" required="required"></form:input>
 			</div></td>
 		</tr>
         <tr>
@@ -80,14 +80,14 @@ ss-login">Home</a></p>
             <td><div class="form-group">
                 <input role="form" type="password" class="form-control" name="cPassword"
                  pattern=".{8,20}" title="Please enter in between 8 and 20 characters." 
-                 placeholder="Confirm Password"/>
+                 placeholder="Confirm Password" required="required"/>
             </div></td>
           
         </tr>
 		<tr>
 			<td>Choose user type:</td>
 			<div class="form-group">
-			<td><form:select class="form-control" path="role" label="">
+			<td><form:select class="form-control" path="role" required="required">
 				<form:option class="form-control" value="Searcher" label="Searcher"></form:option>
 				<form:option class="form-control" value="Landlord" label="Landlord"></form:option>
 			</form:select></div></td>
