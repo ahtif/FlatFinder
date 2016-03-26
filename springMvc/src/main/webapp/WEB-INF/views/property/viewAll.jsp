@@ -54,7 +54,7 @@
 <br /><br /><br />
 
     <div class="jumbotron">
-        <h3>Properties</h3>
+        <h1>Properties</h1>
         <p>Below is a list of all your current properties on the website.</p>
       </div>
 <table>
