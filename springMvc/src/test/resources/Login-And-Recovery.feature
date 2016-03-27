@@ -76,6 +76,7 @@ Scenario: Recovering password with unpaired email
  Then I should receive an error message "Incorrect email"
 
 @Controller
+@NotImplemented
 Scenario: Logging into a temporarily suspended account
  Given a user "Bob" with password "foo"
  And "Bob" account is suspended 
