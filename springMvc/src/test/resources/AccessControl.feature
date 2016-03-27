@@ -6,9 +6,9 @@ Feature: Access Control
 @Security
 @NotImplemented
 Scenario Outline: multiuser authentication
-    Given I am a <ROLE> with username <USR> and password <PWD>
-    When I access <URL>
-    Then My authentication is <isAuth> with role <ROLE>
+ Given I am a <ROLE> with username <USR> and password <PWD>
+ When I access <URL>
+ Then My authentication is <isAuth> with role <ROLE>
 
     Examples:
       | URL           | USR       | PWD        | ROLE        | isAuth |
@@ -23,9 +23,9 @@ Scenario Outline: multiuser authentication
 @Security
 @NotImplemented
 Scenario Outline: authorization
-    Given I am an authenticated <ROLE> with username <USR>
-    When I access <Service>
-    Then My authentication is <isAuthorized> with role <ROLE>
+ Given I am an authenticated <ROLE> with username <USR>
+ When I access <Service>
+ Then My authentication is <isAuthorized> with role <ROLE>
 
     Examples:
        | Service                          | USR     | ROLE        | isAuthorized|
@@ -71,3 +71,16 @@ Scenario Outline: authorization
 #      | "/profile/sendAllUsersMessage"   | "Harry" | "SEARCHER"  | false       |
 #      | "/accounts/deleteAccounts"       | "Harry" | "SEARCHER"  | false       |
 #      | "/accounts/UsersStatistics"      | "Harry" | "SEARCHER"  | false       |
+
+@Security
+@NotImplemented
+Scenario Outline: Redirection to homepage based on role
+ Given I am an authenticated user with <ROLE>
+ When I go to my specific homepage
+ Then I should be on a <ROLES> specific homepage.
+
+    Examples:
+	  | ROLE        | ROLES      |
+	  | "LANDLORD"  | "LANDLORD" |
+      | "ADMIN"     | "ADMIN"    |
+      | "SEARCHER"  | "SEARCHER" |
