@@ -1,8 +1,8 @@
 #NB: URLS NEED TO BE CHANGED BASED ON IMPLEMENTATION
 Feature: Administrator management
- 	In order to manage the system's user-base
- 	As an administrator I want to oversee communications and receive reports
-	So that I can deal with them accordingly by suspending, expiring and deleting users and posts
+ In order to manage the system's user-base
+ As an administrator I want to oversee communications and receive reports
+ So that I can deal with them accordingly by suspending, expiring and deleting users and posts
 
 @Domain
 @NotImplemented
