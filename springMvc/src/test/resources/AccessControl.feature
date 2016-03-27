@@ -3,7 +3,8 @@ Feature: Access Control
   Users should be able to only access certain content based on their role
   So that they system is secure
 
-@security
+@Security
+@NotImplemented
 Scenario Outline: multiuser authentication
     Given I am a <ROLE> with username <USR> and password <PWD>
     When I access <URL>
@@ -19,7 +20,8 @@ Scenario Outline: multiuser authentication
       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-@security
+@Security
+@NotImplemented
 Scenario Outline: authorization
     Given I am an authenticated <ROLE> with username <USR>
     When I access <Service>
