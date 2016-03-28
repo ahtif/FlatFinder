@@ -1,7 +1,7 @@
 Feature: Login and recovery
-  As a user
-  I would like to be able to login to the system
-  So that I am authorised to access the services provided
+ As a user
+ I would like to be able to login to the system
+ So that I am authorised to access the services provided
 
 @Security
 @NotImplemented
@@ -24,8 +24,10 @@ Scenario Outline: Login
 @NotImplemented
 Scenario: Username field length validation
  Given I am on the login screen
- When I enter the username "UsernameIsTooLongToFitHere"
- Then I should receive an error message stating: "Username must be between "3 to 12 characters"
+ And enter a username "UsernameIsTooLongToFitHere"
+ And password "invalid"
+ When I press login
+ Then I should receive an error message stating "Username must be between 3 to 12 characters"
 
 @Controller
 @NotImplemented

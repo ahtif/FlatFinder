@@ -1,75 +1,89 @@
 Feature: Interact with other users
-	In order to interact with other users users must be able to view their inbox
-	So that they can exchange messages and send reports
+ As a user
+ In order to interact with other users,users must be able to view their Inbox
+ So that they can exchange messages and send reports
 
-#Background:
-#	Given a user called "bob"
-#	And a user called "ted"
-#	And "ted" is a landlord
-#
-#@domain
-#Scenario: Sending a message
-#	Given I am a searcher "bob"
-#	When I send a message "Hello" to a landlord "ted"
-#	Then "ted" should receive the message "Hello"
-#
-#@domain
-#Scenario: replying to a message
-#	Given I am a searcher "bob"
-#	When I receive a message "viewing arrangements" from a user "ted"
-#	Then I should be able to reply with "time and date?"
+@Domain
+@NotImplemented
+Scenario: Sending a message
+ Given I am a Searcher "Bob"
+ When "Bob" sends a message "Hello" to a landlord "Ted" with Subject "Important"
+ Then "Ted" should receive the message "Hello" from "Bob"
 
-# @domain
-# Scenario: Expressing interest in a property
-#	Given I am a searcher "bob"
-#	And the user "ted" is a landlord
-#	And the user "ted" is the owner of the property
-#	When I like a property "Ted's House 7"
-#	Then user "ted" receives a notification that user "bob" liked his property
+@Domain
+@NotImplemented
+Scenario: Replying to a message
+ Given I am a Searcher "Bob"
+ When I receive a message "viewing arrangements" from a Searcher "Ted" with Subject "Arrangements"
+ Then I should be able to reply with "Time and Date?"
+ 
+@Domain
+@NotImplemented
+Scenario: Sending a email with no recipient
+ Given I am a Searcher "Bob"
+ When "Bob" sends a message "Hello" to "" with Subject "Bye"
+ Then message should not be sent
+ And error message saying "Add recipient" should be displayed
 
-# @domain
-# Scenario: Broadcasting a message
-#	Given I am an administator "James"
-#	When I broadcast a message "Maintenance 4-7AM (GMT)"
-#	Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
+@Domain
+@NotImplemented
+Scenario: Expressing interest in a property
+ Given I am a Searcher "Bob"
+ And the user "Ted" is a landlord
+ And the user "Ted" is the owner of the property "Ted's House 7"
+ When I like a property "Ted's House 7"
+ Then user "Ted" receives a notification that user "Bob" liked his property
 
-# @domain
-# Scenario: Searcher providing feedback for landlord
-#	Given I am a registered searcher "bob"
-#	When I have dealt with a landlord "Ted"
-#	Then I should be able to leave feedback: "Excellent property"
-#	And rate him "4/5" stars
+@Domain
+@NotImplemented
+Scenario: Broadcasting a message
+ Given I am an administrator "James"
+ When I broadcast a message "Maintenance 4-7AM (GMT)"
+ Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
 
-# @domain
-# Scenario: expressing interest
-#	Given I am a registered user "bob"
-#	And I am logged in
-#	And I am a searcher
-#	When I view a property
-#	Then I should be able to express interest
+@Domain
+@NotImplemented
+Scenario: Searcher providing feedback for landlord
+ Given I am a registered Searcher "Bob"
+ When I have dealt with a landlord "Ted"
+ Then I should be able to leave feedback "Excellent property"
+ And rate him "4/5" stars
 
-# @domain
-# Scenario Outline: expressed interest notification
-#	Given I am a landlord "Ted"
-#	When a searcher <SearcherName> expresses interest
-#	Then I should be notified
+@Domain
+@NotImplemented
+Scenario: Expressing interest
+ Given I am a registered Searcher "Bob"
+ And I am logged in
+ When I view a property
+ Then I should be able to express interest
 
-#	Examples:
-#		|SearcherName|
-#		|Bob         |
-#		|Sarah       |
-#		|Jacob       |
-#		|Kim         |
+@Domain
+@NotImplemented
+Scenario Outline: Expressed interest notification
+ Given I am a Landlord "Ted"
+ When a searcher <SearcherName> expresses interest
+ Then I should be notified that <SearcherName> has expressed interest
+     Examples:
+	|SearcherName|
+	|Bob         |
+	|Sarah       |
+	|Jacob       |
+	|Kim         |
 
-# @domain
-# Scenario: Reporting a landlord as a searcher
-#	Given I am a searcher "Bob"
-#	When a landlord "Ted" makes an inaccurate property listing
-#	Then I should be able to report them
-#	And the administrator "James" should be notified
+@Domain
+@NotImplemented
+Scenario: Reporting a landlord as a searcher
+ Given a Searcher "Bob"
+ And a landlord "Ted"
+ And "Ted" has a property "21 Fleet Street" with price "1" PCM
+ When "Bob" reports "Ted" for inaccurate details
+ Then Administrator "James" should be notified
 
-# @domain
-# Scenario: Reporting a searcher as a landlord
-#	Given I am a landlord "Ted"
-#	When a searcher "Bob" verbally abuses me over the messaging system
-#	Then I should be able to report searcher "bob"
+@Domain
+@NotImplemented
+Scenario: Reporting a searcher as a landlord
+ Given a Searcher "Bob"
+ And a landlord "Ted"
+ And "Bob" has verbally abused me through the messaging system
+ When "Ted" reports "Bob" for abuse
+ Then Administrator "James" should be notified
