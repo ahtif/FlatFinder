@@ -123,4 +123,3 @@ Scenario: Password validation
  And I have entered the confirmed password "password1"
  When I request for a user account
  Then the user is redirect to the login page
-

@@ -1,6 +1,6 @@
 Feature: Viewing and updating profile
  As a searcher or a landlord
- I want to have a profile and be able to view other user's profiles
+ I want to have a profile and be able to view other users profiles
  So that I may find a suitable buddy-up partner or tenant
 
 @Domain
@@ -52,7 +52,7 @@ Scenario: Viewing profile of non buddies
  Given a Searcher "foo"
  And I am located on the searching buddies page
  And I am not a buddy with Searcher "Majid"
- When I access the profile page of "Majid
+ When I access the profile page of "Majid"
  Then I should navigate to "searchresult/NotBuddy"
 
 @Domain
