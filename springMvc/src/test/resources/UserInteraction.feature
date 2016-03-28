@@ -16,7 +16,7 @@ Scenario: Replying to a message
  Given I am a Searcher "Bob"
  When I receive a message "viewing arrangements" from a Searcher "Ted" with Subject "Arrangements"
  Then I should be able to reply with "Time and Date?"
- 
+
 @Domain
 @NotImplemented
 Scenario: Sending a email with no recipient
@@ -57,18 +57,18 @@ Scenario: Expressing interest
  When I view a property
  Then I should be able to express interest
 
-@Domain
-@NotImplemented
-Scenario Outline: Expressed interest notification
- Given I am a Landlord "Ted"
- When a searcher <SearcherName> expresses interest
- Then I should be notified that <SearcherName> has expressed interest
-     Examples:
-	|SearcherName|
-	|Bob         |
-	|Sarah       |
-	|Jacob       |
-	|Kim         |
+# @Domain
+# @NotImplemented
+# Scenario Outline: Expressed interest notification
+#  Given I am a Landlord "Ted"
+#  When a searcher <SearcherName> expresses interest
+#  Then I should be notified that <SearcherName> has expressed interest
+#      Examples:
+# 	|SearcherName|
+# 	|Bob         |
+# 	|Sarah       |
+# 	|Jacob       |
+# 	|Kim         |
 
 @Domain
 @NotImplemented

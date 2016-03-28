@@ -3,23 +3,23 @@ Feature: Login and recovery
  I would like to be able to login to the system
  So that I am authorised to access the services provided
 
-@Security
-@NotImplemented
-Scenario Outline: Login 
- Given I am a <ROLE> with username <USR> and password <PWD>
- When I access <URL>
- Then My authentication is <isAuth> with role <ROLE>
+# @Security
+# @NotImplemented
+# Scenario Outline: Login
+#  Given I am a <ROLE> with username <USR> and password <PWD>
+#  When I access <URL>
+#  Then My authentication is <isAuth> with role <ROLE>
+#
+#     Examples:
+#       | URL           | USR       | PWD        | ROLE        | isAuth |
+#       | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
+#       | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
+#       | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
+#       | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
+#       | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
+#       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
+#       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-    Examples:
-      | URL           | USR       | PWD        | ROLE        | isAuth |
-      | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
-      | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
-      | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
-      | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
-      | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
-	
 @Controller
 @NotImplemented
 Scenario: Username field length validation
@@ -65,8 +65,8 @@ Scenario: Password recovery
  And I enter the email address "Bob@gmail.com"
  When I press submit
  Then the system should generate a unique link
- And should send the unique link to the email "Bob@gmail.com" 
- 
+ And should send the unique link to the email "Bob@gmail.com"
+
 @Controller
 @NotImplemented
 Scenario: Recovering password with unpaired email
@@ -81,7 +81,7 @@ Scenario: Recovering password with unpaired email
 @NotImplemented
 Scenario: Logging into a temporarily suspended account
  Given a user "Bob" with password "foo"
- And "Bob" account is suspended 
+ And "Bob" account is suspended
  When "Bob" enters his username "Bob" and password "foo" into the login form fields
  Then error message appears saying "Suspended account"
  And is redirected to the "login" page
