@@ -57,20 +57,20 @@ Scenario: Re-entering an already listed property
  Then an error message should occur "property already listed - can not relist the same property"
  And the details should not be stored in the database
 
-@Domain
-@NotImplemented
-Scenario: Upload image of property
- Given I am a landlord "James"
- And I am on the update property page
- When I select property <PROPERTYNAME> to update
- Then I should be able to upload <IMAGE> to give a further description of my property
-
-      Examples:
-      | PROPERTYNAME        | IMAGE    |
-      | "7 FleetStreet"     | "img1"   |
-      | "32 Amber Park"     | "img2"   |
-      | "2 Helloworld Lane" | "img3"   |
-
+#@Domain
+#@NotImplemented
+#Scenario: Upload image of property
+# Given I am a landlord "James"
+# And I am on the update property page
+# When I select property <PROPERTYNAME> to update
+# Then I should be able to upload <IMAGE> to give a further description of my property
+#
+#      Examples:
+#      | PROPERTYNAME        | IMAGE    |
+#      | "7 FleetStreet"     | "img1"   |
+#      | "32 Amber Park"     | "img2"   |
+#      | "2 Helloworld Lane" | "img3"   |
+#
 
 # @Domain
 # @NotImplemented
