@@ -21,21 +21,21 @@ Scenario Outline: multiuser authentication
        | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
        | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-#@Security
-#@NotImplemented
-#Scenario Outline: authorization
-# Given I am an authenticated <ROLE> with username <USR>
-# When I access <Service>
-# Then My authentication is <isAuthorized> with role <ROLE>
+@Security
+@NotImplemented
+Scenario Outline: authorization
+ Given I am an authenticated <ROLE> with username <USR>
+ When I access <Service>
+ Then My authentication is <isAuthorized> with role <ROLE>
 
-#     Examples:
-#      | Service                          | USR     | ROLE        | isAuthorized|
-#      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
-#      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/sendMessage"           | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/profileStatistic"      | "Jerry" | "LANDLORD"  | true        |
-#      | "/reporting/sendReport"          | "Jerry" | "LANDLORD"  | true        |
+     Examples:
+      | Service                          | USR     | ROLE        | isAuthorized|
+      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
+      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/sendMessage"           | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/profileStatistic"      | "Jerry" | "LANDLORD"  | true        |
+      | "/reporting/sendReport"          | "Jerry" | "LANDLORD"  | true        |
 #      | "/reporting/reviewReports"       | "Jerry" | "LANDLORD"  | false       |
 #      | "/profile/sendAllUsersMessage"   | "Jerry" | "LANDLORD"  | false       |
 #      | "/accounts/deleteAccounts"       | "Jerry" | "LANDLORD"  | false       |
