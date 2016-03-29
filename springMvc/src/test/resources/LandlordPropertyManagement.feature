@@ -72,34 +72,31 @@ Scenario Outline: Upload image of property
       | "2 Helloworld Lane" | "img3"   |
 
 
-#@Domain
-#@NotImplemented
-#Scenario Outline: Submitting property details
-# Given I am a landlord "Ted"
-# And I have entered the address <ADDRESS>
-# And I have entered the postcode <POSTCODE>
-# And I have entered the no. bedrooms <BEDROOMS>
-# And I have entered the price <PRICE>
-# And I have entered the size <SIZE> sq. metres
-# And I have entered the start date <STDATE>
-# And I have entered the end date <ENDATE>
-# And I have entered the local information <LOCALINFO>
-# And I have attached the image <IMAGE>
-# When I submit the form
-# Then the property should be listed on the system
-# And with the postcode <POSTCODE>
-# And with the no. bedrooms <BEDROOMS>
-# And with the price <PRICE>
-# And with the size <SIZE> sq metres
-# And with the start date <STDATE>
-# And with the end date <ENDATE>
-# And with the local information <LOCALINFO>
-#
-#  	Examples:
-#      |ADDRESS          |POSTCODE  |BEDROOMS  |PRICE|SIZE  |STDATE      |ENDATE      |LOCALINFO                     |IMAGE          |
-#      |"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"78"  |"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|"AyleStone.png"|
-#      |"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"105" |"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |"LndRd.png"    |
-#      |"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"110" |"16/04/2016"|"31/12/2016"|"Urban Area"                  |"Welford.png"  |
+@Domain
+@NotImplemented
+Scenario Outline: Submitting property details
+ Given I am a landlord "Ted"
+ And I have entered the address <ADDRESS>
+ And I have entered the postcode <POSTCODE>
+ And I have entered the no. bedrooms <BEDROOMS>
+ And I have entered the price <PRICE>
+ And I have entered the start date <STDATE>
+ And I have entered the end date <ENDATE>
+ And I have entered the local information <LOCALINFO>
+ When I submit the form
+ Then the property should be listed on the system
+ And with the postcode <POSTCODE>
+ And with the no. bedrooms <BEDROOMS>
+ And with the price <PRICE>
+ And with the start date <STDATE>
+ And with the end date <ENDATE>
+ And with the local information <LOCALINFO>
+
+  	Examples:
+      |ADDRESS          |POSTCODE  |BEDROOMS  |PRICE|STDATE      |ENDATE      |LOCALINFO                     |
+      |"13 Aylestone Rd"|"LE2 7LG" |   "3"    |"700"|"01/03/2016"|"01/06/2016"|"Urban Area-Victorian Housing"|
+      |"171 London Rd"  |"LE2 3BE" |   "5"    |"950"|"01/04/2016"|"01/09/2016"|"Urban Area-City-Centre"      |
+      |"300 Welford Rd" |"LE2 6EG" |   "5"    |"950"|"16/04/2016"|"31/12/2016"|"Urban Area"                  |
 
 @Domain
 @NotImplemented
