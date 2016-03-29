@@ -4,22 +4,22 @@ Feature: Login and recovery
  I would like to be able to login to the system
  So that I am authorised to access the services provided
 
-# @Security
-# @NotImplemented
-# Scenario Outline: Login
-#  Given I am a <ROLE> with username <USR> and password <PWD>
-#  When I access <URL>
-#  Then My authentication is <isAuth> with role <ROLE>
-#
-#     Examples:
-#       | URL           | USR       | PWD        | ROLE        | isAuth |
-#       | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
-#       | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
-#       | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
-#       | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
-#       | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
-#       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
-#       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
+@Security
+@NotImplemented
+Scenario Outline: Login
+Given I am a <ROLE> with username <USR> and password <PWD>
+When I access <URL>
+Then My authentication is <isAuth> with role <ROLE>
+
+     Examples:
+       | URL           | USR       | PWD        | ROLE        | isAuth |
+       | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
+       | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
+       | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
+       | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
+       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
 @Controller
 @NotImplemented
