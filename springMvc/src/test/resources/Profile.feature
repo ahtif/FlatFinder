@@ -27,7 +27,7 @@ Scenario Outline: Tracking property views
  And my property views for "171 London Rd" should be "999"
 
 	Examples:
-	 |PROPERTIES	   |
+	 |PROPERTIES	 |
 	 |13 Aylestone Rd|
 	 |171 London Rd  |
 	 |300 Welford Rd |
