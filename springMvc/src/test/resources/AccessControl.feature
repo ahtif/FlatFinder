@@ -5,7 +5,6 @@ Feature: Access Control
  So that the system is secure
 
 @Security
-@NotImplemented
 Scenario Outline: multiuser authentication
  Given I am a <ROLE> with username <USR> and password <PWD>
  When I access <URL>
@@ -83,5 +82,5 @@ Scenario Outline: Redirection to homepage based on role
      Examples:
  	| ROLE        | ROLES      |
  	| "LANDLORD"  | "LANDLORD" |
-    | "ADMIN"     | "ADMIN"    |
-    | "SEARCHER"  | "SEARCHER" |
+  | "ADMIN"     | "ADMIN"    |
+  | "SEARCHER"  | "SEARCHER" |

@@ -1,3 +1,4 @@
+
 package com.uni.c02015;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
@@ -47,6 +48,7 @@ public class AccessControlStepDefs {
   /**
    * Ran before every scenario.
    */
+
   @Before
   public void setup() {
     this.mockMvc = MockMvcBuilders
@@ -81,16 +83,17 @@ public class AccessControlStepDefs {
   public void myauthentication_is_false_with_role(String arg1) throws Throwable {
     result.andExpect(redirectedUrl("https://localhost/login-form"));
   }
-
+/*
   @Given("^I am an authenticated \"([^\"]*)\" with username \"([^\"]*)\"$")
   public void authenticated_with_username(String arg1, String arg2) throws Throwable {
     authentication = new UsernamePasswordAuthenticationToken(arg2, null,
             AuthorityUtils.createAuthorityList("ROLE_" + arg1));
   }
-
+*/
   /**
    * Checks authorization.
    */
+/*
   @Then("^My authentication is <isAuth> with role \"([^\"]*)\"$")
   public void myauthentication_is_isAuth_with_role(boolean arg1, String arg2) throws Throwable {
     if (arg1) {
@@ -99,10 +102,12 @@ public class AccessControlStepDefs {
       result.andExpect(status().is3xxRedirection());
     }
   }
-
+*/
+/*
   @When("^I retrieve the password from the user credentials stored in the repository$")
   public void iretrieve_the_password_from_the_user_credentials_stored_in_the_repository()
           throws Throwable {
     user = userRepository.findByLogin(user.getLogin());
   }
+  */
 }
