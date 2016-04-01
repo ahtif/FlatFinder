@@ -18,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MessageController {
@@ -74,9 +77,20 @@ public class MessageController {
     return messageView;
   }
   
+  /**
+   * Send a new message to a user.
+   * @param request HttpServletRequest
+   */
   @RequestMapping("messaging/new")
-  public ModelAndView newMessage() {
-    return new ModelAndView("messaging/newMessage","message",new Message());
+  public ModelAndView newMessage(HttpServletRequest request) {
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("messaging/newMessage","message",new Message());
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
   
   /**
@@ -108,7 +122,12 @@ public class MessageController {
     if (parent != null && !parent.isEmpty()) {
       message.setParent(messageRepo.findById(Integer.parseInt(parent)));
     }
+    
     User receiver = userRepo.findByLogin(to);
+    if (receiver == null) {
+      return "redirect:/messaging/new?receiverExists=false";
+    }
+
     message.setSenderName(currentUser.getLogin());
     message.setSender(currentUser);
     message.setReceiver(receiver);

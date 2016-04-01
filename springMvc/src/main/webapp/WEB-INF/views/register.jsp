@@ -32,7 +32,6 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
           </ul>
-		<li><a href="/">Home</a></p>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
