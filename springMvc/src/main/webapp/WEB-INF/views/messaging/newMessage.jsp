@@ -58,19 +58,19 @@
 			<tr>
 				<td>To:</td> 
 				<td><div class="form-group">
-				<form:input role="form" type="text" path="receiver" class="form-control"/>
+				<form:input role="form" type="text" path="receiver" class="form-control" required="true"/>
 				</div></td>
 				<td>
 			</tr>
 		<tr>
 			<td>Subject:</td>
 			<td><div class="form-group">
-				<form:input role="form" type="text" path="subject" class="form-control"/>
+				<form:input role="form" type="text" path="subject" class="form-control" required="true"/>
 			</div></td>
 		</tr>
 		<tr>
 			<td colspan="2"><div class="form-group">
-				<form:textarea role="form" rows="5" cols="50" path="message" form="messageForm" class="form-control"/>
+				<form:textarea role="form" rows="5" cols="50" path="message" form="messageForm" class="form-control" required="true"/>
 			</div></td>
 		</tr>
 		<tr>
