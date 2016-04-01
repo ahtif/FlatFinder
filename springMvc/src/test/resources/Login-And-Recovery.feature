@@ -1,84 +1,88 @@
 Feature: Login and recovery
-  As a user
-  I would like to be able to login to the system
-  So that I am authorised to access the services provided
 
-@controller
-Scenario: Access login page
-  Given I am a registered user "bob"
-  When I request the login page
-  Then I should be able to access 
-  And I will be prompted to enter my credentials 
+ As a user
+ I would like to be able to login to the system
+ So that I am authorised to access the services provided
 
-@security
-Scenario Outline: logging in to the system
-  Given I am a registered user <USER> with account type <TYPE>
-  And I am on the login screen
-  When I enter username <USER> and password <PASSWORD>
-  Then I should be <IsAuthorised> to use the system
+@Security
+@NotImplemented
+Scenario Outline: Login
+Given I am a <ROLE> with username <USR> and password <PWD>
+When I access <URL>
+Then My authentication is <isAuth> with role <ROLE>
 
-  Examples:
-    |  USER	  |  PASSWORD | TYPE            |IsAuthorised  |
-    | "bob"	  | "pw123"   | "Searcher"      |"authorised"  |
-    | "ted"       | "tlop"    | "Landlord"      |"authorised"  |
-    | "key&peele" | "partynd" | "Administrator" |"unauthorised"|
-    | "james"     | "kanye"   | "Administrator" |"authorised"  |
-    | "bob"	  | "mrwest"  | "Searcher"	|"unauthorised"|
-    | "james"     | "drizzy"  | "Administrator" |"unauthorised"|
-    | "ted"       | "yeezy"   | "Landlord"	|"unauthorised"|	
+     Examples:
+       | URL           | USR       | PWD        | ROLE        | isAuth |
+       | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
+       | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
+       | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
+       | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
+       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-	
-@security
-Scenario: Password masking
-  Given I am on the login screen
-  When I enter my password "password"
-  Then the password should be masked with asterisk symbols
-  And it should be displayed as "********"
-	
-@controller
+@Controller
+@NotImplemented
 Scenario: Username field length validation
-  Given I am on the login screen
-  When I enter the username "UsernameIsTooLongToFitHere"
-  Then I should receive an error message stating: "Username must be between "3 to 12 characters"
+ Given I am on the login screen
+ And enter a username "UsernameIsTooLongToFitHere"
+ And password "invalid"
+ When I press login
+ Then I should receive an error message stating "Username must be between 3 to 12 characters"
 
-@controller
+@Controller
+@NotImplemented
 Scenario: Entering non-existing login credentials
-  Given I have entered the username "JonJones"
-  And I have entered the password "bones"
-  And the username "JonJones" does not exist in the database
-  When I press login
-  Then I receive the error message "Username does not exist"
+ Given I have entered the username "JonJones"
+ And I have entered the password "Bones"
+ And the username "JonJones" does not exist in the database
+ When I press login
+ Then I receive the error message "Username does not exist"
 
-@controller
+@Controller
+@NotImplemented
 Scenario: Entering the wrong password
-  Given I have a login "bob" in the database
-  And with a password "validpassword"
-  And I enter "bob" in the username field
-  And I enter the password "invalidpassword"
-  When I enter press login
-  Then I should receive an error message "Incorrect password, please try again."
+ Given I have a user "Bob" in the database
+ And with a password "validpassword"
+ And I enter "Bob" in the username field
+ And I enter the password "invalidpassword"
+ When I enter press login
+ Then I should receive an error message "Incorrect password, please try again."
 
-@controller
-Scenario: logging out
-  Given a searcher "bob" is logged in
-  When searcher "bob" presses logout
-  Then he should be redirected to the login page
+@Controller
+@NotImplemented
+Scenario: Logging out
+ Given a searcher "Bob" with password "foo"
+ And "Bob" is logged in
+ When searcher "Bob" presses logout
+ Then he should be redirected to the "login-page"
 
-@security
-Scenario: password recovery
-  Given I am a registered user "bob"
-  And I have forgotten my password
-  And I have requested the "forgotten password" form
-  And I enter the valid and matching email "bob@gmail.com"
-  When I request the "forgotten password" form
-  Then I should receive an email with my password
+@Security
+@NotImplemented
+Scenario: Password recovery
+ Given I have a Searcher "Bob" with password "foo"
+ And the user "Bob is registered with the email address "Bob@gmail.com"
+ And I request the "forgotten password" form
+ And I enter the email address "Bob@gmail.com"
+ When I press submit
+ Then the system should generate a unique link
+ And should send the unique link to the email "Bob@gmail.com"
 
-@controller
-Scenario: recovering password with unpaired email
-  Given I have entered the username "bob"
-  And the username "bob is registered with the email address "bob@gmail.com"
-  And I request the 'forgotten password' form
-  And I enter the email address "incorrect@hotmail.com"
-  When I press submit
-  Then I should receive an error message "Incorrect email"
-	
+@Controller
+@NotImplemented
+Scenario: Recovering password with unpaired email
+ Given I have a Searcher "Bob" with password "foo"
+ And the user "Bob is registered with the email address "Bob@gmail.com"
+ And I request the "forgotten password" form
+ And I enter the email address "incorrect@hotmail.com"
+ When I press submit
+ Then I should receive an error message "Incorrect email"
+
+@Controller
+@NotImplemented
+Scenario: Logging into a temporarily suspended account
+ Given a user "Bob" with password "foo"
+ And "Bob" account is suspended
+ When "Bob" enters his username "Bob" and password "foo" into the login form fields
+ Then error message appears saying "Suspended account"
+ And is redirected to the "login" page

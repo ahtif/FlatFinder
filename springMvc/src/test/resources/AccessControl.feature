@@ -1,38 +1,40 @@
 Feature: Access Control
-  In order to access control content
-  Users should be able to only access certain content based on their role
-  So that they system is secure
 
-@security
+ In order to access control content
+ As a Users should be able to only access certain content based on their role
+ So that the system is secure
+
+@Security
 Scenario Outline: multiuser authentication
-    Given I am a <ROLE> with username <USR> and password <PWD>
-    When I access <URL>
-    Then My authentication is <isAuth> with role <ROLE>
+ Given I am a <ROLE> with username <USR> and password <PWD>
+ When I access <URL>
+ Then My authentication is <isAuth> with role <ROLE>
 
-    Examples:
-      | URL           | USR       | PWD        | ROLE        | isAuth |
-      | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
-      | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
-      | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
-      | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
-      | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
-      | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
+     Examples:
+       | URL           | USR       | PWD        | ROLE        | isAuth |
+       | "/login-form" | "Jerry"   | "password" | "LANDLORD"  | true   |
+       | "/login-form" | "Jerry"   | "invalid"  | "LANDLORD"  | false  |
+       | "/login-form" | "Mark"    | "admin"    | "ADMIN"     | true   |
+       | "/login-form" | "Mark"    | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "invalid" | "invalid"  | "ADMIN"     | false  |
+       | "/login-form" | "Harry"   | "football" | "SEARCHER"  | true   |
+       | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
-@security
+@Security
+@NotImplemented
 Scenario Outline: authorization
-    Given I am an authenticated <ROLE> with username <USR>
-    When I access <Service>
-    Then My authentication is <isAuthorized> with role <ROLE>
+ Given I am an authenticated <ROLE> with username <USR>
+ When I access <Service>
+ Then My authentication is <isAuthorized> with role <ROLE>
 
-    Examples:
-       | Service                          | USR     | ROLE        | isAuthorized|
-#      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
-#      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/sendMessage"           | "Jerry" | "LANDLORD"  | true        |
-#      | "/profile/profileStatistic"      | "Jerry" | "LANDLORD"  | true        |
-#      | "/reporting/sendReport"          | "Jerry" | "LANDLORD"  | true        |
+     Examples:
+      | Service                          | USR     | ROLE        | isAuthorized|
+      | "/property/addProperty"          | "Jerry" | "LANDLORD"  | true        |
+      | "/property/propertyStatistic"    | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/viewInbox"             | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/sendMessage"           | "Jerry" | "LANDLORD"  | true        |
+      | "/profile/profileStatistic"      | "Jerry" | "LANDLORD"  | true        |
+      | "/reporting/sendReport"          | "Jerry" | "LANDLORD"  | true        |
 #      | "/reporting/reviewReports"       | "Jerry" | "LANDLORD"  | false       |
 #      | "/profile/sendAllUsersMessage"   | "Jerry" | "LANDLORD"  | false       |
 #      | "/accounts/deleteAccounts"       | "Jerry" | "LANDLORD"  | false       |
@@ -69,3 +71,16 @@ Scenario Outline: authorization
 #      | "/profile/sendAllUsersMessage"   | "Harry" | "SEARCHER"  | false       |
 #      | "/accounts/deleteAccounts"       | "Harry" | "SEARCHER"  | false       |
 #      | "/accounts/UsersStatistics"      | "Harry" | "SEARCHER"  | false       |
+
+@Security
+@NotImplemented
+Scenario Outline: Redirection to homepage based on role
+ Given I am an authenticated user with <ROLE>
+ When I go to my specific homepage
+ Then I should be on a <ROLES> specific homepage.
+
+     Examples:
+ 	| ROLE        | ROLES      |
+ 	| "LANDLORD"  | "LANDLORD" |
+  | "ADMIN"     | "ADMIN"    |
+  | "SEARCHER"  | "SEARCHER" |
