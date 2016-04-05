@@ -15,6 +15,19 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
+    <script>
+    function toggleBuddy(){
+        var btn = document.getElementById("buddyPref");
+        if(btn.value == "true"){
+            btn.value = "false";
+            document.getElementById("buddy").innerHTML = "I am not a buddy";
+        } else if(btn.value == "false"){
+            btn.value = "true";
+            document.getElementById("buddy").innerHTML = "I am a buddy";
+        }
+    }
+    </script>
+    
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -74,13 +87,17 @@
         </tr>
        
         <tr>
-            <td>Buddy Preference</td>
-            <div class="form-group">
-	            <td><form:select class="form-control" path="buddyPref">
-	            <form:option class="form-control" value="true">I want to be a buddy</form:option>
-                <form:option class="form-control" value="false">I do not want to be a buddy</form:option>
-	            </form:select></td>
-	        </div>
+            <td>Buddy Preference:</td>
+            <td><div class="form-group">
+	            <c:if test="${searcher.buddyPref}">
+	            <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
+	            <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="true"/>
+	            </c:if>
+	            <c:if test="${!searcher.buddyPref}">
+                <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
+                <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
+                </c:if>
+	        </div></td>
 	            
         <tr>
             <td><input type="submit" value="Save" class="btn btn-success"/></td>
