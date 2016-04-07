@@ -43,3 +43,15 @@ Scenario: Search by start date
  And I filter listings by start date "01/03/2016/"
  When I set the end date "01/04/2016"
  Then I should be able to only see properties available from "01/03/2016" to "01/04/2016"
+
+ @Controller
+ @NotImplemented
+ Scenario: Search for property that has been removed
+  Given a Landlord "Bob
+  And "Bob" has a property listing "123 Example Street" with postcode "SW1A 2AA"
+  And price "300" pcm
+  And a Searcher "Majid"
+  And "Bob" searches for the property "123 Example Street"
+  When "Bob" removes the property from his listing
+  And "Majid" searches again for "123 Example Street"
+  Then I should redirected to "noresult/property"
