@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +21,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 @Controller
 public class RegistrationController {
 
+  
+  
   public static final String SIGN_UP_ID_SESSION = "signUpID";
 
   @Autowired
@@ -47,6 +59,75 @@ public class RegistrationController {
 
     return new User();
   }
+  
+  /**
+   * Send an email message to the user
+   * @param user The user to send the message.
+   * @param address The email address of the user.
+   */
+  public void sendConfirmationEmail(User user,
+      String address) {
+    
+    
+    
+    String confirmId = UUID.randomUUID().toString();
+    
+    user.setConfirmId(confirmId);
+    userRepo.save(user);
+    
+    String subject = "Please confirm your account at FlatFinder";
+    
+    String messageBody = "In order to activate your account at FlatFinder,"
+        + " please click the following link: <br />"
+        + "<a href='https://localhost:8070/confirm/" + confirmId + "'>Activate your account</a>";
+    
+    // Recipient's email ID needs to be mentioned.
+    String to = address;
+
+    // Sender's email ID needs to be mentioned
+    String from = "confirmations@flatfinder.com";
+
+    // Assuming you are sending email from localhost
+    String host = "localhost";
+
+    // Get system properties
+    Properties properties = System.getProperties();
+
+    // Setup mail server
+    properties.setProperty("mail.smtp.host", host);
+
+    // Get the default Session object.
+    Session session = Session.getDefaultInstance(properties);
+
+    try {
+      // Create a default MimeMessage object.
+      MimeMessage message = new MimeMessage(session);
+
+      // Set From: header field of the header.
+      message.setFrom(new InternetAddress(from));
+
+      // Set To: header field of the header.
+      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+      // Set Subject: header field
+      message.setSubject(subject);
+
+      // Send the actual HTML message, as big as you like
+      message.setContent(messageBody, "text/html");
+
+      // Send message
+      Transport.send(message);
+      System.out.println("Sent message successfully....");
+    } catch (MessagingException mex) {
+      mex.printStackTrace();
+    }
+  }
+  
+  @RequestMapping("/confirm/{confirmId}")
+  public String confirmAccount(@PathVariable String confirmId) {
+    return confirmId;
+  }
+  
 
   /**
    * Add a searcher.
@@ -117,7 +198,11 @@ public class RegistrationController {
     searcher.setEmailAddress(emailAddress);
     searcher.setBuddyPref(buddyPref);
     searcherRepo.save(searcher);
-
+    
+    //Send the confirmation email
+    User user = userRepo.findById((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+    sendConfirmationEmail(user, emailAddress);
+    
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
 
@@ -189,9 +274,15 @@ public class RegistrationController {
     landlord.setLastName(lastName);
     landlord.setEmailAddress(emailAddress);
     landlordRepo.save(landlord);
-
+    
+    //Send the confirmation email
+    User user = userRepo.findById((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
+    sendConfirmationEmail(user, emailAddress);
+    
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
+
+
 
     return "redirect:/";
   }

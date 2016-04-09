@@ -22,6 +22,9 @@ public class User {
 
   private String login;
   private String password;
+  private String confirmId;
+  private boolean confirmed = false;
+  
 
   public User() {}
 
@@ -98,5 +101,21 @@ public class User {
   public void setRole(Role role) {
 
     this.role = role;
+  }
+
+  public String getConfirmId() {
+    return confirmId;
+  }
+
+  public void setConfirmId(String confirmId) {
+    this.confirmId = confirmId;
+  }
+
+  public boolean getConfirmed() {
+    return confirmed;
+  }
+
+  public void setConfirmed(boolean confirmed) {
+    this.confirmed = confirmed;
   }
 }
