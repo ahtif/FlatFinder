@@ -28,6 +28,8 @@
 ## Scenarios
 
 ### Registration
+Feature: Registration  
+As a user, I want to be able to register as either a Landlord or a Searcher so that I can rent my property or find a property.  
 
 Scenario: Register as a Searcher  
 Given I am a user  
@@ -47,6 +49,8 @@ When I register as a Landlord
 Then I should be registered as a Landlord  
 
 ###Login
+Feature: Login  
+As a registered user, I should be able to login to the website as a Landlord or Searcher so that I can have access to my account and use the services.  
 
 Scenario: Login as Searcher  
 Given I have registered as a Searcher  
@@ -64,6 +68,8 @@ When I login with my username and password
 Then I should be able to access the services for Administrators  
 
 ###Account Recovery
+Feature: Account recovery  
+As a registered user, I should be able to reset my password for my account as either a Landlord or Searcher so that I can regain access to my account.  
 
 Scenario: Recovering an account  
 Given I am a user  
@@ -80,6 +86,8 @@ And enter a password and confirmed password which match
 Then my password will be changed to the new password  
 
 ### Searching for properties
+Feature: Searching for properties  
+As a Searcher, I should be able to use the system to search for properties near me and based on my preferences So that I am to find the properties that match my preference.  
 
 Scenario: Searching for properties by postcode and price  
 Given I am logged in as a Searcher  
@@ -94,6 +102,9 @@ And I select en suite rooms, non-smoking and undergraduates tenants and apply th
 Then I should see a map of properties near me that match my filters  
 
 ### Buddying Up
+Feature: Buddying up  
+As a Searcher, I should be able to use the system to search for buddies and should be matched based on my preferences So that I am to find possible flat mates.  
+
 Scenario: Buddying up  
 Given I am logged in as a Searcher  
 And I am looking at a property  
@@ -101,6 +112,8 @@ When I select the buddy up option
 Then I should be matched to a buddy  
 
 ### Registering interest
+Feature: Registering interest
+As a Searcher, I should be able to register interest into a property So that I am to notify the landlord
 
 Scenario: Registering interest  
 Given I am logged in as a Searcher  
@@ -109,6 +122,8 @@ When I click the express interest button
 Then the landlord should be alerted that I am interested  
 
 ### Maps  
+Feature: Find property using GPS
+As a Searcher, I should be able to find properties using the GPS So that I am to see the properties  
 
 Scenario: GPS tracking  
 Given I am logged in as a Searcher  
@@ -116,6 +131,8 @@ When I want to find a property using the GPS system
 Then the GPS should take me to the property  
 
 ### Managing Properties
+Feature: Managing Properties  
+As a Landlord I should be able to add, remove or update my properties so that I can manage my properties.  
 
 Scenario: Adding a property  
 Given I am logged in as a Landlord  
@@ -137,6 +154,9 @@ When I update my property details
 Then the property should be updated in the system  
 
 ### Reporting
+Feature: Reporting  
+As a user of the system, I should be able to report properties as a Searcher  
+Or I should be able to report Searchers as a Landlord so that I can protect myself and other users.  
 
 Scenario: Reporting a property  
 Given I am logged in as a Searcher  
@@ -151,6 +171,8 @@ When I report the Searcher
 Then an Administrator should be notified  
 
 ### Administrator
+Feature: Administrator abilities  
+As an administrator, I can receive report notifications and suspend or delete accounts so that I can protect users of the website  
 
 Scenario: Receiving reports  
 Given I am logged in as an Administrator  
@@ -175,6 +197,8 @@ When I set an expiry date for user accounts
 Then the account should expire after the given date
 
 ### Messaging and user notifications
+Feature: Messaging and user notifications  
+As a user or administrator, I should be able to message other users so that I can notify and communicate to other users.  
 
 Scenario: Administrator messaging  
 Given I am logged in as an Administrator  
@@ -197,6 +221,10 @@ When I receive a notification
 Then I should be able to view the received notification  
 
 ### Viewing user and administrator statistics
+
+Feature: Viewing user and administrator statistics  
+As a user I can view my account statistics  
+Or as a administrator I can view confidential statistics of all users  
 
 Scenario: Searcher statistics  
 Given I am logged in as a Searcher  
