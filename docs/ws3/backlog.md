@@ -17,7 +17,7 @@
 | 11  | Searcher | Report properties which contain false information | I can make the administrators aware of the issue and prevent other users from being scammed | High	| No | 
 | 12  |	Registered User |	Report searchers or searchers reporting landlords for harassing users or violating the rules | I can protect myself and other users from being harassed and make the administrators aware of the issue | High |	No |
 | 13  | Administrator |	Receive report notifications and suspend or delete accounts | I can protect searchers or landlord from abusive users or fake listing | High	| No |
-| 14  | Administrator	| Expire accounts after a given time period	I can maintain the website and have only active users |	High | No |
+| 14  | Administrator	| Expire accounts after a given time period	| I can maintain the website and have only active users |	High | No |
 | 15	| Registered User |	Message other users and respond to their messages |	I can notify and communicate to users | High | Yes |
 | 16  | Registered User |	Have an inbox so I am able to see all my conversion with other users | I can easily reply to landlord or searchers and see my previous conversion with them |	High | Yes |
 | 17	| Administrator | Broadcast a message to all users | I can notify them about important updates | High	| No |
