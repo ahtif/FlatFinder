@@ -75,7 +75,7 @@ public class AuthorizationController {
         return "redirect:/landlord/registration";
       }
 
-      return "landlord/index";
+      return "redirect:/property/viewAll";
     }
 
     // Check the searcher has completed the sign up process

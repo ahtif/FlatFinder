@@ -25,7 +25,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     // Reference resources through an absolute directory path
     registry.addResourceHandler("/resources/**").addResourceLocations(
         "file://" + System.getProperty("user.dir") + File.separator + "src" + File.separator
-        + "main" + File.separator + "resources" + File.separator
+        + "main" + File.separator + "webapp" + File.separator
     );
   }
 

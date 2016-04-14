@@ -80,18 +80,18 @@
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
+    <!-- Wrapper for slides - !!!ensure image width is maximised!!! -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-          <img src="<c:url value="/resources/images/index/carousel0.jpg" />" alt="" width="9999" height="640" />
+          <img src="<c:url value="/resources/images/index/carousel0.png" />" alt="" width="9999" height="640" />
       </div>
     
       <div class="item">
-          <img src="<c:url value="/resources/images/index/carousel1.jpg" />" alt="" width="9999" height="640" />
+          <img src="<c:url value="/resources/images/index/carousel1.png" />" alt="" width="9999" height="640" />
       </div>
 
       <div class="item">
-          <img src="<c:url value="/resources/images/index/carousel2.jpg" />" alt="" width="9999" height="640" />
+          <img src="<c:url value="/resources/images/index/carousel2.png" />" alt="" width="9999" height="640" />
       </div>
     </div>
 

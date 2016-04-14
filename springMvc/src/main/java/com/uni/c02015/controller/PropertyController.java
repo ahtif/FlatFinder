@@ -28,10 +28,11 @@ import java.util.List;
 @Controller
 public class PropertyController {
 
+  // Image root directory for property images
   private static final String IMAGE_ROOT_DIR =
       System.getProperty("user.dir") + File.separator + "src"
           + File.separator + "main" + File.separator
-          + "resources" + File.separator + "images"
+          + "webapp" + File.separator + "images"
           + File.separator + "properties" + File.separator;
 
   @Autowired
