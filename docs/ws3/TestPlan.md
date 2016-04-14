@@ -97,7 +97,7 @@
 * Make sure that the site is easy to use without help
 
 ### How will issues be fixed?
-* With cucmber testing, it is easy to fix issues as and when they appear. The running gradle check we will be able to see if the tests pass or fail. If they fail then the tester will tell the developer and together can fix the issue.
+* With cucmber testing, it is easy to fix issues as and when they appear. By running gradle check we will be able to see if the tests pass or fail. If they fail then the tester will tell the developer and together they can fix the issue.
 * With UI testing we will proof read the site to fix any grammatical errors, and to test usability we will get people who are not in our group to try and use the site and provide feedback.
 
 
