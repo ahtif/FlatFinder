@@ -12,13 +12,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PropertyController {
+
+  private static final String IMAGE_ROOT_DIR =
+      System.getProperty("user.dir") + File.separator + "src"
+          + File.separator + "main" + File.separator
+          + "resources" + File.separator + "images"
+          + File.separator + "properties" + File.separator;
 
   @Autowired
   TypeRepository typeRepository;
@@ -48,7 +62,8 @@ public class PropertyController {
    * @return String
    */
   @RequestMapping(value = "/property/addPost", method = RequestMethod.POST)
-  public String propertyAddPost(HttpServletRequest request, Principal principal) {
+  public String propertyAddPost(HttpServletRequest request, Principal principal,
+                                @RequestParam("images") MultipartFile images[]) {
 
     Property property = new Property();
 
@@ -67,6 +82,40 @@ public class PropertyController {
     property.setLandlord(landlordRepository.findById(user.getId()));
 
     propertyRepository.save(property);
+
+    // Save property images
+    for (int i = 0; i < images.length; i++) {
+
+      MultipartFile multipartFile = images[i];
+
+      // The file is not empty
+      if (!multipartFile.isEmpty()) {
+
+        String fileName = multipartFile.getOriginalFilename();
+
+        byte[] bytes;
+        try {
+
+          // Create the directory to store file in - property-images/<userID>/<propertyID>/
+          File dir = new File(IMAGE_ROOT_DIR + property.getId());
+          if (!dir.exists()) {
+
+            dir.mkdirs();
+          }
+
+          // Create the image file on the server
+          File serverFile = new File(dir.getAbsolutePath()
+              + File.separator + multipartFile.getOriginalFilename());
+          BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+          stream.write(multipartFile.getBytes());
+          stream.close();
+
+        } catch (IOException e) {
+
+          e.printStackTrace();
+        }
+      }
+    }
 
     return "property/addPost";
   }
@@ -99,6 +148,18 @@ public class PropertyController {
 
     // TODO check the property ID exists
     modelAndView.addObject("property", propertyRepository.findById(id));
+
+    // Add the absolute image paths to the model
+    File rootFolder = new File(IMAGE_ROOT_DIR + id);
+    File[] images = rootFolder.listFiles();
+
+    List<String> imagePaths = new ArrayList<String>();
+    for (int i = 0; i < images.length; ++i) {
+
+      imagePaths.add(id + File.separator + images[i].getName());
+    }
+
+    modelAndView.addObject("images", imagePaths);
 
     return modelAndView;
   }

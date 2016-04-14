@@ -53,7 +53,7 @@
 
 <br /><br /><br />
 <h1>Add Property</h1>
-<form method="POST" action="/property/addPost">
+<form method="POST" enctype="multipart/form-data" type="" action="/property/addPost">
 	<table>
 		<tr>
 			<td>Property Number:</td>
@@ -104,6 +104,15 @@
                     <option value="4">4</option>
                 </select>
             </div></td>
+        </tr>
+
+        <tr>
+            <td>Property Images:</td>
+            <td>
+                <div class="form-group">
+                    <input type="file" name="images" multiple="multiple" required="required" max="6" />
+                </div>
+            </td>
         </tr>
 
 		<tr>
