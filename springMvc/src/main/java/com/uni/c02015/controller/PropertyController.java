@@ -147,20 +147,28 @@ public class PropertyController {
 
     ModelAndView modelAndView = new ModelAndView("property/view");
 
-    // TODO check the property ID exists
-    modelAndView.addObject("property", propertyRepository.findById(id));
+    Property property = propertyRepository.findById(id);
 
-    // Add the absolute image paths to the model
-    File rootFolder = new File(IMAGE_ROOT_DIR + id);
-    File[] images = rootFolder.listFiles();
+    if (property == null) {
 
-    List<String> imagePaths = new ArrayList<String>();
-    for (int i = 0; i < images.length; ++i) {
+      modelAndView.addObject("notFound", true);
 
-      imagePaths.add(id + File.separator + images[i].getName());
+    } else {
+
+      modelAndView.addObject("property", property);
+
+      // Add the absolute image paths to the model
+      File rootFolder = new File(IMAGE_ROOT_DIR + id);
+      File[] images = rootFolder.listFiles();
+
+      List<String> imagePaths = new ArrayList<String>();
+      for (int i = 0; i < images.length; ++i) {
+
+        imagePaths.add(id + File.separator + images[i].getName());
+      }
+
+      modelAndView.addObject("images", imagePaths);
     }
-
-    modelAndView.addObject("images", imagePaths);
 
     return modelAndView;
   }
