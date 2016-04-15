@@ -59,6 +59,13 @@
 
         </c:when>
         <c:otherwise>
+
+            <c:if test="${showEditButton != null}">
+
+                <button class="btn btn-success" type="submit"><a href="/property/edit/${showEditButton}">Edit</a></button>
+
+            </c:if>
+
             <div class="container" style="margin-left: -15px;">
                 <br>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">

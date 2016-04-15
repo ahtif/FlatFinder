@@ -6,6 +6,7 @@ import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,7 @@ public class PropertyController {
   PropertyRepository propertyRepository;
 
   /**
-   * View property.
+   * Add a property.
    * @return ModelAndView
    */
   @RequestMapping(value = "/property/add", method = RequestMethod.GET)
@@ -80,7 +81,8 @@ public class PropertyController {
     String query = "";
 
     // Property number invalid
-    if (request.getParameter("pNumber").length() == 0 || Integer.parseInt(request.getParameter("pNumber")) < 0) {
+    if (request.getParameter("pNumber").length() == 0
+        || Integer.parseInt(request.getParameter("pNumber")) < 0) {
 
       query += "invalidNumber=true";
     }
@@ -132,12 +134,50 @@ public class PropertyController {
       query += "imagesInvalid=true";
     }
 
+    // There was errors in the request
     if (query.length() > 0) {
 
+      // The request was an edit
+      if (request.getParameter("edit") != null) {
+
+        return "redirect:/property/edit/" + request.getParameter("edit") + "?" + query;
+      }
+
+      // The request was property creation
       return "redirect:/property/add?" + query;
     }
 
-    Property property = new Property();
+    Property property;
+
+    // Editing an existing property
+    if (request.getParameter("edit") != null) {
+
+      property = propertyRepository.findById(new Integer(request.getParameter("edit")));
+
+      // Cannot edit non-existence properties - prompt new property creation
+      if (property == null) {
+
+        return "redirect:/property/add";
+
+      // Property exists and all checks were valid
+      } else {
+
+        // Delete the property image directory
+        try {
+
+          FileUtils.deleteDirectory(new File(IMAGE_ROOT_DIR + property.getId()));
+
+        } catch (IOException e) {
+
+          e.printStackTrace();
+        }
+      }
+
+    // We are creating a new property
+    } else {
+
+      property = new Property();
+    }
 
     property.setNumber(request.getParameter("pNumber"));
     property.setStreet(request.getParameter("pStreet"));
@@ -168,7 +208,7 @@ public class PropertyController {
         byte[] bytes;
         try {
 
-          // Create the directory to store file in - property-images/<userID>/<propertyID>/
+          // Create the directory to store file in
           File dir = new File(IMAGE_ROOT_DIR + property.getId());
           if (!dir.exists()) {
 
@@ -214,7 +254,8 @@ public class PropertyController {
    * @return ModelAndView
    */
   @RequestMapping(value = "/property/view/{id}", method = RequestMethod.GET)
-  public ModelAndView viewProperty(@PathVariable(value = "id") Integer id) {
+  public ModelAndView viewProperty(@PathVariable(value = "id") Integer id,
+                                   Principal principal) {
 
     ModelAndView modelAndView = new ModelAndView("property/view");
 
@@ -225,6 +266,15 @@ public class PropertyController {
       modelAndView.addObject("notFound", true);
 
     } else {
+
+      User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User)
+          ((Authentication) principal).getPrincipal()).getUsername());
+
+      // The user owns this property
+      if (user.getId() == property.getLandlord().getId()) {
+
+        modelAndView.addObject("showEditButton", id);
+      }
 
       modelAndView.addObject("property", property);
 
@@ -239,6 +289,45 @@ public class PropertyController {
       }
 
       modelAndView.addObject("images", imagePaths);
+    }
+
+    return modelAndView;
+  }
+
+  /**
+   * Edit a property.
+   * @return ModelAndView
+   */
+  @RequestMapping(value = "/property/edit/{id}", method = RequestMethod.GET)
+  public ModelAndView editProperty(@PathVariable(value = "id") Integer id,
+                                   HttpServletRequest request, Principal principal) {
+
+    ModelAndView modelAndView = new ModelAndView("property/edit");
+
+    Property property = propertyRepository.findById(id);
+
+    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User)
+        ((Authentication) principal).getPrincipal()).getUsername());
+
+    // Invalid user edit
+    if (user.getId() != property.getLandlord().getId()) {
+
+      modelAndView.addObject("invalid", true);
+
+    // Cannot edit non existent properties
+    } else if (property == null) {
+
+      modelAndView.addObject("notFound", true);
+
+    // Valid edit
+    } else {
+
+      modelAndView.addObject("types", typeRepository.findAll());
+      modelAndView.addObject("property", property);
+
+      // Get the request GET parameters and add to the model
+      Map<String, String[]> parameters = request.getParameterMap();
+      modelAndView.addAllObjects(parameters);
     }
 
     return modelAndView;
