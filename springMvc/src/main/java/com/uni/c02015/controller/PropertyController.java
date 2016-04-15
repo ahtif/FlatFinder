@@ -1,5 +1,6 @@
 package com.uni.c02015.controller;
 
+import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
@@ -270,8 +271,9 @@ public class PropertyController {
       User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User)
           ((Authentication) principal).getPrincipal()).getUsername());
 
-      // The user owns this property
-      if (user.getId() == property.getLandlord().getId()) {
+      // The user owns this property or is an administrator
+      if (user.getId() == property.getLandlord().getId()
+          || user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
 
         modelAndView.addObject("showEditButton", id);
       }
@@ -309,8 +311,9 @@ public class PropertyController {
     User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User)
         ((Authentication) principal).getPrincipal()).getUsername());
 
-    // Invalid user edit
-    if (user.getId() != property.getLandlord().getId()) {
+    // The user is not validated to edit the property
+    if (user.getId() != property.getLandlord().getId()
+        && !user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
 
       modelAndView.addObject("invalid", true);
 

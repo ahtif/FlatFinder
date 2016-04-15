@@ -62,7 +62,7 @@
 
             <c:if test="${showEditButton != null}">
 
-                <button class="btn btn-success" type="submit"><a href="/property/edit/${showEditButton}">Edit</a></button>
+                <p><a href="/property/edit/${showEditButton}" class="btn btn-success">Edit Property</a></p>
 
             </c:if>
 
