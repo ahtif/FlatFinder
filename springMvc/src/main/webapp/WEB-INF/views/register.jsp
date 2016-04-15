@@ -44,6 +44,7 @@
 
 <div class="container">
 <h1>Registration</h1>
+
 <c:if test="${usernameLength != null}">
     <div class="alert alert-danger" role="alert">
         <strong>Sorry!</strong> Your username is not between 3 and 15 characters.
@@ -64,6 +65,7 @@
         <strong>Sorry!</strong> Your passwords did not match.
     </div>
 </c:if>
+
 <form:form method="POST" action="/createAccount" modelAttribute="User">
 	<table>
 		<tr>

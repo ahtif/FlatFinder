@@ -53,33 +53,68 @@
 
 <br /><br /><br />
 <h1>Add Property</h1>
+
+        <c:if test="${invalidNumber != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> The property number which was entered is invalid.
+            </div>
+        </c:if>
+
+        <c:if test="${streetInvalid != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> Please enter a valid street.
+            </div>
+        </c:if>
+
+        <c:if test="${cityInvalid != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> Please enter a valid city.
+            </div>
+        </c:if>
+
+        <c:if test="${postcodeInvalid != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> Please enter a valid postcode ie. LE18 6UG
+            </div>
+        </c:if>
+
+        <c:if test="${imagesInvalid != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> Please provide at least one property image.
+            </div>
+        </c:if>
+
 <form method="POST" enctype="multipart/form-data" type="" action="/property/addPost">
 	<table>
 		<tr>
 			<td>Property Number:</td>
 			<td><div class="form-group">
-			    <input role="form" class="form-control" type="text" name="pNumber" pattern="[0-9a-z ]+" required="required" placeholder="Number"/>
+			    <input role="form" class="form-control" type="text" name="pNumber"
+                       pattern="[0-9a-zA-Z]+" placeholder="Property Number" required="required" />
 			</div></td>
 		</tr>
 
 		<tr>
             <td>Property Street:</td>
             <td><div class="form-group">
-			    <input role="form" class="form-control" type="text" name="pStreet" pattern="[0-9a-z ]+" required="required" placeholder="Street name"/>
+			    <input role="form" class="form-control" type="text" name="pStreet"
+                       pattern="[a-zA-Z ]+" placeholder="Street Name" required="required" />
 			</div></td>
 		</tr>
 
         <tr>
             <td>Property City:</td>
             <td><div class="form-group"><div class="form-group">
-			    <input role="form" class="form-control" type="text" name="pCity" pattern="[A-Za-z ]+" required="required" placeholder="City"/>
+			    <input role="form" class="form-control" type="text" name="pCity"
+                       pattern="[A-Za-z ]+" placeholder="City" required="required" />
 			</div></td>
         </tr>
 
         <tr>
             <td>Property PostCode:</td>
             <td><div class="form-group">
-			    <input role="form" class="form-control" type="text" name="pPostcode" pattern="[a-zA-Z0-9 ]+" required="required" placeholder="Postcode"/>
+			    <input role="form" class="form-control" type="text" name="pPostcode"
+                       pattern="[a-zA-Z0-9 ]+" placeholder="Postcode ie. LE18 6UG" required="required" />
 			</div></td>
         </tr>
 
@@ -110,7 +145,8 @@
             <td>Property Images:</td>
             <td>
                 <div class="form-group">
-                    <input type="file" name="images" multiple="multiple" required="required" max="6" />
+                    <input type="file" name="images" multiple="multiple"
+                           max="6" required="required" />
                 </div>
             </td>
         </tr>

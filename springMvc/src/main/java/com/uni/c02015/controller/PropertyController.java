@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class PropertyController {
@@ -34,6 +37,10 @@ public class PropertyController {
           + File.separator + "main" + File.separator
           + "webapp" + File.separator + "images"
           + File.separator + "properties" + File.separator;
+
+  // Postcode regex and pattern
+  private final String postcodeRegex = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$";
+  private Pattern postcodePattern = Pattern.compile(postcodeRegex);
 
   @Autowired
   TypeRepository typeRepository;
@@ -55,6 +62,10 @@ public class PropertyController {
 
     modelAndView.addObject("types", typeRepository.findAll());
 
+    // Get the request GET parameters and add to the model
+    Map<String, String[]> parameters = request.getParameterMap();
+    modelAndView.addAllObjects(parameters);
+
     return modelAndView;
   }
 
@@ -65,6 +76,66 @@ public class PropertyController {
   @RequestMapping(value = "/property/addPost", method = RequestMethod.POST)
   public String propertyAddPost(HttpServletRequest request, Principal principal,
                                 @RequestParam("images") MultipartFile images[]) {
+
+    String query = "";
+
+    // Property number invalid
+    if (request.getParameter("pNumber").length() == 0 || Integer.parseInt(request.getParameter("pNumber")) < 0) {
+
+      query += "invalidNumber=true";
+    }
+
+    // Street invalid
+    if (request.getParameter("pStreet").length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "streetInvalid=true";
+    }
+
+    // City invalid
+    if (request.getParameter("pCity").length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "cityInvalid=true";
+    }
+
+    // Postcode regex matcher
+    Matcher matcher = postcodePattern.matcher(request.getParameter("pPostcode"));
+
+    // Invalid postcode
+    if (request.getParameter("pPostcode").length() == 0 || !matcher.find()) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "postcodeInvalid=true";
+    }
+
+    // No images supplied
+    if (images.length == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "imagesInvalid=true";
+    }
+
+    if (query.length() > 0) {
+
+      return "redirect:/property/add?" + query;
+    }
 
     Property property = new Property();
 
