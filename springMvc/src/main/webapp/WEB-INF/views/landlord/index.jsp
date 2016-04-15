@@ -54,9 +54,6 @@
 
 <br /><br /><br />
 
-    <div class="alert alert-success" role="alert">
-        <strong>Hi!</strong> You have been successfully logged in as a landlord.
-    </div>
 </div>
 <hr>
 

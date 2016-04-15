@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Welcome Administrator</title>
+    <title>Welcome Landlord</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -27,11 +27,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Flat Finder - Search Results</a>
+          <a class="navbar-brand" href="#">Flat Finder- Landlord View</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href="/success-login">Home</a></li>
+            <li><a href="/profile">Profile</a></li>                        
+            <li><a href="/messaging">Inbox</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/property/add">Add a Property</a></li>
+                <li><a href="/property/viewAll">View all properties</a></li>
+              </ul>
+            </li>
           </ul>
           <c:url value="/logout" var="logoutUrl"/>
           <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -43,7 +52,9 @@
     </nav>
     <div class="container">
 
-<br /><br /><br />
+<br /><br /><br /><br />
+
+
 
 </div>
 <hr>

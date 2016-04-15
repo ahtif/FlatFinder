@@ -7,22 +7,31 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class DbConfig {
 
+  public final static String HOST;
+  public final static String DATABASE;
+  public final static String USER;
+  public final static String PASSWORD;
+
+  static {
+
+    HOST = "127.0.0.1";
+    DATABASE = "springMvc";
+    USER = "root";
+    PASSWORD = "";
+  }
+
   /**
    * JPA mysql connection details.
-   * 
    * @return DriverManagerDataSource
    */
   @Bean
   public DriverManagerDataSource dataSource() {
+
     DriverManagerDataSource ds = new DriverManagerDataSource();
     ds.setDriverClassName("com.mysql.jdbc.Driver");
-    // jdbc:mysql://host:port/db
-    ds.setUrl("jdbc:mysql://127.0.0.1/springMvc");
-    ds.setUsername("root");
-    ds.setPassword("");
-    // ds.setUrl("jdbc:mysql://mysql.mcscw3.le.ac.uk:3306/aa845");
-    // ds.setUsername("aa845");
-    // ds.setPassword("aggazzlo");
+    ds.setUrl("jdbc:mysql://" + HOST + "/" + DATABASE);
+    ds.setUsername(USER);
+    ds.setPassword(PASSWORD);
     return ds;
   }
 }

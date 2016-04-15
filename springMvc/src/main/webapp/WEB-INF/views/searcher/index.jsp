@@ -42,13 +42,52 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container">
 
-<br /><br /><br />
+<div class="container">
 
-    <div class="alert alert-success" role="alert">
-        <strong>Hi!</strong> You have been successfully logged in as a searcher.
-    </div>
+    <br /><br /><br /><br />
+
+        <form action="/searchProperties" method="get">
+
+            <table>
+                <tr>
+                    <td>Property Keyword:</td>
+                    <td><div class="form-group">
+                        <input role="form" class="form-control" type="text" name="pKeyword"
+                               pattern="[0-9a-zA-Z]+" placeholder="Enter a street, city or postcode" required="required" />
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td>Property Type:</td>
+                    <td><div class="form-group">
+                        <select name="pType" class="form-control" required="required">
+                            <c:forEach items="${types}" var="type">
+                                <option value="${type.id}">${type.type}</option>
+                            </c:forEach>
+                        </select>
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td>Number of Rooms:</td>
+                    <td><div class="form-group">
+                        <select name="pRooms" class="form-control" required="required">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><input type="submit" value="Search Properties" /></td>
+                </tr>
+
+            </table>
+        </form>
+
 </div>
 <hr>
 
