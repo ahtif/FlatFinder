@@ -33,16 +33,20 @@ import java.util.regex.Pattern;
 @Controller
 public class PropertyController {
 
-  // Image root directory for property images
-  private static final String IMAGE_ROOT_DIR =
-      System.getProperty("user.dir") + File.separator + "src"
-          + File.separator + "main" + File.separator
-          + "webapp" + File.separator + "images"
-          + File.separator + "properties" + File.separator;
+  private static final String IMAGE_ROOT_DIR;
+  private static final String POSTCODE_REGEX;
 
-  // Postcode regex and pattern
-  private final String postcodeRegex = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$";
-  private Pattern postcodePattern = Pattern.compile(postcodeRegex);
+  static {
+
+    IMAGE_ROOT_DIR = System.getProperty("user.dir") + File.separator + "src"
+            + File.separator + "main" + File.separator
+            + "webapp" + File.separator + "images"
+            + File.separator + "properties" + File.separator;
+
+    POSTCODE_REGEX = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$";
+  }
+
+  private Pattern postcodePattern = Pattern.compile(POSTCODE_REGEX);
 
   @Autowired
   TypeRepository typeRepository;

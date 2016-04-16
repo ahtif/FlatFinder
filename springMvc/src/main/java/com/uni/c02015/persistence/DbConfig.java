@@ -7,10 +7,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class DbConfig {
 
-  public final static String HOST;
-  public final static String DATABASE;
-  public final static String USER;
-  public final static String PASSWORD;
+  public static final String HOST;
+  public static final String DATABASE;
+  public static final String USER;
+  public static final String PASSWORD;
 
   static {
 

@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Controller
 public class SearchController {
@@ -24,7 +28,10 @@ public class SearchController {
     try {
 
       Class.forName("com.mysql.jdbc.Driver");
-      DB_CONN = DriverManager.getConnection("jdbc:mysql://" + DbConfig.HOST + "/" + DbConfig.DATABASE, DbConfig.USER, DbConfig.PASSWORD);
+      DB_CONN = DriverManager.getConnection(
+          "jdbc:mysql://" + DbConfig.HOST + "/"
+              + DbConfig.DATABASE, DbConfig.USER, DbConfig.PASSWORD
+      );
 
     } catch (SQLException e) {
 
@@ -43,6 +50,11 @@ public class SearchController {
   @Autowired
   private LandlordRepository landlordRepository;
 
+  /**
+   * Search results view.
+   * @param request The request
+   * @return ModelAndView
+   */
   @RequestMapping(value = "/searchProperties", method = RequestMethod.GET)
   public ModelAndView searchQuery(HttpServletRequest request) {
 

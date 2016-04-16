@@ -27,12 +27,22 @@ public class SpringMvc implements ApplicationRunner {
   @Autowired
   private MessageRepository messageRepo;
 
-  public static final int ROLE_ADMINISTRATOR_ID = 1;
-  public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
-  public static final int ROLE_LANDLORD_ID = 2;
-  public static final String ROLE_LANDLORD = "LANDLORD";
-  public static final int ROLE_SEARCHER_ID = 3;
-  public static final String ROLE_SEARCHER = "SEARCHER";
+  public static final int ROLE_ADMINISTRATOR_ID;
+  public static final String ROLE_ADMINISTRATOR;
+  public static final int ROLE_LANDLORD_ID;
+  public static final String ROLE_LANDLORD;
+  public static final int ROLE_SEARCHER_ID;
+  public static final String ROLE_SEARCHER;
+
+  static {
+
+    ROLE_ADMINISTRATOR_ID = 1;
+    ROLE_ADMINISTRATOR = "ADMINISTRATOR";
+    ROLE_LANDLORD_ID = 2;
+    ROLE_LANDLORD = "LANDLORD";
+    ROLE_SEARCHER_ID = 3;
+    ROLE_SEARCHER = "SEARCHER";
+  }
 
   /**
    * Psvm.

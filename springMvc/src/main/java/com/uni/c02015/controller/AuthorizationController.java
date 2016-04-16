@@ -78,7 +78,7 @@ public class AuthorizationController {
         return new ModelAndView("redirect:/landlord/registration");
       }
 
-      return new ModelAndView("redirect:/property/viewAll");
+      return new ModelAndView("landlord/index");
     }
 
     // Check the searcher has completed the sign up process
