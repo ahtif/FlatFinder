@@ -16,6 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private UserDetailsService userDetailsService;
+  
+  @Autowired
+  private CustomAuthenticationFailureHandler failureHandler;
 
   /**
    * Web security configuration.
@@ -23,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * @throws Exception Throws on error
    */
   protected void configure(HttpSecurity http) throws Exception {
-
+    
     http
       .authorizeRequests()
       .antMatchers("/user-logout",
@@ -33,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher",
-          "/confirm/**").permitAll()
+          "/confirm/**",
+          "/invalid-login").permitAll()
       .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_LANDLORD)
       .antMatchers("/property/add", "/property/addPost", 
@@ -48,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .loginPage("/")
       .loginProcessingUrl("/login")
       .defaultSuccessUrl("/success-login", true)
-      .failureUrl("/invalid-login")
+      .failureHandler(failureHandler)
       .permitAll()
       .and()
     .logout()

@@ -39,7 +39,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <c:url value="/login" var="loginUrl"/>
-          <form class="navbar-form navbar-right" action="${loginUrl}" method="post" modelAttribute="user">
+          <form class="navbar-form navbar-right" action="${loginUrl}" method="post" modelAttribute="user" >
             <div class="form-group">
               <input id="username" name="username" type="text" placeholder="Username" class="form-control" required>
             </div>
@@ -59,7 +59,7 @@
 <p>
     <c:if test="${error == true}">
     <div class="alert alert-danger" role="alert">
-        <strong>Sorry!</strong> It seems as though you have entered an invalid username or password.
+        <strong>Sorry!</strong> ${SPRING_SECURITY_LAST_EXCEPTION}
     </div>
     </c:if>
     <c:if test="${logout == true}">

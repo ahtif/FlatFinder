@@ -69,6 +69,7 @@ public class ProfileController {
     Searcher searcher = searcherRepo.findById(user.getId());
     ModelAndView profileView = new ModelAndView("searcher/view","user",new Searcher());
     profileView.addObject("searcher", searcher);
+    profileView.addObject("usr", user);
     return profileView;
   }
 
@@ -92,9 +93,10 @@ public class ProfileController {
     Searcher searcher = searcherRepo.findById(user.getId());
     searcher.setFirstName(firstName);
     searcher.setLastName(lastName);
-    searcher.setEmailAddress(emailAddress);
+    user.setEmailAddress(emailAddress);
     searcher.setBuddyPref(buddy);
     searcherRepo.save(searcher);
+    userRepo.save(user);
     
     return "redirect:/searcher/profile";
   }
@@ -111,6 +113,7 @@ public class ProfileController {
     Landlord landlord = landlordRepo.findById(user.getId());
     ModelAndView profileView = new ModelAndView("landlord/view","user",new Landlord());
     profileView.addObject("landlord", landlord);
+    profileView.addObject("usr", user);
     return profileView;
   }
 
@@ -132,9 +135,9 @@ public class ProfileController {
     Landlord landlord = landlordRepo.findById(user.getId());
     landlord.setFirstName(firstName);
     landlord.setLastName(lastName);
-    landlord.setEmailAddress(emailAddress);
+    user.setEmailAddress(emailAddress);
     landlordRepo.save(landlord);
-    
+    userRepo.save(user);
     return "redirect:/landlord/profile";
   }
 }

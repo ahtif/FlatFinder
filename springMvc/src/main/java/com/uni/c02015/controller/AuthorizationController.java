@@ -74,7 +74,11 @@ public class AuthorizationController {
 
         return "redirect:/landlord/registration";
       }
-
+      
+      if (!user.getConfirmed()) {
+        return "redirect:/confirm/email";
+      }
+      
       return "landlord/index";
     }
 
@@ -85,7 +89,11 @@ public class AuthorizationController {
 
       return "redirect:/searcher/registration";
     }
-
+    
+    if (!user.getConfirmed()) {
+      return "redirect:/confirm/email";
+    }
+    
     return "searcher/index";
   }
 

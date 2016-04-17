@@ -68,8 +68,6 @@ public class RegistrationController {
   public void sendConfirmationEmail(User user,
       String address) {
     
-    
-    
     String confirmId = UUID.randomUUID().toString();
     
     user.setConfirmId(confirmId);
@@ -123,10 +121,29 @@ public class RegistrationController {
     }
   }
   
+  /**
+   * Confirm a user's account.
+   * @param confirmId The unique confirmation ID.
+   */
   @RequestMapping("/confirm/{confirmId}")
   public String confirmAccount(@PathVariable String confirmId) {
-    return confirmId;
+    System.out.println("confirmed");
+    User user = userRepo.findByConfirmId(confirmId);
+    user.setConfirmed(true);
+    userRepo.save(user);
+    return "redirect:/confirm/confirmed";
   }
+  
+  @RequestMapping("/confirm/confirmed")
+  public String emailConfirmed() {
+    return "/email-confirmed";
+  }
+  
+  @RequestMapping("/confirm/email")
+  public String confirmEmail() {
+    return "/confirm-email";
+  }
+
   
 
   /**
@@ -138,7 +155,6 @@ public class RegistrationController {
   public String addSearcher(
       @RequestParam(value = "firstName", required = true) String firstName,
       @RequestParam(value = "lastName", required = true) String lastName,
-      @RequestParam(value = "emailAddress", required = true) String emailAddress,
       @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
       Model model,
       HttpServletRequest request) {
@@ -162,28 +178,6 @@ public class RegistrationController {
       query += "lNameLength=true";
     }
 
-    // Email regex matcher
-    Matcher matcher = emailPattern.matcher(emailAddress);
-    // Email address is not set
-    if (emailAddress.length() == 0) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailLength=true";
-
-    // Email is not of the correct pattern
-    } else if (!matcher.find()) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailFormat=true";
-    }
 
     if (query.length() > 0) {
 
@@ -195,13 +189,8 @@ public class RegistrationController {
     
     searcher.setFirstName(firstName);
     searcher.setLastName(lastName);
-    searcher.setEmailAddress(emailAddress);
     searcher.setBuddyPref(buddyPref);
     searcherRepo.save(searcher);
-    
-    //Send the confirmation email
-    User user = userRepo.findById((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
-    sendConfirmationEmail(user, emailAddress);
     
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
@@ -217,7 +206,7 @@ public class RegistrationController {
   @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
   public String addLandlord(@RequestParam(value = "firstName", required = true) String firstName,
       @RequestParam(value = "lastName", required = true) String lastName,
-      @RequestParam(value = "emailAddress", required = true) String emailAddress, Model model,
+      Model model,
       HttpServletRequest request) {
 
     String query = "";
@@ -239,29 +228,6 @@ public class RegistrationController {
       query += "lNameLength=true";
     }
 
-    // Email regex matcher
-    Matcher matcher = emailPattern.matcher(emailAddress);
-    // Email address is not set
-    if (emailAddress.length() == 0) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailLength=true";
-
-      // Email is not of the correct pattern
-    } else if (!matcher.find()) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailFormat=true";
-    }
-
     if (query.length() > 0) {
 
       return "redirect:/landlord/registration?" + query;
@@ -272,12 +238,9 @@ public class RegistrationController {
 
     landlord.setFirstName(firstName);
     landlord.setLastName(lastName);
-    landlord.setEmailAddress(emailAddress);
     landlordRepo.save(landlord);
     
-    //Send the confirmation email
-    User user = userRepo.findById((Integer) request.getSession().getAttribute(SIGN_UP_ID_SESSION));
-    sendConfirmationEmail(user, emailAddress);
+    
     
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
@@ -367,9 +330,12 @@ public class RegistrationController {
       @RequestParam(value = "password", required = true) String password,
       @RequestParam(value = "cPassword", required = true) String confPassword,
       @RequestParam(value = "role", required = true) String role,
+      @RequestParam(value = "emailAddress", required = false) String emailAddress,
       Model model,
       HttpServletRequest request) {
 
+    System.out.println("email is : " + emailAddress);
+    
     String query = "";
 
     // Username length is invalid
@@ -381,6 +347,29 @@ public class RegistrationController {
     } else if (username.length() >= 3 && userRepo.findByLogin(username) != null) {
 
       query += "usernameExists=true";
+    }
+    
+    // Email regex matcher
+    Matcher matcher = emailPattern.matcher(emailAddress);
+    // Email address is not set
+    if (emailAddress.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailLength=true";
+
+      // Email is not of the correct pattern
+    } else if (!matcher.find()) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailFormat=true";
     }
 
     // Password length is invalid
@@ -419,15 +408,9 @@ public class RegistrationController {
     // Set the sign up session
     request.getSession().setAttribute(SIGN_UP_ID_SESSION, user.getId());
 
-    // Searcher
-    if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)) {
-
-      return "redirect:/searcher/registration";
-
-    // Landlord
-    } else {
-
-      return "redirect:/landlord/registration";
-    }
+    //Send the confirmation email
+    sendConfirmationEmail(user, emailAddress);
+    
+    return "redirect:confirm/email";
   }
 }

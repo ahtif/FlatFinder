@@ -77,7 +77,9 @@ public class SpringMvc implements ApplicationRunner {
     // Set up admin user
     User user = new User();
     user.setLogin("admin");
+    user.setConfirmed(true);
     user.setPassword(pe.encode("password"));
+    user.setEmailAddress("admin@flatfinder.com");
     role = new Role();
     role.setId(ROLE_ADMINISTRATOR_ID);
     role.setRole(ROLE_ADMINISTRATOR);
@@ -96,7 +98,9 @@ public class SpringMvc implements ApplicationRunner {
     // Set up users
     User user1 = new User();
     user1.setLogin("alice");
+    user1.setConfirmed(true);
     user1.setPassword(pe.encode("searcher"));
+    user1.setEmailAddress("alice@flatfinder.com");
     role = new Role();
     role.setId(ROLE_SEARCHER_ID);
     role.setRole(ROLE_SEARCHER);

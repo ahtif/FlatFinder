@@ -22,6 +22,7 @@ public class User {
 
   private String login;
   private String password;
+  private String emailAddress;
   private String confirmId;
   private boolean confirmed = false;
   
@@ -117,5 +118,13 @@ public class User {
 
   public void setConfirmed(boolean confirmed) {
     this.confirmed = confirmed;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
   }
 }

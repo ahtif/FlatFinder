@@ -77,7 +77,7 @@
         <tr>
             <td>Email Address:</td>
             <td><div class="form-group">
-                <form:input role="form" type="text" path="emailAddress" class="form-control" value="${landlord.emailAddress}"></form:input>
+                <input role="form" type="text" name="emailAddress" class="form-control" value="${usr.emailAddress}"></input>
             </div></td>
         </tr>
 

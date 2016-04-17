@@ -64,6 +64,16 @@
         <strong>Sorry!</strong> Your passwords did not match.
     </div>
 </c:if>
+<c:if test="${emailLength != null}">
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> Please provide an email.
+    </div>
+</c:if>
+<c:if test="${emailFormat != null}">
+    <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> The email is not of the correct format.
+    </div>
+</c:if>
 <form:form method="POST" action="/createAccount" modelAttribute="User">
 	<table>
 		<tr>
@@ -90,6 +100,12 @@
                  placeholder="Confirm Password" required="required" />
             </div></td>
           
+        </tr>    
+        <tr>
+            <td>Email:</td>
+            <td><div class="form-group">
+                <form:input role="form" type="email" path="emailAddress" class="form-control" placeholder="Email Address" required="required"></form:input>
+            </div></td>
         </tr>
 		<tr>
 			<td>Choose user type:</td>
@@ -99,6 +115,7 @@
 				<form:option class="form-control" value="Landlord" label="Landlord"></form:option>
 			</form:select></div></td>
 		</tr>
+		
 		<tr><td><br /></td></tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="Create account" class="btn btn-success"/></td>

@@ -25,4 +25,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
   List<User> findByRole(Role role);
 
   User findById(Integer integer);
+  
+  User findByConfirmId(String confirmId);
 }
