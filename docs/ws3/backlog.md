@@ -27,7 +27,7 @@
 
 ## Scenarios
 
-### Registration
+### Registration - Completed
 Feature: Registration  
 As a user, I want to be able to register as either a Landlord or a Searcher so that I can rent my property or find a property.  
 
@@ -48,7 +48,7 @@ Given I am a user
 When I register as a Landlord  
 Then I should be registered as a Landlord  
 
-###Login
+###Login - Completed
 Feature: Login  
 As a registered user, I should be able to login to the website as a Landlord or Searcher so that I can have access to my account and use the services.  
 
@@ -67,7 +67,7 @@ Given I have registered as a Administrator
 When I login with my username and password  
 Then I should be able to access the services for Administrators  
 
-###Account Recovery
+###Account Recovery - Not Completed
 Feature: Account recovery  
 As a registered user, I should be able to reset my password for my account as either a Landlord or Searcher so that I can regain access to my account.  
 
@@ -85,7 +85,7 @@ When I access the link
 And enter a password and confirmed password which match  
 Then my password will be changed to the new password  
 
-### Searching for properties
+### Searching for properties - Not Completed
 Feature: Searching for properties  
 As a Searcher, I should be able to use the system to search for properties near me and based on my preferences So that I am able to find the properties that match my preference.  
 
@@ -101,7 +101,7 @@ When I search for properties near me
 And I select en suite rooms, non-smoking and undergraduates tenants and apply the filter  
 Then I should see a map of properties near me that match my filters  
 
-### Buddying Up
+### Buddying Up - Completed
 Feature: Buddying up  
 As a Searcher, I should be able to use the system to search for buddies and should be matched based on my preferences So that I am able to find possible flat mates.  
 
@@ -111,7 +111,7 @@ And I am looking at a property
 When I select the buddy up option  
 Then I should be matched to a buddy  
 
-### Registering interest
+### Registering interest - Not Completed
 Feature: Registering interest
 As a Searcher, I should be able to register interest into a property So that I am able to notify the landlord
 
@@ -121,7 +121,7 @@ And I am looking at a property
 When I click the express interest button  
 Then the landlord should be alerted that I am interested  
 
-### Maps  
+### Maps - Not Completed
 Feature: Find property using GPS  
 As a Searcher, I should be able to find properties using the GPS So that I am able to see the properties  
 
@@ -130,7 +130,7 @@ Given I am logged in as a Searcher
 When I want to find a property using the GPS system  
 Then the GPS should take me to the property  
 
-### Managing Properties
+### Managing Properties - Completed
 Feature: Managing Properties  
 As a Landlord I should be able to add, remove or update my properties so that I can manage my properties.  
 
@@ -153,7 +153,7 @@ Given I am logged in as a Landlord
 When I update my property details  
 Then the property should be updated in the system  
 
-### Reporting
+### Reporting - Not Completed
 Feature: Reporting  
 As a user of the system, I should be able to report properties as a Searcher  
 Or I should be able to report Searchers as a Landlord so that I can protect myself and other users.  
@@ -170,7 +170,7 @@ And I am looking at a Searcher profile
 When I report the Searcher  
 Then an Administrator should be notified  
 
-### Administrator
+### Administrator - Not Completed
 Feature: Administrator abilities  
 As an administrator, I can receive report notifications and suspend or delete accounts so that I can protect users of the website  
 
@@ -196,7 +196,7 @@ Given I am logged in as an Administrator
 When I set an expiry date for user accounts    
 Then the account should expire after the given date
 
-### Messaging and user notifications
+### Messaging and user notifications - Completed
 Feature: Messaging and user notifications  
 As a user or administrator, I should be able to message other users so that I can notify and communicate to other users.  
 
@@ -220,7 +220,7 @@ Given I am logged in as a user
 When I receive a notification  
 Then I should be able to view the received notification  
 
-### Viewing user and administrator statistics
+### Viewing user and administrator statistics - Not Completed
 
 Feature: Viewing user and administrator statistics  
 As a user I can view my account statistics  
