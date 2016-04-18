@@ -45,6 +45,7 @@ public class MessageController {
    */
   @RequestMapping("messaging/inbox")
   public ModelAndView goToInbox() {
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);

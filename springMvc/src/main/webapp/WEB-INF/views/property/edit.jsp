@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Flat Finder - Add Property</title>
+    <title>Flat Finder - Edit Property</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Flat Finder - Add Property</a>
+            <a class="navbar-brand" href="#">Flat Finder - Edit Property</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -53,8 +53,25 @@
 
     <div class="jumbotron">
         <br />
-        <h1>Add Property</h1>
+        <h1>Edit Property</h1>
+        <p>Edit the property using the form below.</p>
     </div>
+
+    <c:choose>
+
+    <c:when test="${notFound != null}">
+
+        <p>Property could not be found.</p>
+
+    </c:when>
+
+    <c:when test="${invalid != null}">
+
+        <p>You cannot edit this resource.</p>
+
+    </c:when>
+
+    <c:otherwise>
 
     <c:if test="${invalidNumber != null}">
         <div class="alert alert-danger" role="alert">
@@ -86,12 +103,12 @@
         </div>
     </c:if>
 
-    <form method="POST" enctype="multipart/form-data" type="" action="/property/addPost">
+    <form method="POST" enctype="multipart/form-data" type="" action="/property/addPost?edit=${property.getId()}">
         <table>
             <tr>
                 <td>Property Number:</td>
                 <td><div class="form-group">
-                    <input role="form" class="form-control" type="text" name="pNumber"
+                    <input role="form" class="form-control" type="text" name="pNumber" value="${property.getNumber()}"
                            pattern="[0-9a-zA-Z]+" placeholder="Property Number" required="required" />
                 </div></td>
             </tr>
@@ -99,7 +116,7 @@
             <tr>
                 <td>Property Street:</td>
                 <td><div class="form-group">
-                    <input role="form" class="form-control" type="text" name="pStreet"
+                    <input role="form" class="form-control" type="text" name="pStreet" value="${property.getStreet()}"
                            pattern="[a-zA-Z ]+" placeholder="Street Name" required="required" />
                 </div></td>
             </tr>
@@ -107,15 +124,15 @@
             <tr>
                 <td>Property City:</td>
                 <td><div class="form-group"><div class="form-group">
-                    <input role="form" class="form-control" type="text" name="pCity"
-                           pattern="[A-Za-z ]+" placeholder="City" required="required" />
+                    <input role="form" class="form-control" type="text" name="pCity" value="${property.getCity()}"
+                           pattern="[A-Za-z ]+" placeholder="City"  />
                 </div></td>
             </tr>
 
             <tr>
                 <td>Property PostCode:</td>
                 <td><div class="form-group">
-                    <input role="form" class="form-control" type="text" name="pPostcode"
+                    <input role="form" class="form-control" type="text" name="pPostcode" value="${property.getPostcode()}"
                            pattern="[a-zA-Z0-9 ]+" placeholder="Postcode ie. LE18 6UG" required="required" />
                 </div></td>
             </tr>
@@ -125,7 +142,14 @@
                 <td><div class="form-group">
                     <select name="pType" class="form-control" required="required">
                         <c:forEach items="${types}" var="type">
-                            <option value="${type.id}">${type.type}</option>
+                            <c:choose>
+                                <c:when test="${type.type == property.getType().getType()}">
+                                    <option value="${type.id}" selected="selected">${type.type}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${type.id}">${type.type}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                 </div></td>
@@ -135,15 +159,46 @@
                 <td>Number of Rooms:</td>
                 <td><div class="form-group">
                     <select name="pRooms" class="form-control" required="required">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <c:choose>
+                            <c:when test="${1 == property.getRooms()}">
+                                <option value="1" selected="selected">1</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="1">1</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${2 == property.getRooms()}">
+                                <option value="2" selected="selected">2</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="2">2</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${3 == property.getRooms()}">
+                                <option value="3" selected="selected">3</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="3">3</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${4 == property.getRooms()}">
+                                <option value="4" selected="selected">4</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="4">4</option>
+                            </c:otherwise>
+                        </c:choose>
                     </select>
                 </div></td>
             </tr>
 
             <tr>
+                <div class="alert alert-danger" role="alert">
+                    Please upload all required images of property.
+                </div>
                 <td>Property Images:</td>
                 <td>
                     <div class="form-group">
@@ -162,6 +217,11 @@
 
     </form>
 </div>
+
+</c:otherwise>
+
+</c:choose>
+
 <hr />
 
 <footer class="container">

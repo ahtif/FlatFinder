@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>403 - Forbidden</title>
+    <title>Flat Finder - Search Results</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -18,6 +17,7 @@
 </head>
 <body>
 
+<!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -27,38 +27,34 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">Flat Finder</a>
+            <a class="navbar-brand" href="#">Flat Finder - Search Results</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <c:url value="/login" var="loginUrl"/>
-            <form class="navbar-form navbar-right" action="${loginUrl}" method="post" modelAttribute="user">
-                <div class="form-group">
-                    <input id="username" name="username" type="text" placeholder="Username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input id="password" name="password" type="password" placeholder="Password" class="form-control" required>
-                </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/success-login">Home</a></li>
+            </ul>
+            <c:url value="/logout" var="logoutUrl"/>
+            <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button type="submit" class="btn btn-success">Log in</button>
-                <a href="/register" class="btn btn-success">Register</a>
+                <button class="btn btn-success" type="submit">Log Out</button>
             </form>
-        </div><!--/.navbar-collapse -->
+        </div><!--/.nav-collapse -->
     </div>
 </nav>
-
 <div class="container">
+
     <div class="jumbotron">
         <br />
-        <h1>403&hellip;</h1>
-        <p>You do not have permission to access this resource.</p>
+        <h1>Property Search Results</h1>
     </div>
-</div>
 
+</div>
 <hr />
 
 <footer class="container">
     <p>&copy; CO2015 - Group 6</p>
 </footer>
+
 
 </body>
 </html>
