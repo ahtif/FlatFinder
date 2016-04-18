@@ -87,7 +87,7 @@ Then my password will be changed to the new password
 
 ### Searching for properties
 Feature: Searching for properties  
-As a Searcher, I should be able to use the system to search for properties near me and based on my preferences So that I am to find the properties that match my preference.  
+As a Searcher, I should be able to use the system to search for properties near me and based on my preferences So that I am able to find the properties that match my preference.  
 
 Scenario: Searching for properties by postcode and price  
 Given I am logged in as a Searcher  
@@ -103,7 +103,7 @@ Then I should see a map of properties near me that match my filters
 
 ### Buddying Up
 Feature: Buddying up  
-As a Searcher, I should be able to use the system to search for buddies and should be matched based on my preferences So that I am to find possible flat mates.  
+As a Searcher, I should be able to use the system to search for buddies and should be matched based on my preferences So that I am able to find possible flat mates.  
 
 Scenario: Buddying up  
 Given I am logged in as a Searcher  
@@ -113,7 +113,7 @@ Then I should be matched to a buddy
 
 ### Registering interest
 Feature: Registering interest
-As a Searcher, I should be able to register interest into a property So that I am to notify the landlord
+As a Searcher, I should be able to register interest into a property So that I am able to notify the landlord
 
 Scenario: Registering interest  
 Given I am logged in as a Searcher  
@@ -122,8 +122,8 @@ When I click the express interest button
 Then the landlord should be alerted that I am interested  
 
 ### Maps  
-Feature: Find property using GPS
-As a Searcher, I should be able to find properties using the GPS So that I am to see the properties  
+Feature: Find property using GPS  
+As a Searcher, I should be able to find properties using the GPS So that I am able to see the properties  
 
 Scenario: GPS tracking  
 Given I am logged in as a Searcher  
