@@ -1,6 +1,6 @@
 # Software Engineering Project (CO2015) - Meeting Minutes
 
-**Date and time of meeting**: 25/03/16
+**Date and time of meeting**: 30/03/16
 
 **Participants**: Harry Zachariou, Jordan Basran, Jack Owen, Ahtif Anwar, Majid Hussain, Carl Griffiths, and Ibrahim Issa
 
