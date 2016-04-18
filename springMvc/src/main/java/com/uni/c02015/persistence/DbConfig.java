@@ -29,9 +29,9 @@ public class DbConfig {
 
     DriverManagerDataSource ds = new DriverManagerDataSource();
     ds.setDriverClassName("com.mysql.jdbc.Driver");
-    ds.setUrl("jdbc:mysql://" + HOST + "/" + DATABASE);
-    ds.setUsername(USER);
-    ds.setPassword(PASSWORD);
+    ds.setUrl("jdbc:mysql://mysql.mcscw3.le.ac.uk:3306/hcz1");
+    ds.setUsername("hcz1");
+    ds.setPassword("emetorne");
     return ds;
   }
 }
