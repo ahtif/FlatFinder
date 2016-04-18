@@ -1,7 +1,7 @@
 # Table of Contents
 ### Sprint Backlog
-* [Sprint Backlog Markdown Format](1.md)
-* [Features](1.md)
+* [Sprint Backlog Markdown Format](backlog.md.md)
+* [Features](projectBacklog.feature.md)
 
 ### Update/Complete Design Documents
 - [Diagram1](1.md	)
@@ -12,7 +12,8 @@
 - [Doc1](1.md)
 
 ### Minutes
-- [Minutes](1.doc)
+- [Internal Meeting 1](minutes-25.03.16.md)
+- [Internal Meeting 2](minutes-30.03.16.md)
 
 ### Sprint 1 Retrospective
 - [Doc1](1.md)
