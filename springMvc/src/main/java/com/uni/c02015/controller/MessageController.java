@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,6 +86,7 @@ public class MessageController {
    * @param to The receiver of the message.
    * @param subject The subject of the message.
    * @param body The body of the message.
+   * @param sender The sender of the message
    * @return Return to the current user's inbox.
    */
   @RequestMapping("messaging/sendMessage")
@@ -119,6 +121,50 @@ public class MessageController {
     message.setIsRead(false);
     messageRepo.save(message);
     
+    return "redirect:/messaging/inbox";
+  }
+  
+  /**
+   * Allows an admin to broadcast a message.
+   * @param subject The subject of the message.
+   * @param body The body of the message.
+   * @param sender The sender of the message
+   * @return Return to the current user's inbox.
+   */
+  @RequestMapping("/admin/broadcast/send")
+  public String broadcast(@RequestParam(value = "subject", required = true) String subject,
+      @RequestParam(value = "message", required = true) String body,
+      @RequestParam(value = "parent", required = false) String parent,
+      @RequestParam(value = "sender", required = false) String sender) {
+
+    User currentUser;
+    Message message = new Message();
+
+    if (sender != null && !sender.isEmpty()) {
+      currentUser = userRepo.findByLogin(sender);
+    } else {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      String username = auth.getName();
+      currentUser = userRepo.findByLogin(username);
+    }
+
+    if (parent != null && !parent.isEmpty()) {
+      message.setParent(messageRepo.findById(Integer.parseInt(parent)));
+    }
+
+    ArrayList<User> allUsers = (ArrayList<User>) userRepo.findAll();
+    for (User user : allUsers) {
+      message = new Message();
+      message.setSenderName(currentUser.getLogin());
+      message.setSender(currentUser);
+      message.setReceiver(user);
+      message.setSubject(subject);
+      message.setMessage(body);
+      message.setMessageDate(new Date());
+      message.setIsRead(false);
+      messageRepo.save(message);
+    }
+
     return "redirect:/messaging/inbox";
   }
   

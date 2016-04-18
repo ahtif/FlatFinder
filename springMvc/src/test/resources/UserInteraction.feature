@@ -5,32 +5,33 @@ Feature: Interact with other users
  So that they can exchange messages and send reports
 
 @Domain
-@NotImplemented
 Scenario: Sending a message
  Given I am a Searcher "Bob"
- When "Bob" sends a message "Hello" to a landlord "Ted" with Subject "Important"
+ And a landlord "Ted"
+ When "Bob" sends a message "Hello" to "Ted" with Subject "Important"
  Then "Ted" should receive the message "Hello" from "Bob"
 
 @Domain
 @NotImplemented
 Scenario: Replying to a message
  Given I am a Searcher "Bob"
- When I receive a message "viewing arrangements" from a Searcher "Ted" with Subject "Arrangements"
- Then I should be able to reply with "Time and Date?"
+ And a searcher "Ted"
+ And a message "viewing arrangements" from "Ted" with Subject "Arrangements" to "Bob"
+ When I reply with "Time and Date?"
+ Then the message "Time and Date?" should be stored in the database
 
 @Domain
 @NotImplemented
 Scenario: Sending a email with no recipient
  Given I am a Searcher "Bob"
  When "Bob" sends a message "Hello" to "" with Subject "Bye"
- Then message should not be sent
- And error message saying "Add recipient" should be displayed
+ Then the message should not be sent
 
 @Domain
 @NotImplemented
 Scenario: Expressing interest in a property
  Given I am a Searcher "Bob"
- And the user "Ted" is a landlord
+ And a landlord "Ted"
  And the user "Ted" is the owner of the property "Ted's House 7"
  When I like a property "Ted's House 7"
  Then user "Ted" receives a notification that user "Bob" liked his property
@@ -39,13 +40,15 @@ Scenario: Expressing interest in a property
 @NotImplemented
 Scenario: Broadcasting a message
  Given I am an administrator "James"
- When I broadcast a message "Maintenance 4-7AM (GMT)"
+ And a searcher "Bob"
+ And a landlord "Ted"
+ When I broadcast a message "Maintenance 4-7AM (GMT)" with subject "Maintenance"
  Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
 
 @Domain
 @NotImplemented
 Scenario: Searcher providing feedback for landlord
- Given I am a registered Searcher "Bob"
+ Given I am a Searcher "Bob"
  When I have dealt with a landlord "Ted"
  Then I should be able to leave feedback "Excellent property"
  And rate him "4/5" stars
@@ -53,7 +56,7 @@ Scenario: Searcher providing feedback for landlord
 @Domain
 @NotImplemented
 Scenario: Expressing interest
- Given I am a registered Searcher "Bob"
+ Given I am a Searcher "Bob"
  And I am logged in
  When I view a property
  Then I should be able to express interest
@@ -75,7 +78,7 @@ Examples:
 @Domain
 @NotImplemented
 Scenario: Reporting a landlord as a searcher
- Given a Searcher "Bob"
+ Given I am a Searcher "Bob"
  And a landlord "Ted"
  And "Ted" has a property "21 Fleet Street" with price "1" PCM
  When "Bob" reports "Ted" for inaccurate details
