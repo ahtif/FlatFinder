@@ -49,6 +49,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <button type="submit" class="btn btn-success">Log in</button>
             <a href="/register" class="btn btn-success">Register</a>
+            <a href="/forgot" class="btn btn-success">Forgot Password?</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>

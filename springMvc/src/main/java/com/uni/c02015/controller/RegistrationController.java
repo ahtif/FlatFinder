@@ -3,11 +3,15 @@ package com.uni.c02015.controller;
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Searcher;
+import com.uni.c02015.domain.TokenType;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.VerificationToken;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.VerificationTokenRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
@@ -48,6 +54,8 @@ public class RegistrationController {
   private SearcherRepository searcherRepo;
   @Autowired
   private LandlordRepository landlordRepo;
+  @Autowired
+  private VerificationTokenRepository tokenRepo;
 
   // Email regex and pattern
   private final String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -68,16 +76,16 @@ public class RegistrationController {
   public void sendConfirmationEmail(User user,
       String address) {
     
-    String confirmId = UUID.randomUUID().toString();
+    String tokenId = UUID.randomUUID().toString();
     
-    user.setConfirmId(confirmId);
-    userRepo.save(user);
+    VerificationToken token = new VerificationToken(tokenId, user, TokenType.ACTIVATION);
+    tokenRepo.save(token);
     
     String subject = "Please confirm your account at FlatFinder";
     
     String messageBody = "In order to activate your account at FlatFinder,"
         + " please click the following link: <br />"
-        + "<a href='https://localhost:8070/confirm/" + confirmId + "'>Activate your account</a>";
+        + "<a href='https://localhost:8070/confirm/" + tokenId + "'>Activate your account</a>";
     
     // Recipient's email ID needs to be mentioned.
     String to = address;
@@ -127,16 +135,40 @@ public class RegistrationController {
    */
   @RequestMapping("/confirm/{confirmId}")
   public String confirmAccount(@PathVariable String confirmId) {
-    System.out.println("confirmed");
-    User user = userRepo.findByConfirmId(confirmId);
+    Calendar cal = Calendar.getInstance();
+    VerificationToken token = tokenRepo.findByToken(confirmId);
+    if (token == null || token.getType() != TokenType.ACTIVATION) {
+      return "redirect:/confirm/confirmed?invalid=true";
+    }
+    if ((token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+      return "redirect:/confirm/confirmed?expired=true";
+    }
+    if (token.isUsed()) {
+      return "redirect:/confirm/confirmed?used=true";
+    }
+    User user = token.getUser();
+    token.setUsed(true);
     user.setConfirmed(true);
     userRepo.save(user);
+    tokenRepo.save(token);
     return "redirect:/confirm/confirmed";
   }
   
+  /**
+   * Redirect the user to the email confirmed page, and add any GET parameters
+   * to the page.
+   * @param request The HTTP request.
+   */
   @RequestMapping("/confirm/confirmed")
-  public String emailConfirmed() {
-    return "/email-confirmed";
+  public ModelAndView emailConfirmed(HttpServletRequest request) {
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("email-confirmed");
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
   
   @RequestMapping("/confirm/email")
@@ -400,7 +432,7 @@ public class RegistrationController {
 
     User user = new User();
     user.setLogin(username);
-
+    user.setEmailAddress(emailAddress);
     user.setPassword(new BCryptPasswordEncoder().encode(password));
     user.setRole(roleRepo.findByRole(role));
     userRepo.save(user);

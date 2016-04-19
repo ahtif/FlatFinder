@@ -23,7 +23,6 @@ public class User {
   private String login;
   private String password;
   private String emailAddress;
-  private String confirmId;
   private boolean confirmed = false;
   
 
@@ -102,14 +101,6 @@ public class User {
   public void setRole(Role role) {
 
     this.role = role;
-  }
-
-  public String getConfirmId() {
-    return confirmId;
-  }
-
-  public void setConfirmId(String confirmId) {
-    this.confirmId = confirmId;
   }
 
   public boolean getConfirmed() {

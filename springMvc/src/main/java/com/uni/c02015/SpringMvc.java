@@ -106,6 +106,19 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     user1.setRole(role);
     userRepo.save(user1);
+    
+    // Set up users
+    User user2 = new User();
+    user2.setLogin("ahtif");
+    user2.setConfirmed(true);
+    user2.setPassword(pe.encode("admin"));
+    user2.setEmailAddress("ahtif.a@hotmail.co.uk");
+    role = new Role();
+    role.setId(ROLE_ADMINISTRATOR_ID);
+    role.setRole(ROLE_ADMINISTRATOR);
+    user2.setRole(role);
+    userRepo.save(user2);
+
 
     Message message = new Message();
     message.setSenderName("admin");
