@@ -1,5 +1,6 @@
 package com.uni.c02015;
 
+import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Type;
@@ -7,6 +8,9 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -99,7 +103,6 @@ public class SpringMvc implements ApplicationRunner {
     type = new Type();
     type.setType("House");
     typeRepository.save(type);
-<<<<<<< HEAD
 
     // Set up users
     User user1 = new User();
@@ -149,7 +152,6 @@ public class SpringMvc implements ApplicationRunner {
     message1.setParent(message);
     message1.setChildren(null);
     messageRepo.save(message1);
-=======
->>>>>>> master
+
   }
 }
