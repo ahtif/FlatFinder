@@ -3,28 +3,45 @@ package com.uni.c02015.controller;
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Searcher;
+import com.uni.c02015.domain.TokenType;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.VerificationToken;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.VerificationTokenRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 @Controller
 public class RegistrationController {
+
 
   public static final String SIGN_UP_ID_SESSION;
   private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -43,6 +60,8 @@ public class RegistrationController {
   private SearcherRepository searcherRepo;
   @Autowired
   private LandlordRepository landlordRepo;
+  @Autowired
+  private VerificationTokenRepository tokenRepo;
 
   private Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
 
@@ -53,6 +72,67 @@ public class RegistrationController {
   }
 
   /**
+   * Send an email message to the user
+   * @param user The user to send the message to.
+   * @param address The email address of the user.
+   */
+  public void sendConfirmationEmail(User user,
+      String address) {
+    
+    String tokenId = UUID.randomUUID().toString();
+    
+    VerificationToken token = new VerificationToken(tokenId, user, TokenType.ACTIVATION);
+    tokenRepo.save(token);
+    
+    String subject = "Please confirm your account at FlatFinder";
+    
+    String messageBody = "In order to activate your account at FlatFinder,"
+        + " please click the following link: <br />"
+        + "<a href='https://localhost:8070/confirm/" + tokenId + "'>Activate your account</a>";
+    
+    // Recipient's email ID needs to be mentioned.
+    String to = address;
+
+    // Sender's email ID needs to be mentioned
+    String from = "confirmations@flatfinder.com";
+
+    // Assuming you are sending email from localhost
+    String host = "localhost";
+
+    // Get system properties
+    Properties properties = System.getProperties();
+
+    // Setup mail server
+    properties.setProperty("mail.smtp.host", host);
+
+    // Get the default Session object.
+    Session session = Session.getDefaultInstance(properties);
+
+    try {
+      // Create a default MimeMessage object.
+      MimeMessage message = new MimeMessage(session);
+
+      // Set From: header field of the header.
+      message.setFrom(new InternetAddress(from));
+
+      // Set To: header field of the header.
+      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+      // Set Subject: header field
+      message.setSubject(subject);
+
+      // Send the actual HTML message, as big as you like
+      message.setContent(messageBody, "text/html");
+
+      // Send message
+      Transport.send(message);
+      System.out.println("Sent message successfully....");
+    } catch (MessagingException mex) {
+      mex.printStackTrace();
+    }
+  }
+  
+  /**
    * Add a searcher.
    * @param request The request
    * @return String
@@ -61,7 +141,6 @@ public class RegistrationController {
   public String addSearcher(
       @RequestParam(value = "firstName", required = true) String firstName,
       @RequestParam(value = "lastName", required = true) String lastName,
-      @RequestParam(value = "emailAddress", required = true) String emailAddress,
       @RequestParam(value = "buddyPref", required = true) boolean buddyPref,
       Model model,
       HttpServletRequest request) {
@@ -85,28 +164,6 @@ public class RegistrationController {
       query += "lNameLength=true";
     }
 
-    // Email regex matcher
-    Matcher matcher = emailPattern.matcher(emailAddress);
-    // Email address is not set
-    if (emailAddress.length() == 0) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailLength=true";
-
-    // Email is not of the correct pattern
-    } else if (!matcher.find()) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailFormat=true";
-    }
 
     if (query.length() > 0) {
 
@@ -118,10 +175,9 @@ public class RegistrationController {
     
     searcher.setFirstName(firstName);
     searcher.setLastName(lastName);
-    searcher.setEmailAddress(emailAddress);
     searcher.setBuddyPref(buddyPref);
     searcherRepo.save(searcher);
-
+    
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
 
@@ -136,7 +192,7 @@ public class RegistrationController {
   @RequestMapping(value = "/addLandlord", method = RequestMethod.POST)
   public String addLandlord(@RequestParam(value = "firstName", required = true) String firstName,
       @RequestParam(value = "lastName", required = true) String lastName,
-      @RequestParam(value = "emailAddress", required = true) String emailAddress, Model model,
+      Model model,
       HttpServletRequest request) {
 
     String query = "";
@@ -158,29 +214,6 @@ public class RegistrationController {
       query += "lNameLength=true";
     }
 
-    // Email regex matcher
-    Matcher matcher = emailPattern.matcher(emailAddress);
-    // Email address is not set
-    if (emailAddress.length() == 0) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailLength=true";
-
-      // Email is not of the correct pattern
-    } else if (!matcher.find()) {
-
-      if (query.length() > 0) {
-
-        query += "&";
-      }
-
-      query += "emailFormat=true";
-    }
-
     if (query.length() > 0) {
 
       return "redirect:/landlord/registration?" + query;
@@ -191,11 +224,14 @@ public class RegistrationController {
 
     landlord.setFirstName(firstName);
     landlord.setLastName(lastName);
-    landlord.setEmailAddress(emailAddress);
     landlordRepo.save(landlord);
-
+    
+    
+    
     // Remove the sign up session
     request.getSession().removeAttribute(SIGN_UP_ID_SESSION);
+
+
 
     return "redirect:/";
   }
@@ -280,9 +316,10 @@ public class RegistrationController {
       @RequestParam(value = "password", required = true) String password,
       @RequestParam(value = "cPassword", required = true) String confPassword,
       @RequestParam(value = "role", required = true) String role,
+      @RequestParam(value = "emailAddress", required = false) String emailAddress,
       Model model,
       HttpServletRequest request) {
-
+    
     String query = "";
 
     // Username length is invalid
@@ -294,6 +331,29 @@ public class RegistrationController {
     } else if (username.length() >= 3 && userRepo.findByLogin(username) != null) {
 
       query += "usernameExists=true";
+    }
+    
+    // Email regex matcher
+    Matcher matcher = emailPattern.matcher(emailAddress);
+    // Email address is not set
+    if (emailAddress.length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailLength=true";
+
+      // Email is not of the correct pattern
+    } else if (!matcher.find()) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailFormat=true";
     }
 
     // Password length is invalid
@@ -324,7 +384,7 @@ public class RegistrationController {
 
     User user = new User();
     user.setLogin(username);
-
+    user.setEmailAddress(emailAddress);
     user.setPassword(new BCryptPasswordEncoder().encode(password));
     user.setRole(roleRepo.findByRole(role));
     userRepo.save(user);
@@ -332,15 +392,9 @@ public class RegistrationController {
     // Set the sign up session
     request.getSession().setAttribute(SIGN_UP_ID_SESSION, user.getId());
 
-    // Searcher
-    if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)) {
-
-      return "redirect:/searcher/registration";
-
-    // Landlord
-    } else {
-
-      return "redirect:/landlord/registration";
-    }
+    //Send the confirmation email
+    sendConfirmationEmail(user, emailAddress);
+    
+    return "redirect:confirm/email";
   }
 }

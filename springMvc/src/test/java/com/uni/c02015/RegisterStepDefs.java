@@ -139,7 +139,7 @@ public class RegisterStepDefs {
     result = this.mockMvc.perform(post("/addLandlord")
             .param("firstname", landlord.getFirstName())
             .param("lastname", landlord.getLastName())
-            .param("emailAddress", landlord.getEmailAddress())
+            .param("emailAddress", user.getEmailAddress())
     );
   }
 
@@ -160,7 +160,7 @@ public class RegisterStepDefs {
 
   @Then("^a Landlord with email \"([^\"]*)\"$")
   public void alandlord_with_email(String arg1) throws Throwable {
-    landlord.setEmailAddress(arg1);
+    user.setEmailAddress(arg1);
   }
 
   @Given("^a Searcher with firstname \"([^\"]*)\"$")
@@ -175,7 +175,7 @@ public class RegisterStepDefs {
 
   @Given("^a Searcher with email \"([^\"]*)\"$")
   public void asearcher_with_email(String arg1) throws Throwable {
-    searcher.setEmailAddress(arg1);
+    user.setEmailAddress(arg1);
   }
 
   @Given("^buddyUp is selected$")
@@ -191,7 +191,7 @@ public class RegisterStepDefs {
     result = this.mockMvc.perform(post("/addSearcher")
             .param("firstname", searcher.getFirstName())
             .param("lastname", searcher.getLastName())
-            .param("emailAddress", searcher.getEmailAddress())
+            .param("emailAddress", user.getEmailAddress())
             .param("buddyPref", Boolean.toString(searcher.getBuddyPref()))
     );
   }

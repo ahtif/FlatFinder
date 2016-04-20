@@ -56,17 +56,17 @@ Priority = (Likelihood + Impact) / 2
 | ----------- | -------------------- | --------------- | ----------------  | ----------  |
 | 1.1           | 20                       | 80                 | 50                    | Medium |
 | 1.2           | 20                       | 80                 | 50                    | Medium |
-| 2.1           | 60                       | 100               | 80                    | High |
-| 2.2           | 40                       | 80                 | 60                    | Medium |
+| 2.1           | 40                       | 80               | 60                    | Medium |
+| 2.2           | 20                       | 60                 | 40                    | Low |
 | 3.1           | 40                       | 100                | 70                    | High |
 | 3.2           | 40                       | 100                | 70                    | High |
 | 4.1           | 40                       | 60                 | 50                    | Medium |
 | 4.2           | 20                       | 80                 | 50                    |Medium|
 | 4.3           | 100                       | 80                 | 90                    |Very High|
-| 5.1           | 60                       | 80                | 70                    | High |
+| 5.1           | 40                       | 80                | 60                    | Medium |
 | 5.2           | 20                       | 40                | 30                    | Low |
 | 5.3           | 60                       | 80                | 70                    | High |
-| 6.1           | 60                       | 100               | 80                   | High |
+| 6.1           | 20                       | 100               | 60                   | Medium |
 
 The Rating is based on the calculated Priority score. Use the following system to determine the Rating:
 
@@ -84,17 +84,17 @@ The Rating is based on the calculated Priority score. Use the following system t
 | Rating | ID | Preventative Actions| Action Resource | Action Date| Contingent Actions| Action Resource| Action Date|
 |---------|-----|-------------------------|---------------------|----------------|-----------------------|-----------------------|----------|
 |Very High|4.3| n/a | n/a | n/a | Discuss as a group and reallocate the members tasks fairly among the rest of the group| Project Manager| 17/3/16|  
-|High| 6.1 | Set aside time to learn the framework that will be used for the product | Developer| n/a | Change the roles of the developers to suit their skills|Project Manager| n/a|
-|High|2.1| Set internal deadlines for specific aspects of the project | Project Manager| n/a| Ensure deadlines are stuck to| Developer| n/a|
 |High|3.1| Create acceptance criteria for each requirement and ensure the criteria pass | Tester| n/a| Go back and redevelop areas that do not pass| Developer| n/a|
 |High|3.2| Have the client sign off on the requirements | Business Analyst| n/a| Discuss issues with clients and rectify the issues| Business Analyst| n/a|
-|High|5.1| Organise regular meetings and ensure that everyone attends | Project Manager| n/a| Notify supervisor on developers absence | Project Manager| n/a|
 |High|5.3| Set up a group chat where we can discuss issues with the project while away over Easter | Project Manager| 18/3/16| n/a | Project Manager| n/a|
-|Medium|2.2| Prioritise the key tasks in order to achieve the best quality product within the given time frame | Developer| n/a| Produce the best quality product that you can within the time frame| Developer| n/a|
+|Medium|5.1| Organise regular meetings and ensure that everyone attends | Project Manager| n/a| Notify supervisor on developers absence | Project Manager| n/a|
+|Medium| 6.1 | Set aside time to learn the framework that will be used for the product | Developer| n/a | Change the roles of the developers to suit their skills|Project Manager| n/a|
+|Medium|2.1| Set internal deadlines for specific aspects of the project | Project Manager| n/a| Ensure deadlines are stuck to| Developer| n/a|
 |Medium|1.1| Organise a meeting with clients to redraft unclear requirements | Business Analyst| 2/2/16| Create product that meets the requirements in the developers mind | Developer| n/a|
 |Medium|1.2| Create a clear set of requirements that the client can sign off on | Developer| n/a| Get an outside focus group to give feedback on how well it meets their needs| Business Analyst| n/a|
 |Medium|4.1| Create a clear timeline for fixing issues and make sure the group sticks to it | Project Analyst| n/a| Fix issues in the agreed time frame| Developer| n/a|
 |Medium|4.2| n/a | n/a | n/a | Re Allocate the persons tasks among the other members of the group| Project Manager| n/a|  
+|Low|2.2| Prioritise the key tasks in order to achieve the best quality product within the given time frame | Developer| n/a| Produce the best quality product that you can within the time frame| Developer| n/a|
 |Low|5.2| Organise regular meetings with supervisor and ensure all the group attends | Project Manager| n/a| Carry out the project as best we can| Project Manager| n/a|
 
 # 4 Risk Process

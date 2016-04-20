@@ -11,7 +11,6 @@ public class Searcher {
 
   @Id
   private Integer id;
-  private String emailAddress;
   private String firstName;
   private String lastName;
   private boolean buddyPref;
@@ -31,14 +30,6 @@ public class Searcher {
   
   public Integer getId() {
     return id;
-  }
-
-  public String getEmailAddress() {
-    return emailAddress;
-  }
-
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
   }
   
   public String getFirstName() {
