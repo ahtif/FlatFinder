@@ -42,9 +42,15 @@ import javax.mail.internet.MimeMessage;
 @Controller
 public class RegistrationController {
 
-  
-  
-  public static final String SIGN_UP_ID_SESSION = "signUpID";
+
+  public static final String SIGN_UP_ID_SESSION;
+  private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+      + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+  static {
+
+    SIGN_UP_ID_SESSION = "signUpID";
+  }
 
   @Autowired
   private UserRepository userRepo;
@@ -56,11 +62,8 @@ public class RegistrationController {
   private LandlordRepository landlordRepo;
   @Autowired
   private VerificationTokenRepository tokenRepo;
-  
-  // Email regex and pattern
-  private final String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-      + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-  private Pattern emailPattern = Pattern.compile(emailRegex);
+
+  private Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
 
   @ModelAttribute("User")
   public User getUser() {

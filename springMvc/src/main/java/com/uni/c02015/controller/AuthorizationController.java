@@ -4,6 +4,7 @@ import com.uni.c02015.SpringMvc;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +26,8 @@ public class AuthorizationController {
   private SearcherRepository searcherRepository;
   @Autowired
   private LandlordRepository landlordRepository;
+  @Autowired
+  private TypeRepository typeRepository;
 
   /**
    * Login.
@@ -54,11 +57,11 @@ public class AuthorizationController {
    * @return String
    */
   @RequestMapping(value = "/success-login", method = RequestMethod.GET)
-  public String successLogin(HttpServletRequest request) {
+  public ModelAndView successLogin(HttpServletRequest request) {
 
     if (request.isUserInRole(SpringMvc.ROLE_ADMINISTRATOR)) {
 
-      return "administrator/index";
+      return new ModelAndView("administrator/index");
     }
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -72,14 +75,10 @@ public class AuthorizationController {
 
         request.getSession().setAttribute(RegistrationController.SIGN_UP_ID_SESSION, user.getId());
 
-        return "redirect:/landlord/registration";
+        return new ModelAndView("redirect:/landlord/registration");
       }
-      
-      if (!user.getConfirmed()) {
-        return "redirect:/confirm/email";
-      }
-      
-      return "landlord/index";
+
+      return new ModelAndView("landlord/index");
     }
 
     // Check the searcher has completed the sign up process
@@ -87,14 +86,13 @@ public class AuthorizationController {
 
       request.getSession().setAttribute(RegistrationController.SIGN_UP_ID_SESSION, user.getId());
 
-      return "redirect:/searcher/registration";
+      return new ModelAndView("redirect:/searcher/registration");
     }
-    
-    if (!user.getConfirmed()) {
-      return "redirect:/confirm/email";
-    }
-    
-    return "searcher/index";
+    // Add property types
+    ModelAndView modelAndView = new ModelAndView("searcher/index");
+    modelAndView.addObject("types", typeRepository.findAll());
+
+    return modelAndView;
   }
 
   /**
@@ -123,5 +121,4 @@ public class AuthorizationController {
 
     return "/error-message";
   }
-
 }

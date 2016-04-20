@@ -118,4 +118,8 @@ public class User {
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
   }
+  
+  public String toString() {
+    return login + id;
+  }
 }

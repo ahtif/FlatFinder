@@ -37,10 +37,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher",
+<<<<<<< HEAD
           "/confirm/**",
           "/invalid-login",
           "/forgot/**",
           "/recover/**").permitAll()
+=======
+          "/resources/**").permitAll()
+      .antMatchers("/admin/**").hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR)
+>>>>>>> master
       .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_LANDLORD)
       .antMatchers("/property/add", "/property/addPost", 
