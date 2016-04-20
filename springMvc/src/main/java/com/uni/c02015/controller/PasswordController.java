@@ -187,7 +187,7 @@ public class PasswordController {
 
     String messageBody = "In order to reset your password at FlatFinder," 
         + " please click the following link: <br />"
-        + "<a href='https://localhost:8070/forgot/" + tokenId + "'>Activate your account</a>";
+        + "<a href='https://localhost:8070/forgot/" + tokenId + "'>Reset your password</a>";
 
     // Recipient's email ID needs to be mentioned.
     String to = emailAddress;

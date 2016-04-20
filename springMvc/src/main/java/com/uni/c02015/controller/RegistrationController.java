@@ -56,7 +56,7 @@ public class RegistrationController {
   private LandlordRepository landlordRepo;
   @Autowired
   private VerificationTokenRepository tokenRepo;
-
+  
   // Email regex and pattern
   private final String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
       + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -67,10 +67,10 @@ public class RegistrationController {
 
     return new User();
   }
-  
+
   /**
    * Send an email message to the user
-   * @param user The user to send the message.
+   * @param user The user to send the message to.
    * @param address The email address of the user.
    */
   public void sendConfirmationEmail(User user,
@@ -129,55 +129,6 @@ public class RegistrationController {
     }
   }
   
-  /**
-   * Confirm a user's account.
-   * @param confirmId The unique confirmation ID.
-   */
-  @RequestMapping("/confirm/{confirmId}")
-  public String confirmAccount(@PathVariable String confirmId) {
-    Calendar cal = Calendar.getInstance();
-    VerificationToken token = tokenRepo.findByToken(confirmId);
-    if (token == null || token.getType() != TokenType.ACTIVATION) {
-      return "redirect:/confirm/confirmed?invalid=true";
-    }
-    if ((token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-      return "redirect:/confirm/confirmed?expired=true";
-    }
-    if (token.isUsed()) {
-      return "redirect:/confirm/confirmed?used=true";
-    }
-    User user = token.getUser();
-    token.setUsed(true);
-    user.setConfirmed(true);
-    userRepo.save(user);
-    tokenRepo.save(token);
-    return "redirect:/confirm/confirmed";
-  }
-  
-  /**
-   * Redirect the user to the email confirmed page, and add any GET parameters
-   * to the page.
-   * @param request The HTTP request.
-   */
-  @RequestMapping("/confirm/confirmed")
-  public ModelAndView emailConfirmed(HttpServletRequest request) {
-    // Get the request GET parameters
-    Map<String, String[]> parameters = request.getParameterMap();
-
-    // Create the model and view and add the GET parameters as object in the model
-    ModelAndView modelAndView = new ModelAndView("email-confirmed");
-    modelAndView.addAllObjects(parameters);
-
-    return modelAndView;
-  }
-  
-  @RequestMapping("/confirm/email")
-  public String confirmEmail() {
-    return "/confirm-email";
-  }
-
-  
-
   /**
    * Add a searcher.
    * @param request The request
@@ -365,8 +316,6 @@ public class RegistrationController {
       @RequestParam(value = "emailAddress", required = false) String emailAddress,
       Model model,
       HttpServletRequest request) {
-
-    System.out.println("email is : " + emailAddress);
     
     String query = "";
 

@@ -35,7 +35,8 @@
     <br /><br /><br />
     <div class="container">
         <h1>Please confirm your account</h1>
-        <p>In order to activate your account and complete the registration process, please click on the confirmation link sent to your email address</p>
+        <p>In order to activate your account and complete the registration process, please click on the confirmation link sent to your email address.</p>
+        <p>If you need a new activation email, please click <a href="/confirm/newEmail">here.</a></p>
     </div>
     
     <hr>
