@@ -39,8 +39,11 @@ public class CustomUserDetailsService implements UserDetailsService {
   public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
     com.uni.c02015.domain.User user = userRepo.findByLogin(login);
+    if (user == null) {
+      throw new UsernameNotFoundException("user not found");
+    }
     return new User(user.getLogin(), user.getPassword(),
-        true, true, true, true, getAuthorities(user.getRole().getId()));
+        user.getConfirmed(), true, true, true, getAuthorities(user.getRole().getId()));
   }
 
   /**

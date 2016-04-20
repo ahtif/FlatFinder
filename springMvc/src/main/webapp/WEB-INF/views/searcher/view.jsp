@@ -82,7 +82,7 @@
             <tr>
                 <td>Email Address:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="emailAddress" class="form-control" value="${searcher.emailAddress}"></form:input>
+                    <form:input role="form" type="text" path="emailAddress" class="form-control" value="${usr.emailAddress}"></form:input>
                 </div></td>
             </tr>
 
@@ -107,6 +107,7 @@
         </table>
 
     </form:form>
+>>>>>>> master
 
 </div>
 <hr />

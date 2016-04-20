@@ -1,6 +1,7 @@
 package com.uni.c02015;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private UserDetailsService userDetailsService;
+  
+  @Autowired
+  private CustomAuthenticationFailureHandler failureHandler;
 
   /**
    * Web security configuration.
@@ -23,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * @throws Exception Throws on error
    */
   protected void configure(HttpSecurity http) throws Exception {
-
+    
     http
       .authorizeRequests()
       .antMatchers("/user-logout",
@@ -33,7 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher",
-          "/resources/**").permitAll()
+          "/confirm/**",
+          "/invalid-login",
+          "/forgot/**",
+          "/recover/**").permitAll()
       .antMatchers("/admin/**").hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR)
       .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_LANDLORD)
@@ -49,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .loginPage("/")
       .loginProcessingUrl("/login")
       .defaultSuccessUrl("/success-login", true)
-      .failureUrl("/invalid-login")
+      .failureHandler(failureHandler)
       .permitAll()
       .and()
     .logout()

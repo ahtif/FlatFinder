@@ -22,6 +22,9 @@ public class User {
 
   private String login;
   private String password;
+  private String emailAddress;
+  private boolean confirmed = false;
+  
 
   public User() {}
 
@@ -98,6 +101,22 @@ public class User {
   public void setRole(Role role) {
 
     this.role = role;
+  }
+
+  public boolean getConfirmed() {
+    return confirmed;
+  }
+
+  public void setConfirmed(boolean confirmed) {
+    this.confirmed = confirmed;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
   }
   
   public String toString() {

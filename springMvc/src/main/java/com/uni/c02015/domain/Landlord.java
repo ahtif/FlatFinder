@@ -11,10 +11,11 @@ public class Landlord {
   //login details
   @Id
   private Integer id;
-  private String emailAddress;
+  
   //personal details
   private String firstName;
   private String lastName;
+
 
   public Landlord() {
 
@@ -27,14 +28,6 @@ public class Landlord {
 
   public Integer getId() {
     return id;
-  }
-
-  public String getEmailAddress() {
-    return emailAddress;
-  }
-
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
   }
 
   public String getFirstName() {

@@ -51,16 +51,6 @@
             <strong>Sorry!</strong> Please provide a last name.
         </div>
     </c:if>
-    <c:if test="${emailLength != null}">
-        <div class="alert alert-danger" role="alert">
-            <strong>Sorry!</strong> Please provide an email.
-        </div>
-    </c:if>
-    <c:if test="${emailFormat != null}">
-        <div class="alert alert-danger" role="alert">
-            <strong>Sorry!</strong> The email is not of the correct format.
-        </div>
-    </c:if>
 
     <form:form modelAttribute="Landlord" method="POST" action="/addLandlord">
         <table>
@@ -77,13 +67,6 @@
                     <form:input role="form" type="text" path="lastName" class="form-control" placeholder="Last Name" required="required"></form:input>
                 </div></td>
 
-            </tr>
-
-            <tr>
-                <td>Email:</td>
-                <td><div class="form-group">
-                    <form:input role="form" type="email" path="emailAddress" class="form-control" placeholder="Email Address" required="required"></form:input>
-                </div></td>
             </tr>
 
             <tr>
