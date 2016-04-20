@@ -27,6 +27,15 @@ Scenario: Searching buddies by city and age
  And age filter to "20 and over"
  Then I should be redirected to "findbuddy/location=derby&age=20+"
 
+ @Controller
+ @NotImplemeneted
+ Scenario: Searching for people who havent chosen to buddyup
+  Given a searcher "Majid" with password "foo"
+  And a searcher "John" who hasnt opted in to the buddyup system
+  And I am logged in as "Majid"
+  When I search for a buddy "John"
+  Then I should be redirected to "nosearchresult/buddy"
+
 @Controller
 @NotImplemented
  Scenario: Sending a buddy request
@@ -35,6 +44,7 @@ Scenario: Searching buddies by city and age
  And I am logged in as "Majid"
  When I access the "search buddy page" to find "John"
  Then I should navigate to "buddySearch-John"
+ And I should be able to send a buddy up request
 
 @Domain
 @NotImplemeneted
@@ -43,10 +53,10 @@ Scenario: Sending a buddy request (domain)
  And a searcher "John"
  And I am logged in as "Majid"
  When I send "John" a "buddy request"
- Then a buddy request will be added to the list of buddy request "John"
+ Then a buddy request "Majid" will be added to the list of buddy request for "John"
 
-@Controller
-@NotImplemented
+ @Controller
+ @NotImplemented
 Scenario: Accepting buddy request
  Given a searcher "Majid" has sent searcher "John" a buddy request
  And "John" should have received a buddy requests notification

@@ -8,6 +8,3 @@
 - [Cucumber Report](springMvc/build/cucumber-html-report)
 - [Checkstyle Report](springMvc/build/reports/checkstyle)
 - [Test Results](springMvc/build/reports/tests)
-
-# SKYPE Meeting 
-- 30/03/16 AT 2PM - REGARDING DEVELOPMENT/PROGRESS 
