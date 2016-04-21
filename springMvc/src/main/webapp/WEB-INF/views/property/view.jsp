@@ -13,7 +13,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+    
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        #mapid { height: 500px;
+                 }
+    </style>
+   
+    
 </head>
 <body>
 <!-- Fixed navbar -->
@@ -113,6 +123,27 @@
                 <p>Property Type: ${property.type.type}</p>
                 <p>Property Rooms: ${property.rooms}</p>
             </div>
+            
+            <div id="mapid" class="jumbotron"></div>
+            <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+            <script type="text/javascript">
+                var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
+            
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    id: 'mapbox.streets'
+                }).addTo(mymap);
+                
+                var lat = ${property.latitude};
+                var lng = ${property.longitude};
+                
+                L.marker([lat, lng]).addTo(mymap)
+                    .bindPopup("${property.number}<br />${property.street}<br />${property.city}<br />${property.postcode}<br />").openPopup();
+            </script>
+            
         </c:otherwise>
     </c:choose>
 </div>

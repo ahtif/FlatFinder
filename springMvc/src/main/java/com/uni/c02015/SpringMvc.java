@@ -1,9 +1,11 @@
 package com.uni.c02015;
 
+import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Type;
+import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
@@ -29,7 +31,8 @@ public class SpringMvc implements ApplicationRunner {
   private RoleRepository roleRepo;
   @Autowired
   private TypeRepository typeRepository;
-
+  @Autowired
+  private LandlordRepository landlordRepo;
   @Autowired
   private MessageRepository messageRepo;
 
@@ -141,7 +144,11 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_LANDLORD);
     user3.setRole(role);
     userRepo.save(user3);
-
+    
+    Landlord larry = new Landlord(user3.getId());
+    larry.setFirstName("larry");
+    larry.setLastName("landlord");
+    landlordRepo.save(larry);
 
     Message message = new Message();
     message.setSenderName("admin");
