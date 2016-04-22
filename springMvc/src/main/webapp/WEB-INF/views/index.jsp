@@ -54,7 +54,7 @@
         <p>Register as either a Landlord or a Searcher today to start viewing and posting properties.</p>
     </div>
     <p>
-        <c:if test="${error == true}">
+    <c:if test="${error == true}">
     <div class="alert alert-danger" role="alert">
         <strong>Sorry!</strong> ${SPRING_SECURITY_LAST_EXCEPTION}
     </div>

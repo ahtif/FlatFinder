@@ -13,7 +13,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="/resources/css/leaflet.css"/>
+    
+    <script src="/resources/js/leaflet.js"></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        #mapid { height: 500px;
+                 }
+    </style>
+   
+    
 </head>
 <body>
 <!-- Fixed navbar -->
@@ -113,6 +125,22 @@
                 <p>Property Type: ${property.type.type}</p>
                 <p>Property Rooms: ${property.rooms}</p>
             </div>
+            
+            <div id="mapid" class="jumbotron"></div>
+            <script type="text/javascript">
+                var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
+            
+                L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                }).addTo(mymap);
+                
+                var lat = ${property.latitude};
+                var lng = ${property.longitude};
+                
+                L.marker([lat, lng]).addTo(mymap)
+                    .bindPopup("${property.number}<br />${property.street}<br />${property.city}<br />${property.postcode}<br />").openPopup();
+            </script>
+            
         </c:otherwise>
     </c:choose>
 </div>
