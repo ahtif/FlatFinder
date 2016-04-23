@@ -132,9 +132,12 @@ public class ConfirmationController {
     Calendar cal = Calendar.getInstance();
     VerificationToken token = tokenRepo.findByToken(confirmId);
     if (token == null || token.getType() != TokenType.ACTIVATION 
-        || token.getExpiryDate().getTime() - cal.getTime().getTime() <= 0 
-        || token.isUsed()) {
+        || token.getExpiryDate().getTime() - cal.getTime().getTime() <= 0) {
       return "redirect:/confirm/notConfirmed";
+    }
+    
+    if (token.getType() == TokenType.ACTIVATION && token.isUsed()) {
+      return "redirect:/confirm/alreadyConfirmed";
     }
    
     User user = token.getUser();
@@ -144,12 +147,12 @@ public class ConfirmationController {
     tokenRepo.save(token);
     return "redirect:/confirm/confirmed";
   }
+  
   /**
    * Take in the user's login, check if their account is not already activated and 
    * send a new activation email.
    * @param username The username of the user.
    */
-  
   @RequestMapping("/confirm/sendNewEmail")
   public String resendConfirmation(@RequestParam("login")String username) {
     User user = userRepo.findByLogin(username);
@@ -205,6 +208,11 @@ public class ConfirmationController {
   @RequestMapping("/confirm/notConfirmed")
   public String notConfirmed() {
     return "/confirm/not-confirmed";
+  }
+  
+  @RequestMapping("/confirm/alreadyConfirmed")
+  public String alreadyConfirmed() {
+    return "/confirm/already-confirmed";
   }
   
 
