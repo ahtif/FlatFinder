@@ -43,7 +43,8 @@ public class CustomUserDetailsService implements UserDetailsService {
       throw new UsernameNotFoundException("user not found");
     }
     return new User(user.getLogin(), user.getPassword(),
-        user.getConfirmed(), true, true, true, getAuthorities(user.getRole().getId()));
+        user.getConfirmed(), true, true, !user.isSuspended(),
+        getAuthorities(user.getRole().getId()));
   }
 
   /**

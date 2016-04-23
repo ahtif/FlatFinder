@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Flat Finder - Manage Properties</title>
+    <title>Flat Finder - Manage Users</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -47,13 +47,23 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>Manage Properties</h1>
-        <p>Here you can view all the properties in the system and choose to edit/delete them.</p>
+        <h1>Manage Users</h1>
+        <p>Here you can view all the users in the system and choose to edit/suspend them.</p>
     </div>
     
+    <c:if test="${suspended != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully suspended the user from using the system.
+        </div>
+    </c:if>
+    <c:if test="${unSuspended != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully un suspended the user from the system.
+        </div>
+    </c:if>
     <c:if test="${deleted != null}">
         <div class="alert alert-success" role="alert">
-            <strong>Success!</strong> You have successfully deleted the property from the database.
+            <strong>Success!</strong> You have successfully deleted the user from using the system.
         </div>
     </c:if>
     <c:if test="${edited != null}">
@@ -65,25 +75,29 @@
     <table class="table table-hover">
         <tr>
             <th>ID</th>
-            <th>Landlord</th>
-            <th>Property Type</th>
-            <th>Number</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>Postcode</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Activated</th>
+            <th>Suspended</th>
+            <th>Email Address</th>
             <th>Options</th>
         </tr>
-        <c:forEach items ="${properties}" var ="property">
+        <c:forEach items ="${users}" var ="user">
             <tr>
-                <td>${property.id}</td>
-                <td>${property.landlord.firstName} ${property.landlord.lastName}</td>
-                <td>${property.type.type}</td>
-                <td>${property.number}</td>
-                <td>${property.street}</td>
-                <td>${property.city}</td>
-                <td>${property.postcode}</td>
-                <td><a href="/property/view/${property.id}" class="btn btn-default">View</a>
-                    <a href="/admin/property/delete/${property.id}" class="btn btn-default">Delete</a></td>
+                <td>${user.id}</td>
+                <td>${user.login}</td>
+                <td>${user.role.role}</td>
+                <td>${user.confirmed}</td>
+                <td>${user.suspended}</td>
+                <td>${user.emailAddress}</td>
+                <td><a href="/admin/user/${user.id}" class="btn btn-default">View</a>
+                    <c:if test="${user.suspended == true}">
+                        <a href="/admin/user/unSuspend/${user.id}" class="btn btn-default">Un Suspend</a>
+                    </c:if>
+                    <c:if test="${user.suspended == false}">
+                        <a href="/admin/user/suspend/${user.id}" class="btn btn-default">Suspend</a>
+                    </c:if>
+                    <a href="/admin/user/delete/${user.id}" class="btn btn-default">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

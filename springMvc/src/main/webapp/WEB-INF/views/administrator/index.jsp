@@ -34,6 +34,7 @@
                 <li><a href="/success-login">Home</a></li>
                 <li><a href="/messaging/inbox">Inbox</a></li>
                 <li><a href="/admin/viewProperties">Manage Properties</a></li>
+                <li><a href="/admin/viewUsers">Manage Users</a></li> 
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">

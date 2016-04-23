@@ -24,11 +24,13 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
     if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
       setDefaultFailureUrl("/confirm/email");
-      errorMessage = "It seems as though your user accout has not been activated";
+      errorMessage = "It seems as though your user account has not been activated";
     } else if (exception.getMessage().equalsIgnoreCase("User account has expired")) {
-      errorMessage = "It seems as though your user accout has expired";
-    } else if (exception.getMessage().equalsIgnoreCase("blocked")) {
-      errorMessage = "It seems as though your user accout is blocked";
+      errorMessage = "It seems as though your user account has expired";
+    } else if (exception.getMessage().equalsIgnoreCase("User account is blocked")) {
+      errorMessage = "It seems as though your user account is blocked";
+    } else if (exception.getMessage().equalsIgnoreCase("User account is locked")) {
+      errorMessage = "It seems as though your user account is suspended";
     }
 
     super.onAuthenticationFailure(request, response, exception);

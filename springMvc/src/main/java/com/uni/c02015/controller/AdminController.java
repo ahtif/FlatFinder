@@ -1,9 +1,13 @@
 package com.uni.c02015.controller;
 
+import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
+import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
+import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
@@ -97,17 +101,95 @@ public class AdminController {
   }
   
   /**
+   * Take the admin to the manage users pages, and add any GET parameters to the page.
+   * @param request The HTTP request.
+   */
+  @RequestMapping("/admin/viewUsers")
+  public ModelAndView viewUsers(HttpServletRequest request) {
+    // Get the request GET parameters
+    Map<String, String[]> parameters = request.getParameterMap();
+
+    // Create the model and view and add the GET parameters as object in the model
+    ModelAndView modelAndView = new ModelAndView("/administrator/view-users");
+    modelAndView.addAllObjects(parameters);
+    
+    ArrayList<User> users = (ArrayList<User>) userRepo.findAll();
+    modelAndView.addObject("users", users);
+
+    return modelAndView;
+  }
+  
+  /**
    * Take in a property ID and delete the property from the database if it exists.
    * @param id The ID of the property.
    */
   @RequestMapping("/admin/property/delete/{id}")
   public String deleteProperty(@PathVariable Integer id) {
     Property property = propertyRepo.findById(id);
-    if (property != null){
+    if (property != null) {
       propertyRepo.delete(id);
       return "redirect:/admin/viewProperties?deleted=true";
     }
     return "redirect:/admin/viewProperties";
+  }
+  
+  /**
+   * Take in a user ID and suspend the user from the system if it exists.
+   * @param id The ID of the user.
+   */
+  @RequestMapping("/admin/user/suspend/{id}")
+  public String suspendUser(@PathVariable Integer id) {
+    User user = userRepo.findById(id);
+    if (user != null) {
+      user.setSuspended(true);
+      userRepo.save(user);
+      return "redirect:/admin/viewUsers?suspended=true";
+    }
+    return "redirect:/admin/viewUsers";
+  }
+  
+  /**
+   * Take in a user ID and un suspend the user from the system if it exists.
+   * @param id The ID of the user.
+   */
+  @RequestMapping("/admin/user/unSuspend/{id}")
+  public String unSuspendUser(@PathVariable Integer id) {
+    User user = userRepo.findById(id);
+    if (user != null && user.isSuspended()) {
+      user.setSuspended(false);
+      userRepo.save(user);
+      return "redirect:/admin/viewUsers?unSuspended=true";
+    }
+    return "redirect:/admin/viewUsers";
+  }
+  
+  /**
+   * Take in a user ID and delete the user from the system if it exists.
+   * @param id The ID of the user.
+   */
+  @RequestMapping("/admin/user/delete/{id}")
+  public String deleteUser(@PathVariable Integer id) {
+    User user = userRepo.findById(id);
+    if (user != null) {
+      userRepo.delete(user);
+      return "redirect:/admin/viewUsers?deleted=true";
+    }
+    return "redirect:/admin/viewUsers";
+  }
+  
+  /**
+   * Redirect the admin to view a single user's profile
+   * @param id The id of the user.
+   */
+  @RequestMapping("/admin/user/{id}")
+  public ModelAndView viewUser(@PathVariable Integer id) {
+    User user = userRepo.findById(id);
+    if (user != null) {
+      ModelAndView modelAndView = new ModelAndView("redirect:/admin/view-user");
+      modelAndView.addObject("user", user);
+      return modelAndView;
+    }
+    return new ModelAndView("redirect:/admin/viewUsers");
   }
   
   
