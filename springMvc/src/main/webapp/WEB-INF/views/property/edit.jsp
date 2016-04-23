@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,25 +29,41 @@
             </button>
             <a class="navbar-brand" href="#">Flat Finder - Edit Property</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/success-login">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Inbox</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/property/add">Add a Property</a></li>
-                        <li><a href="/property/viewAll">View all properties</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <c:url value="/logout" var="logoutUrl"/>
-            <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button class="btn btn-success" type="submit">Log Out</button>
-            </form>
-        </div><!--/.nav-collapse -->
+        <sec:authorize access="hasRole('ADMINISTRATOR')">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/success-login">Home</a></li>
+                    <li><a href="/messaging/inbox">Inbox</a></li>
+                    <li><a href="/admin/viewProperties">Manage Properties</a></li>
+                </ul>
+                <c:url value="/logout" var="logoutUrl"/>
+                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button class="btn btn-success" type="submit">Log Out</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </sec:authorize>
+        <sec:authorize access="hasRole('LANDLORD')">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/success-login">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/messaging">Inbox</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/property/add">Add a Property</a></li>
+                            <li><a href="/property/viewAll">View all properties</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <c:url value="/logout" var="logoutUrl"/>
+                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button class="btn btn-success" type="submit">Log Out</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </sec:authorize>
     </div>
 </nav>
 <div class="container">

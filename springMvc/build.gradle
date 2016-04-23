@@ -42,6 +42,8 @@ dependencies {
     // Security
     compile("org.springframework.boot:spring-boot-starter-security")
     testCompile("org.springframework.security:spring-security-test:4.0.1.RELEASE")
+    // Security tag library
+    compile('org.springframework.security:spring-security-taglibs:4.0.4.RELEASE')
     //Java Mail
     compile('javax.mail:javax.mail-api:1.5.5')
     //Google Geocoding API

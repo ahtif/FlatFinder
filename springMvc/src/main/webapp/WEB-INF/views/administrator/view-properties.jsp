@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Flat Finder - Administrator Home</title>
+    <title>Flat Finder - Manage Properties</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -46,8 +46,46 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>Administrator Home</h1>
+        <h1>Manage Properties</h1>
+        <p>Here you can view all the properties in the system and choose to edit/delete them.</p>
     </div>
+    
+    <c:if test="${deleted != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully deleted the property from the database.
+        </div>
+    </c:if>
+    <c:if test="${edited != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully edited a property.
+        </div>
+    </c:if>
+    
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Landlord</th>
+            <th>Property Type</th>
+            <th>Number</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>Postcode</th>
+            <th>Options</th>
+        </tr>
+        <c:forEach items ="${properties}" var ="property">
+            <tr>
+                <td>${property.id}</td>
+                <td>${property.landlord.firstName} ${property.landlord.lastName}</td>
+                <td>${property.type.type}</td>
+                <td>${property.number}</td>
+                <td>${property.street}</td>
+                <td>${property.city}</td>
+                <td>${property.postcode}</td>
+                <td><a href="/property/view/${property.id}" class="btn btn-default">View</a>
+                    <a href="/admin/property/delete/${property.id}" class="btn btn-default">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 <hr />
