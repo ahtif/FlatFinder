@@ -3,11 +3,13 @@ package com.uni.c02015;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
+import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
 
@@ -33,6 +35,8 @@ public class SpringMvc implements ApplicationRunner {
   private TypeRepository typeRepository;
   @Autowired
   private LandlordRepository landlordRepo;
+  @Autowired
+  private SearcherRepository searcherRepo;
   @Autowired
   private MessageRepository messageRepo;
 
@@ -120,6 +124,12 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     user1.setRole(role);
     userRepo.save(user1);
+    
+    Searcher alice = new Searcher(user1.getId());
+    alice.setFirstName("alice");
+    alice.setLastName("searcher");
+    alice.setBuddyPref(true);
+    searcherRepo.save(alice);
     
     // Set up users
     User user2 = new User();
