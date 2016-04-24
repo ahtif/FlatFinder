@@ -1,5 +1,6 @@
 package com.uni.c02015.controller;
 
+import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Searcher;
@@ -7,6 +8,7 @@ import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +37,13 @@ public class AdminController {
   @Autowired
   private UserRepository userRepo;
   @Autowired
-  PropertyRepository propertyRepo;
+  private PropertyRepository propertyRepo;
+  @Autowired
+  private SearcherRepository searcherRepo;
+  @Autowired
+  private LandlordRepository landlordRepo;
+  @Autowired
+  private RoleRepository roleRepo;
   
   
   /**
@@ -181,18 +190,54 @@ public class AdminController {
    * Redirect the admin to view a single user's profile
    * @param id The id of the user.
    */
-  @RequestMapping("/admin/user/{id}")
+  @RequestMapping("/admin/view-user/{id}")
   public ModelAndView viewUser(@PathVariable Integer id) {
     User user = userRepo.findById(id);
     if (user != null) {
-      ModelAndView modelAndView = new ModelAndView("redirect:/admin/view-user");
-      modelAndView.addObject("user", user);
+      ModelAndView modelAndView = new ModelAndView("/administrator/view-user", "user" , new User());
+      if (user.getRole().getId() == SpringMvc.ROLE_SEARCHER_ID) {
+        Searcher searcher = searcherRepo.findById(user.getId());
+        modelAndView.addObject("searcher", searcher);
+      } else if (user.getRole().getId() == SpringMvc.ROLE_LANDLORD_ID) {
+        Landlord landlord = landlordRepo.findById(user.getId());
+        modelAndView.addObject("landlord", landlord);
+      } else {
+        return new ModelAndView("redirect:/admin/viewUsers");
+      }
+      modelAndView.addObject("usr", user);
       return modelAndView;
     }
     return new ModelAndView("redirect:/admin/viewUsers");
   }
   
-  
-  
+  /**
+   * Redirect the admin to view a single user's profile
+   * @param id The id of the user.
+   */
+  @RequestMapping("/admin/user/edit")
+  public String editUser(@RequestParam("id") Integer id,
+      @RequestParam("firstName") String firstName,
+      @RequestParam("lastName") String lastName,
+      @RequestParam("emailAddress") String emailAddress,
+      @RequestParam(value = "buddyPref", required = false) Boolean buddy) {
+    
+    User user = userRepo.findById(id);
+    user.setEmailAddress(emailAddress);
+    if (user.getRole().getId() == SpringMvc.ROLE_SEARCHER_ID) {
+      Searcher searcher = searcherRepo.findById(id);
+      searcher.setFirstName(firstName);
+      searcher.setLastName(lastName);
+      searcher.setBuddyPref(buddy);
+      searcherRepo.save(searcher);
+    } else if (user.getRole().getId() == SpringMvc.ROLE_LANDLORD_ID) {
+      Landlord landlord = landlordRepo.findById(user.getId());
+      landlord.setFirstName(firstName);
+      landlord.setLastName(lastName);
+      landlordRepo.save(landlord);
+    }
+    userRepo.save(user);
+    
+    return "redirect:/admin/viewUsers?edited=true";
+  }
   
 }

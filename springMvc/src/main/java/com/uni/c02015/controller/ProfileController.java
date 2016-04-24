@@ -78,7 +78,7 @@ public class ProfileController {
   public String editSearcherProfile(@RequestParam("firstName") String firstName,
           @RequestParam("lastName") String lastName,
           @RequestParam("emailAddress") String emailAddress,
-          @RequestParam("buddyPref")Boolean buddy) {
+          @RequestParam("buddyPref") Boolean buddy) {
     
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();

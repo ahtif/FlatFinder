@@ -98,12 +98,11 @@
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
                     </c:if>
                 </div></td>
-
+            </tr>
             <tr>
                 <td><input type="submit" value="Save" class="btn btn-success"/></td>
             </tr>
 
-            </tr>
         </table>
 
     </form:form>

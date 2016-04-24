@@ -68,7 +68,7 @@
     </c:if>
     <c:if test="${edited != null}">
         <div class="alert alert-success" role="alert">
-            <strong>Success!</strong> You have successfully edited a property.
+            <strong>Success!</strong> You have successfully edited a user.
         </div>
     </c:if>
     
@@ -90,14 +90,18 @@
                 <td>${user.confirmed}</td>
                 <td>${user.suspended}</td>
                 <td>${user.emailAddress}</td>
-                <td><a href="/admin/user/${user.id}" class="btn btn-default">View</a>
-                    <c:if test="${user.suspended == true}">
-                        <a href="/admin/user/unSuspend/${user.id}" class="btn btn-default">Un Suspend</a>
+                <td>
+                    <c:if test="${user.role.role != 'ADMINISTRATOR'}">
+                        <a href="/admin/view-user/${user.id}" class="btn btn-default">Edit</a>
+                        <c:if test="${user.suspended == true}">
+                            <a href="/admin/user/unSuspend/${user.id}" class="btn btn-default">Un Suspend</a>
+                        </c:if>
+                        <c:if test="${user.suspended == false}">
+                            <a href="/admin/user/suspend/${user.id}" class="btn btn-default">Suspend</a>
+                        </c:if>
+                        <a href="/admin/user/delete/${user.id}" class="btn btn-default">Delete</a>
                     </c:if>
-                    <c:if test="${user.suspended == false}">
-                        <a href="/admin/user/suspend/${user.id}" class="btn btn-default">Suspend</a>
-                    </c:if>
-                    <a href="/admin/user/delete/${user.id}" class="btn btn-default">Delete</a></td>
+                </td>
             </tr>
         </c:forEach>
     </table>

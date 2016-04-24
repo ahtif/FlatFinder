@@ -55,7 +55,7 @@
         <div class="alert alert-danger" role="alert">
          <strong>Sorry!</strong> That user does not exist.
         </div>
-      </c:if>s
+      </c:if>
 
     <form:form action="/messaging/sendMessage" method="post" modelAttribute="message" id="messageForm">
         <table>
