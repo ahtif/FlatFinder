@@ -43,7 +43,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-security")
     testCompile("org.springframework.security:spring-security-test:4.0.1.RELEASE")
     //Java Mail
-    compile('javax.mail:javax.mail-api:1.5.5')
+    compile('com.sun.mail:javax.mail:1.5.5')
     //Google Geocoding API
     compile ('com.google.maps:google-maps-services:0.1.12')
     // Cucumber
