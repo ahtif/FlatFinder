@@ -2,11 +2,7 @@ package com.uni.c02015.controller;
 
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.persistence.repository.UserRepository;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
-import com.uni.c02015.persistence.repository.LandlordRepository;
-import com.uni.c02015.persistence.repository.MessageRepository;
+import com.uni.c02015.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MessageController {

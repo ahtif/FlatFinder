@@ -1,36 +1,16 @@
 package com.uni.c02015.controller;
 
-import com.uni.c02015.SpringMvc;
-import com.uni.c02015.domain.Landlord;
-import com.uni.c02015.domain.Searcher;
-import com.uni.c02015.domain.TokenType;
-import com.uni.c02015.domain.User;
-import com.uni.c02015.domain.VerificationToken;
-import com.uni.c02015.persistence.repository.LandlordRepository;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
-import com.uni.c02015.persistence.repository.UserRepository;
-import com.uni.c02015.persistence.repository.VerificationTokenRepository;
-
+import com.uni.c02015.domain.*;
+import com.uni.c02015.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-
-import java.util.Calendar;
-import java.util.Map;
-import java.util.Properties;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -38,6 +18,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class RegistrationController {
