@@ -60,14 +60,22 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/success-login">Home</a></li>
                     <li><a href="/profile">Profile</a></li>
-                    <li><a href="/messaging">Inbox</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/property/add">Add a Property</a></li>
-                            <li><a href="/property/viewAll">View all properties</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/messaging">Message Box</a></li>
+                    <li><a href="/property/add">Add a Property</a></li>
+                </ul>
+                <c:url value="/logout" var="logoutUrl"/>
+                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button class="btn btn-success" type="submit">Log Out</button>
+                </form>
+            </div><!--/.nav-collapse -->
+        </sec:authorize>
+        <sec:authorize access="hasRole('SEARCHER')">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/success-login">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/messaging">Message Box</a></li>
                 </ul>
                 <c:url value="/logout" var="logoutUrl"/>
                 <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -148,7 +156,7 @@
                     </a>
                 </div>
             </div>
-
+            <br />
             <div id="mapid" class="jumbotron"></div>
             <script type="text/javascript">
                 var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
