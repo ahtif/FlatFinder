@@ -87,6 +87,13 @@ public class MessageController {
     ModelAndView modelAndView = new ModelAndView("messaging/newMessage","message",new Message());
     modelAndView.addAllObjects(parameters);
 
+    // We have a predefined contact
+    if (request.getParameter("contact") != null) {
+
+      modelAndView.addObject("contactUser",
+          userRepo.findById(Integer.parseInt(request.getParameter("contact"))).getLogin());
+    }
+
     return modelAndView;
   }
   

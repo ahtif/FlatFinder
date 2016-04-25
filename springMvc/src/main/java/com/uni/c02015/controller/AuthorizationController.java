@@ -86,7 +86,8 @@ public class AuthorizationController {
       ModelAndView modelAndView = new ModelAndView("landlord/index");
 
       // Get the landlord properties
-      List<Property> properties = propertyRepository.findByLandlord(landlordRepository.findById(user.getId()));
+      List<Property> properties =
+          propertyRepository.findByLandlord(landlordRepository.findById(user.getId()));
 
       // The landlord has no properties
       if (properties.isEmpty()) {

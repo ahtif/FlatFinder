@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Inbox</a></li>
+                <li><a href="/messaging">Message Box</a></li>
                 <li><a href="/property/add">Add a Property</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>

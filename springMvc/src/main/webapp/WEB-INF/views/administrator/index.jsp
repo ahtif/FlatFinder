@@ -32,7 +32,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
-                <li><a href="/messaging/inbox">Inbox</a></li>
+                <li><a href="/messaging">Message Box</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">

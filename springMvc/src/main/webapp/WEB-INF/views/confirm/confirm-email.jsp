@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Flat Finder</a>
+            <a class="navbar-brand">Flat Finder - Confirm Account</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -35,7 +35,7 @@
 <div class="container">
     <div class="jumbotron">
         <br />
-        <h1>Please confirm your account</h1>
+        <h1>Please Confirm Your Account</h1>
         <p>In order to activate your account and complete the registration process, please click on the confirmation link sent to your email address.</p>
         <p>If you need a new activation email, please click <a href="/confirm/newEmail">here.</a></p>
     </div>
