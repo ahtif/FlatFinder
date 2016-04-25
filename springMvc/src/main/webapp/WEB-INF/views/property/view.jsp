@@ -80,13 +80,13 @@
                 <p>Property Rooms: ${property.rooms}</p>
             </div>
 
-            <c:if test="${showEditButton != null}">
+            <c:if test="${showEditButton != null || isAdmin != null}">
 
                 <p><a href="/property/edit/${showEditButton}" class="btn btn-success">Edit Property</a></p>
 
             </c:if>
 
-            <c:if test="${showEditButton == null}">
+            <c:if test="${showEditButton == null || isAdmin != null}">
 
                 <p><a href="/messaging/new?contact=${property.getLandlord().getId()}" class="btn btn-success">Contact Landlord</a></p>
 
