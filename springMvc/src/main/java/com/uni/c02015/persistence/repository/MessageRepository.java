@@ -19,6 +19,8 @@ public interface MessageRepository extends CrudRepository<Message, Integer> {
 
   List<Message> findByReceiver(User currentUser);
   
+  List<Message> findBySender(User user);
+  
   Message findByMessage(String message);
   
   Message findByMessageAndReceiver(String message, User receiver);

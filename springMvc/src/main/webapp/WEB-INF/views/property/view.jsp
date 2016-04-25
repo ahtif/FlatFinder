@@ -41,49 +41,7 @@
             </button>
             <a class="navbar-brand" href="#">Flat Finder - View Property</a>
         </div>
-        <sec:authorize access="hasRole('ADMINISTRATOR')">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/success-login">Home</a></li>
-                    <li><a href="/messaging/inbox">Inbox</a></li>
-                    <li><a href="/admin/viewProperties">Manage Properties</a></li>
-                </ul>
-                <c:url value="/logout" var="logoutUrl"/>
-                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button class="btn btn-success" type="submit">Log Out</button>
-                </form>
-            </div><!--/.nav-collapse -->
-        </sec:authorize>
-        <sec:authorize access="hasRole('LANDLORD')">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/success-login">Home</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/messaging">Message Box</a></li>
-                    <li><a href="/property/add">Add a Property</a></li>
-                </ul>
-                <c:url value="/logout" var="logoutUrl"/>
-                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button class="btn btn-success" type="submit">Log Out</button>
-                </form>
-            </div><!--/.nav-collapse -->
-        </sec:authorize>
-        <sec:authorize access="hasRole('SEARCHER')">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/success-login">Home</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/messaging">Message Box</a></li>
-                </ul>
-                <c:url value="/logout" var="logoutUrl"/>
-                <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button class="btn btn-success" type="submit">Log Out</button>
-                </form>
-            </div><!--/.nav-collapse -->
-        </sec:authorize>
+        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
     </div>
 </nav>
 
