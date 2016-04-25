@@ -37,12 +37,10 @@
 </nav>
 <div class="container">
     <div class="jumbotron">
-        <h1>Need a new activation email?</h1>
-        <p>Please enter your username to receive a new activation email</p>
+        <br />
+        <h1>Need A New Activation Email?</h1>
+        <p>Please enter your username to receive a new activation email.</p>
     </div>
-</div>
-
-<div class="container">
     <c:if test="${submitted != null}">
         <div class="alert alert-success" role="alert">
             <strong>Success!</strong> If the username you entered exists, you will be sent a new email to activate your account.

@@ -32,10 +32,12 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<br /><br /><br />
 <div class="container">
-    <h1>Thank you for confirming your account</h1>
-    <p>Thank you for confirming your account, please click <a href="/">here</a> to log in and complete the registration process</p>
+    <div class="jumbotron">
+        <br />
+        <h1>Thank You For Confirming Your Account</h1>
+        <p>Thank you for confirming your account, please click <a href="/">here</a> to log in and complete the registration process.</p>
+    </div>
 </div>
 
 <hr />

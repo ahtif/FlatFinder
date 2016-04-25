@@ -32,10 +32,12 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<br /><br /><br />
 <div class="container">
-    <h1>Your account has not been activated</h1>
-    <p>It appears you have clicked an invalid activation link, please click <a href="/confirm/newEmail">here</a> to request another if you need one.</p>
+    <div class="jumbotron">
+        <br />
+        <h1>Your Account Has Not Been Activated</h1>
+        <p>It appears you have clicked an invalid activation link, please click <a href="/confirm/newEmail">here</a> to request another if you need one.</p>
+    </div>
 </div>
 
 <hr />

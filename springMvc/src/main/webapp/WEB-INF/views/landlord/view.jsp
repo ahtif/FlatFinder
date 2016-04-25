@@ -35,13 +35,7 @@
                 <li><a href="/success-login">Home</a></li>
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="/messaging">Inbox</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/property/add">Add a Property</a></li>
-                        <li><a href="/property/viewAll">View all properties</a></li>
-                    </ul>
-                </li>
+                <li><a href="/property/add">Add a Property</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
