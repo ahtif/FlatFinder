@@ -81,6 +81,12 @@
                 <p><a href="/messaging/new?contact=${property.getLandlord().getId()}" class="btn btn-success">Contact Landlord</a></p>
 
             </c:if>
+            
+            <sec:authorize access="hasRole('SEARCHER')">
+            
+                <a href="/property/expressInterest/${property.id}" class="btn btn-success">Express Interest</a>
+            
+            </sec:authorize>
 
             <div class="container" style="margin-left: -15px;">
                 <br>

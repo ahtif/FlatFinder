@@ -1,6 +1,9 @@
 package com.uni.c02015.domain.property;
 
 import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.User;
+
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -23,6 +26,10 @@ public class Property {
   private String city;
   private double latitude;
   private double longitude;
+  
+  @OneToMany
+  @JoinColumn
+  private Set<User> interestedUsers;
 
   @ManyToOne
   @JoinColumn(name = "type")
@@ -109,5 +116,13 @@ public class Property {
 
   public void setLongitude(double longitude) {
     this.longitude = longitude;
+  }
+  
+  public Set<User> getInterestedUsers() {
+    return interestedUsers;
+  }
+
+  public void setInterestedUsers(Set<User> interestedUsers) {
+    this.interestedUsers = interestedUsers;
   }
 }

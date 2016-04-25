@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/recover/**",
           "/resources/**").permitAll()
       .antMatchers("/admin/**").hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR)
-      .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
+      .antMatchers("/searcher/**","/buddy/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_LANDLORD)
       .antMatchers("/property/add", "/property/viewAll").hasRole(SpringMvc.ROLE_LANDLORD)
       .antMatchers("/property/addPost")

@@ -5,12 +5,14 @@ import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class SpringMvc implements ApplicationRunner {
   private RoleRepository roleRepo;
   @Autowired
   private TypeRepository typeRepository;
+  @Autowired
+  private PropertyRepository propertyRepo;
   @Autowired
   private LandlordRepository landlordRepo;
   @Autowired
@@ -158,6 +162,32 @@ public class SpringMvc implements ApplicationRunner {
     larry.setLastName("landlord");
     landlordRepo.save(larry);
 
+    //set up default properties
+    Property property = new Property();
+    property.setNumber("5");
+    property.setStreet("University Road");
+    property.setCity("Leicester");
+    property.setPostcode("LE1 7RA");
+    property.setType(typeRepository.findById(1));
+    property.setRooms(2);
+    property.setLatitude(52.627717);
+    property.setLongitude(-1.121204);
+    property.setLandlord(larry);
+    propertyRepo.save(property);
+    
+    property = new Property();
+    property.setNumber("2");
+    property.setStreet("Manor Rd");
+    property.setCity("Leicester");
+    property.setPostcode("LE2 2LJ");
+    property.setType(typeRepository.findById(2));
+    property.setRooms(4);
+    property.setLatitude(52.609993);
+    property.setLongitude(-1.088549);
+    property.setLandlord(larry);
+    propertyRepo.save(property);
+    
+    
     Message message = new Message();
     message.setSenderName("admin");
     message.setMessage("hello");
