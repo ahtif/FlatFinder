@@ -41,7 +41,7 @@
 <hr />
 
 <footer class="container">
-    <p>&copy; CO2015- Group 6</p>
+    <p>&copy; CO2015 - Group 6</p>
 </footer>
 </body>
 </html>

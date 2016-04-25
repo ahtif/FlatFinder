@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Invalid Token</title>
+    <title>Flat Finder - Invalid Token</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
@@ -23,7 +23,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Flat Finder</a>
+          <a class="navbar-brand">Flat Finder - Invalid Token</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -38,10 +38,10 @@
         <p>It seems that the link your have clicked to reset your password is either invalid or has expired, please visit the forgot password page to get another one.</p>
     </div>
     
-    <hr>
+    <hr />
         
-    <footer>
-        <p>&copy; CO2015- Group 6</p>
+    <footer class="container">
+        <p>&copy; CO2015 - Group 6</p>
     </footer>
 </body>
 </html>

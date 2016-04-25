@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Forgot Password</title>
+    <title>Flat Finder - Forgot Password</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -26,7 +26,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Flat Finder</a>
+          <a class="navbar-brand">Flat Finder - Forgot Password</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -67,10 +67,10 @@
 
 </div>
 
-<hr>
+<hr />
 
-      <footer>
-        <p>&copy; CO2015- Group 6</p>
+      <footer class="container">
+        <p>&copy; CO2015 - Group 6</p>
       </footer>
 
 
