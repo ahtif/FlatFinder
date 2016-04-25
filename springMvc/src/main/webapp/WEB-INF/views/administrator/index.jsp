@@ -32,13 +32,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
-<<<<<<< HEAD
-                <li><a href="/messaging/inbox">Inbox</a></li>
+                <li><a href="/messaging">Message Box</a></li>
                 <li><a href="/admin/viewProperties">Manage Properties</a></li>
                 <li><a href="/admin/viewUsers">Manage Users</a></li> 
-=======
-                <li><a href="/messaging">Message Box</a></li>
->>>>>>> master
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
