@@ -180,6 +180,7 @@ public class AdminController {
   public String deleteUser(@PathVariable Integer id) {
     User user = userRepo.findById(id);
     if (user != null) {
+      messageRepo.delete(messageRepo.findBySender(user));
       userRepo.delete(user);
       return "redirect:/admin/viewUsers?deleted=true";
     }
