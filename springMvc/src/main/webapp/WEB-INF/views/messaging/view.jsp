@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,17 +30,7 @@
             </button>
             <a class="navbar-brand" href="#">Flat Finder - View Message</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/success-login">Home</a></li>
-                <li><a href="/messaging">Message Box</a></li>
-            </ul>
-            <c:url value="/logout" var="logoutUrl"/>
-            <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button class="btn btn-success" type="submit">Log Out</button>
-            </form>
-        </div><!--/.nav-collapse -->
+        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
     </div>
 </nav>
 
