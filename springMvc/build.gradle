@@ -42,6 +42,12 @@ dependencies {
     // Security
     compile("org.springframework.boot:spring-boot-starter-security")
     testCompile("org.springframework.security:spring-security-test:4.0.1.RELEASE")
+    // Security tag library
+    compile('org.springframework.security:spring-security-taglibs:4.0.4.RELEASE')
+    //Java Mail
+    compile('com.sun.mail:javax.mail:1.5.5')
+    //Google Geocoding API
+    compile ('com.google.maps:google-maps-services:0.1.12')
     // Cucumber
     testCompile("info.cukes:cucumber-spring:1.2.3")
     testCompile('info.cukes:cucumber-java:1.2.3')

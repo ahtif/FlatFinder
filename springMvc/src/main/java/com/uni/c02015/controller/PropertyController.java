@@ -1,5 +1,9 @@
 package com.uni.c02015.controller;
 
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.model.GeocodingResult;
+
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
@@ -7,6 +11,7 @@ import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
+
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -183,20 +188,39 @@ public class PropertyController {
 
       property = new Property();
     }
-
-    property.setNumber(request.getParameter("pNumber"));
-    property.setStreet(request.getParameter("pStreet"));
-    property.setCity(request.getParameter("pCity"));
-    property.setPostcode(request.getParameter("pPostcode"));
+    
+    String propNumber = request.getParameter("pNumber");
+    String propStreet = request.getParameter("pStreet");
+    String propCity = request.getParameter("pCity");
+    String propPostcode = request.getParameter("pPostcode");
+    
+    property.setNumber(propNumber);
+    property.setStreet(propStreet);
+    property.setCity(propCity);
+    property.setPostcode(propPostcode);
     property.setType(
         typeRepository.findById(new Integer(request.getParameter("pType")))
     );
     property.setRooms(new Integer(request.getParameter("pRooms")));
-
+    
+    //Geocode the address of the property to get it's latitude and longitude.
+    GeoApiContext context =
+        new GeoApiContext().setApiKey("AIzaSyCEawq-gRz787BseZuahn_lFjPfIsTgvj8");
+    try {
+      GeocodingResult[] results =  GeocodingApi.geocode(context,
+          propNumber + " " + propStreet + " " + propCity + " " + propPostcode).await();
+      property.setLatitude(results[0].geometry.location.lat);
+      property.setLongitude(results[0].geometry.location.lng);
+    } catch (Exception e1) {
+      e1.printStackTrace();
+    }
+    
     User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
         ((Authentication) principal).getPrincipal()).getUsername());
-
-    property.setLandlord(landlordRepository.findById(user.getId()));
+    
+    if (property.getLandlord() == null) {
+      property.setLandlord(landlordRepository.findById(user.getId()));
+    }
 
     propertyRepository.save(property);
 
@@ -233,25 +257,11 @@ public class PropertyController {
         }
       }
     }
-
+    
+    if (request.isUserInRole(SpringMvc.ROLE_ADMINISTRATOR)) {
+      return "redirect:/admin/viewProperties?edited=true";
+    }
     return "property/addPost";
-  }
-
-  /**
-   * View all properties.
-   * @return ModelAndView
-   */
-  @RequestMapping(value = "/property/viewAll", method = RequestMethod.GET)
-  public ModelAndView viewProperty(Principal principal) {
-
-    ModelAndView modelAndView = new ModelAndView("property/viewAll");
-
-    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
-        ((Authentication) principal).getPrincipal()).getUsername());
-    modelAndView.addObject("properties", 
-        propertyRepository.findByLandlord(landlordRepository.findById(user.getId())));
-
-    return modelAndView;
   }
   
   /**
@@ -276,10 +286,15 @@ public class PropertyController {
           ((Authentication) principal).getPrincipal()).getUsername());
 
       // The user owns this property or is an administrator
-      if (user.getId() == property.getLandlord().getId()
-          || user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
+      if (user.getId() == property.getLandlord().getId()) {
 
         modelAndView.addObject("showEditButton", id);
+      }
+
+      // User is an admin
+      if (user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
+
+        modelAndView.addObject("isAdmin", true);
       }
 
       modelAndView.addObject("property", property);

@@ -33,14 +33,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Inbox</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/property/add">Add a Property</a></li>
-                        <li><a href="/property/viewAll">View all properties</a></li>
-                    </ul>
-                </li>
+                <li><a href="/messaging">Message Box</a></li>
+                <li><a href="/property/add">Add a Property</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -55,7 +49,48 @@
     <div class="jumbotron">
         <br />
         <h1>Landlord Home</h1>
+        <p>Below is a list of all your current properties.</p>
     </div>
+
+    <c:choose>
+        <c:when test="${noResults != null}">
+
+            <p>You currently have no properties, click <a href="/property/add">here</a> to add a new property.</p>
+
+        </c:when>
+        <c:otherwise>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Number</th>
+                    <th>Street</th>
+                    <th>Postcode</th>
+                    <th>Type</th>
+                    <th>Rooms</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <c:forEach items="${properties}" var="property">
+
+                    <tr>
+                        <td><a class="btn btn-success" href="/property/view/${property.id}">View</a></td>
+                        <td>${property.number}</td>
+                        <td>${property.street}</td>
+                        <td>${property.postcode}</td>
+                        <td>${property.type.getType()}</td>
+                        <td>${property.rooms}</td>
+                    </tr>
+
+                </c:forEach>
+
+                </tbody>
+            </table>
+
+        </c:otherwise>
+    </c:choose>
 
 </div>
 

@@ -46,7 +46,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Inbox</a></li>
+                <li><a href="/messaging">Message Box</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -82,7 +82,7 @@
             <tr>
                 <td>Email Address:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="emailAddress" class="form-control" value="${searcher.emailAddress}"></form:input>
+                    <input role="form" type="text" name="emailAddress" class="form-control" value="${usr.emailAddress}"></input>
                 </div></td>
             </tr>
 
@@ -98,16 +98,14 @@
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
                     </c:if>
                 </div></td>
-
+            </tr>
             <tr>
                 <td><input type="submit" value="Save" class="btn btn-success"/></td>
             </tr>
 
-            </tr>
         </table>
 
     </form:form>
-
 </div>
 <hr />
 

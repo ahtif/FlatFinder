@@ -47,6 +47,7 @@
     <div class="jumbotron">
         <br />
         <h1>Message Inbox</h1>
+        <p>This is your message inbox where you can send and receive email.</p>
     </div>
 
     <table class="table table-striped">

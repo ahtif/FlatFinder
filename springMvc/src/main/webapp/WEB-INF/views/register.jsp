@@ -45,7 +45,7 @@
             <p>Please fill in your details using the form below.</p>
         </div>
     </div>
-
+    
     <c:if test="${usernameLength != null}">
         <div class="alert alert-danger" role="alert">
             <strong>Sorry!</strong> Your username is not between 3 and 15 characters.
@@ -93,6 +93,13 @@
                            placeholder="Confirm Password" required="required" />
                 </div></td>
 
+            </tr>
+            <tr>
+            <td>Email:</td>
+                <td><div class="form-group">
+                    <form:input role="form" type="email" path="emailAddress" class="form-control" 
+                                placeholder="Email Address" required="required"></form:input>
+                </div></td>
             </tr>
             <tr>
                 <td>Choose user type:</td>

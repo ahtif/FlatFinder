@@ -16,6 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private UserDetailsService userDetailsService;
+  
+  @Autowired
+  private CustomAuthenticationFailureHandler failureHandler;
 
   /**
    * Web security configuration.
@@ -23,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * @throws Exception Throws on error
    */
   protected void configure(HttpSecurity http) throws Exception {
-
+    
     http
       .authorizeRequests()
       .antMatchers("/user-logout",
@@ -33,12 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           "/landlord/registration",
           "/addLandlord",
           "/addSearcher",
+          "/confirm/**",
+          "/invalid-login",
+          "/forgot/**",
+          "/recover/**",
           "/resources/**").permitAll()
       .antMatchers("/admin/**").hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR)
       .antMatchers("/searcher/**").hasAnyRole(SpringMvc.ROLE_SEARCHER)
       .antMatchers("/landlord/**").hasAnyRole(SpringMvc.ROLE_LANDLORD)
-      .antMatchers("/property/add", "/property/addPost", 
-        "/property/viewAll").hasRole(SpringMvc.ROLE_LANDLORD)
+      .antMatchers("/property/add", "/property/viewAll").hasRole(SpringMvc.ROLE_LANDLORD)
+      .antMatchers("/property/addPost")
+        .hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR,SpringMvc.ROLE_LANDLORD)
       .antMatchers("/messaging/**")
         .hasAnyRole(SpringMvc.ROLE_ADMINISTRATOR,
             SpringMvc.ROLE_SEARCHER,
@@ -49,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .loginPage("/")
       .loginProcessingUrl("/login")
       .defaultSuccessUrl("/success-login", true)
-      .failureUrl("/invalid-login")
+      .failureHandler(failureHandler)
       .permitAll()
       .and()
     .logout()

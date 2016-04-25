@@ -41,6 +41,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-success">Log in</button>
                 <a href="/register" class="btn btn-success">Register</a>
+                <a href="/forgot" class="btn btn-success">Forgot Password?</a>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
@@ -53,9 +54,9 @@
         <p>Register as either a Landlord or a Searcher today to start viewing and posting properties.</p>
     </div>
     <p>
-        <c:if test="${error == true}">
+    <c:if test="${error == true}">
     <div class="alert alert-danger" role="alert">
-        <strong>Sorry!</strong> It seems as though you have entered an invalid username or password.
+        <strong>Sorry!</strong> ${SPRING_SECURITY_LAST_EXCEPTION}
     </div>
     </c:if>
     <c:if test="${logout == true}">

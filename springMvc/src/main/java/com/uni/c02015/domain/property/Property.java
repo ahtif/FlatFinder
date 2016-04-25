@@ -2,12 +2,7 @@ package com.uni.c02015.domain.property;
 
 import com.uni.c02015.domain.Landlord;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -26,6 +21,8 @@ public class Property {
   private String street;
   private String postcode;
   private String city;
+  private double latitude;
+  private double longitude;
 
   @ManyToOne
   @JoinColumn(name = "type")
@@ -96,5 +93,21 @@ public class Property {
 
   public void setRooms(Integer rooms) {
     this.rooms = rooms;
+  }
+
+  public double getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
+  }
+
+  public double getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
   }
 }

@@ -1,9 +1,11 @@
 package com.uni.c02015.controller;
 
 import com.uni.c02015.SpringMvc;
+import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class AuthorizationController {
@@ -28,6 +31,8 @@ public class AuthorizationController {
   private LandlordRepository landlordRepository;
   @Autowired
   private TypeRepository typeRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
 
   /**
    * Login.
@@ -78,7 +83,24 @@ public class AuthorizationController {
         return new ModelAndView("redirect:/landlord/registration");
       }
 
-      return new ModelAndView("landlord/index");
+      ModelAndView modelAndView = new ModelAndView("landlord/index");
+
+      // Get the landlord properties
+      List<Property> properties =
+          propertyRepository.findByLandlord(landlordRepository.findById(user.getId()));
+
+      // The landlord has no properties
+      if (properties.isEmpty()) {
+
+        modelAndView.addObject("noResults", true);
+
+      // The landlord has properties
+      } else {
+
+        modelAndView.addObject("properties", properties);
+      }
+
+      return modelAndView;
     }
 
     // Check the searcher has completed the sign up process
@@ -88,7 +110,6 @@ public class AuthorizationController {
 
       return new ModelAndView("redirect:/searcher/registration");
     }
-
     // Add property types
     ModelAndView modelAndView = new ModelAndView("searcher/index");
     modelAndView.addObject("types", typeRepository.findAll());

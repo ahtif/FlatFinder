@@ -1,12 +1,6 @@
 package com.uni.c02015.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -22,6 +16,10 @@ public class User {
 
   private String login;
   private String password;
+  private String emailAddress;
+  private boolean confirmed = false;
+  private boolean suspended = false;
+  
 
   public User() {}
 
@@ -99,8 +97,33 @@ public class User {
 
     this.role = role;
   }
+
+  public boolean getConfirmed() {
+    return confirmed;
+  }
+
+  public void setConfirmed(boolean confirmed) {
+    this.confirmed = confirmed;
+  }
+  
+  public boolean isSuspended() {
+    return suspended;
+  }
+
+  public void setSuspended(boolean suspended) {
+    this.suspended = suspended;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
+  }
   
   public String toString() {
     return login + id;
   }
+
 }
