@@ -11,11 +11,12 @@
 3. Comments and improvement about the web app
 4.	AOB - Any Other Business
 
-**Software walkthrough***
+**Software walkthrough**
 
 Ahtif decided that he wanted to show us the progress of the web app, he said it was in the final stages and only the buddy up page which pairs searchers together wasn’t completed. He said that he will get it done by the end of the day. He showed us all the features of the web app to get our opinion and suggest any improvements. 
 
 **Testing web app on various screen sizes**
+
 It was Harry idea to test the web app on different browsers and mobile devices, he used browserstack to test the web app on different devices. Carl noticed a problem with the web app, the carousel on the home screen wouldn’t flatten on small devices. Jordan fixed the problem within the meeting it was a simple error in the CSS file.
 
 **Comments and improvement about the web app**
