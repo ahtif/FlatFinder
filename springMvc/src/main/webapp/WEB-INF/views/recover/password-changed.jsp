@@ -32,10 +32,12 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<br /><br /><br />
 <div class="container">
-    <h1>Password Successfully Changed</h1>
-    <p>You have successfully reset your password, please click <a href="/">here</a> to log in.</p>
+    <div class="jumbotron">
+        <br />
+        <h1>Password Successfully Changed</h1>
+        <p>You have successfully reset your password, please click <a href="/">here</a> to log in.</p>
+    </div>
 </div>
 
 <hr />

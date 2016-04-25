@@ -37,8 +37,9 @@
 </nav>
 <div class="container">
     <div class="jumbotron">
-        <h1>Reset your password</h1>
-        <p>Please enter your new password</p>
+        <br />
+        <h1>Reset Your Password</h1>
+        <p>Please enter your new password.</p>
     </div>
 
     <c:if test="${passwordLength != null}">
