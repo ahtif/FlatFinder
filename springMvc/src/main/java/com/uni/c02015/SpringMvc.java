@@ -22,8 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 
-
-
 @SpringBootApplication
 public class SpringMvc implements ApplicationRunner {
 

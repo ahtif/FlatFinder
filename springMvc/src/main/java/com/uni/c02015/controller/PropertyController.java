@@ -11,6 +11,7 @@ import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
+
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -262,23 +263,6 @@ public class PropertyController {
     }
     return "property/addPost";
   }
-
-  /**
-   * View all properties.
-   * @return ModelAndView
-   */
-  @RequestMapping(value = "/property/viewAll", method = RequestMethod.GET)
-  public ModelAndView viewProperty(Principal principal) {
-
-    ModelAndView modelAndView = new ModelAndView("property/viewAll");
-
-    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
-        ((Authentication) principal).getPrincipal()).getUsername());
-    modelAndView.addObject("properties", 
-        propertyRepository.findByLandlord(landlordRepository.findById(user.getId())));
-
-    return modelAndView;
-  }
   
   /**
    * View property.
@@ -302,10 +286,15 @@ public class PropertyController {
           ((Authentication) principal).getPrincipal()).getUsername());
 
       // The user owns this property or is an administrator
-      if (user.getId() == property.getLandlord().getId()
-          || user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
+      if (user.getId() == property.getLandlord().getId()) {
 
         modelAndView.addObject("showEditButton", id);
+      }
+
+      // User is an admin
+      if (user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
+
+        modelAndView.addObject("isAdmin", true);
       }
 
       modelAndView.addObject("property", property);

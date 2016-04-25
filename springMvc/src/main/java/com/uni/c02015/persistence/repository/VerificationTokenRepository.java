@@ -1,8 +1,6 @@
 package com.uni.c02015.persistence.repository;
 
-import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.VerificationToken;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 

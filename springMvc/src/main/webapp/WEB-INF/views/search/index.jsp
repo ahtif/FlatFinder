@@ -41,20 +41,69 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
 <div class="container">
 
     <div class="jumbotron">
         <br />
         <h1>Property Search Results</h1>
+        <p>Below are the search results for your current query.</p>
     </div>
 
+    <c:choose>
+        <c:when test="${error != null}">
+
+            <p>Please fill out all required search fields.</p>
+            <p><a href="/success-login" class="btn btn-success">Back</a></p>
+
+        </c:when>
+        <c:when test="${noResults != null}">
+
+            <p><strong>0</strong> results were found for your search. Please refine your search.</p>
+            <p><a href="/success-login" class="btn btn-success">Back</a></p>
+
+        </c:when>
+        <c:otherwise>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Number</th>
+                    <th>Street</th>
+                    <th>Postcode</th>
+                    <th>Type</th>
+                    <th>Rooms</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <c:forEach items="${properties}" var="property">
+
+                    <tr>
+                        <td><a class="btn btn-success" href="/property/view/${property.id}">View</a></td>
+                        <td>${property.number}</td>
+                        <td>${property.street}</td>
+                        <td>${property.postcode}</td>
+                        <td>${property.type.getType()}</td>
+                        <td>${property.rooms}</td>
+                    </tr>
+
+                </c:forEach>
+
+                </tbody>
+            </table>
+
+        </c:otherwise>
+    </c:choose>
+
 </div>
+
 <hr />
 
 <footer class="container">
     <p>&copy; CO2015 - Group 6</p>
 </footer>
-
 
 </body>
 </html>

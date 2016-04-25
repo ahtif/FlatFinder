@@ -33,7 +33,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
-                <li><a href="/messaging">Inbox</a></li>
+                <li><a href="/messaging">Message Box</a></li>
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -62,7 +62,13 @@
             <tr>
                 <td>To:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="receiver" class="form-control"/>
+
+                    <c:if test="${contactUser != null}">
+                        <form:input role="form" type="text" path="receiver" class="form-control" value="${contactUser}" />
+                    </c:if>
+                    <c:if test="${contactUser == null}">
+                        <form:input role="form" type="text" path="receiver" class="form-control" />
+                    </c:if>
                 </div></td>
                 <td>
             </tr>
