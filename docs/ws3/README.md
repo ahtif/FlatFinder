@@ -9,10 +9,10 @@
 - [Diagram3](1.md)
 
 ### Project Plan
-- [Project plan](1.md)
-- [Test plan](1.md)
-- [Configuration management plan](1.md)
-- [Revised risk assessment](1.md)
+- [Project plan](ProjectPlan.gan)
+- [Test plan](TestPlan.md)
+- [Configuration management plan](ConfigManagementPlan.md)
+- [Revised risk assessment](UpdatedRiskAssessment.md)
 
 ### Minutes
 - [Internal Meeting 1](minutes-25.03.16.md)
@@ -31,7 +31,14 @@
 ### Automated Testing
 | Feature       | Step defs    |
 | ------------- |:------------:|
-| [Doc1](1.md)  | [Doc1](1.md) |
-| [Doc1](1.md)  | [Doc1](1.md) |
-| [Doc1](1.md)  | [Doc1](1.md) |
+| [AccessControl.feature](AccessControl.feature) | [Doc1](1.md) |
+| [AdminManagement.feature](AdminManagement.feature) | [Doc1](1.md) |
+| [BuddyUp.feature](BuddyUp.feature) | [Doc1](1.md) |
+| [LandlordPropertyManagement.feature](LandlordPropertyManagement.feature) | [Doc1](1.md) |
+| [Login-And-Recovery.feature](Login-And-Recovery.feature) | [Doc1](1.md) |
+| [Map.feature](Map.feature) | [Doc1](1.md) |
+| [Profile.feature](Profile.feature) | [Doc1](1.md) |
+| [Register.feature](Register.feature)| [Doc1](1.md) |
+| [Searching.feature](Searching.feature) | [Doc1](1.md) |
+| [UserInteraction.feature](UserInteraction.feature) | [Doc1](1.md) |
 
