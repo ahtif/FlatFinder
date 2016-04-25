@@ -31,14 +31,14 @@
 ### Automated Testing
 | Feature       | Step defs    |
 | ------------- |:------------:|
-| [AccessControl.feature](AccessControl.feature) | [Doc1](1.md) |
-| [AdminManagement.feature](AdminManagement.feature) | [Doc1](1.md) |
-| [BuddyUp.feature](BuddyUp.feature) | [Doc1](1.md) |
-| [LandlordPropertyManagement.feature](LandlordPropertyManagement.feature) | [Doc1](1.md) |
-| [Login-And-Recovery.feature](Login-And-Recovery.feature) | [Doc1](1.md) |
-| [Map.feature](Map.feature) | [Doc1](1.md) |
-| [Profile.feature](Profile.feature) | [Doc1](1.md) |
-| [Register.feature](Register.feature)| [Doc1](1.md) |
-| [Searching.feature](Searching.feature) | [Doc1](1.md) |
-| [UserInteraction.feature](UserInteraction.feature) | [Doc1](1.md) |
+| [AccessControl.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AccessControl.feature) | [Doc1](1.md) |
+| [AdminManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AdminManagement.feature) | [Doc1](1.md) |
+| [BuddyUp.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/BuddyUp.feature) | [Doc1](1.md) |
+| [LandlordPropertyManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/LandlordPropertyManagement.feature) | [Doc1](1.md) |
+| [Login-And-Recovery.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Login-And-Recovery.feature) | [Doc1](1.md) |
+| [Map.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Map.feature) | [Doc1](1.md) |
+| [Profile.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Profile.feature) | [Doc1](1.md) |
+| [Register.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Register.feature)| [Doc1](1.md) |
+| [Searching.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Searching.feature) | [Doc1](1.md) |
+| [UserInteraction.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/UserInteraction.feature) | [Doc1](1.md) |
 
