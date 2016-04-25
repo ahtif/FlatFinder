@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Flat Finder - Edit Profile</title>
+    <title>Flat Finder - Manage Users</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -17,12 +17,12 @@
 
     <script>
         function toggleBuddy(){
-            var btn = document.getElementById("buddyPref");
-            if(btn.value == "true"){
-                btn.value = "false";
+            var btn = document.getElementsByName("buddyPref");
+            if(btn[0].value == "true"){
+                btn[0].value = "false";
                 document.getElementById("buddy").innerHTML = "I am not a buddy";
-            } else if(btn.value == "false"){
-                btn.value = "true";
+            } else if(btn[0].value == "false"){
+                btn[0].value = "true";
                 document.getElementById("buddy").innerHTML = "I am a buddy";
             }
         }
@@ -30,6 +30,7 @@
 
 </head>
 <body>
+
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -40,13 +41,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Flat Finder - Edit Profile</a>
+            <a class="navbar-brand" href="#">Flat Finder - Administrator</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Message Box</a></li>
+                <li><a href="/messaging/inbox">Inbox</a></li>
+                <li><a href="/admin/viewProperties">Manage Properties</a></li>
+                <li><a href="/admin/viewUsers">Manage Users</a></li> 
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -58,25 +60,25 @@
 </nav>
 
 <div class="container">
-
     <div class="jumbotron">
-        <br />
-        <h1>Your Profile</h1>
-        <p>Edit your Searcher profile details using the form below.</p>
+        <h1>Manage Users</h1>
+        <p>Here you can view all the users in the system and choose to edit/suspend them.</p>
     </div>
-
-    <form:form method="POST" action="edit" modelAttribute="user">
+    
+    
+    <form:form method="POST" action="/admin/user/edit" modelAttribute="user">
+        <input type="hidden" name="id" value="${usr.id}" />
         <table>
             <tr>
                 <td>First Name:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="firstName" class="form-control" value="${searcher.firstName}"></form:input>
+                    <input role="form" type="text" name="firstName" class="form-control" value="${searcher != null ? searcher.firstName : landlord.firstName}"></input>
                 </div></td>
             </tr>
             <tr>
                 <td>Last Name:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="lastName" class="form-control" value="${searcher.lastName}"></form:input>
+                    <input role="form" type="text" name="lastName" class="form-control" value="${searcher != null ? searcher.lastName : landlord.lastName}"></input>
                 </div></td>
             </tr>
             <tr>
@@ -85,28 +87,32 @@
                     <input role="form" type="text" name="emailAddress" class="form-control" value="${usr.emailAddress}"></input>
                 </div></td>
             </tr>
-
-            <tr>
-                <td>Buddy Preference:</td>
-                <td><div class="form-group">
-                    <c:if test="${searcher.buddyPref}">
-                        <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
-                        <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="true"/>
-                    </c:if>
-                    <c:if test="${!searcher.buddyPref}">
-                        <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
-                        <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
-                    </c:if>
-                </div></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Save" class="btn btn-success"/></td>
-            </tr>
-
+            <c:if test = "${searcher != null}">
+                <tr>
+                    <td>Buddy Preference:</td>
+                    <td><div class="form-group">
+                        <c:if test="${searcher.buddyPref}">
+                            <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
+                            <input role="form" type="hidden" name="buddyPref" class="form-control" value="true"/>
+                        </c:if>
+                        <c:if test="${!searcher.buddyPref}">
+                            <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
+                            <input role="form" type="hidden" name="buddyPref" class="form-control" value="false"/>
+                        </c:if>
+                    </div></td>
+                </tr>
+               
+           </c:if>
+           <tr>
+               <td><input type="submit" value="Save" class="btn btn-success"/></td>
+           </tr>
+            
         </table>
 
     </form:form>
+    
 </div>
+
 <hr />
 
 <footer class="container">

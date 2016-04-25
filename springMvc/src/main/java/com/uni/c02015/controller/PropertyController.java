@@ -217,8 +217,10 @@ public class PropertyController {
     
     User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User) 
         ((Authentication) principal).getPrincipal()).getUsername());
-
-    property.setLandlord(landlordRepository.findById(user.getId()));
+    
+    if (property.getLandlord() == null) {
+      property.setLandlord(landlordRepository.findById(user.getId()));
+    }
 
     propertyRepository.save(property);
 
@@ -255,7 +257,10 @@ public class PropertyController {
         }
       }
     }
-
+    
+    if (request.isUserInRole(SpringMvc.ROLE_ADMINISTRATOR)) {
+      return "redirect:/admin/viewProperties?edited=true";
+    }
     return "property/addPost";
   }
   

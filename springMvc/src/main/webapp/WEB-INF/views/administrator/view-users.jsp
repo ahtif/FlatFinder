@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
-    <title>Flat Finder - Administrator Home</title>
+    <title>Flat Finder - Manage Users</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -27,18 +27,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Flat Finder - Administrator Home</a>
+            <a class="navbar-brand" href="#">Flat Finder - Administrator</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/success-login">Home</a></li>
-<<<<<<< HEAD
                 <li><a href="/messaging/inbox">Inbox</a></li>
                 <li><a href="/admin/viewProperties">Manage Properties</a></li>
                 <li><a href="/admin/viewUsers">Manage Users</a></li> 
-=======
-                <li><a href="/messaging">Message Box</a></li>
->>>>>>> master
             </ul>
             <c:url value="/logout" var="logoutUrl"/>
             <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
@@ -51,8 +47,64 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>Administrator Home</h1>
+        <h1>Manage Users</h1>
+        <p>Here you can view all the users in the system and choose to edit/suspend them.</p>
     </div>
+    
+    <c:if test="${suspended != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully suspended the user from using the system.
+        </div>
+    </c:if>
+    <c:if test="${unSuspended != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully un suspended the user from the system.
+        </div>
+    </c:if>
+    <c:if test="${deleted != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully deleted the user from using the system.
+        </div>
+    </c:if>
+    <c:if test="${edited != null}">
+        <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have successfully edited a user.
+        </div>
+    </c:if>
+    
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Activated</th>
+            <th>Suspended</th>
+            <th>Email Address</th>
+            <th>Options</th>
+        </tr>
+        <c:forEach items ="${users}" var ="user">
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.login}</td>
+                <td>${user.role.role}</td>
+                <td>${user.confirmed}</td>
+                <td>${user.suspended}</td>
+                <td>${user.emailAddress}</td>
+                <td>
+                    <c:if test="${user.role.role != 'ADMINISTRATOR'}">
+                        <a href="/admin/view-user/${user.id}" class="btn btn-default">Edit</a>
+                        <c:if test="${user.suspended == true}">
+                            <a href="/admin/user/unSuspend/${user.id}" class="btn btn-default">Un Suspend</a>
+                        </c:if>
+                        <c:if test="${user.suspended == false}">
+                            <a href="/admin/user/suspend/${user.id}" class="btn btn-default">Suspend</a>
+                        </c:if>
+                        <a href="/admin/user/delete/${user.id}" class="btn btn-default">Delete</a>
+                    </c:if>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 <hr />

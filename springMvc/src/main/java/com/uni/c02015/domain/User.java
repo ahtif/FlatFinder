@@ -18,6 +18,7 @@ public class User {
   private String password;
   private String emailAddress;
   private boolean confirmed = false;
+  private boolean suspended = false;
   
 
   public User() {}
@@ -104,6 +105,14 @@ public class User {
   public void setConfirmed(boolean confirmed) {
     this.confirmed = confirmed;
   }
+  
+  public boolean isSuspended() {
+    return suspended;
+  }
+
+  public void setSuspended(boolean suspended) {
+    this.suspended = suspended;
+  }
 
   public String getEmailAddress() {
     return emailAddress;
@@ -116,4 +125,5 @@ public class User {
   public String toString() {
     return login + id;
   }
+
 }
