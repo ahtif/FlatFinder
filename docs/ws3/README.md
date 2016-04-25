@@ -9,7 +9,10 @@
 - [Diagram3](1.md)
 
 ### Project Plan
-- [Doc1](1.md)
+- [Project plan](1.md)
+- [Test plan](1.md)
+- [Configuration management plan](1.md)
+- [Revised risk assessment](1.md)
 
 ### Minutes
 - [Internal Meeting 1](minutes-25.03.16.md)
