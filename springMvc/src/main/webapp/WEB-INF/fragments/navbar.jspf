@@ -34,6 +34,7 @@
             <li><a href="/success-login">Home</a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a href="/messaging">Message Box</a></li>
+            <li><a href="/buddy/viewAll">My Buddies</a></li>
         </ul>
         <c:url value="/logout" var="logoutUrl"/>
         <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
