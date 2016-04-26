@@ -6,7 +6,7 @@ Feature: Administrator management
  So that I can deal with them accordingly by suspending, expiring and deleting users and posts
 
 @Domain
-@NotImplemented
+
 Scenario: Deleting a user
  Given a user "Bob"
  And "Bob" is reported for malicious behaviour
@@ -14,50 +14,22 @@ Scenario: Deleting a user
  Then user "Bob" is removed from the system
 
 @Controller
-@NotImplemented
+
 Scenario: Deleting a user using controller
  Given a user "Bob"
  And "Bob" is reported for malicious behaviour
  When I located the user "Bob" on the delete user page
- And click "delete account"
- Then I should be redirect to "/delete-users"
+ Then I should be redirect to "/admin/viewUsers"
 
 @Domain
 @NotImplemented
 Scenario: Temporarily suspend user
  Given a user "Bob"
  And "Bob" is reported for malicious behaviour
- When I suspend "Bob" for 30 days
- Then "Bob" is suspended for 30 days
+ When I suspend "Bob"
+ Then "Bob" is suspended
  And account status is changed to "suspended"
 
-@Controller
-@NotImplemented
-Scenario: Temporarily suspend user using controller
- Given a user "Bob"
- And "Bob" is reported for malicious behaviour
- When I located the user "Bob" on the suspend user page
- And enter 30 days
- And click "suspend account"
- Then I should be redirect to "/suspend-users"
-
-@Controller
-@NotImplemented
-Scenario: Suspending a user that is already temporarily suspended
- Given a user "Bob"
- And "Bob" is already suspended for 30 days
- And "Bob" is reported for malicious behaviour
- When I located the user "Bob" on the suspend user page
- Then I should be able to delete the user "Bob"
- And should be redirect to "/suspend-users"
-
-@Controller
-@NotImplemented
-Scenario: Viewing reports from users
- Given a user "Bob"
- When a searcher "Bob" makes a report about a user "Ted"
- Then I should be notified
- And I should be able to view their report
 
 @Domain
 @NotImplemented
@@ -93,7 +65,7 @@ Scenario: Viewing confidential statistics
 @NotImplemented
 Scenario: Taking down listings
  Given I am an administrator "James"
- And a listing "300 Welford Road" by a Landlord "Ted"
+ And a listing with number "300" and road "Welford Road" by landlord "Ted"
  And I receive a false listing report
  When I remove the listing "300 Welford Road"
  And I suspend landlord "Ted"
@@ -101,10 +73,9 @@ Scenario: Taking down listings
  And "Ted" account status should be suspend
 
 @Controller
-@NotImplemented
-Scenario: Taking down listing which is removed by landlord
- Given I am an administrator "James"
- And a listing "300 Welford Road" by a Landlord "Ted"
- And I receive a false listing report
- When "Ted" remove the property "300 Welford Road"
- Then the report should be closed
+
+Scenario: Taking down listing which is removed by an admin
+ Given I am an admin "James"
+ And a listing with number "300" and road "Welford Road" by landlord "Ted"
+ When "James" remove the property number "300" and street "Welford Road"
+ Then the property should be removed
