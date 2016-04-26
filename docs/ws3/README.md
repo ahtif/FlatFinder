@@ -4,7 +4,7 @@
 * [Features](projectBacklog.feature)
 
 ### Update/Complete Design Documents
-- [Diagram1](1.md)
+- [Design Document](DesignDocuments.md)
 - [Diagram2](1.md)
 - [Diagram3](1.md)
 
@@ -17,7 +17,7 @@
 ### Minutes
 - [Internal Meeting 1](minutes-25.03.16.md)
 - [Internal Meeting 2](minutes-30.03.16.md)
-- [Internal Meeting 3](foo)
+- [Internal Meeting 3](minutes-25.04.16.md))
 
 ### Sprint 1 Retrospective
 - [Doc1](Sprint 1 retrospective.docx)
