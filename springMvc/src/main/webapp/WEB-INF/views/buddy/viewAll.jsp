@@ -19,29 +19,102 @@
 </head>
 <body>
 
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
+            </div>
+            <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
         </div>
-        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
-    </div>
-</nav>
-<div class="container">
-
-    <div class="jumbotron">
-        <br />
-        <h1>Buddies</h1>
-        <p>Below you can see a list of all your buddies and view their profile.</p>
-    </div>
-
+    </nav>
+    <div class="container">
+        
+        <div class="jumbotron">
+            <br />
+            <h1>Buddies</h1>
+            <p>Below you can see a list of all your buddies and view their profile.</p>
+        </div>
+        
+        <c:if test="${requested != null}">
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> You have successfully requested a buddy up with the user.
+            </div>
+        </c:if>
+        
+         <c:if test="${accepted != null}">
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> You have successfully accepted a buddy up with the user.
+            </div>
+        </c:if>
+        
+        <c:if test="${rejected != null}">
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> You have successfully rejected a buddy up with the user.
+            </div>
+        </c:if>
+        
+        <c:if test="${notBuddy != null}">
+            <div class="alert alert-danger" role="alert">
+                <strong>Warning!</strong> You cannot view that profile as you are not buddies with that user or that user does not exist.
+            </div>
+        </c:if>
+        
+        <h3>Your pending buddy requests</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Options</th>
+            </tr>
+            <c:forEach items ="${pending}" var ="request">
+                <tr>
+                    <td>${request.sender.firstName}</td>
+                    <td>${request.sender.lastName}</td>
+                    <td> 
+                        <a href="/buddy/accept/${request.id}" class="btn btn-default">Accept</a> 
+                        <a href="/buddy/reject/${request.id}" class="btn btn-default">Reject</a> 
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        
+        <h3>Your buddies</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Options</th>
+            </tr>
+            <c:forEach items ="${sentBuddies}" var ="request">
+                <tr>
+                    <td>${request.receiver.firstName}</td>
+                    <td>${request.receiver.lastName}</td>
+                    <td> 
+                        <a href="/buddy/viewBuddy/${request.receiver.id}" class="btn btn-default">View Profile</a> 
+                        <a href="/messaging/new?contact=${request.receiver.id}" class="btn btn-default">Contact</a>  
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:forEach items ="${acceptedBuddies}" var ="request">
+                <tr>
+                    <td>${request.sender.firstName}</td>
+                    <td>${request.sender.lastName}</td>
+                    <td> 
+                        <a href="/buddy/viewBuddy/${request.sender.id}" class="btn btn-default">View Profile</a> 
+                        <a href="/messaging/new?contact=${request.sender.id}" class="btn btn-default">Contact</a> 
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        
+        
 
 </div>
 

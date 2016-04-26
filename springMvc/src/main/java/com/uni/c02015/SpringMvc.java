@@ -133,6 +133,23 @@ public class SpringMvc implements ApplicationRunner {
     alice.setBuddyPref(true);
     searcherRepo.save(alice);
     
+    user1 = new User();
+    user1.setLogin("tim");
+    user1.setConfirmed(true);
+    user1.setPassword(pe.encode("hello123"));
+    user1.setEmailAddress("tim@flatfinder.com");
+    role = new Role();
+    role.setId(ROLE_SEARCHER_ID);
+    role.setRole(ROLE_SEARCHER);
+    user1.setRole(role);
+    userRepo.save(user1);
+    
+    Searcher tim = new Searcher(user1.getId());
+    tim.setFirstName("tim");
+    tim.setLastName("buddy");
+    tim.setBuddyPref(true);
+    searcherRepo.save(tim);
+    
     // Set up users
     User user2 = new User();
     user2.setLogin("ahtif");

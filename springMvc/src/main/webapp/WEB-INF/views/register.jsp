@@ -66,6 +66,11 @@
             <strong>Sorry!</strong> Your passwords did not match.
         </div>
     </c:if>
+    <c:if test="${emailFormat != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please enter a valid email.
+        </div>
+    </c:if>
 
     <form:form method="POST" action="/createAccount" modelAttribute="User">
         <table>
