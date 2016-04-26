@@ -14,13 +14,13 @@ The relationships between and among the actors and the use cases.
 
 ##Component Diagram
 
-!(media/componentDiagram.png)
+![Alt text](media/componentDiagram.png)
 
 Shows all the components in the MVC architecture.
 
 ##Spring MVC Basic Architecture
 
-!(media/springmvc.png)
+![Alt text](media/springmvc.png)
 
 The Spring MVC framework which uses the model, view and controller design pattern also comes with a lot of added functionality such as the Spring Security package; 
 this can be utilised for user password encryption (bcrypt).
@@ -40,7 +40,7 @@ Above is a graphical representation of the design pattern which the Spring MVC f
 
 ##Domain Class Diagram
 
-!(media/domainclassdiagram.png)
+![Alt text](media/domainclassdiagram.png)
 
 This diagram shows the scope of the system, the domain part of the system. The User object is created when a user creates a new account 
 it holds your username, password, and role. Landlord and Searcher object are to hold personal information such as name, email, this object 
@@ -49,15 +49,15 @@ the user role and take them to the appropriate screen.
 
 ##Message Navigational Model
 
-!(media/messageNavModel-1.png)
+![Alt text](media/messageNavModel-1.png)
 
 ##Authentication Navigational Model
 
-!(media/navigationa-diagram-authController-1.png)
+![Alt text](media/navigationa-diagram-authController-1.png)
 
 ##Registation Navigational Model
 
-!(media/registrationNavModel-1.png)
+![Alt text](media/registrationNavModel-1.png)
 
 These navigational models show how the user interacts with the system
 
