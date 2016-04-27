@@ -70,6 +70,10 @@ public class MessageController {
     Message message = messageRepo.findById(Integer.parseInt(id));
     ModelAndView messageView = new ModelAndView("messaging/view","messageAttribute", new Message());
     messageView.addObject("message", message);
+
+    message.setIsRead(true);
+    messageRepo.save(message);
+
     return messageView;
   }
   
@@ -143,7 +147,4 @@ public class MessageController {
     
     return "redirect:/messaging/inbox";
   }
-  
-
-  
 }
