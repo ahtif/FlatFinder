@@ -77,6 +77,7 @@
                     <th>Postcode</th>
                     <th>Type</th>
                     <th>Rooms</th>
+                    <th>Price Per Month</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,6 +91,7 @@
                         <td>${property.postcode}</td>
                         <td>${property.type.getType()}</td>
                         <td>${property.rooms}</td>
+                        <td>${property.pricePerMonth}</td>
                     </tr>
 
                 </c:forEach>

@@ -41,6 +41,8 @@
         <p>As a Searcher you can actively search for listed properties using the form below.</p>
     </div>
 
+    <p>Enter as much or as little information that is needed to perform your search.</p>
+
     <form action="/searchProperties" method="get">
 
         <table>
@@ -56,6 +58,7 @@
                 <td>Property Type:</td>
                 <td><div class="form-group">
                     <select name="pType" class="form-control" required="required">
+                        <option value="-1">Any Type</option>
                         <c:forEach items="${types}" var="type">
                             <option value="${type.id}">${type.type}</option>
                         </c:forEach>
@@ -67,11 +70,42 @@
                 <td>Number of Rooms:</td>
                 <td><div class="form-group">
                     <select name="pRooms" class="form-control" required="required">
+                        <option value="-1">All Rooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Minimum Price Per Month:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="text" name="pMinPPM"
+                           pattern="[0-9]+" placeholder="100" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Maximum Price Per Month:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="text" name="pMaxPPM"
+                           pattern="[0-9]+" placeholder="10000" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable From:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidFrom" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable Until:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidTo" />
                 </div></td>
             </tr>
 

@@ -24,6 +24,7 @@ public class SearchController {
 
     try {
 
+      // Create another database connection for search queries - reduce load on read only connection
       Class.forName("com.mysql.jdbc.Driver");
       DB_CONN = DriverManager.getConnection(
           "jdbc:mysql://" + DbConfig.HOST + "/"
@@ -57,6 +58,8 @@ public class SearchController {
     String keyword = request.getParameter("pKeyword");
     String type = request.getParameter("pType");
     String rooms = request.getParameter("pRooms");
+    String minPricePerMonth = request.getParameter("pMinPPM");
+    String maxPricePerMonth = request.getParameter("pMaxPPM");
 
     // Not all of the form was submitted
     if (keyword.length() == 0 || type.length() == 0 || rooms.length() == 0) {
@@ -66,9 +69,40 @@ public class SearchController {
     // All of the form was submitted
     } else {
 
-      String query = "SELECT id FROM property WHERE city LIKE ? OR postcode LIKE ? "
-          + "OR street LIKE ? OR rooms LIKE ? OR type LIKE ?";
+      // Create the mysql query
+      String query = "SELECT id FROM property WHERE (city LIKE ? OR postcode LIKE ? "
+          + "OR street LIKE ?)";
       List<Property> properties = new LinkedList<Property>();
+
+      if (!rooms.equals("-1")) {
+
+        query += " AND rooms = " + rooms;
+      }
+
+      if (!type.equals("-1")) {
+
+        query += " AND type = " + type;
+      }
+
+      if (minPricePerMonth.length() > 0) {
+
+        query += " AND price_per_month >= " + minPricePerMonth;
+      }
+
+      if (maxPricePerMonth.length() > 0) {
+
+        query += " AND price_per_month <= " + maxPricePerMonth;
+      }
+
+      if (request.getParameter("pValidFrom").length() > 0) {
+
+        query += " AND valid_from >= '" + request.getParameter("pValidFrom") + "'";
+      }
+
+      if (request.getParameter("pValidTo").length() > 0) {
+
+        query += " AND valid_to <= '" + request.getParameter("pValidTo") + "'";
+      }
 
       try {
 
@@ -77,8 +111,6 @@ public class SearchController {
         preparedStatement.setString(1, "%" + keyword + "%");
         preparedStatement.setString(2, "%" + keyword + "%");
         preparedStatement.setString(3, "%" + keyword + "%");
-        preparedStatement.setString(4, "%" + rooms + "%");
-        preparedStatement.setString(5, "%" + type + "%");
 
         ResultSet resultSet = preparedStatement.executeQuery();
 

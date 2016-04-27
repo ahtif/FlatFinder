@@ -159,14 +159,14 @@
             </tr>
 
             <tr>
-                <td>Valid From Date:</td>
+                <td>Is Rentable From:</td>
                 <td><div class="form-group">
                     <input role="form" class="form-control" type="date" name="pValidFrom" required="required" />
                 </div></td>
             </tr>
 
             <tr>
-                <td>Valid To Date:</td>
+                <td>Is Rentable Until:</td>
                 <td><div class="form-group">
                     <input role="form" class="form-control" type="date" name="pValidTo" required="required" />
                 </div></td>
