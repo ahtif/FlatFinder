@@ -1,8 +1,10 @@
 package com.uni.c02015.domain;
 
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ public class Searcher {
   private String firstName;
   private String lastName;
   private boolean buddyPref;
-
+  
   public Searcher(int id) {
 
     this.id = id;
@@ -55,4 +57,5 @@ public class Searcher {
   public void setBuddyPref(boolean buddyPref) {
     this.buddyPref = buddyPref;
   }
+  
 }

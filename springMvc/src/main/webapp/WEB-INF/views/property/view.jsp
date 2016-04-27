@@ -81,6 +81,7 @@
                 <p><a href="/messaging/new?contact=${property.getLandlord().getId()}" class="btn btn-success">Contact Landlord</a></p>
 
             </c:if>
+           
 
             <div class="container" style="margin-left: -15px;">
                 <br>

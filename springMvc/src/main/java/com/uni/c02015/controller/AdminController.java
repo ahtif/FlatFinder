@@ -11,6 +11,7 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.VerificationTokenRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class AdminController {
   private LandlordRepository landlordRepo;
   @Autowired
   private RoleRepository roleRepo;
+  @Autowired
+  private VerificationTokenRepository tokenRepo;
   
   
   /**
@@ -181,6 +184,7 @@ public class AdminController {
     User user = userRepo.findById(id);
     if (user != null) {
       messageRepo.delete(messageRepo.findBySender(user));
+      tokenRepo.delete(tokenRepo.findByUser(user));
       userRepo.delete(user);
       return "redirect:/admin/viewUsers?deleted=true";
     }
