@@ -1,4 +1,4 @@
-#Sprint 2 Rectrospective 
+#Sprint 2 Retrospective 
 Towards the end of sprint 2 the group disscussed how the project went and how we could improve for future project and even went on to say what we would do in the next sprint if we had one. We disscussed three major points: things what we should start doing, things that we should stop doing and things that we should continue doing. 
 
 What we should have started doing is checking regularly in the group chat how a certain task was going and if anyone needed assistance if they were struggling to complete the task, instead of just waiting until they pushed to GitHub - This would have sped up some tasks and made it easier towards the end of the worksheet.
