@@ -3,9 +3,9 @@ package com.uni.c02015.domain.property;
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.User;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table
@@ -36,10 +36,45 @@ public class Property {
   private Type type;
 
   private Integer rooms;
+  private Integer pricePerMonth;
 
+  @Temporal(TemporalType.DATE)
+  Date validFrom;
+  @Temporal(TemporalType.DATE)
+  Date validTo;
 
   public Property() {
 
+  }
+
+  public Date getValidFrom() {
+
+    return validFrom;
+  }
+
+  public void setValidFrom(Date validFrom) {
+
+    this.validFrom = validFrom;
+  }
+
+  public Date getValidTo() {
+
+    return validTo;
+  }
+
+  public void setValidTo(Date validTo) {
+
+    this.validTo = validTo;
+  }
+
+  public Integer getPricePerMonth() {
+
+    return pricePerMonth;
+  }
+
+  public void setPricePerMonth(Integer pricePerMonth) {
+
+    this.pricePerMonth = pricePerMonth;
   }
 
   public Integer getId() {

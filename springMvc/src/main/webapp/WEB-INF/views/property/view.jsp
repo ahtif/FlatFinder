@@ -62,12 +62,24 @@
             <div class="jumbotron">
                 <br />
                 <h1>Property Details</h1>
-                <p>Property Number: ${property.number}</p>
-                <p>Property Street: ${property.street}</p>
-                <p>Property City: ${property.city}</p>
-                <p>Property PostCode: ${property.postcode}</p>
-                <p>Property Type: ${property.type.type}</p>
-                <p>Property Rooms: ${property.rooms}</p>
+                <p>Number: ${property.number}</p>
+                <p>Street: ${property.street}</p>
+                <p>City: ${property.city}</p>
+                <p>PostCode: ${property.postcode}</p>
+                <p>Type: ${property.type.type}</p>
+                <p>Rooms: ${property.rooms}</p>
+                <p>Price Per Month:
+                    <c:choose>
+                        <c:when test="${property.pricePerMonth == -1}">
+                            Not Disclosed
+                        </c:when>
+                        <c:otherwise>
+                            &pound;${property.pricePerMonth}
+                        </c:otherwise>
+                    </c:choose>
+                </p>
+                <p>Valid From: ${property.validFrom}</p>
+                <p>Valid To: ${property.validTo}</p>
             </div>
 
             <c:if test="${showEditButton != null || isAdmin != null}">
