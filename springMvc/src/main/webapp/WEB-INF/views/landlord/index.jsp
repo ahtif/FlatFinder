@@ -49,7 +49,7 @@
 
         </c:when>
         <c:otherwise>
-
+<div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -78,7 +78,7 @@
 
                 </tbody>
             </table>
-
+</div>
         </c:otherwise>
     </c:choose>
 

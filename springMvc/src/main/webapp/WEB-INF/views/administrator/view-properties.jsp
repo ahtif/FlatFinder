@@ -51,7 +51,7 @@
             <strong>Success!</strong> You have successfully edited a property.
         </div>
     </c:if>
-    
+<div class="table-responsive">
     <table class="table table-hover">
         <tr>
             <th>ID</th>
@@ -78,7 +78,7 @@
         </c:forEach>
     </table>
 </div>
-
+</div>
 <hr />
 
 <footer class="container">

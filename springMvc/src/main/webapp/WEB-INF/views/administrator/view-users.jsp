@@ -61,7 +61,7 @@
             <strong>Success!</strong> You have successfully edited a user.
         </div>
     </c:if>
-    
+    <div class="table-responsive">
     <table class="table table-hover">
         <tr>
             <th>ID</th>
@@ -95,6 +95,7 @@
             </tr>
         </c:forEach>
     </table>
+</div>
 </div>
 
 <hr />
