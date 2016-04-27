@@ -9,7 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.uni.c02015.domain.User;
+import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.MessageRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.Filter;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -39,7 +45,17 @@ public class AccessControlStepDefs {
   private Filter springSecurityFilterChain;
   @Autowired
   private UserRepository userRepository;
-
+  @Autowired
+  private MessageRepository messageRepository;
+  @Autowired
+  private LandlordRepository landlordRepository;
+  @Autowired
+  private SearcherRepository searcherRepository;
+  @Autowired
+  private RoleRepository roleRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
+  
   private MockMvc mockMvc;
   private ResultActions result;
   private Authentication authentication;
@@ -56,6 +72,23 @@ public class AccessControlStepDefs {
             .addFilters(springSecurityFilterChain)
             .apply(springSecurity())
             .build();
+  }
+  
+  /**
+   * Delete contents from each repo's after each scenario.
+   */
+  @After
+  public void delete() {
+    try {
+      propertyRepository.deleteAll();
+      messageRepository.deleteAll();
+      landlordRepository.deleteAll();
+      searcherRepository.deleteAll();
+      userRepository.deleteAll();
+      roleRepository.deleteAll();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   //Creates an authentication token using username, password and role
@@ -103,13 +136,16 @@ public class AccessControlStepDefs {
   }
 
   @Given("^I am an authenticated user with \"([^\"]*)\"$")
-  public void i_am_an_authenticated_user_with(String arg1) throws Throwable {
+  public void am_an_authenticated_user_with(String arg1) throws Throwable {
     authentication = new UsernamePasswordAuthenticationToken("majid", null,
             AuthorityUtils.createAuthorityList("ROLE_" + arg1));
   }
-
+  
+  /**
+   * Go to the user's homepage.
+   */
   @When("^I go to my specific homepage$")
-  public void i_go_to_my_specific_homepage() throws Throwable {
+  public void go_to_my_specific_homepage() throws Throwable {
     if (authentication.getAuthorities().equals("ROLE_LANDLORD")) {
       result = mockMvc.perform(get("landlord/index").with(authentication(authentication)));
     } else {
@@ -117,8 +153,12 @@ public class AccessControlStepDefs {
     }
   }
 
+  /**
+   * Check that the user is ont the specific page.
+   * @param arg1 The type of page the user should be on.
+   */
   @Then("^I should be on a \"([^\"]*)\" specific homepage\\.$")
-  public void i_should_be_on_a_specific_homepage(String arg1) throws Throwable {
+  public void should_be_on_a_specific_homepage(String arg1) throws Throwable {
     if (authentication.getAuthorities().equals("ROLE_LANDLORD")) {
       result.andExpect(redirectedUrl("https://localhostlandlord/index"));
     } else {

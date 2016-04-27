@@ -176,12 +176,12 @@ public class BuddyUpStepDefs {
     throw new PendingException();
   }
 
-  @Given("^a searcher \"([^\"]*)\" with password \"([^\"]*)\"$")
-  public void searcher_with_password(
-      String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+//  @Given("^a searcher \"([^\"]*)\" with password \"([^\"]*)\"$")
+//  public void searcher_with_password(
+//      String arg1, String arg2) throws Throwable {
+//    // Write code here that turns the phrase above into concrete actions
+//    throw new PendingException();
+//  }
 
   @Given("^a searcher \"([^\"]*)\" who hasnt opted in to the buddyup system$")
   public void searcher_who_hasnt_opted_in_to_the_buddyup_system(

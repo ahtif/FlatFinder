@@ -22,16 +22,13 @@ Then My authentication is <isAuth> with role <ROLE>
        | "/login-form" | "Harry"   | "foo"      | "SEARCHER"  | false  |
 
 @Controller
-@NotImplemented
 Scenario: Username field length validation
- Given I am on the login screen
- And enter a username "UsernameIsTooLongToFitHere"
- And password "invalid"
+ Given I have entered the username "UsernameIsTooLongToFitHere"
+ And I have entered the password "invalid"
  When I press login
- Then I should receive an error message stating "Username must be between 3 to 12 characters"
+ Then I receive the error message "Username must be between 3 to 12 characters"
 
 @Controller
-@NotImplemented
 Scenario: Entering non-existing login credentials
  Given I have entered the username "JonJones"
  And I have entered the password "Bones"
@@ -40,49 +37,32 @@ Scenario: Entering non-existing login credentials
  Then I receive the error message "Username does not exist"
 
 @Controller
-@NotImplemented
 Scenario: Entering the wrong password
- Given I have a user "Bob" in the database
- And with a password "validpassword"
- And I enter "Bob" in the username field
- And I enter the password "invalidpassword"
- When I enter press login
- Then I should receive an error message "Incorrect password, please try again."
+ Given I have a user "Bob" with password "password"
+ And I have entered the username "Bob"
+ And I have entered the password "invalid"
+ When I press login
+ Then I receive the error message "Invalid username or password"
 
 @Controller
-@NotImplemented
 Scenario: Logging out
  Given a searcher "Bob" with password "foo"
  And "Bob" is logged in
  When searcher "Bob" presses logout
- Then he should be redirected to the "login-page"
+ Then he should be redirected to the "/user-logout"
 
 @Security
 @NotImplemented
 Scenario: Password recovery
- Given I have a Searcher "Bob" with password "foo"
- And the user "Bob is registered with the email address "Bob@gmail.com"
- And I request the "forgotten password" form
- And I enter the email address "Bob@gmail.com"
- When I press submit
- Then the system should generate a unique link
- And should send the unique link to the email "Bob@gmail.com"
-
-@Controller
-@NotImplemented
-Scenario: Recovering password with unpaired email
- Given I have a Searcher "Bob" with password "foo"
- And the user "Bob is registered with the email address "Bob@gmail.com"
- And I request the "forgotten password" form
- And I enter the email address "incorrect@hotmail.com"
- When I press submit
- Then I should receive an error message "Incorrect email"
+ Given I have a Searcher "Barry" with password "foo" with email address "Bob@gmail.com"
+ And I request the forgotten password form
+ When I submit the password recovery form with username "Barry"
+ Then I should be redirected to the "/forgot?submitted=true" page
 
 @Controller
 @NotImplemented
 Scenario: Logging into a temporarily suspended account
- Given a user "Bob" with password "foo"
- And "Bob" account is suspended
- When "Bob" enters his username "Bob" and password "foo" into the login form fields
- Then error message appears saying "Suspended account"
- And is redirected to the "login" page
+ Given I have a user "Joe" with password "foo"
+ And "Joe" account is suspended
+ When I login with username "Joe" and password "foo"
+ Then I receive the error message "Suspended account"

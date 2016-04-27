@@ -15,6 +15,7 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class UserInteraction {
   private SearcherRepository searcherRepository;
   @Autowired
   private RoleRepository roleRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
 
   private MockMvc mockMvc;
   private ResultActions result;
@@ -112,11 +115,16 @@ public class UserInteraction {
    */
   @After
   public void delete() {
-    messageRepository.deleteAll();
-    searcherRepository.deleteAll();
-    landlordRepository.deleteAll();
-    userRepository.deleteAll();
-    roleRepository.deleteAll();
+    try {
+      propertyRepository.deleteAll();
+      messageRepository.deleteAll();
+      landlordRepository.deleteAll();
+      searcherRepository.deleteAll();
+      userRepository.deleteAll();
+      roleRepository.deleteAll();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   /**
