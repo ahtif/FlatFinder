@@ -1,0 +1,14 @@
+#Sprint 1 retrospective
+After sprint 1 our group had a meeting to discuss how it went as a whole and what we could do to improve. We focused on three areas to improve our performance as a group in sprint 2, these were: things that we should start doing, things that we should stop doing and things that we should continue doing. 
+
+The first thing that we said is that we should manage our time better, we feel as though this is very important as we left some things to do on the very last day, which is unprofessional and could impact on the quality of the final product. We should also ensure that everyone knows what they’re doing at the start and throughout the sprint, this is essential for the code of the system in particular as people were unsure about what they were doing at some points of the project and we had to waste time reallocating certain aspects of project. As the Easter holiday was coming up we decided that it would be beneficial to have a meeting before the holiday to make sure that everyone knows what they’re doing. We also found that testing part of the system is very difficult if you have had no input on the actual code for the system because it’s hard to understand the code and because of this even harder to test it. 
+
+We decided from early on that the implementation of the functionality was more important than the design so we did no design in sprint 1 but decided that when we did in the next sprint that we would use bootstrap as it is professional and isn’t too difficult to implement. We decided that in sprint 2 we would implement the design as soon as possible.
+
+Submitting to GitHub before checking for errors was something that we agreed that we should stop doing as it meant a lot of the time throughout this sprint that our master branch was failing. The errors mainly were from the checkstyle that we were trying to implement so we decided to change it to be a little more lenient, i.e. remove the checkstyle that the imports have to be in the correct order.
+
+Using issues on GitHub is something we started to do partway through sprint 1 and we feel as though we should carry on using them throughout the next sprint as we found them to be useful to raise any concerns/problems with the project. We should also continue to use branches as it means that there is less chance of pushing to the master branch causing it the error as you can ensure it passes on another branch first.
+
+One obstacle that we faced was that a team member did no work for the project, because of this we were waiting for him at certain points and other people had to do his work as a result. In the next sprint he will be allocated work that is not essential to the project as to not impact anyone else’s work.
+
+Overall, sprint 1 went well although it could have gone better. We feel if we do everything that we have discussed then the project will be a success and the product will be professional.

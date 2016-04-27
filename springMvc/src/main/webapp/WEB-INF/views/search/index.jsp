@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - Search Results</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -50,7 +51,7 @@
     <div class="jumbotron">
         <br />
         <h1>Property Search Results</h1>
-        <p>Below are the search results for your current query.</p>
+        <p>Below are the search results for your current query, use the map to locate each search result.</p>
     </div>
 
     <c:choose>
@@ -68,6 +69,24 @@
         </c:when>
         <c:otherwise>
 
+            <div id="mapid" class="jumbotron"></div>
+            <script type="text/javascript">
+                var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
+
+                L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                }).addTo(mymap);
+            </script>
+            <c:forEach items="${properties}" var="property">
+                <script type="text/javascript">
+                    var lat = ${property.latitude};
+                    var lng = ${property.longitude};
+
+                    L.marker([lat, lng]).addTo(mymap)
+                            .bindPopup("${property.number}<br />${property.street}<br />${property.city}<br />${property.postcode}<br />").openPopup();
+                </script>
+            </c:forEach>
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -77,6 +96,7 @@
                     <th>Postcode</th>
                     <th>Type</th>
                     <th>Rooms</th>
+                    <th>Price Per Month</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,30 +110,13 @@
                         <td>${property.postcode}</td>
                         <td>${property.type.getType()}</td>
                         <td>${property.rooms}</td>
+                        <td>${property.pricePerMonth}</td>
                     </tr>
 
                 </c:forEach>
 
                 </tbody>
             </table>
-            
-            <div id="mapid" class="jumbotron"></div>
-            <script type="text/javascript">
-                var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
-
-                L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                }).addTo(mymap);
-            </script>
-            <c:forEach items="${properties}" var="property">
-                <script type="text/javascript">
-                    var lat = ${property.latitude};
-                    var lng = ${property.longitude};
-    
-                    L.marker([lat, lng]).addTo(mymap)
-                            .bindPopup("${property.number}<br />${property.street}<br />${property.city}<br />${property.postcode}<br />").openPopup();
-                </script>
-            </c:forEach>
 
         </c:otherwise>
     </c:choose>

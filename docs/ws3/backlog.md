@@ -7,22 +7,22 @@
 | 1   | User | Register as either a Landlord or a Searcher | I can rent my property to possible tenants or find a property which meets my criteria | High | Complete | 
 | 2   | Searcher | Register as a Searcher and subscribe to the buddy system | I can find properties and possible buddies who I can share a flat with | High | Complete | 
 | 3   | Registered User | Login into the website as a Landlord, Searcher or Admin | I can have access to my account and use the services which I have access to | High | Complete |
-| 4	  | Registered User |	Reset my password for my account as either a Landlord or Searcher | I can regain access to my account and use the services which I have access to | High | No |
-| 5   |	Searcher | Search for properties near me and based on filter setting such as price, postcode, house type, smoking/non-smoking and pets | I can find the properties that match my preference | High | No |
+| 4	  | Registered User |	Reset my password for my account as either a Landlord or Searcher | I can regain access to my account and use the services which I have access to | Low | Complete |
+| 5   |	Searcher | Search for properties near me and based on filter setting such as price, postcode, house type, smoking/non-smoking and pets | I can find the properties that match my preference | High | Complete |
 | 6   | Searcher |	Search for properties using map feature |	I can find properties and see the local amenities near the properties |	High | No |
-| 7	  | Landlord |	Add and update my properties	| I can make sure the information is correct and up to date |	High | No |
-| 8   |	Landlord |	Remove properties from my property listing |	I can make sure my properties listing are up to date and only available properties are listed	| High | No |
-| 9   | Landlord |	Upload pictures of my property | I can give searchers a visual representation of the property |	High | No |
-| 10  | Landlord |	Provide details about my property such as price, room, location and building rules such as no pet, no smoking etc. | I can inform tenants about the rules of the property. Also find tenants who meet my preferences | High	| No |
+| 7	  | Landlord |	Add and update my properties	| I can make sure the information is correct and up to date |	High | Complete |
+| 8   |	Landlord |	Remove properties from my property listing |	I can make sure my properties listing are up to date and only available properties are listed	| High | Complete |
+| 9   | Landlord |	Upload pictures of my property | I can give searchers a visual representation of the property |	Low | Complete |
+| 10  | Landlord |	Provide details about my property such as price, room, location and building rules such as no pet, no smoking etc. | I can inform tenants about the rules of the property. Also find tenants who meet my preferences | High	| Complete |
 | 11  | Searcher | Report properties which contain false information | I can make the administrators aware of the issue and prevent other users from being scammed | High	| No | 
 | 12  |	Registered User |	Report searchers or searchers reporting landlords for harassing users or violating the rules | I can protect myself and other users from being harassed and make the administrators aware of the issue | High |	No |
-| 13  | Administrator |	Receive report notifications and suspend or delete accounts | I can protect searchers or landlord from abusive users or fake listing | High	| No |
+| 13  | Administrator |	Receive report notifications and suspend or delete accounts | I can protect searchers or landlord from abusive users or fake listing | High	| Complete |
 | 14  | Administrator	| Expire accounts after a given time period	| I can maintain the website and have only active users |	High | No |
-| 15	| Registered User |	Message other users and respond to their messages |	I can notify and communicate to users | High | Yes |
-| 16  | Registered User |	Have an inbox so I am able to see all my conversion with other users | I can easily reply to landlord or searchers and see my previous conversion with them |	High | Yes |
-| 17	| Administrator | Broadcast a message to all users | I can notify them about important updates | High	| No |
-| 18	| Landlord | View my account statistics such as most looked at property, number of interests per property |	I can see which property is popular and understand any possible trends | High	| No |
-| 19  |	Searcher | View my account statistics such as property history | I can view listing of properties I have visited before | High | No |
+| 15	| Registered User |	Message other users and respond to their messages |	I can notify and communicate to users | High | Complete |
+| 16  | Registered User |	Have an inbox so I am able to see all my conversion with other users | I can easily reply to landlord or searchers and see my previous conversion with them |	High | Complete |
+| 17	| Administrator | Broadcast a message to all users | I can notify them about important updates | Low	| No |
+| 18	| Landlord | View my account statistics such as most looked at property, number of interests per property |	I can see which property is popular and understand any possible trends | Low	| Complete |
+| 19  |	Searcher | View my account statistics such as property history | I can view listing of properties I have visited before | Low | No |
 | 20  | Searcher | Send an interest on a specific property I like	| I can inform the landlord I am interest in the property | High	| No |
 
 ## Scenarios

@@ -1,18 +1,14 @@
 package com.uni.c02015;
 
-import com.uni.c02015.domain.Landlord;
-import com.uni.c02015.domain.Message;
-import com.uni.c02015.domain.Role;
-import com.uni.c02015.domain.Searcher;
-import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.*;
 import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -31,6 +27,8 @@ public class SpringMvc implements ApplicationRunner {
   private RoleRepository roleRepo;
   @Autowired
   private TypeRepository typeRepository;
+  @Autowired
+  private PropertyRepository propertyRepo;
   @Autowired
   private LandlordRepository landlordRepo;
   @Autowired
@@ -129,6 +127,23 @@ public class SpringMvc implements ApplicationRunner {
     alice.setBuddyPref(true);
     searcherRepo.save(alice);
     
+    user1 = new User();
+    user1.setLogin("tim");
+    user1.setConfirmed(true);
+    user1.setPassword(pe.encode("hello123"));
+    user1.setEmailAddress("tim@flatfinder.com");
+    role = new Role();
+    role.setId(ROLE_SEARCHER_ID);
+    role.setRole(ROLE_SEARCHER);
+    user1.setRole(role);
+    userRepo.save(user1);
+    
+    Searcher tim = new Searcher(user1.getId());
+    tim.setFirstName("tim");
+    tim.setLastName("buddy");
+    tim.setBuddyPref(true);
+    searcherRepo.save(tim);
+    
     // Set up users
     User user2 = new User();
     user2.setLogin("ahtif");
@@ -158,6 +173,31 @@ public class SpringMvc implements ApplicationRunner {
     larry.setLastName("landlord");
     landlordRepo.save(larry);
 
+//    //set up default properties
+//    Property property = new Property();
+//    property.setNumber("5");
+//    property.setStreet("University Road");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE1 7RA");
+//    property.setType(typeRepository.findById(1));
+//    property.setRooms(2);
+//    property.setLatitude(52.627717);
+//    property.setLongitude(-1.121204);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property);
+//    
+//    property = new Property();
+//    property.setNumber("2");
+//    property.setStreet("Manor Rd");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE2 2LJ");
+//    property.setType(typeRepository.findById(2));
+//    property.setRooms(4);
+//    property.setLatitude(52.609993);
+//    property.setLongitude(-1.088549);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property); 
+    
     Message message = new Message();
     message.setSenderName("admin");
     message.setMessage("hello");

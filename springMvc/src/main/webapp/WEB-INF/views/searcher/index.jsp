@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - Searcher Home</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -28,18 +30,7 @@
             </button>
             <a class="navbar-brand" href="#">Flat Finder - Searcher Home</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/success-login">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/messaging">Message Box</a></li>
-            </ul>
-            <c:url value="/logout" var="logoutUrl"/>
-            <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button class="btn btn-success" type="submit">Log Out</button>
-            </form>
-        </div><!--/.nav-collapse -->
+        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
     </div>
 </nav>
 
@@ -50,6 +41,8 @@
         <h1>Property Search</h1>
         <p>As a Searcher you can actively search for listed properties using the form below.</p>
     </div>
+
+    <p>Enter as much or as little information that is needed to perform your search.</p>
 
     <form action="/searchProperties" method="get">
 
@@ -66,6 +59,7 @@
                 <td>Property Type:</td>
                 <td><div class="form-group">
                     <select name="pType" class="form-control" required="required">
+                        <option value="-1">Any Type</option>
                         <c:forEach items="${types}" var="type">
                             <option value="${type.id}">${type.type}</option>
                         </c:forEach>
@@ -77,11 +71,42 @@
                 <td>Number of Rooms:</td>
                 <td><div class="form-group">
                     <select name="pRooms" class="form-control" required="required">
+                        <option value="-1">All Rooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Minimum Price Per Month:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="text" name="pMinPPM"
+                           pattern="[0-9]+" placeholder="100" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Maximum Price Per Month:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="text" name="pMaxPPM"
+                           pattern="[0-9]+" placeholder="10000" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable From:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidFrom" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable Until:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidTo" />
                 </div></td>
             </tr>
 

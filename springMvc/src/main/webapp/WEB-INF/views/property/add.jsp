@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - Add Property</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -69,6 +70,24 @@
         </div>
     </c:if>
 
+    <c:if test="${ppmInvalid != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide a price per month.
+        </div>
+    </c:if>
+
+    <c:if test="${validFromInvalid != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide a valid from date.
+        </div>
+    </c:if>
+
+    <c:if test="${validToInvalid != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please provide a valid to date.
+        </div>
+    </c:if>
+
     <form method="POST" enctype="multipart/form-data" type="" action="/property/addPost">
         <table>
             <tr>
@@ -123,6 +142,34 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Price Per Month:</td>
+                <td><div class="form-group">
+                    <select name="pPricePerMonth" class="form-control" required="required">
+                        <c:forEach var="i" begin="1" end="9">
+                            <c:forEach var="i2" begin="0" end="9">
+                                <option value="${i}${i2}0">${i}${i2}0</option>
+                            </c:forEach>
+                        </c:forEach>
+                        <option value="-1">Other</option>
+                    </select>
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable From:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidFrom" required="required" />
+                </div></td>
+            </tr>
+
+            <tr>
+                <td>Is Rentable Until:</td>
+                <td><div class="form-group">
+                    <input role="form" class="form-control" type="date" name="pValidTo" required="required" />
                 </div></td>
             </tr>
 

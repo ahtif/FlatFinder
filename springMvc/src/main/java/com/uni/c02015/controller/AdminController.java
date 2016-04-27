@@ -6,13 +6,8 @@ import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
-import com.uni.c02015.persistence.repository.LandlordRepository;
-import com.uni.c02015.persistence.repository.MessageRepository;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
-import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.*;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,13 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AdminController {
@@ -44,6 +37,8 @@ public class AdminController {
   private LandlordRepository landlordRepo;
   @Autowired
   private RoleRepository roleRepo;
+  @Autowired
+  private VerificationTokenRepository tokenRepo;
   
   
   /**
@@ -181,6 +176,7 @@ public class AdminController {
     User user = userRepo.findById(id);
     if (user != null) {
       messageRepo.delete(messageRepo.findBySender(user));
+      tokenRepo.delete(tokenRepo.findByUser(user));
       userRepo.delete(user);
       return "redirect:/admin/viewUsers?deleted=true";
     }

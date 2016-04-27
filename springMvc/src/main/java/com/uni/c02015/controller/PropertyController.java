@@ -8,10 +8,11 @@ import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.buddy.BuddyPropertyRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
-
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +64,10 @@ public class PropertyController {
   UserRepository userRepository;
   @Autowired
   PropertyRepository propertyRepository;
+  @Autowired
+  SearcherRepository searcherRepository;
+  @Autowired
+  BuddyPropertyRepository buddyPropertyRepository;
 
   /**
    * Add a property.
@@ -144,6 +151,39 @@ public class PropertyController {
       query += "imagesInvalid=true";
     }
 
+    // No property price per month
+    if (request.getParameter("pPricePerMonth").length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "ppmInvalid=true";
+    }
+
+    // No valid from date
+    if (request.getParameter("pValidFrom").length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "validFromInvalid=true";
+    }
+
+    // No valid to date
+    if (request.getParameter("pValidTo").length() == 0) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "validToInvalid=true";
+    }
+
     // There was errors in the request
     if (query.length() > 0) {
 
@@ -193,7 +233,8 @@ public class PropertyController {
     String propStreet = request.getParameter("pStreet");
     String propCity = request.getParameter("pCity");
     String propPostcode = request.getParameter("pPostcode");
-    
+    Integer pricePerMonth = new Integer(request.getParameter("pPricePerMonth"));
+
     property.setNumber(propNumber);
     property.setStreet(propStreet);
     property.setCity(propCity);
@@ -202,7 +243,20 @@ public class PropertyController {
         typeRepository.findById(new Integer(request.getParameter("pType")))
     );
     property.setRooms(new Integer(request.getParameter("pRooms")));
-    
+    property.setPricePerMonth(pricePerMonth);
+
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+    try {
+
+      property.setValidFrom(format.parse(request.getParameter("pValidFrom")));
+      property.setValidTo(format.parse(request.getParameter("pValidTo")));
+
+    } catch (ParseException e) {
+
+      e.printStackTrace();
+    }
+
     //Geocode the address of the property to get it's latitude and longitude.
     GeoApiContext context =
         new GeoApiContext().setApiKey("AIzaSyCEawq-gRz787BseZuahn_lFjPfIsTgvj8");
@@ -295,6 +349,29 @@ public class PropertyController {
       if (user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
 
         modelAndView.addObject("isAdmin", true);
+      }
+
+      // Is a searcher with buddy up option on
+      if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)) {
+
+        if (searcherRepository.findById(user.getId()).getBuddyPref()) {
+
+          modelAndView.addObject("userId", user.getId());
+
+          if (buddyPropertyRepository
+              .findByPropertyAndUser(property, userRepository.findById(user.getId())) != null) {
+
+            modelAndView.addObject("buddyProperty", true);
+
+          } else {
+
+            modelAndView.addObject("buddyProperty", false);
+          }
+
+        } else {
+
+          modelAndView.addObject("buddyPrompt", true);
+        }
       }
 
       modelAndView.addObject("property", property);

@@ -18,7 +18,7 @@ public class VerificationToken {
   @Enumerated(EnumType.STRING)
   private TokenType type;
 
-  @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+  @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, orphanRemoval = true)
   @JoinColumn(nullable = false, name = "user_id")
   private User user;
 

@@ -1,8 +1,11 @@
 package com.uni.c02015.domain.property;
 
 import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.User;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table
@@ -23,16 +26,55 @@ public class Property {
   private String city;
   private double latitude;
   private double longitude;
+  
+  @OneToMany
+  @JoinColumn
+  private Set<User> interestedUsers;
 
   @ManyToOne
   @JoinColumn(name = "type")
   private Type type;
 
   private Integer rooms;
+  private Integer pricePerMonth;
 
+  @Temporal(TemporalType.DATE)
+  Date validFrom;
+  @Temporal(TemporalType.DATE)
+  Date validTo;
 
   public Property() {
 
+  }
+
+  public Date getValidFrom() {
+
+    return validFrom;
+  }
+
+  public void setValidFrom(Date validFrom) {
+
+    this.validFrom = validFrom;
+  }
+
+  public Date getValidTo() {
+
+    return validTo;
+  }
+
+  public void setValidTo(Date validTo) {
+
+    this.validTo = validTo;
+  }
+
+  public Integer getPricePerMonth() {
+
+    return pricePerMonth;
+  }
+
+  public void setPricePerMonth(Integer pricePerMonth) {
+
+    this.pricePerMonth = pricePerMonth;
   }
 
   public Integer getId() {
@@ -109,5 +151,13 @@ public class Property {
 
   public void setLongitude(double longitude) {
     this.longitude = longitude;
+  }
+  
+  public Set<User> getInterestedUsers() {
+    return interestedUsers;
+  }
+
+  public void setInterestedUsers(Set<User> interestedUsers) {
+    this.interestedUsers = interestedUsers;
   }
 }

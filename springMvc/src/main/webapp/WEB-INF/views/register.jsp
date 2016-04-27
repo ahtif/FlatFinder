@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - Register</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -64,6 +65,11 @@
     <c:if test="${passwordMismatch != null}">
         <div class="alert alert-danger" role="alert">
             <strong>Sorry!</strong> Your passwords did not match.
+        </div>
+    </c:if>
+    <c:if test="${emailFormat != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> Please enter a valid email.
         </div>
     </c:if>
 

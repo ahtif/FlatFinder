@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - View Property</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -62,17 +63,29 @@
             <div class="jumbotron">
                 <br />
                 <h1>Property Details</h1>
-                <p>Property Number: ${property.number}</p>
-                <p>Property Street: ${property.street}</p>
-                <p>Property City: ${property.city}</p>
-                <p>Property PostCode: ${property.postcode}</p>
-                <p>Property Type: ${property.type.type}</p>
-                <p>Property Rooms: ${property.rooms}</p>
+                <p>Number: ${property.number}</p>
+                <p>Street: ${property.street}</p>
+                <p>City: ${property.city}</p>
+                <p>PostCode: ${property.postcode}</p>
+                <p>Type: ${property.type.type}</p>
+                <p>Rooms: ${property.rooms}</p>
+                <p>Price Per Month:
+                    <c:choose>
+                        <c:when test="${property.pricePerMonth == -1}">
+                            Not Disclosed
+                        </c:when>
+                        <c:otherwise>
+                            &pound;${property.pricePerMonth}
+                        </c:otherwise>
+                    </c:choose>
+                </p>
+                <p>Valid From: ${property.validFrom}</p>
+                <p>Valid To: ${property.validTo}</p>
             </div>
 
             <c:if test="${showEditButton != null || isAdmin != null}">
 
-                <p><a href="/property/edit/${showEditButton}" class="btn btn-success">Edit Property</a></p>
+                <p><a href="/property/edit/${property.getId()}" class="btn btn-success">Edit Property</a></p>
 
             </c:if>
 
@@ -81,6 +94,29 @@
                 <p><a href="/messaging/new?contact=${property.getLandlord().getId()}" class="btn btn-success">Contact Landlord</a></p>
 
             </c:if>
+
+            <c:if test="${userId != null}">
+
+                <p><a href="/buddy/showPropertyBuddies/${property.getId()}" class="btn btn-success">View Users Who Want To Buddy</a></p>
+
+                <c:if test="${buddyProperty == true}">
+
+                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-success">Cancel Buddy Up With This Property</a></p>
+
+                </c:if>
+
+                <c:if test="${buddyProperty == false}">
+
+                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-success">Let Other Searchers Buddy Up With You</a></p>
+
+                </c:if>
+
+            </c:if>
+
+            <c:if test="${buddyPrompt == true}">
+                <p>In order to enable property buddies please enable it in your preferences <a href="/searcher/profile">here</a>.</p>
+            </c:if>
+
 
             <div class="container" style="margin-left: -15px;">
                 <br>
