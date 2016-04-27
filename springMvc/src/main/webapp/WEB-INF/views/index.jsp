@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -76,15 +77,15 @@
         <!-- Wrapper for slides - !!!ensure image width is maximised!!! -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="<c:url value="/resources/images/index/carousel0.png" />" alt="" width="9999" height="640" />
+                <img src="<c:url value="/resources/images/index/highcross.jpg" />" alt="" style="width:9999px;" />
             </div>
 
             <div class="item">
-                <img src="<c:url value="/resources/images/index/carousel1.png" />" alt="" width="9999" height="640" />
+                <img src="<c:url value="/resources/images/index/LCFC.jpg" />" alt="" style="width:9999px;" />
             </div>
 
             <div class="item">
-                <img src="<c:url value="/resources/images/index/carousel2.png" />" alt="" width="9999" height="640" />
+                <img src="<c:url value="/resources/images/index/monument.jpg" />" alt="" style="width:9999px;" />
             </div>
         </div>
 

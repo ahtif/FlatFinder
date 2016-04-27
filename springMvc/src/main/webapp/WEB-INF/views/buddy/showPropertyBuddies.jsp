@@ -6,6 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8" lang="en" http-equiv="Content-Type" content="text/html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - My Buddies</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -38,34 +39,24 @@
         
         <div class="jumbotron">
             <br />
-            <h1>Buddies</h1>
-            <p>Below you can see a list of all available buddies and request to be buddies with them.</p>
+            <h1>Buddies For This Property</h1>
+            <p>Below are all searchers which have opted to buddy up for the property.</p>
         </div>
-        
-        <c:if test="${notBuddy}">
-            <h4> You must first opt in to be a buddy before you can find other's to buddy up with. <br />
-                Click <a href="/profile">here</a> to go to your profile and change your buddy preference.    
-            </h4>
-        </c:if>
-        
-        <c:if test="${!notBuddy}">
-            <table class="table table-hover">
+
+        <table class="table table-hover">
+            <tr>
+                <th>Username</th>
+                <th>Options</th>
+            </tr>
+            <c:forEach items ="${buddiesProperty}" var ="buddyProperty">
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Options</th>
+                    <td>${buddyProperty.user.login}</td>
+                    <td>
+                        <a href="/buddy/request/${buddyProperty.user.id}">Request Buddy</a>
+                    </td>
                 </tr>
-                <c:forEach items ="${buddies}" var ="buddy">
-                    <tr>
-                        <td>${buddy.firstName}</td>
-                        <td>${buddy.lastName}</td>
-                        <td> <a href="/buddy/request/${buddy.id}" class="btn btn-default">Request to be a Buddy</a> </td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:if>
-        
-        
+            </c:forEach>
+        </table>
 
 </div>
 
