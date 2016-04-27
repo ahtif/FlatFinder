@@ -1,10 +1,12 @@
 package com.uni.c02015.domain.buddy;
 
-import com.uni.c02015.domain.Searcher;
+import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.property.Property;
 
 import javax.persistence.*;
 
 @Entity
+@Table
 public class Request {
 
   @Id
@@ -13,11 +15,16 @@ public class Request {
   
   @ManyToOne
   @JoinColumn(name = "senderId")
-  private Searcher sender;
+  private User sender;
   
   @ManyToOne
   @JoinColumn(name = "receiverId")
-  private Searcher receiver;
+  private User receiver;
+
+  @ManyToOne
+  @JoinColumn(name = "property")
+  private Property property;
+
 
   private Boolean confirmed = false;
   
@@ -25,19 +32,19 @@ public class Request {
     return id;
   }
 
-  public Searcher getReceiver() {
+  public User getReceiver() {
     return receiver;
   }
 
-  public void setReceiver(Searcher receiver) {
+  public void setReceiver(User receiver) {
     this.receiver = receiver;
   }
 
-  public Searcher getSender() {
+  public User getSender() {
     return sender;
   }
 
-  public void setSender(Searcher sender) {
+  public void setSender(User sender) {
     this.sender = sender;
   }
 
@@ -49,4 +56,11 @@ public class Request {
     this.confirmed = confirmed;
   }
 
+  public Property getProperty() {
+    return property;
+  }
+
+  public void setProperty(Property property) {
+    this.property = property;
+  }
 }

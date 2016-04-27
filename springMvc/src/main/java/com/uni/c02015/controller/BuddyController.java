@@ -65,15 +65,14 @@ public class BuddyController {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
-    Searcher currentSearcher = searcherRepo.findById(currentUser.getId());
-    
+
     List<Request> pendingRequests =
-        buddyRepo.findByReceiverAndConfirmed(currentSearcher, false);
+        buddyRepo.findByReceiverAndConfirmed(currentUser, false);
     modelAndView.addObject("pending", pendingRequests);
     
-    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
+    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentUser, true);
     List<Request> acceptedRequests2 =
-        buddyRepo.findByReceiverAndConfirmed(currentSearcher, true);
+        buddyRepo.findByReceiverAndConfirmed(currentUser, true);
     
     modelAndView.addObject("sentBuddies", acceptedRequests);
     modelAndView.addObject("acceptedBuddies", acceptedRequests2);
@@ -143,26 +142,27 @@ public class BuddyController {
 
     return modelAndView;
   }
-  
+
   /**
    * Create a new buddy up request and redirect the the user to the view buddies page.
-   * @param id The id of the user to request a buddy up with.
+   * @param userId User Id
+   * @param propertyId Property Id
+   * @return String
    */
-  @RequestMapping("/buddy/request/{id}")
-  public String requestBuddy(@PathVariable Integer id) {
+  @RequestMapping("/buddy/request/{userId}/{propertyId}")
+  public String requestBuddy(@PathVariable Integer userId, @PathVariable Integer propertyId) {
     
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
-    Searcher currentSearcher = searcherRepo.findById(currentUser.getId());
-    User requestedUser = userRepo.findById(id);
-    Searcher requestedSearcher = searcherRepo.findById(requestedUser.getId());
+    User requestedUser = userRepo.findById(userId);
 
     if (currentUser.getId() != requestedUser.getId()) {
 
       Request request = new Request();
-      request.setSender(currentSearcher);
-      request.setReceiver(requestedSearcher);
+      request.setSender(currentUser);
+      request.setReceiver(requestedUser);
+      request.setProperty(propertyRepository.findById(propertyId));
       buddyRepo.save(request);
     }
 
@@ -171,16 +171,16 @@ public class BuddyController {
   
   /**
    * Accept a buddy request.
-   * @param id The id of the buddy request.
+   * @param userId The id of the buddy request.
    */
-  @RequestMapping("/buddy/accept/{id}")
-  public String acceptBuddy(@PathVariable Integer id) {
+  @RequestMapping("/buddy/accept/{userId}")
+  public String acceptBuddy(@PathVariable Integer userId) {
     
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
-    Request request = buddyRepo.findOne(id);
+    Request request = buddyRepo.findOne(userId);
     if (request.getReceiver().getId() == currentUser.getId() && !request.getConfirmed()) {
       request.setConfirmed(true);
       buddyRepo.save(request);
@@ -216,33 +216,31 @@ public class BuddyController {
    */
   @RequestMapping("/buddy/viewBuddy/{buddyId}")
   public ModelAndView viewBuddy(@PathVariable Integer buddyId) {
-    System.out.println("hello1");
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
-    Searcher currentSearcher = searcherRepo.findOne(currentUser.getId());
     Searcher buddy = searcherRepo.findOne(buddyId);
     User buddyUser = userRepo.findOne(buddyId);
     
     ModelAndView modelAndView = new ModelAndView("/buddy/view-buddy");
-    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
+    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentUser, true);
     List<Request> acceptedRequests2 =
-        buddyRepo.findByReceiverAndConfirmed(currentSearcher, true);
+        buddyRepo.findByReceiverAndConfirmed(currentUser, true);
     
     List<Searcher> receivers = new ArrayList<>();
     for (Request req : acceptedRequests) {
-      receivers.add(req.getReceiver());
+      receivers.add(searcherRepo.findById(req.getReceiver().getId()));
     }
     
     List<Searcher> senders = new ArrayList<>();
     for (Request req : acceptedRequests2) {
-      senders.add(req.getSender());
+      senders.add(searcherRepo.findById(req.getSender().getId()));
     }
     
     if (receivers.contains(buddy) || senders.contains(buddy)) {
       modelAndView.addObject("buddy", buddy);
       modelAndView.addObject("buddyUser", buddyUser);
-      System.out.println("hello");
       return modelAndView;
     }
     
