@@ -103,5 +103,21 @@ The Rating is based on the calculated Priority score. Use the following system t
 
 The purpose of risk management is to take into consideration any risks that may arise throughout the project and think of ways in which to prevent risks and how to deal with any that occur. The group discussed potential risks and then came up with a plan for rectifying any risks that may take place. 
 
+# 5 End of project risk review 
 
+| Risk ID | Did it occur? | What action was taken? |
+| ---------- | ------------------- | ------------------------------------  |
+| 1.1      | No                |  n/a                                |
+| 1.2      | No                | n/a                                 |
+| 2.1      | No                | n/a                                 |
+| 2.2      | No                | n/a                                 |
+| 3.1      | Need to speak to the client | n/a           |
+| 3.2      | Need to speak to the client | n/a           |
+| 4.1      | No                | n/a                                 |
+| 4.2      | No                | n/a                                 |
+| 4.3      | Yes               | The members tasks were split out among the rest of the group |
+| 5.1      | No                | n/a                                 |
+| 5.2      | No                | n/a                                 |
+| 5.3      | No                | n/a                                 |
+| 6.1      | Yes               | The task was reallocated to a different developer|
 
