@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -128,13 +129,20 @@ public class BuddyController {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
-    for (int i = 0; i < buddyProperties.size(); ++i) {
 
-      BuddyProperty buddyProperty = buddyProperties.get(i);
+    Iterator<BuddyProperty> iter = buddyProperties.iterator();
+    while (iter.hasNext()) {
+
+      BuddyProperty buddyProperty = iter.next();
 
       if (buddyProperty.getUser().getId() == currentUser.getId()) {
 
-        buddyProperties.remove(i);
+        iter.remove();
+
+      } else if (buddyRepo.findBySenderAndReceiver(currentUser, buddyProperty.getUser()) != null
+          || buddyRepo.findBySenderAndReceiver(buddyProperty.getUser(), currentUser) != null) {
+
+        iter.remove();
       }
     }
 
@@ -171,19 +179,30 @@ public class BuddyController {
   
   /**
    * Accept a buddy request.
-   * @param userId The id of the buddy request.
+   * @param id The id of the buddy request.
    */
-  @RequestMapping("/buddy/accept/{userId}")
-  public String acceptBuddy(@PathVariable Integer userId) {
+  @RequestMapping("/buddy/accept/{id}")
+  public String acceptBuddy(@PathVariable Integer id) {
     
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
-    Request request = buddyRepo.findOne(userId);
+    Request request = buddyRepo.findOne(id);
     if (request.getReceiver().getId() == currentUser.getId() && !request.getConfirmed()) {
+
       request.setConfirmed(true);
       buddyRepo.save(request);
+
+      // Let's check to see if the recipient was also a sender of a request to the current sender
+      Request otherRequest =
+          buddyRepo.findBySenderAndReceiver(request.getReceiver(), request.getSender());
+      // There was a pending request in both directions
+      if (otherRequest != null) {
+
+        buddyRepo.delete(otherRequest);
+      }
+
       return "redirect:/buddy/viewAll?accepted=true";   
     }
     
