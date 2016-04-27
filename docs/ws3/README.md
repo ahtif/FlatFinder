@@ -20,10 +20,10 @@
 - [Internal Meeting 3](minutes-25.04.16.md))
 
 ### Sprint 1 Retrospective
-- [Doc1](Sprint 1 retrospective.docx)
+- [Doc1](Sprint 1 retrospective.md)
 
 ### Sprint 2 Retrospective
-- [Doc1]()
+- [Doc1](Sprint2Retrospective.md)
 
 ### User Manual
 - [Doc1](1.md)
