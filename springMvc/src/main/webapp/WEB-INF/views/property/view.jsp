@@ -93,6 +93,28 @@
                 <p><a href="/messaging/new?contact=${property.getLandlord().getId()}" class="btn btn-success">Contact Landlord</a></p>
 
             </c:if>
+
+            <c:if test="${userId != null}">
+
+                <p><a href="/buddy/showPropertyBuddies/${property.getId()}" class="btn btn-success">View Users Who Want To Buddy</a></p>
+
+                <c:if test="${buddyProperty == true}">
+
+                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-success">Cancel Buddy Up With This Property</a></p>
+
+                </c:if>
+
+                <c:if test="${buddyProperty == false}">
+
+                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-success">Let Other Searchers Buddy Up With You</a></p>
+
+                </c:if>
+
+            </c:if>
+
+            <c:if test="${userId == null}">
+                <p>In order to enable property buddies please enable it in your preferences <a href="/searcher/profile">here</a>.</p>
+            </c:if>
            
 
             <div class="container" style="margin-left: -15px;">

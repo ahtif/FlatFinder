@@ -50,7 +50,7 @@
     <div class="jumbotron">
         <br />
         <h1>Property Search Results</h1>
-        <p>Below are the search results for your current query.</p>
+        <p>Below are the search results for your current query, use the map to locate each search result.</p>
     </div>
 
     <c:choose>
@@ -67,6 +67,24 @@
 
         </c:when>
         <c:otherwise>
+
+            <div id="mapid" class="jumbotron"></div>
+            <script type="text/javascript">
+                var mymap = L.map('mapid').setView([52.621919, -1.12381], 13);
+
+                L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                }).addTo(mymap);
+            </script>
+            <c:forEach items="${properties}" var="property">
+                <script type="text/javascript">
+                    var lat = ${property.latitude};
+                    var lng = ${property.longitude};
+
+                    L.marker([lat, lng]).addTo(mymap)
+                            .bindPopup("${property.number}<br />${property.street}<br />${property.city}<br />${property.postcode}<br />").openPopup();
+                </script>
+            </c:forEach>
 
             <table class="table table-striped">
                 <thead>
