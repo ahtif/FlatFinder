@@ -1,12 +1,9 @@
 package com.uni.c02015.controller;
 
 import com.uni.c02015.domain.BuddyRequest;
-import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,11 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class BuddyController {

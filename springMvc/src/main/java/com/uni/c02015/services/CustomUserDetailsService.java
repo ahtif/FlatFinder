@@ -1,7 +1,5 @@
 package com.uni.c02015.services;
 
-import static com.uni.c02015.SpringMvc.*;
-
 import com.uni.c02015.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static com.uni.c02015.SpringMvc.*;
 
 @Service
 @Transactional(readOnly = true)

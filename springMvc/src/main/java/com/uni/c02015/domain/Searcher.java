@@ -1,10 +1,7 @@
 package com.uni.c02015.domain;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity

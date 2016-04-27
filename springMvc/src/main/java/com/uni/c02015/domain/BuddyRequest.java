@@ -1,7 +1,6 @@
 package com.uni.c02015.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class BuddyRequest {
