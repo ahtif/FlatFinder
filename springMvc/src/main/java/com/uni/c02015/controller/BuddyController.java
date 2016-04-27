@@ -122,8 +122,24 @@ public class BuddyController {
 
     ModelAndView modelAndView = new ModelAndView("/buddy/showPropertyBuddies");
 
-    modelAndView.addObject("buddiesProperty",
-        buddyPropertyRepository.findByProperty(propertyRepository.findById(propertyId)));
+    List<BuddyProperty> buddyProperties =
+        buddyPropertyRepository.findByProperty(propertyRepository.findById(propertyId));
+
+    // Remove current user from list
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User currentUser = userRepo.findByLogin(username);
+    for (int i = 0; i < buddyProperties.size(); ++i) {
+
+      BuddyProperty buddyProperty = buddyProperties.get(i);
+
+      if (buddyProperty.getUser().getId() == currentUser.getId()) {
+
+        buddyProperties.remove(i);
+      }
+    }
+
+    modelAndView.addObject("buddiesProperty", buddyProperties);
 
     return modelAndView;
   }
@@ -141,12 +157,15 @@ public class BuddyController {
     Searcher currentSearcher = searcherRepo.findById(currentUser.getId());
     User requestedUser = userRepo.findById(id);
     Searcher requestedSearcher = searcherRepo.findById(requestedUser.getId());
-    
-    Request request = new Request();
-    request.setSender(currentSearcher);
-    request.setReceiver(requestedSearcher);
-    buddyRepo.save(request);
-    
+
+    if (currentUser.getId() != requestedUser.getId()) {
+
+      Request request = new Request();
+      request.setSender(currentSearcher);
+      request.setReceiver(requestedSearcher);
+      buddyRepo.save(request);
+    }
+
     return "redirect:/buddy/viewAll?requested=true";
   }
   
