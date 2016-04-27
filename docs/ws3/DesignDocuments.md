@@ -67,4 +67,8 @@ These navigational models show how the user interacts with the system
 
 This schema shows all of the tables in the database, their contents and how they interact with one another. 
 
+![Alt text](media/classdiagram.png)
+
+This class diagram shows the entire project in UML notation 
+
 
