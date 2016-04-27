@@ -14,8 +14,8 @@ import java.io.File;
 public class WebConfig extends WebMvcConfigurerAdapter {
 
   /**
-   * Create a notification interceptor bean - Spring will manage the object lifecycle!
-   * @return
+   * Create a notification interceptor bean - Spring will manage the object lifecycle.
+   * @return NotificationInterceptor
    */
   @Bean
   public NotificationInterceptor notificationInterceptor() {

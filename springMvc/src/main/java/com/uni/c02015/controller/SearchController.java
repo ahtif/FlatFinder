@@ -24,7 +24,7 @@ public class SearchController {
 
     try {
 
-      // Create another database connection for search queries - reduce load as is read only connection
+      // Create another database connection for search queries - reduce load read only connection
       Class.forName("com.mysql.jdbc.Driver");
       DB_CONN = DriverManager.getConnection(
           "jdbc:mysql://" + DbConfig.HOST + "/"

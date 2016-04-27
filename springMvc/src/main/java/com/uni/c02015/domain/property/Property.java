@@ -118,7 +118,7 @@ public class Property {
 
   /**
    * Set the landlord.
-   * @param landlord
+   * @param landlord Landlord
    */
   public void setLandlord(Landlord landlord) {
 

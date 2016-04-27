@@ -59,7 +59,7 @@ public class Searcher {
 
   /**
    * Set first name.
-   * @param firstName
+   * @param firstName String
    */
   public void setFirstName(String firstName) {
 

@@ -157,8 +157,8 @@ public class User {
   }
 
   /**
-   * toString
-   * @return
+   * toString.
+   * @return String
    */
   public String toString() {
 
