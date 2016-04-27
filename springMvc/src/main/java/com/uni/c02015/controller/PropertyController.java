@@ -352,19 +352,25 @@ public class PropertyController {
       }
 
       // Is a searcher with buddy up option on
-      if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)
-          && searcherRepository.findById(user.getId()).getBuddyPref()) {
+      if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)) {
 
-        modelAndView.addObject("userId", user.getId());
+        if (searcherRepository.findById(user.getId()).getBuddyPref()) {
 
-        if (buddyPropertyRepository
-            .findByPropertyAndUser(property, userRepository.findById(user.getId())) != null) {
+          modelAndView.addObject("userId", user.getId());
 
-          modelAndView.addObject("buddyProperty", true);
+          if (buddyPropertyRepository
+              .findByPropertyAndUser(property, userRepository.findById(user.getId())) != null) {
+
+            modelAndView.addObject("buddyProperty", true);
+
+          } else {
+
+            modelAndView.addObject("buddyProperty", false);
+          }
 
         } else {
 
-          modelAndView.addObject("buddyProperty", false);
+          modelAndView.addObject("buddyPrompt", true);
         }
       }
 

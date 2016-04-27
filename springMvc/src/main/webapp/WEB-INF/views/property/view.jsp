@@ -85,7 +85,7 @@
 
             <c:if test="${showEditButton != null || isAdmin != null}">
 
-                <p><a href="/property/edit/${showEditButton}" class="btn btn-success">Edit Property</a></p>
+                <p><a href="/property/edit/${property.getId()}" class="btn btn-success">Edit Property</a></p>
 
             </c:if>
 
@@ -113,10 +113,10 @@
 
             </c:if>
 
-            <c:if test="${userId == null}">
+            <c:if test="${buddyPrompt == true}">
                 <p>In order to enable property buddies please enable it in your preferences <a href="/searcher/profile">here</a>.</p>
             </c:if>
-           
+
 
             <div class="container" style="margin-left: -15px;">
                 <br>
