@@ -52,7 +52,7 @@
                 <tr>
                     <td>${buddyProperty.user.login}</td>
                     <td>
-                        <a href="/buddy/request/${buddyProperty.user.id}/${buddyProperty.property.id}">Request Buddy</a>
+                        <a class="btn btn-success" href="/buddy/request/${buddyProperty.user.id}/${buddyProperty.property.id}">Request Buddy</a>
                     </td>
                 </tr>
             </c:forEach>

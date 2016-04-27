@@ -77,10 +77,10 @@
         <c:forEach items ="${pending}" var ="request">
             <tr>
                 <td>${request.sender.login}</td>
-                <td><a class="btn btn-default" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
+                <td><a class="btn btn-success" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
                 <td>
-                    <a href="/buddy/accept/${request.id}" class="btn btn-default">Accept</a>
-                    <a href="/buddy/reject/${request.id}" class="btn btn-default">Reject</a>
+                    <a class="btn btn-success" href="/buddy/accept/${request.id}">Accept</a>
+                    <a class="btn btn-danger" href="/buddy/reject/${request.id}">Reject</a>
                 </td>
             </tr>
         </c:forEach>
@@ -96,20 +96,20 @@
         <c:forEach items ="${sentBuddies}" var ="request">
             <tr>
                 <td>${request.receiver.login}</td>
-                <td><a class="btn btn-default" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
+                <td><a class="btn btn-success" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
                 <td>
-                    <a href="/buddy/viewBuddy/${request.receiver.id}" class="btn btn-default">View Profile</a>
-                    <a href="/messaging/new?contact=${request.receiver.id}" class="btn btn-default">Contact</a>
+                    <a href="/buddy/viewBuddy/${request.receiver.id}" class="btn btn-success">View Profile</a>
+                    <a href="/messaging/new?contact=${request.receiver.id}" class="btn btn-success">Contact</a>
                 </td>
             </tr>
         </c:forEach>
         <c:forEach items ="${acceptedBuddies}" var ="request">
             <tr>
                 <td>${request.sender.login}</td>
-                <td><a class="btn btn-default" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
+                <td><a class="btn btn-success" href="/property/view/${request.property.id}">${request.property.postcode}</a></td>
                 <td>
-                    <a href="/buddy/viewBuddy/${request.sender.id}" class="btn btn-default">View Profile</a>
-                    <a href="/messaging/new?contact=${request.sender.id}" class="btn btn-default">Contact</a>
+                    <a href="/buddy/viewBuddy/${request.sender.id}" class="btn btn-success">View Profile</a>
+                    <a href="/messaging/new?contact=${request.sender.id}" class="btn btn-success">Contact</a>
                 </td>
             </tr>
         </c:forEach>

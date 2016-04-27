@@ -9,7 +9,7 @@
         <c:url value="/logout" var="logoutUrl"/>
         <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <button class="btn btn-success" type="submit">Log Out</button>
+            <button class="btn btn-danger" type="submit">Log Out</button>
         </form>
     </div><!--/.nav-collapse -->
 </sec:authorize>
@@ -24,7 +24,7 @@
         <c:url value="/logout" var="logoutUrl"/>
         <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <button class="btn btn-success" type="submit">Log Out</button>
+            <button class="btn btn-danger" type="submit">Log Out</button>
         </form>
     </div><!--/.nav-collapse -->
 </sec:authorize>
@@ -39,7 +39,7 @@
         <c:url value="/logout" var="logoutUrl"/>
         <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <button class="btn btn-success" type="submit">Log Out</button>
+            <button class="btn btn-danger" type="submit">Log Out</button>
         </form>
     </div><!--/.nav-collapse -->
 </sec:authorize>

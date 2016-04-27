@@ -72,8 +72,8 @@
                 <td>${property.street}</td>
                 <td>${property.city}</td>
                 <td>${property.postcode}</td>
-                <td><a href="/property/view/${property.id}" class="btn btn-default">View</a>
-                    <a href="/admin/property/delete/${property.id}" class="btn btn-default">Delete</a></td>
+                <td><a href="/property/view/${property.id}" class="btn btn-success">View</a>
+                    <a href="/admin/property/delete/${property.id}" class="btn btn-danger">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

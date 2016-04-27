@@ -22,10 +22,12 @@
             var btn = document.getElementById("buddyPref");
             if(btn.value == "true"){
                 btn.value = "false";
-                document.getElementById("buddy").innerHTML = "I am not a buddy";
+                document.getElementById("buddy").innerHTML = "I want to be a buddy";
+                document.getElementById("buddy").className = "btn btn-success";
             } else if(btn.value == "false"){
                 btn.value = "true";
-                document.getElementById("buddy").innerHTML = "I am a buddy";
+                document.getElementById("buddy").innerHTML = "I do not want to be a buddy";
+                document.getElementById("buddy").className = "btn btn-danger";
             }
         }
     </script>
@@ -81,11 +83,11 @@
                 <td>Buddy Preference:</td>
                 <td><div class="form-group">
                     <c:if test="${searcher.buddyPref}">
-                        <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
+                        <button type="button" id="buddy" onclick="toggleBuddy()" class="btn btn-danger">I do not want to be a buddy</button>
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="true"/>
                     </c:if>
                     <c:if test="${!searcher.buddyPref}">
-                        <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
+                        <button type="button" id="buddy" onclick="toggleBuddy()" class="btn btn-success">I want to be a buddy</button>
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
                     </c:if>
                 </div></td>
