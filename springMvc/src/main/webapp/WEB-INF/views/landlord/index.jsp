@@ -66,7 +66,10 @@
                 <c:forEach items="${properties}" var="property">
 
                     <tr>
-                        <td><a class="btn btn-success" href="/property/view/${property.id}">View</a></td>
+                        <td>
+                            <a class="btn btn-success" href="/property/view/${property.id}">View</a>
+                            <a class="btn btn-danger" href="/property/delete/${property.id}">Delete</a>
+                        </td>
                         <td>${property.number}</td>
                         <td>${property.street}</td>
                         <td>${property.postcode}</td>
