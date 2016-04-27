@@ -38,6 +38,7 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Administrator Home</h1>
+        <p>Manage the website from the administrator home panel.</p>
     </div>
 </div>
 

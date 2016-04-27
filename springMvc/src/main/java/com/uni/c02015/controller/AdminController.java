@@ -43,46 +43,88 @@ public class AdminController {
   
   /**
    * Allows an admin to broadcast a message.
-   * @param subject The subject of the message.
-   * @param body The body of the message.
-   * @param sender The sender of the message
    * @return Return to the current user's inbox.
    */
   @RequestMapping("/admin/broadcast/send")
-  public String broadcast(@RequestParam(value = "subject", required = true) String subject,
-      @RequestParam(value = "message", required = true) String body,
-      @RequestParam(value = "parent", required = false) String parent,
-      @RequestParam(value = "sender", required = false) String sender) {
+  public String broadcast(HttpServletRequest request) {
 
-    User currentUser;
-    Message message = new Message();
+    String subject = request.getParameter("subject");
+    String message = request.getParameter("message");
+    String sendTo = request.getParameter("sendTo");
 
-    if (sender != null && !sender.isEmpty()) {
-      currentUser = userRepo.findByLogin(sender);
-    } else {
-      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      String username = auth.getName();
-      currentUser = userRepo.findByLogin(username);
+    if (sendTo.length() == 0 || subject.length() == 0 || message.length() == 0) {
+
+      return "redirect:/admin/broadcast/message?error=true";
     }
 
-    if (parent != null && !parent.isEmpty()) {
-      message.setParent(messageRepo.findById(Integer.parseInt(parent)));
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+    User currentUser = userRepo.findByLogin(username);
+
+    if (sendTo.equals("all")) {
+
+      ArrayList<User> allUsers = (ArrayList<User>) userRepo.findAll();
+      for (User user : allUsers) {
+        Message messageObj = new Message();
+        messageObj.setSenderName(currentUser.getLogin());
+        messageObj.setSender(currentUser);
+        messageObj.setReceiver(user);
+        messageObj.setSubject(request.getParameter("subject"));
+        messageObj.setMessage(request.getParameter("message"));
+        messageObj.setMessageDate(new Date());
+        messageObj.setIsRead(false);
+        messageRepo.save(messageObj);
+      }
+
+    } else if (sendTo.equals("searchers")) {
+
+      ArrayList<Searcher> allUsers = (ArrayList<Searcher>) searcherRepo.findAll();
+      for (Searcher user : allUsers) {
+        Message messageObj = new Message();
+        messageObj.setSenderName(currentUser.getLogin());
+        messageObj.setSender(currentUser);
+        messageObj.setReceiver(userRepo.findById(user.getId()));
+        messageObj.setSubject(request.getParameter("subject"));
+        messageObj.setMessage(request.getParameter("message"));
+        messageObj.setMessageDate(new Date());
+        messageObj.setIsRead(false);
+        messageRepo.save(messageObj);
+      }
+
+    } else if (sendTo.equals("landlords")) {
+
+      ArrayList<Landlord> allUsers = (ArrayList<Landlord>) landlordRepo.findAll();
+      for (Landlord user : allUsers) {
+        Message messageObj = new Message();
+        messageObj.setSenderName(currentUser.getLogin());
+        messageObj.setSender(currentUser);
+        messageObj.setReceiver(userRepo.findById(user.getId()));
+        messageObj.setSubject(request.getParameter("subject"));
+        messageObj.setMessage(request.getParameter("message"));
+        messageObj.setMessageDate(new Date());
+        messageObj.setIsRead(false);
+        messageRepo.save(messageObj);
+      }
     }
 
-    ArrayList<User> allUsers = (ArrayList<User>) userRepo.findAll();
-    for (User user : allUsers) {
-      message = new Message();
-      message.setSenderName(currentUser.getLogin());
-      message.setSender(currentUser);
-      message.setReceiver(user);
-      message.setSubject(subject);
-      message.setMessage(body);
-      message.setMessageDate(new Date());
-      message.setIsRead(false);
-      messageRepo.save(message);
-    }
+    return "redirect:/admin/broadcast/message?success=true";
+  }
 
-    return "redirect:/messaging/inbox";
+  /**
+   * As an admin, broadcast a message.
+   * @param request HttpServletRequest
+   * @return ModelAndView
+   */
+  @RequestMapping("/admin/broadcast/message")
+  public ModelAndView massMessage(HttpServletRequest request) {
+
+    ModelAndView modelAndView = new ModelAndView("/administrator/broadcast");
+
+    // Get the request GET parameters and add to the model
+    Map<String, String[]> parameters = request.getParameterMap();
+    modelAndView.addAllObjects(parameters);
+
+    return modelAndView;
   }
   
   /**
@@ -129,6 +171,7 @@ public class AdminController {
    */
   @RequestMapping("/admin/property/delete/{id}")
   public String deleteProperty(@PathVariable Integer id) {
+
     Property property = propertyRepo.findById(id);
     if (property != null) {
       propertyRepo.delete(id);
@@ -236,5 +279,4 @@ public class AdminController {
     
     return "redirect:/admin/viewUsers?edited=true";
   }
-  
 }
