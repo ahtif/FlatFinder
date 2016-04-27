@@ -317,6 +317,38 @@ public class PropertyController {
     }
     return "property/addPost";
   }
+
+  /**
+   * Landlord property delete.
+   * @param principal Principal
+   * @param propertyId Property Id
+   * @return String
+   */
+  @RequestMapping(value = "/property/delete/{propertyId}", method = RequestMethod.GET)
+  public String propertyDelete(Principal principal, @PathVariable Integer propertyId) {
+
+    User user = userRepository.findByLogin(((org.springframework.security.core.userdetails.User)
+        ((Authentication) principal).getPrincipal()).getUsername());
+
+    Property property = propertyRepository.findById(propertyId);
+
+    // The user owns this property
+    if (property != null && user.getId() == property.getLandlord().getId()) {
+
+      // Delete the property image directory
+      try {
+
+        FileUtils.deleteDirectory(new File(IMAGE_ROOT_DIR + property.getId()));
+        propertyRepository.delete(property);
+
+      } catch (IOException e) {
+
+        e.printStackTrace();
+      }
+    }
+
+    return "redirect:/success-login";
+  }
   
   /**
    * View property.

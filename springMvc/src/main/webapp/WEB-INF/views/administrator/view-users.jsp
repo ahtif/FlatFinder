@@ -82,14 +82,14 @@
                 <td>${user.emailAddress}</td>
                 <td>
                     <c:if test="${user.role.role != 'ADMINISTRATOR'}">
-                        <a href="/admin/view-user/${user.id}" class="btn btn-default">Edit</a>
+                        <a href="/admin/view-user/${user.id}" class="btn btn-danger">Edit</a>
                         <c:if test="${user.suspended == true}">
-                            <a href="/admin/user/unSuspend/${user.id}" class="btn btn-default">Un Suspend</a>
+                            <a href="/admin/user/unSuspend/${user.id}" class="btn btn-danger">Un Suspend</a>
                         </c:if>
                         <c:if test="${user.suspended == false}">
-                            <a href="/admin/user/suspend/${user.id}" class="btn btn-default">Suspend</a>
+                            <a href="/admin/user/suspend/${user.id}" class="btn btn-danger">Suspend</a>
                         </c:if>
-                        <a href="/admin/user/delete/${user.id}" class="btn btn-default">Delete</a>
+                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger">Delete</a>
                     </c:if>
                 </td>
             </tr>

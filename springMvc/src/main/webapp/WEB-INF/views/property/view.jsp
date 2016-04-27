@@ -101,7 +101,7 @@
 
                 <c:if test="${buddyProperty == true}">
 
-                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-success">Cancel Buddy Up With This Property</a></p>
+                    <p><a href="/buddy/property/${userId}/${property.getId()}" class="btn btn-danger">Cancel Buddy Up With This Property</a></p>
 
                 </c:if>
 

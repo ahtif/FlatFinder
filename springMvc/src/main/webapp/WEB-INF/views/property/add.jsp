@@ -184,7 +184,7 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Add Property"/></td>
+                <td colspan="2"><input class="btn btn-success" type="submit" value="Add Property"/></td>
             </tr>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

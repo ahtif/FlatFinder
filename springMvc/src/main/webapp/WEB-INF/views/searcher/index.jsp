@@ -111,7 +111,7 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Search Properties" /></td>
+                <td colspan="2"><input type="submit" class="btn btn-success" value="Search Properties" /></td>
             </tr>
 
         </table>
