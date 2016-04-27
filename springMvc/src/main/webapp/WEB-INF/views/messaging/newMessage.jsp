@@ -43,11 +43,11 @@
         <h1>Compose Message</h1>
     </div>
 
-      <c:if test="${receiverExists != null}">
+    <c:if test="${receiverExists != null}">
         <div class="alert alert-danger" role="alert">
-         <strong>Sorry!</strong> That user does not exist.
+            <strong>Sorry!</strong> That user does not exist.
         </div>
-      </c:if>
+    </c:if>
 
     <form:form action="/messaging/sendMessage" method="post" modelAttribute="message" id="messageForm">
         <table>

@@ -21,21 +21,37 @@ public class BuddyProperty {
   @JoinColumn(name = "property")
   private Property property;
 
+  /**
+   * Set property.
+   * @param property Property
+   */
   public void setProperty(Property property) {
 
     this.property = property;
   }
 
+  /**
+   * Get property.
+   * @return Property
+   */
   public Property getProperty() {
 
     return property;
   }
 
+  /**
+   * Set user.
+   * @param user User
+   */
   public void setUser(User user) {
 
     this.user = user;
   }
 
+  /**
+   * Get user.
+   * @return User
+   */
   public User getUser() {
 
     return user;

@@ -51,7 +51,9 @@ public class BuddyController {
   }
 
   /**
-   * Find the buddies of the current user and take them to the view buddies page.
+   * View all buddies of the current user.
+   * @param request HttpServletRequest
+   * @return ModelAndView
    */
   @RequestMapping("/buddy/viewAll")
   public ModelAndView viewBuddies(HttpServletRequest request) {
@@ -125,7 +127,7 @@ public class BuddyController {
     List<BuddyProperty> buddyProperties =
         buddyPropertyRepository.findByProperty(propertyRepository.findById(propertyId));
 
-    // Remove current user from list
+    // Remove current user from list and any other synonymous requests
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
@@ -179,7 +181,7 @@ public class BuddyController {
   
   /**
    * Accept a buddy request.
-   * @param id The id of the buddy request.
+   * @param id The id of the buddy request
    */
   @RequestMapping("/buddy/accept/{id}")
   public String acceptBuddy(@PathVariable Integer id) {
@@ -197,6 +199,7 @@ public class BuddyController {
       // Let's check to see if the recipient was also a sender of a request to the current sender
       Request otherRequest =
           buddyRepo.findBySenderAndReceiver(request.getReceiver(), request.getSender());
+
       // There was a pending request in both directions
       if (otherRequest != null) {
 
@@ -211,7 +214,7 @@ public class BuddyController {
   
   /**
    * Reject a buddy request.
-   * @param id The id of the buddy request.
+   * @param id The id of the buddy request
    */
   @RequestMapping("/buddy/reject/{id}")
   public String rejectBuddy(@PathVariable Integer id) {
@@ -221,8 +224,11 @@ public class BuddyController {
     User currentUser = userRepo.findByLogin(username);
     
     Request request = buddyRepo.findOne(id);
+
     if (request.getReceiver().getId() == currentUser.getId() && !request.getConfirmed()) {
+
       buddyRepo.delete(request);
+
       return "redirect:/buddy/viewAll?rejected=true";   
     }
     
@@ -249,22 +255,24 @@ public class BuddyController {
     
     List<Searcher> receivers = new ArrayList<>();
     for (Request req : acceptedRequests) {
+
       receivers.add(searcherRepo.findById(req.getReceiver().getId()));
     }
     
     List<Searcher> senders = new ArrayList<>();
     for (Request req : acceptedRequests2) {
+
       senders.add(searcherRepo.findById(req.getSender().getId()));
     }
     
     if (receivers.contains(buddy) || senders.contains(buddy)) {
+
       modelAndView.addObject("buddy", buddy);
       modelAndView.addObject("buddyUser", buddyUser);
+
       return modelAndView;
     }
     
     return new ModelAndView("redirect:/buddy/viewAll?notBuddy=true");
   }
-
-  
 }

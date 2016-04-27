@@ -29,8 +29,6 @@ import java.util.regex.Pattern;
 @Controller
 public class ConfirmationController {
 
-  
-  
   public static final String SIGN_UP_ID_SESSION = "signUpID";
 
   @Autowired
@@ -48,26 +46,26 @@ public class ConfirmationController {
 
     return new User();
   }
-  
+
   /**
-   * Send an email message to the user
-   * @param user The user to send the message to.
-   * @param address The email address of the user.
+   * Send an email message to the user.
+   * @param user The user to send the message to
+   * @param address The email address of the user
    */
   public void sendConfirmationEmail(User user,
-      String address) {
-    
+                                    String address) {
+
     String tokenId = UUID.randomUUID().toString();
-    
+
     VerificationToken token = new VerificationToken(tokenId, user, TokenType.ACTIVATION);
     tokenRepo.save(token);
-    
+
     String subject = "Please confirm your account at FlatFinder";
-    
+
     String messageBody = "In order to activate your account at FlatFinder,"
         + " please click the following link: <br />"
         + "<a href='https://localhost:8070/confirm/" + tokenId + "'>Activate your account</a>";
-    
+
     // Recipient's email ID needs to be mentioned.
     String to = address;
 
@@ -105,60 +103,74 @@ public class ConfirmationController {
       // Send message
       Transport.send(message);
       System.out.println("Sent message successfully....");
+
     } catch (MessagingException mex) {
+
       mex.printStackTrace();
     }
   }
-  
+
   /**
    * Confirm a user's account.
-   * @param confirmId The unique confirmation ID.
+   * @param confirmId The unique confirmation ID
    */
   @RequestMapping("/confirm/{confirmId}")
   public String confirmAccount(@PathVariable String confirmId) {
+
     Calendar cal = Calendar.getInstance();
     VerificationToken token = tokenRepo.findByToken(confirmId);
-    if (token == null || token.getType() != TokenType.ACTIVATION 
+
+    if (token == null || token.getType() != TokenType.ACTIVATION
         || token.getExpiryDate().getTime() - cal.getTime().getTime() <= 0) {
+
       return "redirect:/confirm/notConfirmed";
     }
-    
+
     if (token.getType() == TokenType.ACTIVATION && token.isUsed()) {
+
       return "redirect:/confirm/alreadyConfirmed";
     }
-   
+
     User user = token.getUser();
     token.setUsed(true);
     user.setConfirmed(true);
     userRepo.save(user);
     tokenRepo.save(token);
+
     return "redirect:/confirm/confirmed";
   }
-  
+
   /**
-   * Take in the user's login, check if their account is not already activated and 
+   * Take in the user's login, check if their account is not already activated and
    * send a new activation email.
-   * @param username The username of the user.
+   * @param username The username of the user
    */
   @RequestMapping("/confirm/sendNewEmail")
   public String resendConfirmation(@RequestParam("login")String username) {
+
     User user = userRepo.findByLogin(username);
+
     if (user != null && !user.getConfirmed()) {
+
       sendConfirmationEmail(user, user.getEmailAddress());
     }
+
     if (user != null && user.getConfirmed()) {
+
       return "redirect:/confirm/newEmail?activated=true";
     }
+
     return "redirect:/confirm/newEmail?submitted=true";
   }
-  
+
   /**
    * Redirect the user to the email confirmed page, and add any GET parameters
    * to the page.
-   * @param request The HTTP request.
+   * @param request The HTTP request
    */
   @RequestMapping("/confirm/confirmed")
   public ModelAndView emailConfirmed(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
@@ -168,7 +180,7 @@ public class ConfirmationController {
 
     return modelAndView;
   }
-  
+
   /**
    * Redirect the user to the email confirmed page, and add any GET parameters
    * to the page.
@@ -176,6 +188,7 @@ public class ConfirmationController {
    */
   @RequestMapping("/confirm/newEmail")
   public ModelAndView sendNewEmail(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
@@ -185,27 +198,23 @@ public class ConfirmationController {
 
     return modelAndView;
   }
-  
+
   @RequestMapping("/confirm/email")
   public String confirmEmail() {
+
     return "/confirm/confirm-email";
   }
 
-  
+
   @RequestMapping("/confirm/notConfirmed")
   public String notConfirmed() {
+
     return "/confirm/not-confirmed";
   }
-  
+
   @RequestMapping("/confirm/alreadyConfirmed")
   public String alreadyConfirmed() {
+
     return "/confirm/already-confirmed";
   }
-  
-
-  
-  
-  
-  
-  
 }

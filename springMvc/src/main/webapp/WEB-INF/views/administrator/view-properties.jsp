@@ -40,7 +40,7 @@
         <h1>Manage Properties</h1>
         <p>Here you can view all the properties in the system and choose to edit/delete them.</p>
     </div>
-    
+
     <c:if test="${deleted != null}">
         <div class="alert alert-success" role="alert">
             <strong>Success!</strong> You have successfully deleted the property from the database.
@@ -51,33 +51,33 @@
             <strong>Success!</strong> You have successfully edited a property.
         </div>
     </c:if>
-<div class="table-responsive">
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Landlord</th>
-            <th>Property Type</th>
-            <th>Number</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>Postcode</th>
-            <th>Options</th>
-        </tr>
-        <c:forEach items ="${properties}" var ="property">
+    <div class="table-responsive">
+        <table class="table table-hover">
             <tr>
-                <td>${property.id}</td>
-                <td>${property.landlord.firstName} ${property.landlord.lastName}</td>
-                <td>${property.type.type}</td>
-                <td>${property.number}</td>
-                <td>${property.street}</td>
-                <td>${property.city}</td>
-                <td>${property.postcode}</td>
-                <td><a href="/property/view/${property.id}" class="btn btn-success">View</a>
-                    <a href="/admin/property/delete/${property.id}" class="btn btn-danger">Delete</a></td>
+                <th>ID</th>
+                <th>Landlord</th>
+                <th>Property Type</th>
+                <th>Number</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Postcode</th>
+                <th>Options</th>
             </tr>
-        </c:forEach>
-    </table>
-</div>
+            <c:forEach items ="${properties}" var ="property">
+                <tr>
+                    <td>${property.id}</td>
+                    <td>${property.landlord.firstName} ${property.landlord.lastName}</td>
+                    <td>${property.type.type}</td>
+                    <td>${property.number}</td>
+                    <td>${property.street}</td>
+                    <td>${property.city}</td>
+                    <td>${property.postcode}</td>
+                    <td><a href="/property/view/${property.id}" class="btn btn-success">View</a>
+                        <a href="/admin/property/delete/${property.id}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
 <hr />
 

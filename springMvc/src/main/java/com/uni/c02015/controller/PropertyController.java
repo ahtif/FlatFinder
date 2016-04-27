@@ -260,12 +260,16 @@ public class PropertyController {
     //Geocode the address of the property to get it's latitude and longitude.
     GeoApiContext context =
         new GeoApiContext().setApiKey("AIzaSyCEawq-gRz787BseZuahn_lFjPfIsTgvj8");
+
     try {
+
       GeocodingResult[] results =  GeocodingApi.geocode(context,
           propNumber + " " + propStreet + " " + propCity + " " + propPostcode).await();
       property.setLatitude(results[0].geometry.location.lat);
       property.setLongitude(results[0].geometry.location.lng);
+
     } catch (Exception e1) {
+
       e1.printStackTrace();
     }
     
@@ -273,6 +277,7 @@ public class PropertyController {
         ((Authentication) principal).getPrincipal()).getUsername());
     
     if (property.getLandlord() == null) {
+
       property.setLandlord(landlordRepository.findById(user.getId()));
     }
 
@@ -311,10 +316,13 @@ public class PropertyController {
         }
       }
     }
-    
+
+    // Admin edit
     if (request.isUserInRole(SpringMvc.ROLE_ADMINISTRATOR)) {
+
       return "redirect:/admin/viewProperties?edited=true";
     }
+
     return "property/addPost";
   }
 

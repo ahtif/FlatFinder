@@ -10,11 +10,6 @@ import java.util.List;
 @Component
 public interface PropertyRepository extends CrudRepository<Property, Integer> {
 
-  /**
-   * Find a property by ID.
-   * @param id Integer
-   * @return {@link Property}
-   */
   Property findById(Integer id);
 
   List<Property> findByLandlord(Landlord landlord);

@@ -33,6 +33,7 @@ public class MessageController {
 
   @ModelAttribute("User")
   public User getUser() {
+
     return new User();
   }
 
@@ -48,7 +49,8 @@ public class MessageController {
     User currentUser = userRepo.findByLogin(username);
     List<Message> usersMessages = messageRepo.findByReceiver(currentUser);
     ModelAndView inboxView = new ModelAndView("messaging/inboxPage");
-    inboxView.addObject("messages", usersMessages);    
+    inboxView.addObject("messages", usersMessages);
+
     return inboxView;
   }
 
@@ -58,6 +60,7 @@ public class MessageController {
    */
   @RequestMapping("messaging")
   public ModelAndView messageIndex() {
+
     return goToInbox();
   }
   
@@ -67,6 +70,7 @@ public class MessageController {
    */
   @RequestMapping("messaging/view")
   public ModelAndView viewMessage(@RequestParam("id") String id) {
+
     Message message = messageRepo.findById(Integer.parseInt(id));
     ModelAndView messageView = new ModelAndView("messaging/view","messageAttribute", new Message());
     messageView.addObject("message", message);
@@ -83,6 +87,7 @@ public class MessageController {
    */
   @RequestMapping("messaging/new")
   public ModelAndView newMessage(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
@@ -119,20 +124,25 @@ public class MessageController {
     Message message = new Message();
     
     if (sender != null && !sender.isEmpty()) {
+
       currentUser = userRepo.findByLogin(sender);
       message.setSender(currentUser);
+
     } else {
+
       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
       String username = auth.getName();
       currentUser = userRepo.findByLogin(username);
     }
     
     if (parent != null && !parent.isEmpty()) {
+
       message.setParent(messageRepo.findById(Integer.parseInt(parent)));
     }
     
     User receiver = userRepo.findByLogin(to);
     if (receiver == null) {
+
       return "redirect:/messaging/new?receiverExists=false";
     }
 

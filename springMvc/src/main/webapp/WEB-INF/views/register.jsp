@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flat Finder - Register</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -46,7 +46,7 @@
             <p>Please fill in your details using the form below.</p>
         </div>
     </div>
-    
+
     <c:if test="${usernameLength != null}">
         <div class="alert alert-danger" role="alert">
             <strong>Sorry!</strong> Your username is not between 3 and 15 characters.
@@ -106,9 +106,9 @@
 
             </tr>
             <tr>
-            <td>Email:</td>
+                <td>Email:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="email" path="emailAddress" class="form-control" 
+                    <form:input role="form" type="email" path="emailAddress" class="form-control"
                                 placeholder="Email Address" required="required"></form:input>
                 </div></td>
             </tr>

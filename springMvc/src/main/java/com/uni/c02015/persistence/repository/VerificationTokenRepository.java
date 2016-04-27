@@ -15,5 +15,4 @@ public interface VerificationTokenRepository extends CrudRepository<Verification
   VerificationToken findByToken(String token);
   
   List<VerificationToken> findByUser(User user);
-
 }

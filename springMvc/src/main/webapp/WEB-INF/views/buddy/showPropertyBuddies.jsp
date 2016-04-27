@@ -20,43 +20,43 @@
 </head>
 <body>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
-            </div>
-            <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
-        </div>
-    </nav>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        
-        <div class="jumbotron">
-            <br />
-            <h1>Buddies For This Property</h1>
-            <p>Below are all searchers which have opted to buddy up for the property.</p>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
         </div>
+        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
+    </div>
+</nav>
+<div class="container">
 
-        <table class="table table-hover">
+    <div class="jumbotron">
+        <br />
+        <h1>Buddies For This Property</h1>
+        <p>Below are all searchers which have opted to buddy up for the property.</p>
+    </div>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Username</th>
+            <th>Options</th>
+        </tr>
+        <c:forEach items ="${buddiesProperty}" var ="buddyProperty">
             <tr>
-                <th>Username</th>
-                <th>Options</th>
+                <td>${buddyProperty.user.login}</td>
+                <td>
+                    <a class="btn btn-success" href="/buddy/request/${buddyProperty.user.id}/${buddyProperty.property.id}">Request Buddy</a>
+                </td>
             </tr>
-            <c:forEach items ="${buddiesProperty}" var ="buddyProperty">
-                <tr>
-                    <td>${buddyProperty.user.login}</td>
-                    <td>
-                        <a class="btn btn-success" href="/buddy/request/${buddyProperty.user.id}/${buddyProperty.property.id}">Request Buddy</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
 
 </div>
 

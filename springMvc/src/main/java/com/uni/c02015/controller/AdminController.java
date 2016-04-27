@@ -39,11 +39,11 @@ public class AdminController {
   private RoleRepository roleRepo;
   @Autowired
   private VerificationTokenRepository tokenRepo;
-  
-  
+
   /**
-   * Allows an admin to broadcast a message.
-   * @return Return to the current user's inbox.
+   * Broadcast multiple messages to users.
+   * @param request HttpServletRequest
+   * @return String
    */
   @RequestMapping("/admin/broadcast/send")
   public String broadcast(HttpServletRequest request) {
@@ -52,15 +52,18 @@ public class AdminController {
     String message = request.getParameter("message");
     String sendTo = request.getParameter("sendTo");
 
+    // Form error
     if (sendTo.length() == 0 || subject.length() == 0 || message.length() == 0) {
 
       return "redirect:/admin/broadcast/message?error=true";
     }
 
+    // Get the user
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
 
+    // Sending to all users
     if (sendTo.equals("all")) {
 
       ArrayList<User> allUsers = (ArrayList<User>) userRepo.findAll();
@@ -76,6 +79,7 @@ public class AdminController {
         messageRepo.save(messageObj);
       }
 
+    // Sending to searchers
     } else if (sendTo.equals("searchers")) {
 
       ArrayList<Searcher> allUsers = (ArrayList<Searcher>) searcherRepo.findAll();
@@ -91,6 +95,7 @@ public class AdminController {
         messageRepo.save(messageObj);
       }
 
+    // Sending to landlords
     } else if (sendTo.equals("landlords")) {
 
       ArrayList<Landlord> allUsers = (ArrayList<Landlord>) landlordRepo.findAll();
@@ -111,7 +116,7 @@ public class AdminController {
   }
 
   /**
-   * As an admin, broadcast a message.
+   * Mass message view.
    * @param request HttpServletRequest
    * @return ModelAndView
    */
@@ -126,157 +131,203 @@ public class AdminController {
 
     return modelAndView;
   }
-  
+
   /**
-   * Take the admin to the manage properties pages, and add any GET parameters to the page.
-   * @param request The HTTP request.
+   * View all properties.
+   * @param request HttpServletRequest
+   * @return ModelAndView
    */
   @RequestMapping("/admin/viewProperties")
   public ModelAndView viewProperties(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
     // Create the model and view and add the GET parameters as object in the model
     ModelAndView modelAndView = new ModelAndView("/administrator/view-properties");
     modelAndView.addAllObjects(parameters);
-    
+
     ArrayList<Property> properties = (ArrayList<Property>) propertyRepo.findAll();
     modelAndView.addObject("properties", properties);
 
     return modelAndView;
   }
-  
+
   /**
-   * Take the admin to the manage users pages, and add any GET parameters to the page.
-   * @param request The HTTP request.
+   * View all users.
+   * @param request HttpServletRequest
+   * @return ModelAndView
    */
   @RequestMapping("/admin/viewUsers")
   public ModelAndView viewUsers(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
     // Create the model and view and add the GET parameters as object in the model
     ModelAndView modelAndView = new ModelAndView("/administrator/view-users");
     modelAndView.addAllObjects(parameters);
-    
+
     ArrayList<User> users = (ArrayList<User>) userRepo.findAll();
     modelAndView.addObject("users", users);
 
     return modelAndView;
   }
-  
+
   /**
-   * Take in a property ID and delete the property from the database if it exists.
-   * @param id The ID of the property.
+   * Delete a property.
+   * @param id Property Id
+   * @return String
    */
   @RequestMapping("/admin/property/delete/{id}")
   public String deleteProperty(@PathVariable Integer id) {
 
     Property property = propertyRepo.findById(id);
+
     if (property != null) {
+
       propertyRepo.delete(id);
+
       return "redirect:/admin/viewProperties?deleted=true";
     }
+
     return "redirect:/admin/viewProperties";
   }
-  
+
   /**
-   * Take in a user ID and suspend the user from the system if it exists.
-   * @param id The ID of the user.
+   * Suspend a user.
+   * @param id User Id
+   * @return String
    */
   @RequestMapping("/admin/user/suspend/{id}")
   public String suspendUser(@PathVariable Integer id) {
+
     User user = userRepo.findById(id);
     if (user != null) {
+
       user.setSuspended(true);
       userRepo.save(user);
+
       return "redirect:/admin/viewUsers?suspended=true";
     }
+
     return "redirect:/admin/viewUsers";
   }
-  
+
   /**
-   * Take in a user ID and un suspend the user from the system if it exists.
-   * @param id The ID of the user.
+   * Unsuspend a user.
+   * @param id User Id
+   * @return String
    */
   @RequestMapping("/admin/user/unSuspend/{id}")
   public String unSuspendUser(@PathVariable Integer id) {
+
     User user = userRepo.findById(id);
+
     if (user != null && user.isSuspended()) {
+
       user.setSuspended(false);
       userRepo.save(user);
+
       return "redirect:/admin/viewUsers?unSuspended=true";
     }
+
     return "redirect:/admin/viewUsers";
   }
-  
+
   /**
-   * Take in a user ID and delete the user from the system if it exists.
-   * @param id The ID of the user.
+   * Delete a user.
+   * @param id User Id
+   * @return String
    */
   @RequestMapping("/admin/user/delete/{id}")
   public String deleteUser(@PathVariable Integer id) {
+
     User user = userRepo.findById(id);
     if (user != null) {
+
       messageRepo.delete(messageRepo.findBySender(user));
       tokenRepo.delete(tokenRepo.findByUser(user));
       userRepo.delete(user);
+
       return "redirect:/admin/viewUsers?deleted=true";
     }
+
     return "redirect:/admin/viewUsers";
   }
-  
+
   /**
-   * Redirect the admin to view a single user's profile
-   * @param id The id of the user.
+   * View a user.
+   * @param id User Id
+   * @return ModelAndView
    */
   @RequestMapping("/admin/view-user/{id}")
   public ModelAndView viewUser(@PathVariable Integer id) {
+
     User user = userRepo.findById(id);
+
     if (user != null) {
+
       ModelAndView modelAndView = new ModelAndView("/administrator/view-user", "user" , new User());
+
       if (user.getRole().getId() == SpringMvc.ROLE_SEARCHER_ID) {
+
         Searcher searcher = searcherRepo.findById(user.getId());
         modelAndView.addObject("searcher", searcher);
+
       } else if (user.getRole().getId() == SpringMvc.ROLE_LANDLORD_ID) {
+
         Landlord landlord = landlordRepo.findById(user.getId());
         modelAndView.addObject("landlord", landlord);
+
       } else {
+
         return new ModelAndView("redirect:/admin/viewUsers");
       }
+
       modelAndView.addObject("usr", user);
       return modelAndView;
     }
     return new ModelAndView("redirect:/admin/viewUsers");
   }
-  
+
   /**
-   * Redirect the admin to view a single user's profile
-   * @param id The id of the user.
+   * Edit a user.
+   * @param id User Id
+   * @param firstName User first name
+   * @param lastName User last name
+   * @param emailAddress User email address
+   * @param buddy Buddy preference
+   * @return String
    */
   @RequestMapping("/admin/user/edit")
   public String editUser(@RequestParam("id") Integer id,
-      @RequestParam("firstName") String firstName,
-      @RequestParam("lastName") String lastName,
-      @RequestParam("emailAddress") String emailAddress,
-      @RequestParam(value = "buddyPref", required = false) Boolean buddy) {
-    
+                         @RequestParam("firstName") String firstName,
+                         @RequestParam("lastName") String lastName,
+                         @RequestParam("emailAddress") String emailAddress,
+                         @RequestParam(value = "buddyPref", required = false) Boolean buddy) {
+
     User user = userRepo.findById(id);
     user.setEmailAddress(emailAddress);
+
     if (user.getRole().getId() == SpringMvc.ROLE_SEARCHER_ID) {
+
       Searcher searcher = searcherRepo.findById(id);
       searcher.setFirstName(firstName);
       searcher.setLastName(lastName);
       searcher.setBuddyPref(buddy);
       searcherRepo.save(searcher);
+
     } else if (user.getRole().getId() == SpringMvc.ROLE_LANDLORD_ID) {
+
       Landlord landlord = landlordRepo.findById(user.getId());
       landlord.setFirstName(firstName);
       landlord.setLastName(lastName);
       landlordRepo.save(landlord);
     }
+
     userRepo.save(user);
-    
+
     return "redirect:/admin/viewUsers?edited=true";
   }
 }

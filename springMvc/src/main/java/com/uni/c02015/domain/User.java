@@ -19,9 +19,13 @@ public class User {
   private String emailAddress;
   private boolean confirmed = false;
   private boolean suspended = false;
-  
 
-  public User() {}
+  /**
+   * Constructor.
+   */
+  public User() {
+
+  }
 
   /**
    * Constructor.
@@ -98,32 +102,66 @@ public class User {
     this.role = role;
   }
 
+  /**
+   * Get confirmed.
+   * @return boolean
+   */
   public boolean getConfirmed() {
+
     return confirmed;
   }
 
+  /**
+   * Set confirmed.
+   * @param confirmed boolean
+   */
   public void setConfirmed(boolean confirmed) {
+
     this.confirmed = confirmed;
   }
-  
+
+  /**
+   * Get is suspended.
+   * @return boolean
+   */
   public boolean isSuspended() {
+
     return suspended;
   }
 
+  /**
+   * Set suspended.
+   * @param suspended boolean
+   */
   public void setSuspended(boolean suspended) {
+
     this.suspended = suspended;
   }
 
+  /**
+   * Get email address.
+   * @return String
+   */
   public String getEmailAddress() {
+
     return emailAddress;
   }
 
+  /**
+   * Set email address.
+   * @param emailAddress String
+   */
   public void setEmailAddress(String emailAddress) {
+
     this.emailAddress = emailAddress;
   }
-  
+
+  /**
+   * toString
+   * @return
+   */
   public String toString() {
+
     return login + id;
   }
-
 }

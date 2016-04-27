@@ -40,7 +40,7 @@
         <h1>Manage Users</h1>
         <p>Here you can view all the users in the system and choose to edit/suspend them.</p>
     </div>
-    
+
     <c:if test="${suspended != null}">
         <div class="alert alert-success" role="alert">
             <strong>Success!</strong> You have successfully suspended the user from using the system.
@@ -62,40 +62,40 @@
         </div>
     </c:if>
     <div class="table-responsive">
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Activated</th>
-            <th>Suspended</th>
-            <th>Email Address</th>
-            <th>Options</th>
-        </tr>
-        <c:forEach items ="${users}" var ="user">
+        <table class="table table-hover">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.login}</td>
-                <td>${user.role.role}</td>
-                <td>${user.confirmed}</td>
-                <td>${user.suspended}</td>
-                <td>${user.emailAddress}</td>
-                <td>
-                    <c:if test="${user.role.role != 'ADMINISTRATOR'}">
-                        <a href="/admin/view-user/${user.id}" class="btn btn-danger">Edit</a>
-                        <c:if test="${user.suspended == true}">
-                            <a href="/admin/user/unSuspend/${user.id}" class="btn btn-danger">Un Suspend</a>
-                        </c:if>
-                        <c:if test="${user.suspended == false}">
-                            <a href="/admin/user/suspend/${user.id}" class="btn btn-danger">Suspend</a>
-                        </c:if>
-                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger">Delete</a>
-                    </c:if>
-                </td>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Activated</th>
+                <th>Suspended</th>
+                <th>Email Address</th>
+                <th>Options</th>
             </tr>
-        </c:forEach>
-    </table>
-</div>
+            <c:forEach items ="${users}" var ="user">
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.login}</td>
+                    <td>${user.role.role}</td>
+                    <td>${user.confirmed}</td>
+                    <td>${user.suspended}</td>
+                    <td>${user.emailAddress}</td>
+                    <td>
+                        <c:if test="${user.role.role != 'ADMINISTRATOR'}">
+                            <a href="/admin/view-user/${user.id}" class="btn btn-danger">Edit</a>
+                            <c:if test="${user.suspended == true}">
+                                <a href="/admin/user/unSuspend/${user.id}" class="btn btn-danger">Un Suspend</a>
+                            </c:if>
+                            <c:if test="${user.suspended == false}">
+                                <a href="/admin/user/suspend/${user.id}" class="btn btn-danger">Suspend</a>
+                            </c:if>
+                            <a href="/admin/user/delete/${user.id}" class="btn btn-danger">Delete</a>
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
 
 <hr />

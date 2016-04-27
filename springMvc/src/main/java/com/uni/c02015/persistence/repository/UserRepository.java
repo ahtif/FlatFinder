@@ -10,20 +10,10 @@ import java.util.List;
 @Component
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-  /**
-   * Find by login.
-   * @param login String
-   * @return {@link User}
-   */
   User findByLogin(String login);
 
   User findByEmailAddress(String email);
 
-  /**
-   * Find by role.
-   * @param role {@link Role}
-   * @return {@link User} List
-   */
   List<User> findByRole(Role role);
 
   User findById(Integer integer);

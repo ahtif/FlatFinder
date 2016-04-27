@@ -34,6 +34,7 @@ public class PasswordController {
 
   @ModelAttribute("User")
   public User getUser() {
+
     return new User();
   }
 
@@ -44,6 +45,7 @@ public class PasswordController {
    */
   @RequestMapping("/forgot")
   public ModelAndView forgot(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
@@ -62,10 +64,14 @@ public class PasswordController {
    */
   @RequestMapping(value = "/forgot/send", method = RequestMethod.POST)
   public String recoverPassword(@RequestParam("login") String username) {
+
     User user = userRepo.findByLogin(username);
+
     if (user != null) {
+
       sendRecoveryEmail(user, user.getEmailAddress());
     }
+
     return "redirect:/forgot?submitted=true";
   }
 
@@ -74,9 +80,11 @@ public class PasswordController {
    * @param tokenId The unique confirmation ID.
    */
   @RequestMapping("/forgot/{tokenId}")
-  public ModelAndView confirmAccount(@PathVariable String tokenId, RedirectAttributes attrs) { 
+  public ModelAndView confirmAccount(@PathVariable String tokenId, RedirectAttributes attrs) {
+
     ModelAndView resetView = new ModelAndView("redirect:/recover/resetPass", "user", new User());
     attrs.addFlashAttribute("token", tokenId);
+
     return resetView;
   }
   
@@ -87,11 +95,11 @@ public class PasswordController {
    */
   @RequestMapping("/recover/resetPass")
   public ModelAndView resetPassword(HttpServletRequest request) {
+
     // Get the request GET parameters
     Map<String, String[]> parameters = request.getParameterMap();
 
-    // Create the model and view and add the GET parameters as object in the
-    // model
+    // Create the model and view and add the GET parameters as object in the model
     ModelAndView modelAndView = new ModelAndView("/recover/resetPass");
     modelAndView.addAllObjects(parameters);
     
@@ -149,15 +157,18 @@ public class PasswordController {
 
   @RequestMapping("/recover/passwordChanged")
   public String passwordChanged() {
+
     return "/recover/password-changed";
   }
   
   @RequestMapping("/recover/invalidtoken")
   public String invalidToken() {
+
     return "/recover/invalid-token";
   }
 
   private void sendRecoveryEmail(User user, String emailAddress) {
+
     String tokenId = UUID.randomUUID().toString();
 
     VerificationToken token = new VerificationToken(tokenId, user, TokenType.PASSWORD);
@@ -206,9 +217,10 @@ public class PasswordController {
       // Send message
       Transport.send(message);
       System.out.println("Sent message successfully....");
+
     } catch (MessagingException mex) {
+
       mex.printStackTrace();
     }
   }
-
 }

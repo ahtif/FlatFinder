@@ -10,11 +10,6 @@ import java.util.List;
 
 public interface MessageRepository extends CrudRepository<Message, Integer> {
   
-  /**
-   * Find a role by ID.
-   * @param id Integer
-   * @return {@link Message}
-   */
   Message findById(Integer id);
 
   List<Message> findByReceiver(User currentUser);

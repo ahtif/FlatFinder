@@ -23,17 +23,27 @@ public class NotificationInterceptor extends HandlerInterceptorAdapter {
   @Autowired
   private UserRepository userRepository;
 
+  /**
+   * Post processing interceptor.
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @param handler Object
+   * @param modelAndView ModelAndView
+   * @throws Exception Exception
+   */
   @Override
   public void postHandle(HttpServletRequest request,
                          HttpServletResponse response,
                          Object handler,
                          ModelAndView modelAndView) throws Exception {
 
+    // There is no logged in user
     if (request.getRemoteUser() == null) {
 
       return;
     }
 
+    // Get the user
     User user = userRepository.findByLogin(request.getRemoteUser());
 
     // Get the unread message count
