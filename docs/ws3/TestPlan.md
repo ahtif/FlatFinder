@@ -98,7 +98,7 @@
 
 ### How will issues be fixed?
 
-* We have set aside time at the end of the project to fix issues that are found through the testing phase.
+We have set aside time at the end of the project to fix issues that are found through the testing phase.
 
 ##### Cucumber Testing
 
