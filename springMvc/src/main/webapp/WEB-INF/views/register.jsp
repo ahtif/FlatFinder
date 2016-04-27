@@ -52,6 +52,11 @@
             <strong>Sorry!</strong> Your username is not between 3 and 15 characters.
         </div>
     </c:if>
+    <c:if test="${emailTaken != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong>Sorry!</strong> The email address is not available.
+        </div>
+    </c:if>
     <c:if test="${usernameExists != null}">
         <div class="alert alert-danger" role="alert">
             <strong>Sorry!</strong> Your username is not available, please choose another.

@@ -17,6 +17,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
    */
   User findByLogin(String login);
 
+  User findByEmailAddress(String email);
+
   /**
    * Find by role.
    * @param role {@link Role}

@@ -340,6 +340,15 @@ public class RegistrationController {
       }
 
       query += "emailFormat=true";
+
+    } else if (userRepo.findByEmailAddress(emailAddress) != null) {
+
+      if (query.length() > 0) {
+
+        query += "&";
+      }
+
+      query += "emailTaken=true";
     }
 
     // Password length is invalid
