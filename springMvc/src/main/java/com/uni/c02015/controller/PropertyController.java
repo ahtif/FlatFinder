@@ -3,11 +3,14 @@ package com.uni.c02015.controller;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
+
 import com.uni.c02015.SpringMvc;
 import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.buddy.BuddyPropertyRepository;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -61,6 +64,10 @@ public class PropertyController {
   UserRepository userRepository;
   @Autowired
   PropertyRepository propertyRepository;
+  @Autowired
+  SearcherRepository searcherRepository;
+  @Autowired
+  BuddyPropertyRepository buddyPropertyRepository;
 
   /**
    * Add a property.
@@ -342,6 +349,23 @@ public class PropertyController {
       if (user.getRole().getRole().equals(SpringMvc.ROLE_ADMINISTRATOR)) {
 
         modelAndView.addObject("isAdmin", true);
+      }
+
+      // Is a searcher with buddy up option on
+      if (user.getRole().getRole().equals(SpringMvc.ROLE_SEARCHER)
+          && searcherRepository.findById(user.getId()).getBuddyPref()) {
+
+        modelAndView.addObject("userId", user.getId());
+
+        if (buddyPropertyRepository
+            .findByPropertyAndUser(property, userRepository.findById(user.getId())) != null) {
+
+          modelAndView.addObject("buddyProperty", true);
+
+        } else {
+
+          modelAndView.addObject("buddyProperty", false);
+        }
       }
 
       modelAndView.addObject("property", property);

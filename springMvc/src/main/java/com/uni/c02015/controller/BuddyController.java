@@ -1,9 +1,17 @@
 package com.uni.c02015.controller;
 
-import com.uni.c02015.domain.BuddyRequest;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
-import com.uni.c02015.persistence.repository.*;
+import com.uni.c02015.domain.buddy.BuddyProperty;
+import com.uni.c02015.domain.buddy.Request;
+import com.uni.c02015.domain.property.Property;
+import com.uni.c02015.persistence.repository.LandlordRepository;
+import com.uni.c02015.persistence.repository.RoleRepository;
+import com.uni.c02015.persistence.repository.SearcherRepository;
+import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.buddy.BuddyPropertyRepository;
+import com.uni.c02015.persistence.repository.buddy.RequestRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,13 +38,17 @@ public class BuddyController {
   @Autowired
   private LandlordRepository landlordRepo;
   @Autowired
-  private BuddyRequestRepository buddyRepo;
+  private RequestRepository buddyRepo;
+  @Autowired
+  private BuddyPropertyRepository buddyPropertyRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
   
   @ModelAttribute("User")
   public User getUser() {
     return new User();
   }
-  
+
   /**
    * Find the buddies of the current user and take them to the view buddies page.
    */
@@ -55,53 +67,69 @@ public class BuddyController {
     User currentUser = userRepo.findByLogin(username);
     Searcher currentSearcher = searcherRepo.findById(currentUser.getId());
     
-    List<BuddyRequest> pendingRequests =
+    List<Request> pendingRequests =
         buddyRepo.findByReceiverAndConfirmed(currentSearcher, false);
     modelAndView.addObject("pending", pendingRequests);
     
-    List<BuddyRequest> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
-    List<BuddyRequest> acceptedRequests2 =
+    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
+    List<Request> acceptedRequests2 =
         buddyRepo.findByReceiverAndConfirmed(currentSearcher, true);
     
     modelAndView.addObject("sentBuddies", acceptedRequests);
     modelAndView.addObject("acceptedBuddies", acceptedRequests2);
     
     return modelAndView;
-    
   }
+
   /**
-   * Take the user to a page show the list of all available buddies.
-   * If the user has not opted in to the buddy system, then do not allow them to find buddies.
+   * Create a buddy property request.
+   * @param userId The user Id
+   * @param propertyId The property Id
+   * @return String
    */
-  @RequestMapping("/buddy/findBuddies")
-  public ModelAndView findBuddies() {
-    
-    ModelAndView buddyView = new ModelAndView("/buddy/findBuddies");
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String username = auth.getName();
-    User currentUser = userRepo.findByLogin(username);
-    Searcher searcher = searcherRepo.findById(currentUser.getId());
-    if (searcher.getBuddyPref()) {
-      List<Searcher> buddiesToRemove = new ArrayList<Searcher>();
-      List<Searcher> buddies = searcherRepo.findByBuddyPref(true);
-      for (Searcher buddy : buddies) {
-        if (buddyRepo.findBySenderAndReceiver(searcher, buddy) != null
-            || buddyRepo.findBySenderAndReceiver(buddy, searcher) != null) {
-          buddiesToRemove.add(buddy);
-        }
-      }
-      buddies.removeAll(buddiesToRemove);
-      buddies.remove(searcher);
-      buddyView = new ModelAndView("/buddy/findBuddies");
-      buddyView.addObject("buddies", buddies);
-      return buddyView;
+  @RequestMapping(value = "/buddy/property/{userId}/{propertyId}")
+  public String buddyPropertyPreference(@PathVariable Integer userId,
+                                        @PathVariable Integer propertyId) {
+
+    Property property = propertyRepository.findById(propertyId);
+    User user = userRepo.findById(userId);
+
+    BuddyProperty buddyProperty = buddyPropertyRepository.findByPropertyAndUser(property, user);
+
+    if (buddyProperty != null) {
+
+      buddyPropertyRepository.delete(buddyProperty);
+
+    } else {
+
+      buddyProperty = new BuddyProperty();
+      buddyProperty.setProperty(property);
+      buddyProperty.setUser(user);
+
+      buddyPropertyRepository.save(buddyProperty);
     }
-    buddyView.addObject("notBuddy", true);
-    return buddyView;
+
+    return "redirect:/property/view/" + propertyId;
+  }
+
+  /**
+   * Show the buddies for a property.
+   * @param propertyId The property Id
+   * @return ModelAndView
+   */
+  @RequestMapping("/buddy/showPropertyBuddies/{propertyId}")
+  public ModelAndView showBuddiesForProperty(@PathVariable Integer propertyId) {
+
+    ModelAndView modelAndView = new ModelAndView("/buddy/showPropertyBuddies");
+
+    modelAndView.addObject("buddiesProperty",
+        buddyPropertyRepository.findByProperty(propertyRepository.findById(propertyId)));
+
+    return modelAndView;
   }
   
   /**
-   * Create a new buddy up reqeust and redirect the the user to the view buddies page.
+   * Create a new buddy up request and redirect the the user to the view buddies page.
    * @param id The id of the user to request a buddy up with.
    */
   @RequestMapping("/buddy/request/{id}")
@@ -114,7 +142,7 @@ public class BuddyController {
     User requestedUser = userRepo.findById(id);
     Searcher requestedSearcher = searcherRepo.findById(requestedUser.getId());
     
-    BuddyRequest request = new BuddyRequest();
+    Request request = new Request();
     request.setSender(currentSearcher);
     request.setReceiver(requestedSearcher);
     buddyRepo.save(request);
@@ -133,7 +161,7 @@ public class BuddyController {
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
-    BuddyRequest request = buddyRepo.findOne(id);
+    Request request = buddyRepo.findOne(id);
     if (request.getReceiver().getId() == currentUser.getId() && !request.getConfirmed()) {
       request.setConfirmed(true);
       buddyRepo.save(request);
@@ -154,7 +182,7 @@ public class BuddyController {
     String username = auth.getName();
     User currentUser = userRepo.findByLogin(username);
     
-    BuddyRequest request = buddyRepo.findOne(id);
+    Request request = buddyRepo.findOne(id);
     if (request.getReceiver().getId() == currentUser.getId() && !request.getConfirmed()) {
       buddyRepo.delete(request);
       return "redirect:/buddy/viewAll?rejected=true";   
@@ -178,17 +206,17 @@ public class BuddyController {
     User buddyUser = userRepo.findOne(buddyId);
     
     ModelAndView modelAndView = new ModelAndView("/buddy/view-buddy");
-    List<BuddyRequest> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
-    List<BuddyRequest> acceptedRequests2 =
+    List<Request> acceptedRequests = buddyRepo.findBySenderAndConfirmed(currentSearcher, true);
+    List<Request> acceptedRequests2 =
         buddyRepo.findByReceiverAndConfirmed(currentSearcher, true);
     
     List<Searcher> receivers = new ArrayList<>();
-    for (BuddyRequest req : acceptedRequests) {
+    for (Request req : acceptedRequests) {
       receivers.add(req.getReceiver());
     }
     
     List<Searcher> senders = new ArrayList<>();
-    for (BuddyRequest req : acceptedRequests2) {
+    for (Request req : acceptedRequests2) {
       senders.add(req.getSender());
     }
     

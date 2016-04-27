@@ -62,13 +62,13 @@
             <tr>
                 <td>First Name:</td>
                 <td><div class="form-group">
-                    <input role="form" type="text" name="firstName" class="form-control" value="${searcher != null ? searcher.firstName : landlord.firstName}"></input>
+                    <input role="form" type="text" name="firstName" class="form-control" value="${user != null ? user.firstName : landlord.firstName}"></input>
                 </div></td>
             </tr>
             <tr>
                 <td>Last Name:</td>
                 <td><div class="form-group">
-                    <input role="form" type="text" name="lastName" class="form-control" value="${searcher != null ? searcher.lastName : landlord.lastName}"></input>
+                    <input role="form" type="text" name="lastName" class="form-control" value="${user != null ? user.lastName : landlord.lastName}"></input>
                 </div></td>
             </tr>
             <tr>
@@ -77,15 +77,15 @@
                     <input role="form" type="text" name="emailAddress" class="form-control" value="${usr.emailAddress}"></input>
                 </div></td>
             </tr>
-            <c:if test = "${searcher != null}">
+            <c:if test = "${user != null}">
                 <tr>
                     <td>Buddy Preference:</td>
                     <td><div class="form-group">
-                        <c:if test="${searcher.buddyPref}">
+                        <c:if test="${user.buddyPref}">
                             <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
                             <input role="form" type="hidden" name="buddyPref" class="form-control" value="true"/>
                         </c:if>
-                        <c:if test="${!searcher.buddyPref}">
+                        <c:if test="${!user.buddyPref}">
                             <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
                             <input role="form" type="hidden" name="buddyPref" class="form-control" value="false"/>
                         </c:if>

@@ -62,7 +62,7 @@ public class SearchController {
     String maxPricePerMonth = request.getParameter("pMaxPPM");
 
     // Not all of the form was submitted
-    if (keyword.length() == 0 || type.length() == 0 || rooms.length() == 0) {
+    if (keyword.length() == 0) {
 
       modelAndView.addObject("error", true);
 

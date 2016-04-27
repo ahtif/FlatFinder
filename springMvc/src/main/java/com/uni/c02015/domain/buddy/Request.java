@@ -1,9 +1,11 @@
-package com.uni.c02015.domain;
+package com.uni.c02015.domain.buddy;
+
+import com.uni.c02015.domain.Searcher;
 
 import javax.persistence.*;
 
 @Entity
-public class BuddyRequest {
+public class Request {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,8 +18,7 @@ public class BuddyRequest {
   @ManyToOne
   @JoinColumn(name = "receiverId")
   private Searcher receiver;
-  
-  
+
   private Boolean confirmed = false;
   
   public int getId() {

@@ -61,13 +61,13 @@
             <tr>
                 <td>First Name:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="firstName" class="form-control" value="${searcher.firstName}"></form:input>
+                    <form:input role="form" type="text" path="firstName" class="form-control" value="${user.firstName}"></form:input>
                 </div></td>
             </tr>
             <tr>
                 <td>Last Name:</td>
                 <td><div class="form-group">
-                    <form:input role="form" type="text" path="lastName" class="form-control" value="${searcher.lastName}"></form:input>
+                    <form:input role="form" type="text" path="lastName" class="form-control" value="${user.lastName}"></form:input>
                 </div></td>
             </tr>
             <tr>
@@ -80,11 +80,11 @@
             <tr>
                 <td>Buddy Preference:</td>
                 <td><div class="form-group">
-                    <c:if test="${searcher.buddyPref}">
+                    <c:if test="${user.buddyPref}">
                         <button type="button" id="buddy" onclick="toggleBuddy()">I am a buddy</button>
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="true"/>
                     </c:if>
-                    <c:if test="${!searcher.buddyPref}">
+                    <c:if test="${!user.buddyPref}">
                         <button type="button" id="buddy" onclick="toggleBuddy()">I am not a buddy</button>
                         <form:input role="form" type="hidden" path="buddyPref" class="form-control" value="false"/>
                     </c:if>
