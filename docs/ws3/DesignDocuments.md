@@ -61,4 +61,10 @@ the user role and take them to the appropriate screen.
 
 These navigational models show how the user interacts with the system
 
+##Database Schema
+
+![Alt text](media/schema.png)
+
+This schema shows all of the tables in the database, their contents and how they interact with one another. 
+
 
