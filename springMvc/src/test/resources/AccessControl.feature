@@ -32,7 +32,6 @@ Scenario Outline: authorization
       | "/searcher/profile"              | "Harry" | "SEARCHER"  | true        |
 
 @Security
-@NotImplemented
 Scenario Outline: Redirection to homepage based on role
  Given I am an authenticated user with <ROLE>
  When I go to my specific homepage
