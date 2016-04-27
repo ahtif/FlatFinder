@@ -57,7 +57,7 @@ the user role and take them to the appropriate screen.
 
 ##Registation Navigational Model
 
-![Alt text](media/registrationNavModel-1.png)
+![Alt text](media/registrationNavModel.png)
 
 These navigational models show how the user interacts with the system
 
