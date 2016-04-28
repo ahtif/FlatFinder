@@ -38,7 +38,7 @@ Above is a graphical representation of the design pattern which the Spring MVC f
 
 6) The View is then processed along with Model data which forms the end user response
 
-##Technology design decisions overview
+##Technology Design Decisions Overview
 
 During the design phase of the application it was concluded that the following technologies and tools would be used to develop the application and for the relevant reasons.
 •	JAVA – This is the primary programming language that will be used to develop the backend of the application. It has been unanimously agreed upon that Java will be the primary language used to develop the application for various reasons. Firstly, Java is a powerful and capable programming language and offers the huge advantage of being platform independent meaning that the application can be run on different operating systems with little to no adjustments. Additionally, Java was chosen as the primary language due to the simple fact that the developers were most comfortable with Java as they have all had a significant amount of experience with Java. The backend of the 
@@ -62,7 +62,7 @@ o	The domain class diagram to show the entire scope and the domain of the system
 o	Navigation Models have been used in order to lay out the frontend navigation of the system.
 
 
-##Security
+##Security and Performance
 
 In this section the security measurements considered will be discussed. All technologies and tools listed have been considered and discussed but may ultimately not have been implemented due to lack of expertise and/or time
 
