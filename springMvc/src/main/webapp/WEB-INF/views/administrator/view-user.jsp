@@ -54,8 +54,8 @@
         <h1>Manage Users</h1>
         <p>Here you can view all the users in the system and choose to edit/suspend them.</p>
     </div>
-    
-    
+
+
     <form:form method="POST" action="/admin/user/edit" modelAttribute="user">
         <input type="hidden" name="id" value="${usr.id}" />
         <table>
@@ -91,16 +91,16 @@
                         </c:if>
                     </div></td>
                 </tr>
-               
-           </c:if>
-           <tr>
-               <td><input type="submit" value="Save" class="btn btn-success"/></td>
-           </tr>
-            
+
+            </c:if>
+            <tr>
+                <td><input type="submit" value="Save" class="btn btn-success"/></td>
+            </tr>
+
         </table>
 
     </form:form>
-    
+
 </div>
 
 <hr />

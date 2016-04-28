@@ -20,45 +20,45 @@
 </head>
 <body>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
-            </div>
-            <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
-        </div>
-    </nav>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        
-        <div class="jumbotron">
-            <br />
-            <h1>Buddies</h1>
-            <p>Below you can view you buddy's profile.</p>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Flat Finder - My Buddies</a>
         </div>
-        
-        <table>
-            <tr>
-                <td><h4><strong>First Name:</strong> ${buddy.firstName}</h4></td>
-            </tr>
-            <tr>
-                <td><h4><strong>Last Name:</strong> ${buddy.lastName}</h4></td>
-            </tr>
-            <tr>
-                <td><h4><strong>Email Address:</strong> ${buddyUser.emailAddress}</h4></td>
-            </tr>
-            <tr>
-                <td><h4><strong>Buddy Preference:</strong> ${buddy.buddyPref ? "Is a buddy" : "Is not a buddy"}</h4></td>
-            </tr>
-        </table>
-        
-        
+        <%@ include file="/WEB-INF/fragments/navbar.jspf" %>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="jumbotron">
+        <br />
+        <h1>Buddies</h1>
+        <p>Below you can view you buddy's profile.</p>
+    </div>
+
+    <table>
+        <tr>
+            <td><h4><strong>First Name:</strong> ${buddy.firstName}</h4></td>
+        </tr>
+        <tr>
+            <td><h4><strong>Last Name:</strong> ${buddy.lastName}</h4></td>
+        </tr>
+        <tr>
+            <td><h4><strong>Email Address:</strong> ${buddyUser.emailAddress}</h4></td>
+        </tr>
+        <tr>
+            <td><h4><strong>Buddy Preference:</strong> ${buddy.buddyPref ? "Is a buddy" : "Is not a buddy"}</h4></td>
+        </tr>
+    </table>
+
+
 
 </div>
 

@@ -2,7 +2,8 @@
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li><a href="/success-login">Home</a></li>
-            <li><a href="/messaging/inbox">Inbox</a></li>
+            <li><a href="/messaging/inbox">Message Box</a></li>
+            <li><a href="/admin/broadcast/message">Mass Message</a></li>
             <li><a href="/admin/viewProperties">Manage Properties</a></li>
             <li><a href="/admin/viewUsers">Manage Users</a></li>
         </ul>
@@ -13,12 +14,17 @@
         </form>
     </div><!--/.nav-collapse -->
 </sec:authorize>
+
 <sec:authorize access="hasRole('LANDLORD')">
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li><a href="/success-login">Home</a></li>
             <li><a href="/profile">Profile</a></li>
-            <li><a href="/messaging">Message Box</a></li>
+            <li><a href="/messaging">Message Box
+                <c:if test="${messageCount > 0}">
+                    <span class="label label-pill label-danger">${requestScope.messageCount}</span>
+                </c:if>
+            </a></li>
             <li><a href="/property/add">Add a Property</a></li>
         </ul>
         <c:url value="/logout" var="logoutUrl"/>
@@ -28,13 +34,22 @@
         </form>
     </div><!--/.nav-collapse -->
 </sec:authorize>
+
 <sec:authorize access="hasRole('SEARCHER')">
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li><a href="/success-login">Home</a></li>
             <li><a href="/profile">Profile</a></li>
-            <li><a href="/messaging">Message Box</a></li>
-            <li><a href="/buddy/viewAll">Your Buddies</a></li>
+            <li><a href="/messaging">Message Box
+                <c:if test="${messageCount > 0}">
+                    <span class="label label-pill label-danger">${requestScope.messageCount}</span>
+                </c:if>
+            </a></li>
+            <li><a href="/buddy/viewAll">Your Buddies
+                <c:if test="${unprocessedBuddyCount > 0}">
+                    <span class="label label-pill label-danger">${requestScope.unprocessedBuddyCount}</span>
+                </c:if>
+            </a></li>
         </ul>
         <c:url value="/logout" var="logoutUrl"/>
         <form class="navbar-form navbar-right" action="${logoutUrl}" method="get">

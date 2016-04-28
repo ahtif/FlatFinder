@@ -49,39 +49,39 @@
 
         </c:when>
         <c:otherwise>
-<div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Number</th>
-                    <th>Street</th>
-                    <th>Postcode</th>
-                    <th>Type</th>
-                    <th>Rooms</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach items="${properties}" var="property">
-
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>
-                            <a class="btn btn-success" href="/property/view/${property.id}">View</a>
-                            <a class="btn btn-danger" href="/property/delete/${property.id}">Delete</a>
-                        </td>
-                        <td>${property.number}</td>
-                        <td>${property.street}</td>
-                        <td>${property.postcode}</td>
-                        <td>${property.type.getType()}</td>
-                        <td>${property.rooms}</td>
+                        <th></th>
+                        <th>Number</th>
+                        <th>Street</th>
+                        <th>Postcode</th>
+                        <th>Type</th>
+                        <th>Rooms</th>
                     </tr>
+                    </thead>
+                    <tbody>
 
-                </c:forEach>
+                    <c:forEach items="${properties}" var="property">
 
-                </tbody>
-            </table>
-</div>
+                        <tr>
+                            <td>
+                                <a class="btn btn-success" href="/property/view/${property.id}">View</a>
+                                <a class="btn btn-danger" href="/property/delete/${property.id}">Delete</a>
+                            </td>
+                            <td>${property.number}</td>
+                            <td>${property.street}</td>
+                            <td>${property.postcode}</td>
+                            <td>${property.type.getType()}</td>
+                            <td>${property.rooms}</td>
+                        </tr>
+
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
         </c:otherwise>
     </c:choose>
 

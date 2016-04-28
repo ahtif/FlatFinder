@@ -15,15 +15,30 @@ public class Type {
 
   private String type;
 
+  /**
+   * Get Id.
+   * @return Integer
+   */
   public Integer getId() {
+
     return id;
   }
 
+  /**
+   * Get type.
+   * @return Type
+   */
   public String getType() {
+
     return type;
   }
 
+  /**
+   * Set type.
+   * @param type Type
+   */
   public void setType(String type) {
+
     this.type = type;
   }
 }

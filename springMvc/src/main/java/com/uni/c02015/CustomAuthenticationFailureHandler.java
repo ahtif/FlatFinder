@@ -13,10 +13,19 @@ import java.io.IOException;
 @Component("authenticationFailureHandler")
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
+  /**
+   * On failure.
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @param exception AuthenticationException
+   * @throws IOException On error
+   * @throws ServletException On error
+   */
   @Override
   public void onAuthenticationFailure(
       final HttpServletRequest request, final HttpServletResponse response,
       final AuthenticationException exception) throws IOException, ServletException {
+
     setDefaultFailureUrl("/invalid-login");
 
     String errorMessage = "It seems as though you have entered an invalid username or password.";

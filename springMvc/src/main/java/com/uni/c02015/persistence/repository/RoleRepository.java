@@ -7,11 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RoleRepository extends CrudRepository<Role, Integer> {
 
-  /**
-   * Find a role by ID.
-   * @param id Integer
-   * @return {@link Role}
-   */
   Role findById(Integer id);
   
   Role findByRole(String role);

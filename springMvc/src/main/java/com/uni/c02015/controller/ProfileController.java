@@ -43,9 +43,13 @@ public class ProfileController {
    */
   @RequestMapping("/profile")
   public String getRole(HttpServletRequest request) {
+
     if (request.isUserInRole(SpringMvc.ROLE_LANDLORD)) {
+
       return "redirect:/landlord/profile";
+
     } else {
+
       return "redirect:/searcher/profile";
     }
   }
@@ -56,6 +60,7 @@ public class ProfileController {
    */
   @RequestMapping("/searcher/profile")
   public ModelAndView viewProfile() {
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User user = userRepo.findByLogin(username);
@@ -63,6 +68,7 @@ public class ProfileController {
     ModelAndView profileView = new ModelAndView("searcher/view","user",new Searcher());
     profileView.addObject("searcher", searcher);
     profileView.addObject("usr", user);
+
     return profileView;
   }
 
@@ -100,6 +106,7 @@ public class ProfileController {
    */
   @RequestMapping("/landlord/profile")
   public ModelAndView viewLandLordProfile() {
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User user = userRepo.findByLogin(username);
@@ -107,6 +114,7 @@ public class ProfileController {
     ModelAndView profileView = new ModelAndView("landlord/view","user",new Landlord());
     profileView.addObject("landlord", landlord);
     profileView.addObject("usr", user);
+
     return profileView;
   }
 
@@ -131,6 +139,7 @@ public class ProfileController {
     user.setEmailAddress(emailAddress);
     landlordRepo.save(landlord);
     userRepo.save(user);
+
     return "redirect:/landlord/profile";
   }
 }

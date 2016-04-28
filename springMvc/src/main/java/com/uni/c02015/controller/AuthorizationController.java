@@ -53,6 +53,7 @@ public class AuthorizationController {
 
     ModelAndView modelAndView = new ModelAndView("index");
     modelAndView.addObject("error", true);
+
     return modelAndView;
   }
 
@@ -110,6 +111,7 @@ public class AuthorizationController {
 
       return new ModelAndView("redirect:/searcher/registration");
     }
+
     // Add property types
     ModelAndView modelAndView = new ModelAndView("searcher/index");
     modelAndView.addObject("types", typeRepository.findAll());

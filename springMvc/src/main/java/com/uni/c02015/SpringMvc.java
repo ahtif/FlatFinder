@@ -1,13 +1,13 @@
 package com.uni.c02015;
 
-import com.uni.c02015.domain.*;
 import com.uni.c02015.domain.property.Property;
+import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.Message;
+import com.uni.c02015.domain.Role;
+import com.uni.c02015.domain.Searcher;
+import com.uni.c02015.domain.User;
 import com.uni.c02015.domain.property.Type;
-import com.uni.c02015.persistence.repository.LandlordRepository;
-import com.uni.c02015.persistence.repository.MessageRepository;
-import com.uni.c02015.persistence.repository.RoleRepository;
-import com.uni.c02015.persistence.repository.SearcherRepository;
-import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.*;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class SpringMvc implements ApplicationRunner {
@@ -87,9 +85,18 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     roleRepo.save(role);
 
+    // Add property types
+    Type type = new Type();
+    type.setType("Flat");
+    typeRepository.save(type);
+
+    type = new Type();
+    type.setType("House");
+    typeRepository.save(type);
+
     BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 
-    // Set up admin user
+    // Admin
     User user = new User();
     user.setLogin("admin");
     user.setConfirmed(true);
@@ -101,16 +108,7 @@ public class SpringMvc implements ApplicationRunner {
     user.setRole(role);
     userRepo.save(user);
 
-    // Add property types
-    Type type = new Type();
-    type.setType("Flat");
-    typeRepository.save(type);
-
-    type = new Type();
-    type.setType("House");
-    typeRepository.save(type);
-
-    // Set up users
+    // Searcher
     User user1 = new User();
     user1.setLogin("alice");
     user1.setConfirmed(true);
@@ -127,7 +125,8 @@ public class SpringMvc implements ApplicationRunner {
     alice.setLastName("searcher");
     alice.setBuddyPref(true);
     searcherRepo.save(alice);
-    
+
+    // Searcher
     user1 = new User();
     user1.setLogin("tim");
     user1.setConfirmed(true);
@@ -138,14 +137,14 @@ public class SpringMvc implements ApplicationRunner {
     role.setRole(ROLE_SEARCHER);
     user1.setRole(role);
     userRepo.save(user1);
-    
+
     Searcher tim = new Searcher(user1.getId());
     tim.setFirstName("tim");
     tim.setLastName("buddy");
     tim.setBuddyPref(true);
     searcherRepo.save(tim);
-    
-    // Set up users
+
+    // Admin
     User user2 = new User();
     user2.setLogin("ahtif");
     user2.setConfirmed(true);
@@ -157,7 +156,7 @@ public class SpringMvc implements ApplicationRunner {
     user2.setRole(role);
     userRepo.save(user2);
     
-    // Set up users
+    // Landlord
     User user3 = new User();
     user3.setLogin("larry");
     user3.setConfirmed(true);
@@ -174,30 +173,30 @@ public class SpringMvc implements ApplicationRunner {
     larry.setLastName("landlord");
     landlordRepo.save(larry);
 
-//    //set up default properties
-    Property property = new Property();
-    property.setNumber("5");
-    property.setStreet("University Road");
-    property.setCity("Leicester");
-    property.setPostcode("LE1 7RA");
-    property.setType(typeRepository.findById(1));
-    property.setRooms(2);
-    property.setLatitude(52.627717);
-    property.setLongitude(-1.121204);
-    property.setLandlord(larry);
-    propertyRepo.save(property);
-    
-    property = new Property();
-    property.setNumber("2");
-    property.setStreet("Manor Rd");
-    property.setCity("Leicester");
-    property.setPostcode("LE2 2LJ");
-    property.setType(typeRepository.findById(2));
-    property.setRooms(4);
-    property.setLatitude(52.609993);
-    property.setLongitude(-1.088549);
-    property.setLandlord(larry);
-    propertyRepo.save(property); 
+////    //set up default properties
+//    Property property = new Property();
+//    property.setNumber("5");
+//    property.setStreet("University Road");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE1 7RA");
+//    property.setType(typeRepository.findById(1));
+//    property.setRooms(2);
+//    property.setLatitude(52.627717);
+//    property.setLongitude(-1.121204);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property);
+//    
+//    property = new Property();
+//    property.setNumber("2");
+//    property.setStreet("Manor Rd");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE2 2LJ");
+//    property.setType(typeRepository.findById(2));
+//    property.setRooms(4);
+//    property.setLatitude(52.609993);
+//    property.setLongitude(-1.088549);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property); 
     
     Message message = new Message();
     message.setSenderName("admin");
