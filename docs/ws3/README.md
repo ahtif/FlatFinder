@@ -31,10 +31,10 @@
 | Feature       | Step defs    |
 | ------------- |:------------:|
 | [AccessControl.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AccessControl.feature) | [AccessControl](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/AccessControlStepDefs.java) |
-| [AdminManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AdminManagement.feature) | [Doc1](1.md) |
-| [BuddyUp.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/BuddyUp.feature) | [Doc1](1.md) |
+| [AdminManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AdminManagement.feature) | [Admin Management](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/AdminManagementStepDefs.java) |
+| [BuddyUp.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/BuddyUp.feature) | [BuddyUp](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/BuddyUpStepDefs.java) |
 | [LandlordPropertyManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/LandlordPropertyManagement.feature) | [Doc1](1.md) |
-| [Login-And-Recovery.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Login-And-Recovery.feature) | [Doc1](1.md) |
+| [Login-And-Recovery.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Login-And-Recovery.feature) | [Login/Recovery](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/LoginRecoveryStepDefs.java) |
 | [Map.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Map.feature) | [Doc1](1.md) |
 | [Profile.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Profile.feature) | [Doc1](1.md) |
 | [Register.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Register.feature)| [Register](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/RegisterStepDefs.java) |
