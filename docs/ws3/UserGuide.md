@@ -3,9 +3,9 @@
 ## Login (Landlord,Searcher and Administrators)
 All users (landlords, searchers and administrators) use the login page to sign into their accounts.
 ![Login](UserGuideImages/login.png)
-1. Enter user name    
-2. Enter password    
-3. Click Log in     
+1. Enter user name      
+2. Enter password      
+3. Click Log in       
 
 ## Register (Landlord and Searcher)
 Landlords and searchers can register to use Flatfinder.  
@@ -13,12 +13,12 @@ Landlords and searchers can register to use Flatfinder.
 1. Click Register  
 
 ![Register](UserGuideImages/Register2.png) 
-You will be presented with the register page. 
-2. Enter Name   
-3. Enter Password (8 to 10 characters)   
-4. Enter confirm password (same as password)   
-6. Select the type of account you want either landlord or searcher   
-7. Click Create Account   
+You will be presented with the register page.   
+2. Enter Name     
+3. Enter Password (8 to 10 characters)     
+4. Enter confirm password (same as password)     
+6. Select the type of account you want either landlord or searcher     
+7. Click Create Account     
 
 ![Register](UserGuideImages/Register2.png) 
 You will be redirected to the confirm email page. You will be sent an email asking you to confirm your account by clicking on a unique link which will be attached in the email.  
