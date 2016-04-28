@@ -190,7 +190,6 @@ public class BuddyUpStepDefs {
    * Create 2 searchers and make a pending buddy request between them.
    * @param arg1 The first searcher.
    * @param arg2 The second searcher.
-   * @throws Throwable
    */
   @Given("^a searcher \"([^\"]*)\" has sent searcher \"([^\"]*)\" a buddy request$")
   public void searcher_has_sent_searcher_a_buddy_request(String arg1, String arg2)

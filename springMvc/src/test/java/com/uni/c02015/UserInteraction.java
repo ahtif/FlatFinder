@@ -278,6 +278,7 @@ public class UserInteraction {
     result = this.mockMvc.perform(post("https://localhost:8070/admin/broadcast/send")
         .param("subject", subject)
         .param("message", body)
+        .param("sendTo", "all")
         .with(authentication(new UsernamePasswordAuthenticationToken(admin.getLogin(), "",
             AuthorityUtils.createAuthorityList("ROLE_ADMINISTRATOR"))))
         .with(csrf()));
