@@ -1,6 +1,8 @@
 package com.uni.c02015;
 
+import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.domain.Landlord;
+import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
@@ -8,12 +10,16 @@ import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.*;
 import com.uni.c02015.persistence.repository.property.PropertyRepository;
 import com.uni.c02015.persistence.repository.property.TypeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Date;
+
 
 @SpringBootApplication
 public class SpringMvc implements ApplicationRunner {
@@ -170,5 +176,55 @@ public class SpringMvc implements ApplicationRunner {
     larry.setFirstName("larry");
     larry.setLastName("landlord");
     landlordRepo.save(larry);
+
+////    //set up default properties
+//    Property property = new Property();
+//    property.setNumber("5");
+//    property.setStreet("University Road");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE1 7RA");
+//    property.setType(typeRepository.findById(1));
+//    property.setRooms(2);
+//    property.setLatitude(52.627717);
+//    property.setLongitude(-1.121204);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property);
+//    
+//    property = new Property();
+//    property.setNumber("2");
+//    property.setStreet("Manor Rd");
+//    property.setCity("Leicester");
+//    property.setPostcode("LE2 2LJ");
+//    property.setType(typeRepository.findById(2));
+//    property.setRooms(4);
+//    property.setLatitude(52.609993);
+//    property.setLongitude(-1.088549);
+//    property.setLandlord(larry);
+//    propertyRepo.save(property); 
+    
+    Message message = new Message();
+    message.setSenderName("admin");
+    message.setMessage("hello");
+    message.setSender(user);
+    message.setReceiver(user);
+    message.setSubject("test");
+    message.setMessageDate(new Date());
+    message.setIsRead(false);
+    message.setParent(null);
+    message.setChildren(null);
+    messageRepo.save(message);
+
+    Message message1 = new Message();
+    message1.setSenderName("alice");
+    message1.setMessage("hello1");
+    message1.setSender(user1);
+    message1.setReceiver(user);
+    message1.setSubject("test1");
+    message1.setMessageDate(new Date());
+    message1.setIsRead(false);
+    message1.setParent(message);
+    message1.setChildren(null);
+    messageRepo.save(message1);
+
   }
 }

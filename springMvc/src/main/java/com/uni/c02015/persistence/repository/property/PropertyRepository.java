@@ -13,4 +13,7 @@ public interface PropertyRepository extends CrudRepository<Property, Integer> {
   Property findById(Integer id);
 
   List<Property> findByLandlord(Landlord landlord);
+  
+  Property findByStreetAndNumber(String street, String number);
+ 
 }

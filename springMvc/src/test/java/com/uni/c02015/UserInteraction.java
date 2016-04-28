@@ -15,6 +15,7 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class UserInteraction {
   private SearcherRepository searcherRepository;
   @Autowired
   private RoleRepository roleRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
 
   private MockMvc mockMvc;
   private ResultActions result;
@@ -110,13 +113,19 @@ public class UserInteraction {
   /**
    * Delete contents from each repo's after each scenario.
    */
+
   @After
   public void delete() {
-    messageRepository.deleteAll();
-    searcherRepository.deleteAll();
-    landlordRepository.deleteAll();
-    userRepository.deleteAll();
-    roleRepository.deleteAll();
+    try {
+      propertyRepository.deleteAll();
+      messageRepository.deleteAll();
+      landlordRepository.deleteAll();
+      searcherRepository.deleteAll();
+      userRepository.deleteAll();
+      roleRepository.deleteAll();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   /**
@@ -185,9 +194,13 @@ public class UserInteraction {
    */
   @Given("a searcher \"([^\"]*)\"$")
   public void is_a_searcher(String name) throws Throwable {
-    Role searcher = roleRepository.findByRole("SEARCHER");
-    User user = new User(name, "", searcher);
+    Role searcherRole = roleRepository.findByRole("SEARCHER");
+    User user = new User(name, "", searcherRole);
     userRepository.save(user);
+    Searcher searcher = new Searcher(user.getId());
+    searcher.setFirstName(name);
+    searcher.setBuddyPref(true);
+    searcherRepository.save(searcher);
   }
   
  
@@ -265,6 +278,7 @@ public class UserInteraction {
     result = this.mockMvc.perform(post("https://localhost:8070/admin/broadcast/send")
         .param("subject", subject)
         .param("message", body)
+        .param("sendTo", "all")
         .with(authentication(new UsernamePasswordAuthenticationToken(admin.getLogin(), "",
             AuthorityUtils.createAuthorityList("ROLE_ADMINISTRATOR"))))
         .with(csrf()));

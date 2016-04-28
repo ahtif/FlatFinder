@@ -14,17 +14,17 @@ Scenario: Sending a message
 @Domain
 @NotImplemented
 Scenario: Replying to a message
- Given I am a Searcher "Bob"
- And a searcher "Ted"
- And a message "viewing arrangements" from "Ted" with Subject "Arrangements" to "Bob"
+ Given I am a Searcher "Andy"
+ And a searcher "Harry"
+ And a message "viewing arrangements" from "Andy" with Subject "Arrangements" to "Harry"
  When I reply with "Time and Date?"
  Then the message "Time and Date?" should be stored in the database
 
 @Domain
 @NotImplemented
 Scenario: Sending a email with no recipient
- Given I am a Searcher "Bob"
- When "Bob" sends a message "Hello" to "" with Subject "Bye"
+ Given I am a Searcher "Paul"
+ When "Paul" sends a message "Hello" to "" with Subject "Bye"
  Then the message should not be sent
 
 @Domain
@@ -40,10 +40,10 @@ Scenario: Expressing interest in a property
 @NotImplemented
 Scenario: Broadcasting a message
  Given I am an administrator "James"
- And a searcher "Bob"
- And a landlord "Ted"
+ And a searcher "Bobby"
+ And a landlord "William"
  When I broadcast a message "Maintenance 4-7AM (GMT)" with subject "Maintenance"
- Then users "Bob" and "Ted" should receive the message "Maintenance 4-7AM (GMT)"
+ Then users "Bobby" and "William" should receive the message "Maintenance 4-7AM (GMT)"
 
 @Domain
 @NotImplemented
