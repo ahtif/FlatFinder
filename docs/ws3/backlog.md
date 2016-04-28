@@ -17,13 +17,13 @@
 | 11  | Searcher | Report properties which contain false information | I can make the administrators aware of the issue and prevent other users from being scammed | High	| No | 
 | 12  |	Registered User |	Report searchers or searchers reporting landlords for harassing users or violating the rules | I can protect myself and other users from being harassed and make the administrators aware of the issue | High |	No |
 | 13  | Administrator |	Receive report notifications and suspend or delete accounts | I can protect searchers or landlord from abusive users or fake listing | High	| Complete |
-| 14  | Administrator	| Expire accounts after a given time period	| I can maintain the website and have only active users |	High | No |
+| 14  | Administrator	| Expire accounts after a given time period	| I can maintain the website and have only active users |	High | Complete |
 | 15	| Registered User |	Message other users and respond to their messages |	I can notify and communicate to users | High | Complete |
 | 16  | Registered User |	Have an inbox so I am able to see all my conversion with other users | I can easily reply to landlord or searchers and see my previous conversion with them |	High | Complete |
-| 17	| Administrator | Broadcast a message to all users | I can notify them about important updates | Low	| No |
+| 17	| Administrator | Broadcast a message to all users | I can notify them about important updates | Low	| Complete |
 | 18	| Landlord | View my account statistics such as most looked at property, number of interests per property |	I can see which property is popular and understand any possible trends | Low	| Complete |
 | 19  |	Searcher | View my account statistics such as property history | I can view listing of properties I have visited before | Low | No |
-| 20  | Searcher | Send an interest on a specific property I like	| I can inform the landlord I am interest in the property | High	| No |
+| 20  | Searcher | Send an interest on a specific property I like	| I can inform the landlord I am interest in the property | High	| Complete |
 
 ## Scenarios
 
@@ -67,7 +67,7 @@ Given I have registered as a Administrator
 When I login with my username and password  
 Then I should be able to access the services for Administrators  
 
-###Account Recovery - Not Completed
+###Account Recovery - Completed
 Feature: Account recovery  
 As a registered user, I should be able to reset my password for my account as either a Landlord or Searcher so that I can regain access to my account.  
 
@@ -85,7 +85,7 @@ When I access the link
 And enter a password and confirmed password which match  
 Then my password will be changed to the new password  
 
-### Searching for properties - Not Completed
+### Searching for properties - Completed
 Feature: Searching for properties  
 As a Searcher, I should be able to use the system to search for properties near me and based on my preferences So that I am able to find the properties that match my preference.  
 
@@ -111,7 +111,7 @@ And I am looking at a property
 When I select the buddy up option  
 Then I should be matched to a buddy  
 
-### Registering interest - Not Completed
+### Registering interest - Completed
 Feature: Registering interest
 As a Searcher, I should be able to register interest into a property So that I am able to notify the landlord
 
@@ -170,7 +170,7 @@ And I am looking at a Searcher profile
 When I report the Searcher  
 Then an Administrator should be notified  
 
-### Administrator - Not Completed
+### Administrator - Completed
 Feature: Administrator abilities  
 As an administrator, I can receive report notifications and suspend or delete accounts so that I can protect users of the website  
 
