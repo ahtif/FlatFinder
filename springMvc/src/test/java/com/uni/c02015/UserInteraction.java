@@ -15,6 +15,7 @@ import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class UserInteraction {
   private SearcherRepository searcherRepository;
   @Autowired
   private RoleRepository roleRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
 
   private MockMvc mockMvc;
   private ResultActions result;
@@ -110,15 +113,19 @@ public class UserInteraction {
   /**
    * Delete contents from each repo's after each scenario.
    */
-  @After
-  public void delete() {
-    messageRepository.deleteAll();
-    searcherRepository.deleteAll();
-    landlordRepository.deleteAll();
-    userRepository.deleteAll();
-    roleRepository.deleteAll();
-  }
-
+   @After
+   public void delete() {
+	   try {
+	      propertyRepository.deleteAll();
+	      messageRepository.deleteAll();
+	      landlordRepository.deleteAll();
+	      searcherRepository.deleteAll();
+	      userRepository.deleteAll();
+	      roleRepository.deleteAll();
+	    } catch (Exception e) {
+	      System.out.println("error");
+	    }
+   }
   /**
    * saves a user that is a searcher to the userRepository.
    */
@@ -185,9 +192,13 @@ public class UserInteraction {
    */
   @Given("a searcher \"([^\"]*)\"$")
   public void is_a_searcher(String name) throws Throwable {
-    Role searcher = roleRepository.findByRole("SEARCHER");
-    User user = new User(name, "", searcher);
+    Role searcherRole = roleRepository.findByRole("SEARCHER");
+    User user = new User(name, "", searcherRole);
     userRepository.save(user);
+    Searcher searcher = new Searcher(user.getId());
+    searcher.setFirstName(name);
+    searcher.setBuddyPref(true);
+    searcherRepository.save(searcher);
   }
   
  

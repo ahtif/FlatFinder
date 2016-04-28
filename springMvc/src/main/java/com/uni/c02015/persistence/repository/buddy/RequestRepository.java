@@ -17,4 +17,5 @@ public interface RequestRepository extends CrudRepository<Request, Integer> {
   List<Request> findBySenderAndConfirmed(User receiver, boolean confirmed);
   
   Request findBySenderAndReceiver(User sender, User receiver);
+
 }

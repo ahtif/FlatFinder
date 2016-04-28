@@ -1,6 +1,7 @@
 package com.uni.c02015;
 
 import com.uni.c02015.domain.*;
+import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.domain.property.Type;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
@@ -174,29 +175,29 @@ public class SpringMvc implements ApplicationRunner {
     landlordRepo.save(larry);
 
 //    //set up default properties
-//    Property property = new Property();
-//    property.setNumber("5");
-//    property.setStreet("University Road");
-//    property.setCity("Leicester");
-//    property.setPostcode("LE1 7RA");
-//    property.setType(typeRepository.findById(1));
-//    property.setRooms(2);
-//    property.setLatitude(52.627717);
-//    property.setLongitude(-1.121204);
-//    property.setLandlord(larry);
-//    propertyRepo.save(property);
-//    
-//    property = new Property();
-//    property.setNumber("2");
-//    property.setStreet("Manor Rd");
-//    property.setCity("Leicester");
-//    property.setPostcode("LE2 2LJ");
-//    property.setType(typeRepository.findById(2));
-//    property.setRooms(4);
-//    property.setLatitude(52.609993);
-//    property.setLongitude(-1.088549);
-//    property.setLandlord(larry);
-//    propertyRepo.save(property); 
+    Property property = new Property();
+    property.setNumber("5");
+    property.setStreet("University Road");
+    property.setCity("Leicester");
+    property.setPostcode("LE1 7RA");
+    property.setType(typeRepository.findById(1));
+    property.setRooms(2);
+    property.setLatitude(52.627717);
+    property.setLongitude(-1.121204);
+    property.setLandlord(larry);
+    propertyRepo.save(property);
+    
+    property = new Property();
+    property.setNumber("2");
+    property.setStreet("Manor Rd");
+    property.setCity("Leicester");
+    property.setPostcode("LE2 2LJ");
+    property.setType(typeRepository.findById(2));
+    property.setRooms(4);
+    property.setLatitude(52.609993);
+    property.setLongitude(-1.088549);
+    property.setLandlord(larry);
+    propertyRepo.save(property); 
     
     Message message = new Message();
     message.setSenderName("admin");

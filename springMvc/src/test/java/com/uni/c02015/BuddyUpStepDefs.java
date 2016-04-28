@@ -3,18 +3,29 @@ package com.uni.c02015;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import com.uni.c02015.domain.Landlord;
 import com.uni.c02015.domain.Message;
 import com.uni.c02015.domain.Role;
 import com.uni.c02015.domain.Searcher;
 import com.uni.c02015.domain.User;
+import com.uni.c02015.domain.buddy.BuddyProperty;
+import com.uni.c02015.domain.buddy.Request;
+import com.uni.c02015.domain.property.Property;
 import com.uni.c02015.persistence.repository.LandlordRepository;
 import com.uni.c02015.persistence.repository.MessageRepository;
 import com.uni.c02015.persistence.repository.RoleRepository;
 import com.uni.c02015.persistence.repository.SearcherRepository;
 import com.uni.c02015.persistence.repository.UserRepository;
+import com.uni.c02015.persistence.repository.buddy.BuddyPropertyRepository;
+import com.uni.c02015.persistence.repository.buddy.RequestRepository;
+import com.uni.c02015.persistence.repository.property.PropertyRepository;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +68,13 @@ public class BuddyUpStepDefs {
   private SearcherRepository searcherRepository;
   @Autowired
   private RoleRepository roleRepository;
+  @Autowired
+  private PropertyRepository propertyRepository;
+  @Autowired
+  private BuddyPropertyRepository buddyPropertyRepository;
+  @Autowired
+  private RequestRepository requestRepo;
+
 
   private MockMvc mockMvc;
   private ResultActions result;
@@ -68,7 +86,10 @@ public class BuddyUpStepDefs {
   private Searcher searcher;
   private Landlord landlord;
   private Message message;
-
+  private Property property;
+  private Property property2;
+  private Request request;
+  
   public static final int ROLE_ADMINISTRATOR_ID = 1;
   public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
   public static final int ROLE_LANDLORD_ID = 2;
@@ -84,7 +105,7 @@ public class BuddyUpStepDefs {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(
         this.wac).addFilters(springSecurityFilterChain)
         .apply(springSecurity()).build();
-
+    
     // Set up Roles
     Role role = new Role();
     role.setId(ROLE_ADMINISTRATOR_ID);
@@ -109,189 +130,201 @@ public class BuddyUpStepDefs {
   /**
    * Delete contents from each repo's after each scenario.
    */
-  // @After
-  // public void delete() {
-  // messageRepository.deleteAll();
-  // searcherRepository.deleteAll();
-  // landlordRepository.deleteAll();
-  // userRepository.deleteAll();
-  // roleRepository.deleteAll();
-  // }
-  //
-  @Given("^a searcher \"([^\"]*)\" who is looking for a property in \"([^\"]*)\"$")
-  public void searcher_who_is_looking_for_a_property_in(
-      String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @After
+   public void delete() {
+	   try {
+		  buddyPropertyRepository.deleteAll();
+		  requestRepo.deleteAll();
+	      propertyRepository.deleteAll();
+	      messageRepository.deleteAll();
+	      landlordRepository.deleteAll();
+	      searcherRepository.deleteAll();
+	      userRepository.deleteAll();
+	      roleRepository.deleteAll();
+	    } catch (Exception e) {
+	      System.out.println("error");
+	    }
+   }
+  
+//   @Given("^a searcher \"([^\"]*)\" who is looking for a property in \"([^\"]*)\"$")
+//   public void a_searcher_who_is_looking_for_a_property_in(String arg1, String arg2) throws Throwable {
+//	   	Role searcher = roleRepository.findByRole("SEARCHER");
+//	    User user = new User(arg1, "", searcher);
+//	    userRepository.save(user);
+//	    property = new Property();
+//	    property.setCity(arg2);
+//	    propertyRepository.save(property);
+//	  
+//	
+//   }
 
-  @Given("^\"([^\"]*)\" is \"([^\"]*)\" years old$")
-  public void is_years_old(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+//   @When("^\"([^\"]*)\" looks for a buddy who is looking for a property in \"([^\"]*)\"$")
+//   public void looks_for_a_buddy_who_is_looking_for_a_property_in(String arg1, String arg2) throws Throwable {
+//       
+//	   
+//   }
 
-  @When("^\"([^\"]*)\" looks for a buddy who is looking for a property in \"([^\"]*)\"$")
-  public void looks_for_a_buddy_who_is_looking_for_a_property_in(
-      String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+//
+//   @Given("^\"([^\"]*)\" wants to buddy up on property with number \"([^\"]*)\" and road \"([^\"]*)\" by landlord \"([^\"]*)\"$")
+//   public void wants_to_buddy_up_on_property_with_number_and_road_by_landlord(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+//		Role searcher = roleRepository.findByRole("SEARCHER");
+//	    user2 = new User(arg1, "", searcher);
+//	    Role landlordRole = roleRepository.findByRole("LANDLORD");
+//	    User landlordUser = new User(arg3, "", landlordRole);
+//	
+//	    userRepository.save(landlordUser);
+//	    userRepository.save(user1);
+//	    Searcher searcherUser = new Searcher(user1.getId());
+//
+//	    landlord = new Landlord(landlordUser.getId());
+//	    landlord.setFirstName(arg4);
+//	    landlordRepository.save(landlord);
+//	  
+//	    
+//	    userRepository.save(user2);
+//	    property2 = new Property();
+//	    property2.setNumber(arg2);
+//	    property2.setStreet(arg3);
+//	    property2.setLandlord(landlord);
+//	    propertyRepository.save(property2);
+//	    
+//	    BuddyProperty buddyProperty = new BuddyProperty();
+//	    buddyProperty.setProperty(property2);
+//	    buddyProperty.setUser(user1);
+//	    
+//	    buddyPropertyRepository.save(buddyProperty);
+//
+//   }
+//
+   @When("^\"([^\"]*)\" wants to see buddies$")
+   public void wants_to_see_buddies(String arg1) throws Throwable {
+	   
+     result =  mockMvc.perform(get("https://localhost:8070/buddy/showPropertyBuddies/"+property.getId())
+    		 .with(authentication(new UsernamePasswordAuthenticationToken(arg1, "",
+              AuthorityUtils.createAuthorityList("ROLE_SEARCHER"))))
+    	        .with(csrf())).andDo(print());
+   }
 
-  @When("^is \"([^\"]*)\" and over$")
-  public void is_and_over(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Given("^\"([^\"]*)\" wants to buddy up on property with number \"([^\"]*)\" and road \"([^\"]*)\" by landlord \"([^\"]*)\"$")
+   public void wants_to_buddy_up_on_property_with_number_and_road_by_landlord(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+	   User user = userRepository.findByLogin(arg1);
+	   Searcher searcher = searcherRepository.findOne(user.getId());
+	   property = propertyRepository.findByStreetAndNumber(arg3, arg2);
+	   BuddyProperty buddyProp = new BuddyProperty();
+	   buddyProp.setProperty(property);
+	   buddyProp.setUser(user);
+	   buddyPropertyRepository.save(buddyProp);
+   }
 
-  @Then("^\"([^\"]*)\" will be included in the list of possible buddies$")
-  public void will_be_included_in_the_list_of_possible_buddies(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^I should be redirected to the property buddy page for property with number \"([^\"]*)\" and road \"([^\"]*)\" by landlord \"([^\"]*)\"$")
+   public void i_should_be_redirected_to_the_property_buddy_page_for_property_with_number_and_road_by_landlord(String arg1, String arg2, String arg3) throws Throwable {
+       result.andExpect(view().name("/buddy/showPropertyBuddies"));
+   }
 
-  @When("^I search for a buddy on the \"([^\"]*)\" page$")
-  public void search_for_a_buddy_on_the_page(
-      String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Given("^a searcher \"([^\"]*)\" has sent searcher \"([^\"]*)\" a buddy request$")
+   public void a_searcher_has_sent_searcher_a_buddy_request(String arg1, String arg2) throws Throwable {
+       user1 = new User(arg1,"",roleRepository.findByRole("SEARCHER"));
+       user2 = new User(arg2,"",roleRepository.findByRole("SEARCHER"));
+       userRepository.save(user1);
+       userRepository.save(user2);
+       Property property = new Property();
+       propertyRepository.save(property);
+       request = new Request();
+       request.setProperty(property);
+       request.setSender(user1);
+       request.setReceiver(user2);
+       requestRepo.save(request);
+   }
 
-  @When("^set the location filter to \"([^\"]*)\"$")
-  public void set_the_location_filter_to(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @When("^\"([^\"]*)\" accepts the buddy request$")
+   public void accepts_the_buddy_request(String arg1) throws Throwable {
+	   
+       result = mockMvc.perform(post("https://localhost:8070/buddy/accept/"+request.getId()).with(csrf())
+    		   .with(authentication(
+    				   new UsernamePasswordAuthenticationToken(arg1,"", AuthorityUtils.createAuthorityList("ROLE_SEARCHER")))));
+   }
 
-  @When("^age filter to \"([^\"]*)\"$")
-  public void age_filter_to(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^\"([^\"]*)\" is added to \"([^\"]*)\" buddy list$")
+   public void is_added_to_buddy_list(String arg1, String arg2) throws Throwable {
+	   User user1 = userRepository.findByLogin(arg1);
+	   User user2 = userRepository.findByLogin(arg2);
+	   
+	   Request req = requestRepo.findOne(request.getId());
+	   Assert.assertEquals(req.getSender().getLogin(), arg1);
+	   Assert.assertEquals(req.getReceiver().getLogin(), arg2);
+   }
 
-  @Then("^I should be redirected to \"([^\"]*)\"$")
-  public void should_be_redirected_to(
-      String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^removed from list of buddy request$")
+   public void removed_from_list_of_buddy_request() throws Throwable {
+	   Request req = requestRepo.findOne(request.getId());
+	   Assert.assertTrue(req.getConfirmed());
+   }
 
-  @Given("^a searcher \"([^\"]*)\" with password \"([^\"]*)\"$")
-  public void searcher_with_password(
-      String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^he should be redirected to the \"([^\"]*)\" page$")
+   public void he_should_be_redirected_to_the_page(String arg1) throws Throwable {
+       result.andExpect(redirectedUrl(arg1));
+   }
 
-  @Given("^a searcher \"([^\"]*)\" who hasnt opted in to the buddyup system$")
-  public void searcher_who_hasnt_opted_in_to_the_buddyup_system(
-      String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @When("^\"([^\"]*)\" rejects the buddy request$")
+   public void rejects_the_buddy_request(String arg1) throws Throwable {
+	   result = mockMvc.perform(post("https://localhost:8070/buddy/reject/"+request.getId()).with(csrf())
+    		   .with(authentication(
+    				   new UsernamePasswordAuthenticationToken(arg1,"", AuthorityUtils.createAuthorityList("ROLE_SEARCHER"))))).andDo(print());
+   }
 
-  @Given("^I am logged in as \"([^\"]*)\"$")
-  public void am_logged_in_as(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^\"([^\"]*)\" is not added to \"([^\"]*)\" buddy list$")
+   public void is_not_added_to_buddy_list(String arg1, String arg2) throws Throwable {
+	   User user1 = userRepository.findByLogin(arg1);
+	   User user2 = userRepository.findByLogin(arg2);
+	   
+	   Assert.assertNull(requestRepo.findBySenderAndReceiver(user1,user2));
+	 
+   }
 
-  @When("^I search for a buddy \"([^\"]*)\"$")
-  public void search_for_a_buddy(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Given("^a searcher \"([^\"]*)\" is a buddy with searcher \"([^\"]*)\"$")
+   public void a_searcher_is_a_buddy_with_searcher(String arg1, String arg2) throws Throwable {
+	   user1 = new User(arg1,"",roleRepository.findByRole("SEARCHER"));
+       user2 = new User(arg2,"",roleRepository.findByRole("SEARCHER"));
+       userRepository.save(user1);
+       userRepository.save(user2);
+       Property property = new Property();
+       propertyRepository.save(property);
+       request = new Request();
+       request.setProperty(property);
+       request.setSender(user1);
+       request.setReceiver(user2);
+       request.setConfirmed(true);
+       requestRepo.save(request);
+	   
+   }
 
-  @When("^I access the \"([^\"]*)\" to find \"([^\"]*)\"$")
-  public void access_the_to_find(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @When("^\"([^\"]*)\" wants to view \"([^\"]*)\" profile$")
+   public void wants_to_view_profile(String arg1, String arg2) throws Throwable {
+	   user1 = userRepository.findByLogin(arg1);
+       user2 = userRepository.findByLogin(arg2);
+       result = mockMvc.perform(get("https://localhost:8070/buddy/viewBuddy/"+user2.getId()).with(csrf())
+    		   .with(authentication(
+    				   new UsernamePasswordAuthenticationToken(arg1,"", AuthorityUtils.createAuthorityList("ROLE_SEARCHER")))));
+   }
 
-  @Then("^I should navigate to \"([^\"]*)\"$")
-  public void should_navigate_to(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^he should be able to view \"([^\"]*)\" profile$")
+   public void he_should_be_redirected_to_profile(String arg1) throws Throwable {
+	   user1 = userRepository.findByLogin(arg1);
+	   result.andExpect(view().name("/buddy/view-buddy"));
+   }
 
-  @Then("^I should be able to send a buddy up request$")
-  public void should_be_able_to_send_a_buddy_up_request() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @When("^\"([^\"]*)\" wants to contact \"([^\"]*)\"$")
+   public void wants_to_contact(String arg1, String arg2) throws Throwable {
+	   result = mockMvc.perform(get("https://localhost:8070/messaging/new?contact="+user2.getId()).with(csrf())
+    		   .with(authentication(
+    				   new UsernamePasswordAuthenticationToken(arg1,"", AuthorityUtils.createAuthorityList("ROLE_SEARCHER")))));
+   }
 
-  @When("^I send \"([^\"]*)\" a \"([^\"]*)\"$")
-  public void send_a(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+   @Then("^I should be on new message page$")
+   public void i_should_be_on_new_message_page() throws Throwable {
+	   result.andExpect(view().name("messaging/newMessage"));
+   }
 
-  @Then("^a buddy request \"([^\"]*)\" will be "
-      + "added to the list of buddy request for \"([^\"]*)\"$")
-  public void buddy_request_will_be_added_to_the_list_of_buddy_request_for(String arg1, String arg2)
-      throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Given("^a searcher \"([^\"]*)\" has sent searcher \"([^\"]*)\" a buddy request$")
-  public void searcher_has_sent_searcher_buddy_request(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Given("^\"([^\"]*)\" should have received a buddy requests notification$")
-  public void should_have_received_a_buddy_requests_notification(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @When("^\"([^\"]*)\" access the notification \"([^\"]*)\"$")
-  public void access_the_notification(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @When("^\"([^\"]*)\" the buddy request$")
-  public void the_buddy_request(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Then("^\"([^\"]*)\" should be redirect to the next notification$")
-  public void should_be_redirect_to_the_next_notification(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @When("^\"([^\"]*)\" accepts the buddy request$")
-  public void accepts_the_buddy_request(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Then("^\"([^\"]*)\" is added to \"([^\"]*)\" buddy list$")
-  public void is_added_to_buddy_list(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Then("^removed from list of buddy request$")
-  public void removed_from_list_of_buddy_request() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @When("^\"([^\"]*)\" rejects the buddy request$")
-  public void rejects_the_buddy_request(String arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
-  @Then("^\"([^\"]*)\" is not added to \"([^\"]*)\" buddy list$")
-  public void is_not_added_to_buddy_list(String arg1, String arg2) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
+  
 
 }
