@@ -91,7 +91,7 @@ To send a message to other searcher or landlord
 ![Message](UserGuideImages/SendMessage2.png)
 2. Click Compose  
 
-![Message](UserGuideImages/SendMessage1.png)
+![Message](UserGuideImages/SendMessage3.png)
 3. Enter valid user    
 4. Subject      
 5. Message    
