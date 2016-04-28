@@ -107,9 +107,9 @@ If you have a message you will receive a notification (red box with number of un
 2. Click on conversation 
 
 ![Reply-Message](UserGuideImages/ReplyToMessage3.png)
-4. Enter message  
-5. Click Send Reply  
-6. Notification is removed once user views message  
+3. Enter message  
+4. Click Send Reply  
+5. Notification is removed once user views message  
 
 ## Searching For Properties
 Searcher can search for properties based on different filters such as keywords, property type, price etc. 
