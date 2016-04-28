@@ -26,6 +26,10 @@ public class VerificationToken {
 
   private boolean used = false;
 
+  public VerificationToken(){
+    super();
+  }
+  
   /**
    * Constructor for a verification token, takes a token, string and type and creates a new token.
    *
