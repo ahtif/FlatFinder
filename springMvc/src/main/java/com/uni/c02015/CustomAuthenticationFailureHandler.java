@@ -20,16 +20,18 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
     setDefaultFailureUrl("/invalid-login");
 
     String errorMessage = "It seems as though you have entered an invalid username or password.";
-
-    if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
-      setDefaultFailureUrl("/confirm/email");
-      errorMessage = "It seems as though your user account has not been activated";
-    } else if (exception.getMessage().equalsIgnoreCase("User account has expired")) {
-      errorMessage = "It seems as though your user account has expired";
-    } else if (exception.getMessage().equalsIgnoreCase("User account is blocked")) {
-      errorMessage = "It seems as though your user account is blocked";
-    } else if (exception.getMessage().equalsIgnoreCase("User account is locked")) {
-      errorMessage = "It seems as though your user account is suspended";
+    
+    if (exception != null && exception.getMessage() != null) {
+      if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
+        setDefaultFailureUrl("/confirm/email");
+        errorMessage = "It seems as though your user account has not been activated";
+      } else if (exception.getMessage().equalsIgnoreCase("User account has expired")) {
+        errorMessage = "It seems as though your user account has expired";
+      } else if (exception.getMessage().equalsIgnoreCase("User account is blocked")) {
+        errorMessage = "It seems as though your user account is blocked";
+      } else if (exception.getMessage().equalsIgnoreCase("User account is locked")) {
+        errorMessage = "It seems as though your user account is suspended";
+      }
     }
 
     super.onAuthenticationFailure(request, response, exception);

@@ -113,19 +113,21 @@ public class UserInteraction {
   /**
    * Delete contents from each repo's after each scenario.
    */
-   @After
-   public void delete() {
-	   try {
-	      propertyRepository.deleteAll();
-	      messageRepository.deleteAll();
-	      landlordRepository.deleteAll();
-	      searcherRepository.deleteAll();
-	      userRepository.deleteAll();
-	      roleRepository.deleteAll();
-	    } catch (Exception e) {
-	      System.out.println("error");
-	    }
-   }
+
+  @After
+  public void delete() {
+    try {
+      propertyRepository.deleteAll();
+      messageRepository.deleteAll();
+      landlordRepository.deleteAll();
+      searcherRepository.deleteAll();
+      userRepository.deleteAll();
+      roleRepository.deleteAll();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+
   /**
    * saves a user that is a searcher to the userRepository.
    */

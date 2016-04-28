@@ -146,56 +146,6 @@ public class BuddyUpStepDefs {
 	    }
    }
   
-//   @Given("^a searcher \"([^\"]*)\" who is looking for a property in \"([^\"]*)\"$")
-//   public void a_searcher_who_is_looking_for_a_property_in(String arg1, String arg2) throws Throwable {
-//	   	Role searcher = roleRepository.findByRole("SEARCHER");
-//	    User user = new User(arg1, "", searcher);
-//	    userRepository.save(user);
-//	    property = new Property();
-//	    property.setCity(arg2);
-//	    propertyRepository.save(property);
-//	  
-//	
-//   }
-
-//   @When("^\"([^\"]*)\" looks for a buddy who is looking for a property in \"([^\"]*)\"$")
-//   public void looks_for_a_buddy_who_is_looking_for_a_property_in(String arg1, String arg2) throws Throwable {
-//       
-//	   
-//   }
-
-//
-//   @Given("^\"([^\"]*)\" wants to buddy up on property with number \"([^\"]*)\" and road \"([^\"]*)\" by landlord \"([^\"]*)\"$")
-//   public void wants_to_buddy_up_on_property_with_number_and_road_by_landlord(String arg1, String arg2, String arg3, String arg4) throws Throwable {
-//		Role searcher = roleRepository.findByRole("SEARCHER");
-//	    user2 = new User(arg1, "", searcher);
-//	    Role landlordRole = roleRepository.findByRole("LANDLORD");
-//	    User landlordUser = new User(arg3, "", landlordRole);
-//	
-//	    userRepository.save(landlordUser);
-//	    userRepository.save(user1);
-//	    Searcher searcherUser = new Searcher(user1.getId());
-//
-//	    landlord = new Landlord(landlordUser.getId());
-//	    landlord.setFirstName(arg4);
-//	    landlordRepository.save(landlord);
-//	  
-//	    
-//	    userRepository.save(user2);
-//	    property2 = new Property();
-//	    property2.setNumber(arg2);
-//	    property2.setStreet(arg3);
-//	    property2.setLandlord(landlord);
-//	    propertyRepository.save(property2);
-//	    
-//	    BuddyProperty buddyProperty = new BuddyProperty();
-//	    buddyProperty.setProperty(property2);
-//	    buddyProperty.setUser(user1);
-//	    
-//	    buddyPropertyRepository.save(buddyProperty);
-//
-//   }
-//
    @When("^\"([^\"]*)\" wants to see buddies$")
    public void wants_to_see_buddies(String arg1) throws Throwable {
 	   
@@ -324,7 +274,5 @@ public class BuddyUpStepDefs {
    public void i_should_be_on_new_message_page() throws Throwable {
 	   result.andExpect(view().name("messaging/newMessage"));
    }
-
-  
 
 }
