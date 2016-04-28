@@ -21,23 +21,23 @@
 - [Sprint 1 retrospective](Sprint 1 retrospective.md)
 
 ### Sprint 2 Retrospective
-- [Sprint2Retrospective](Sprint2Retrospective.md)
+- [Sprint2 Retrospective](Sprint2Retrospective.md)
 
 ### User Manual
-- [UserGuide](InstallationGuide.md)
-- [Installation Guide](UserGuide.md)
+- [UserGuide](UserGuide.md)
+- [Installation Guide](InstallationGuide.md)
 
 ### Automated Testing
 | Feature       | Step defs    |
 | ------------- |:------------:|
-| [AccessControl.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AccessControl.feature) | [Doc1](1.md) |
+| [AccessControl.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AccessControl.feature) | [AccessControl](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/AccessControlStepDefs.java) |
 | [AdminManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/AdminManagement.feature) | [Doc1](1.md) |
 | [BuddyUp.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/BuddyUp.feature) | [Doc1](1.md) |
 | [LandlordPropertyManagement.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/LandlordPropertyManagement.feature) | [Doc1](1.md) |
 | [Login-And-Recovery.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Login-And-Recovery.feature) | [Doc1](1.md) |
 | [Map.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Map.feature) | [Doc1](1.md) |
 | [Profile.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Profile.feature) | [Doc1](1.md) |
-| [Register.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Register.feature)| [Doc1](1.md) |
+| [Register.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Register.feature)| [Register](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/RegisterStepDefs.java) |
 | [Searching.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/Searching.feature) | [Doc1](1.md) |
-| [UserInteraction.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/UserInteraction.feature) | [Doc1](1.md) |
+| [UserInteraction.feature](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/resources/UserInteraction.feature) | [User Interaction](https://github.com/UOL-CS/co2015-group-06-repo/blob/master/springMvc/src/test/java/com/uni/c02015/UserInteraction.java) |
 
