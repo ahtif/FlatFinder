@@ -26,7 +26,7 @@ public class VerificationToken {
 
   private boolean used = false;
 
-  public VerificationToken(){
+  public VerificationToken() {
     super();
   }
   
