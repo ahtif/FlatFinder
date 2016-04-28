@@ -22,7 +22,7 @@ Scenario: Search by listing price
 @Controller
 @NotImplemented
 Scenario: Search by bedroom
- Given I am logged in as a searcher "Bob"
+ Given I am logged in as searcher "Bob"
  When I filter by "4" bedrooms
  Then only property with "4" Bedrooms should be displayed
 
@@ -39,7 +39,7 @@ Scenario: Filter by multiple criteria
 @Controller
 @NotImplemented
 Scenario: Search by start date
- Given I am logged in as a searcher "Bob"
+ Given I am logged in as searcher "Bob"
  And I filter listings by start date "01/03/2016/"
  When I set the end date "01/04/2016"
  Then I should be able to only see properties available from "01/03/2016" to "01/04/2016"
@@ -47,7 +47,7 @@ Scenario: Search by start date
  @Controller
  @NotImplemented
  Scenario: Search for property that has been removed
-  Given a Landlord "Bob
+  Given a Landlord "Bob"
   And "Bob" has a property listing "123 Example Street" with postcode "SW1A 2AA"
   And price "300" pcm
   And a Searcher "Majid"

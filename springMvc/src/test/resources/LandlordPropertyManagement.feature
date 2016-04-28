@@ -9,8 +9,8 @@ Feature: Add and update property
 @NotImplemented
 Scenario: Accessing the add property page
  Given I am logged in as a landlord "Ted"
- When I request the add property page "/add-property"
- Then I should have access to the page "add-property"
+ When I request the add property page "/property/add"
+ Then I should have access to the page "/property/add"
 
 @Controller
 @NotImplemented
