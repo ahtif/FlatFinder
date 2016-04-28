@@ -20,7 +20,7 @@ You will be presented with the register page.
 6. Select the type of account you want either landlord or searcher     
 7. Click Create Account     
 
-![Register](UserGuideImages/Register2.png) 
+![Register](UserGuideImages/Register3.png) 
 You will be redirected to the confirm email page. You will be sent an email asking you to confirm your account by clicking on a unique link which will be attached in the email.  
 8. If you didn’t receive an email click the link, and it will generate a new link and will email it to you.   
 
@@ -29,7 +29,7 @@ If you have forgot you password you can reset your password.
 ![Forgot password](UserGuideImages/ForgotPassword1.png)
 1. Click Forgot Password 
 
-![Forgot password](UserGuideImages/ForgotPassword1.png)
+![Forgot password](UserGuideImages/ForgotPassword2.png)
 2. Enter your username     
 3. Click submit    
 
