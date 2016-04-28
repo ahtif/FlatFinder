@@ -5,8 +5,6 @@
 
 ### Update/Complete Design Documents
 - [Design Document](DesignDocuments.md)
-- [Diagram2](1.md)
-- [Diagram3](1.md)
 
 ### Project Plan
 - [Project plan](ProjectPlan.gan)
@@ -17,16 +15,17 @@
 ### Minutes
 - [Internal Meeting 1](minutes-25.03.16.md)
 - [Internal Meeting 2](minutes-30.03.16.md)
-- [Internal Meeting 3](minutes-25.04.16.md))
+- [Internal Meeting 3](minutes-25.04.16.md)
 
 ### Sprint 1 Retrospective
-- [Doc1](Sprint 1 retrospective.md)
+- [Sprint 1 retrospective](Sprint 1 retrospective.md)
 
 ### Sprint 2 Retrospective
-- [Doc1](Sprint2Retrospective.md)
+- [Sprint2Retrospective](Sprint2Retrospective.md)
 
 ### User Manual
-- [Doc1](1.md)
+- [UserGuide](InstallationGuide.md)
+- [Installation Guide](UserGuide.md)
 
 ### Automated Testing
 | Feature       | Step defs    |
