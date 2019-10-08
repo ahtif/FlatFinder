@@ -259,7 +259,7 @@ public class PropertyController {
 
     //Geocode the address of the property to get it's latitude and longitude.
     GeoApiContext context =
-        new GeoApiContext().setApiKey("AIzaSyCEawq-gRz787BseZuahn_lFjPfIsTgvj8");
+        new GeoApiContext().setApiKey("");
 
     try {
 
